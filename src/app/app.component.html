@@ -1,36 +1,82 @@
-<nav class="navbar navbar-expand-lg navbar-dark bg-primary">
-  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo03" aria-controls="navbarTogglerDemo03" aria-expanded="false" aria-label="Toggle navigation">
-    <span class="navbar-toggler-icon"></span>
-  </button>
-  <a class="navbar-brand">Gestión de coordinación de carrera</a>
 
-  <div class="collapse navbar-collapse" id="navbarTogglerDemo03">
-    <ul class="navbar-nav mr-auto mt-2 mt-lg-0">
-      <li class="nav-item active">
-        <a class="nav-link" routerLink="/login" >Login <span class="sr-only">(current)</span></a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link" routerLink="/registro-docente">Registro de Empresas</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " routerLink="/registro-empresa">Registro de Docentes</a>
-      </li>
-      <li class="nav-item">
-        <a class="nav-link " routerLink="/consulta-ppp">Consulta PPP</a>
-      </li>
-    </ul>
-    <form class="form-inline my-2 my-lg-0">
-      <input class="form-control mr-sm-2" type="search" placeholder="Search" aria-label="Search">
-      <button class="btn btn-outline-dark my-2 my-sm-0" type="submit">Buscar</button>
-    </form>
-  </div>
-</nav>
-<div class="main">
-  <router-outlet></router-outlet>
-</div>
-<div
-  class="d-flex flex-column flex-md-row text-center text-md-start justify-content-between py-4 px-4 px-xl-5 bg-primary">
-  <div class="text-white mb-3 mb-md-0">
-    Copyright © 2022. Todos los derechos reservados.
-  </div>
-</div>
+<mat-toolbar>
+  INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
+
+</mat-toolbar>
+
+<mat-sidenav-container>
+  <mat-sidenav mode="side" opened>
+    <mat-icon>menu</mat-icon> <span>Menu</span>
+
+    <button mat-button class="menu-button">
+      <a class="nav-link" routerLink="/home" style="color: white;"><mat-icon>go</mat-icon><span>Inicio</span></a>
+    </button>
+
+    <a class="nav-link" routerLink="/registro-empresa" style="color: white;"><mat-icon>home</mat-icon><span>Gestión de empresa</span></a>
+    
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>auto_stories</mat-icon>
+      <span>Gestión de Catálogos </span>
+    </a>
+    
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>supervisor_account</mat-icon>
+      <span>Gestión de Cursos </span>
+    </a>
+
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>assignment</mat-icon>
+      <span>Gestión de Inscripciones </span>
+    </a>
+
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>description</mat-icon>
+      <span>Gestión de Matrículas </span>
+    </a>
+
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>receipt</mat-icon>
+    <span>Gestión de Contratos </span>
+    </a>
+
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>person_pin</mat-icon>
+    <span>Gestión de Personas </span>
+    </a>
+
+    <a class="nav-link" routerLink="/" style="color: white;">
+      <mat-icon>speaker_notes</mat-icon>
+    <span>Gestión de Caso </span>
+    </a>
+      
+    <a class="nav-link" routerLink="/registro-docente" style="color: white;">
+      <mat-icon>perm_identity</mat-icon>
+    <span>Gestión de Docentes </span>
+    </a>
+
+  </mat-sidenav>
+
+  <mat-sidenav-content>
+    <div class="main">
+      <router-outlet></router-outlet>
+    </div>
+    <div class="footer text-center" style="height: 111px; background-color: black; color:white; display: flex; align-items: center;">
+  
+      <div class="container">
+        <div class="row">
+          <div class="col-sm">
+          </div>
+          <div class="col-sm">
+            <p>Copyright © 2022. Todos los derechos reservados.</p>
+          </div>
+          <div class="col-sm">
+          </div>
+        </div>
+      </div>
+    </div>
+  </mat-sidenav-content>
+</mat-sidenav-container>
+
+
+
+

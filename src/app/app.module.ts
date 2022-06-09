@@ -10,6 +10,15 @@ import { RegistroEmpresasComponent } from './registro-empresas/registro-empresas
 import { RegistroDocentesComponent } from './registro-docentes/registro-docentes.component';
 import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
 import { LoginComponent } from './login/login.component';
+import {MatToolbarModule} from '@angular/material/toolbar';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatButtonModule} from '@angular/material/button';
+import {MatIconModule} from '@angular/material/icon';
+import {MatDividerModule} from '@angular/material/divider';
+import { HomeComponent } from './components/home/home.component';
+import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
+
+
 
 @NgModule({
   declarations: [
@@ -17,7 +26,9 @@ import { LoginComponent } from './login/login.component';
     RegistroEmpresasComponent,
     RegistroDocentesComponent,
     ConsultaspppComponent,
-    LoginComponent
+    LoginComponent,
+    HomeComponent,
+    PagenotfoundComponent
   ],
   imports: [
     BrowserModule,
@@ -25,7 +36,12 @@ import { LoginComponent } from './login/login.component';
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-    BrowserAnimationsModule
+    BrowserAnimationsModule,
+    MatToolbarModule,
+    MatSidenavModule,
+    MatButtonModule,
+    MatIconModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

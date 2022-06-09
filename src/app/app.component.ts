@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
+import { MatSidenav } from '@angular/material/sidenav';
+import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
 
 @Component({
   selector: 'app-root',
@@ -8,9 +10,11 @@ import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } f
 })
 
 export class AppComponent implements OnInit {
+  @ViewChild(MatSidenav)
+ sidenav!: MatSidenav;
   title = 'casopractico-dos';
   loginForm!: FormGroup;
-  constructor() { }
+  constructor(private observer: BreakpointObserver) {}
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
@@ -26,5 +30,19 @@ export class AppComponent implements OnInit {
   loginFormSubmit(): void {
     console.log(this.loginForm.value);
     // Call Api
+  }
+  
+
+
+  ngAfterViewInit() {
+    this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
+      if (res.matches) {
+        this.sidenav.mode = 'over';
+        this.sidenav.close();
+      } else {
+        this.sidenav.mode = 'side';
+        this.sidenav.open();
+      }
+    });
   }
 }
