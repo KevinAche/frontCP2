@@ -11,6 +11,7 @@ describe('RegistroDocentesComponent', () => {
       declarations: [ RegistroDocentesComponent ]
     })
     .compileComponents();
+    
   });
 
   beforeEach(() => {
