@@ -7,15 +7,18 @@ import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
 import { LoginComponent } from './login/login.component';
 import { RegistroDocentesComponent } from './registro-docentes/registro-docentes.component';
 import { RegistroEmpresasComponent } from './registro-empresas/registro-empresas.component';
+import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
   {path: 'registro-docente', component:RegistroDocentesComponent },
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
+  {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
   {path: 'consulta-ppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'**',component:PagenotfoundComponent}
+
 ];
 
 @NgModule({

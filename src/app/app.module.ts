@@ -17,7 +17,8 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-
+import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
+import {MatCardModule} from '@angular/material/card';
 
 
 @NgModule({
@@ -28,7 +29,9 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     ConsultaspppComponent,
     LoginComponent,
     HomeComponent,
+    SeleccionEstudiantesComponent,
     PagenotfoundComponent
+
   ],
   imports: [
     BrowserModule,
@@ -41,7 +44,8 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
     MatSidenavModule,
     MatButtonModule,
     MatIconModule,
-    MatDividerModule
+    MatDividerModule,
+    MatCardModule
   ],
   providers: [],
   bootstrap: [AppComponent]
