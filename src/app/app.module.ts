@@ -17,7 +17,7 @@ import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
-import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes';
+import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 
 
 
@@ -29,8 +29,8 @@ import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion
     ConsultaspppComponent,
     LoginComponent,
     HomeComponent,
-    PagenotfoundComponent,
     SeleccionEstudiantesComponent,
+    PagenotfoundComponent
 
   ],
   imports: [
