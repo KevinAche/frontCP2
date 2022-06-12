@@ -19,6 +19,7 @@ import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 import {MatCardModule} from '@angular/material/card';
+import { FooterComponent } from './footer/footer.component';
 
 
 @NgModule({
@@ -30,7 +31,8 @@ import {MatCardModule} from '@angular/material/card';
     LoginComponent,
     HomeComponent,
     SeleccionEstudiantesComponent,
-    PagenotfoundComponent
+    PagenotfoundComponent,
+    FooterComponent
 
   ],
   imports: [

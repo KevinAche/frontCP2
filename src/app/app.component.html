@@ -1,31 +1,39 @@
-<mat-toolbar style="background-color:#1d3557;">
+<mat-toolbar style="background-color:#1d3557">
   <div class="container">
-    <mat-icon>menu</mat-icon>
+    <button mat-icon-button  (click)="sidenav.toggle()">
+      <mat-icon *ngIf="!sidenav.opened">
+        menu
+      </mat-icon>
+      <mat-icon *ngIf="sidenav.opened">
+        close
+      </mat-icon>
+    </button>
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 </mat-toolbar>
+
 <mat-sidenav-container>
-  
-  <mat-sidenav mode="side" opened>
+
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
-      <img class="avatar mat-elevation-z8 text-center" src="../assets/imagen/log.png">
+      <img class="logo" src="../assets/imagen/log.png">
       <br><br>
       <mat-divider></mat-divider>
-      <h2 class="text-center">Menú</h2>     
+      <h2 class="text-center">Dashboard</h2>
     </div>
 
     <mat-divider></mat-divider>
-    <a class="nav-link" routerLink="/home" style="color: white;"><mat-icon>start</mat-icon><span>Inicio</span></a>
-    
+    <a class="nav-link" routerLink="/home" style="color: white;"><mat-icon>dashboard</mat-icon><span>Inicio</span></a>
+
 
     <a class="nav-link" routerLink="/registro-empresa" style="color: white;"><mat-icon>home</mat-icon><span>Gestión de empresa</span></a>
-    
+
     <a class="nav-link" routerLink="/" style="color: white;">
       <mat-icon>auto_stories</mat-icon>
       <span>Gestión de Catálogos </span>
     </a>
-    
+
     <a class="nav-link" routerLink="/" style="color: white;">
       <mat-icon>supervisor_account</mat-icon>
       <span>Gestión de Cursos </span>
@@ -55,7 +63,7 @@
       <mat-icon>speaker_notes</mat-icon>
     <span>Gestión de Caso </span>
     </a>
-      
+
     <a class="nav-link" routerLink="/registro-docente" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
     <span>Gestión de Docentes </span>
@@ -63,25 +71,10 @@
 
   </mat-sidenav>
 
-  <mat-sidenav-content>
-    
-    <div class="main">
+  <mat-sidenav-content class="content mat-elevation-z4">
       <router-outlet></router-outlet>
-    </div>
-    <div class="footer text-center" style="height: 111px; background-color: #1d3557; color:white; display: flex; align-items: center;">
-  
-      <div class="container">
-        <div class="row">
-          <div class="col-sm">
-          </div>
-          <div class="col-sm">
-            <p>Copyright © 2022. Todos los derechos reservados.</p>
-          </div>
-          <div class="col-sm">
-          </div>
-        </div>
-      </div>
-    </div>
-  </mat-sidenav-content>
-</mat-sidenav-container>
 
+  </mat-sidenav-content>
+
+</mat-sidenav-container>
+<app-footer></app-footer>
