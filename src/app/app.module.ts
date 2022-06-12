@@ -20,6 +20,7 @@ import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.co
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
+import { RegistroComponent } from './auth/registro.component';
 
 
 
@@ -34,6 +35,7 @@ import { FooterComponent } from './footer/footer.component';
     SeleccionEstudiantesComponent,
     PagenotfoundComponent,
     FooterComponent,
+    RegistroComponent,
 
   ],
   imports: [
