@@ -21,6 +21,7 @@ import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
+import { HttpClientModule } from '@angular/common/http';
 
 
 
@@ -50,7 +51,8 @@ import { RegistroComponent } from './auth/registro.component';
     MatButtonModule,
     MatIconModule,
     MatDividerModule,
-    MatCardModule
+    MatCardModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

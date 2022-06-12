@@ -2,6 +2,7 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
 import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
+import { CarreraService } from './services/carrera.service';
 
 @Component({
   selector: 'app-root',
@@ -10,11 +11,18 @@ import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
 })
 
 export class AppComponent implements OnInit {
+
   @ViewChild(MatSidenav)
  sidenav!: MatSidenav;
   title = 'casopractico-dos';
   loginForm!: FormGroup;
-  constructor(private observer: BreakpointObserver) {}
+
+  constructor(
+    private observer: BreakpointObserver
+    ) {
+
+    }
+
   ngOnInit(): void {
     this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
