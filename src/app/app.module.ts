@@ -27,6 +27,8 @@ import { ViajeComponent } from './xlop/viaje.component';
 import { ViajeService } from './xlop/viaje.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
+import { ToastrModule } from 'ngx-toastr';
+import {interceptorProvider} from "./interceptors/prod-interceptor.service";
 
 
 
@@ -60,9 +62,11 @@ import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tuto
     MatIconModule,
     MatDividerModule,
     MatCardModule,
-    HttpClientModule
+    HttpClientModule,
+    ToastrModule.forRoot(),
+    ReactiveFormsModule
   ],
-  providers: [ViajeService,ConvocatoriaService],
+  providers: [ViajeService,ConvocatoriaService, interceptorProvider],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
