@@ -17,7 +17,7 @@ export class TokenService {
     window.sessionStorage.removeItem(TOKEN_KEY);
     window.sessionStorage.setItem(TOKEN_KEY, token);
   }
-
+//Revisar
   public getToken(): string{
     return sessionStorage.getItem(TOKEN_KEY);
   }
