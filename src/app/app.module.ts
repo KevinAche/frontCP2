@@ -46,7 +46,10 @@ import {interceptorProvider} from "./interceptors/prod-interceptor.service";
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-    ConsultaConvocatoriaComponent
+    ConsultaConvocatoriaComponent,
+    ViajeComponent,
+    DesigTutorEmpresarialComponent,
+    DesigTutorAcademicoComponent
 
   ],
   imports: [
