@@ -22,6 +22,9 @@ import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { HttpClientModule } from '@angular/common/http';
+import { ConvocatoriaService } from './services/convocatoria.service';
+import { ViajeComponent } from './xlop/viaje.component';
+import { ViajeService } from './xlop/viaje.service';
 
 
 
@@ -37,6 +40,7 @@ import { HttpClientModule } from '@angular/common/http';
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
+    ViajeComponent
 
   ],
   imports: [
@@ -54,7 +58,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatCardModule,
     HttpClientModule
   ],
-  providers: [],
+  providers: [ViajeService,ConvocatoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

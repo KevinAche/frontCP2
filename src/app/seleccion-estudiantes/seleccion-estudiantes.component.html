@@ -1,40 +1,49 @@
 <section class="vh-100">
-    <div class="container-fluid" style="padding: 55px;">
-      
-        <h2>{{titulo}}</h2>
-        <h3>SELECCIONE UNA CONOV</h3>
-        <div>
-            <select class="form-control">
-                <option>-Select</option>
-                <option>-Convocatoria</option>
-            </select>
-        </div>
-    
+  <div class="container-fluid" style="padding: 55px;">
 
-    <h2>LISTA DE SOLICITUDES</h2>
-        <form>
-            <table class="table table-striped">
-                <thead>
-                  <tr>
-                    <th scope="col">Fecha Emisión</th>
-                    <th scope="col">Apellidos</th>
-                    <th scope="col">Nombres</th>
-                    <th scope="col">Aceptar</th>
-                    <th scope="col">Denegar</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  <tr>
-                    <td>20-May-2022</td>
-                    <td>Vanegas</td>
-                    <td>Karen</td>
-                    <td><a class="btn btn-primary btn-xs">Aceptar</a></td>
-					<td><a class="btn btn-danger btn-xs" >Denegar</a></td>
-                  </tr>
-                 
-                </tbody>
-              </table>
-        </form>
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+      {{titulo}}
+    </mat-card-title>
+    <br>
+    <mat-card>
+      <h2 style="color: #1d3557;">{{convocatoriaTitulo}}</h2>
+      <div>
+        <select class="form-control">
+          <option>-Seleccione </option>
+          <--! <option *ngFor="let convo of convocatoria">{{convo.id_convocatoria}}</option> !-->
+        </select>
+      </div>
 
-    </div>
+
+      <br>
+      <h2 style="color: #1d3557;">{{listaTitulo}}</h2>
+    <form>
+      <h3>
+      <table class="table table-striped">
+        <thead>
+          <tr>
+          <th scope="col">Fecha Emisión</th>   
+            <th scope="col">Apellidos</th>
+            <th scope="col">Nombres</th>
+            <th scope="col">Aceptar</th>
+            <th scope="col">Denegar</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <td>20-May-2022</td>
+            <td>Vanegas</td>
+            <td>Karen</td>
+            <td><a class="btn btn-primary btn-xs" style="color: white">Aceptar</a></td>
+            <td><a class="btn btn-danger btn-xs"style="color: white">Denegar</a></td>
+          </tr>
+        </tbody>
+      </table>
+    </h3>
+    </form>
+
+
+    </mat-card>
+
+  </div>
 </section>

@@ -1,0 +1,35 @@
+<div class="card border-primary mb-3">
+    
+    <div class="card-body text-primary">
+
+        <h3>SELECCIONE UNA CONOV</h3>
+        <div>
+            <select class="form-control">
+                <option>-Select</option>
+                <option *ngFor="let viaje of viajes">{{viaje.placa}}</option>
+            </select>
+        </div>
+
+      <h5 class="card-title">Viajes disponibles</h5>
+      <table class="table table-bordered table-stiped">
+          <thead>
+              <tr>
+                  <th>Buseta</th>
+                  <th>Placa</th>
+                  <th>Fecha</th>
+                  <th>Hora Viaje</th>
+                  <th>Chofer</th>
+                  <th>Destino</th>
+              </tr>
+          </thead>
+          <tbody>
+              <tr *ngFor="let viaje of viajes">
+                  <td>{{viaje.buseta}}</td>
+                  <td>{{viaje.placa}}</td>
+                  <td>{{viaje.fecha}}</td>
+                  <td>{{viaje.chofer}}</td>
+                  <td>{{viaje.destino}}</td>
+              </tr>
+          </tbody>
+      </table>
+    </div>
