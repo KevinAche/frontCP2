@@ -1,6 +1,6 @@
 <mat-toolbar style="background-color:#1d3557">
   <div class="container">
-    <button mat-icon-button  (click)="sidenav.toggle()">
+    <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">
         menu
       </mat-icon>
@@ -24,10 +24,18 @@
     </div>
 
     <mat-divider></mat-divider>
-    <a class="nav-link" routerLink="/home" style="color: white;"><mat-icon>dashboard</mat-icon><span>Inicio</span></a>
+    <a class="nav-link" routerLink="/home" style="color: white;">
+      <mat-icon>dashboard</mat-icon><span>Inicio</span>
+    </a>
 
 
-    <a class="nav-link" routerLink="/registro-empresa" style="color: white;"><mat-icon>home</mat-icon><span>Gestión de empresa</span></a>
+    <a class="nav-link" routerLink="/registro-empresa" style="color: white;">
+      <mat-icon>home</mat-icon><span>Gestión de empresa</span>
+    </a>
+
+    <a class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
+      <mat-icon>home</mat-icon><span>Gestión Convocatoria</span>
+    </a>
 
     <a class="nav-link" routerLink="/" style="color: white;">
       <mat-icon>auto_stories</mat-icon>
@@ -51,28 +59,28 @@
 
     <a class="nav-link" routerLink="/" style="color: white;">
       <mat-icon>receipt</mat-icon>
-    <span>Gestión de Contratos </span>
+      <span>Gestión de Contratos </span>
     </a>
 
     <a class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
       <mat-icon>person_pin</mat-icon>
-    <span>Gestión Estudiantes </span>
+      <span>Gestión Estudiantes </span>
     </a>
 
     <a class="nav-link" routerLink="/" style="color: white;">
       <mat-icon>speaker_notes</mat-icon>
-    <span>Gestión de Caso </span>
+      <span>Gestión de Caso </span>
     </a>
 
     <a class="nav-link" routerLink="/registro-docente" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
-    <span>Gestión de Docentes </span>
+      <span>Gestión de Docentes </span>
     </a>
 
   </mat-sidenav>
 
   <mat-sidenav-content class="content mat-elevation-z4">
-      <router-outlet></router-outlet>
+    <router-outlet></router-outlet>
 
   </mat-sidenav-content>
 

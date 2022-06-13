@@ -22,10 +22,6 @@ import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ConvocatoriaService } from './services/convocatoria.service';
-import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
-import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
-import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 
 
 
@@ -41,9 +37,6 @@ import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-a
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-    DesigTutorEmpresarialComponent,
-    DesigTutorAcademicoComponent,
-    ConsultasEstudiantesAsignadosComponent
 
   ],
   imports: [
@@ -61,7 +54,7 @@ import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-a
     MatCardModule,
     HttpClientModule
   ],
-  providers: [ConvocatoriaService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
