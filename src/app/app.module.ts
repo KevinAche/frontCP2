@@ -23,10 +23,9 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConvocatoriaService } from './services/convocatoria.service';
-import { ViajeComponent } from './xlop/viaje.component';
-import { ViajeService } from './xlop/viaje.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
+import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 
 
 
@@ -42,9 +41,9 @@ import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tuto
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-    ViajeComponent,
     DesigTutorEmpresarialComponent,
-    DesigTutorAcademicoComponent
+    DesigTutorAcademicoComponent,
+    ConsultasEstudiantesAsignadosComponent
 
   ],
   imports: [
@@ -62,7 +61,7 @@ import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tuto
     MatCardModule,
     HttpClientModule
   ],
-  providers: [ViajeService,ConvocatoriaService],
+  providers: [ConvocatoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

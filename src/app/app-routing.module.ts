@@ -11,6 +11,7 @@ import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion
 import { ViajeComponent } from './xlop/viaje.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
+import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -22,7 +23,7 @@ const routes: Routes = [
   {path: 'consulta-ppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
-  {path:'viaje',component:ViajeComponent},
+  {path:'consuEstuAsignados',component:ConsultasEstudiantesAsignadosComponent},
   {path:'**',component:PagenotfoundComponent}
 
 ];
