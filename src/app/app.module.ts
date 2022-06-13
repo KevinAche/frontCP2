@@ -25,6 +25,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConvocatoriaService } from './services/convocatoria.service';
 import { ViajeComponent } from './xlop/viaje.component';
 import { ViajeService } from './xlop/viaje.service';
+import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
+import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 
 
 
@@ -40,7 +42,9 @@ import { ViajeService } from './xlop/viaje.service';
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-    ViajeComponent
+    ViajeComponent,
+    DesigTutorEmpresarialComponent,
+    DesigTutorAcademicoComponent
 
   ],
   imports: [
