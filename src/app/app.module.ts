@@ -15,12 +15,14 @@ import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
+import {MatMenuModule} from '@angular/material/menu';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 import {MatCardModule} from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
+import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
 
 
@@ -37,6 +39,7 @@ import { HttpClientModule } from '@angular/common/http';
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
+    ConsultaConvocatoriaComponent
 
   ],
   imports: [
@@ -52,6 +55,7 @@ import { HttpClientModule } from '@angular/common/http';
     MatIconModule,
     MatDividerModule,
     MatCardModule,
+    MatMenuModule,
     HttpClientModule
   ],
   providers: [],
