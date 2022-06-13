@@ -1,0 +1,48 @@
+<section class="vh-100">
+<div class="container-fluid" style="padding: 55px;">
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+        {{titulo}}
+      </mat-card-title>
+
+      <mat-card>
+        <h2 style="color: #1d3557;">{{convocatoriaTitulo}}</h2>
+      <div>
+        <select class="form-control">
+          <option>Seleccione una convocatoria </option>
+          <option>Opcion 1 </option>
+          <option>Opcion 2</option>
+        </select>
+      </div>
+      <br><br>
+      <h2 style="color: #1d3557;">{{listaTitulo}}</h2>
+      <form>
+        <h3>
+        <table class="table table-striped">
+          <thead>
+            <tr>
+            <th scope="col">Fecha Emisión</th>   
+              <th scope="col">Apellidos</th>
+              <th scope="col">Nombres</th>
+              <th scope="col">Eliminar</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr>
+              <td>20-May-2022</td>
+              <td>Vanegas</td>
+              <td>Karen</td>
+              <td><a class="btn btn-danger btn-xs"style="color: white">Eliminar</a></td>
+            </tr>
+          </tbody>
+        </table>
+      </h3>
+
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="button">Generar Documento</button>
+      </div>
+
+      </form>
+      
+      </mat-card>
+</div>
+</section>
