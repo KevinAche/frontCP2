@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-registro-empresas',
@@ -7,9 +8,14 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroEmpresasComponent implements OnInit {
 
-  constructor() { }
+  
+
+  constructor(
+    
+  ) { }
 
   ngOnInit(): void {
+    
   }
 
 }

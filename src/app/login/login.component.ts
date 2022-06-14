@@ -1,6 +1,8 @@
-import { Component, OnInit } from '@angular/core';
-import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
-
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
+import {TokenService} from "../services/token.service";
+import {AuthService} from "../services/auth.service";
+import {Router} from "@angular/router";
+import {LoginUsuario} from "../models/LoginUsuario";
 
 @Component({
   selector: 'app-login',
@@ -9,23 +11,52 @@ import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } f
 })
 export class LoginComponent implements OnInit {
 
-  loginForm!: FormGroup;
-  constructor() { }
-  ngOnInit(): void {
-    this.loginForm = new FormGroup({
-      email: new FormControl('', [Validators.required, Validators.email]),
-      password: new FormControl('', [Validators.required])
-    })
+  isLogged = false;
+  isLoginFail = false;
+  loginUsuario: LoginUsuario;
+  username: string;
+  password: string;
+  roles: string[] = [];
+  errMsj: string;
+
+  constructor(
+    private tokenService: TokenService,
+    private authService: AuthService,
+    private router: Router,
+    private changeDedectionRef: ChangeDetectorRef
+  ) { }
+
+  ngOnInit() {
+    this.changeDedectionRef.detectChanges();
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+      this.isLoginFail = false;
+      this.roles = this.tokenService.getAuthorities();
+    }
   }
-  get emailField(): any {
-    return this.loginForm.get('email');
-  }
-  get passwordField(): any {
-    return this.loginForm.get('password');
-  }
-  loginFormSubmit(): void {
-    console.log(this.loginForm.value);
-    // Call Api
+
+  onLogin(): void{
+    this.loginUsuario = new LoginUsuario(this.username, this.password);
+    this.authService.login(this.loginUsuario).subscribe(data =>{
+      this.isLogged = true;
+      this.isLoginFail = false;
+
+      this.tokenService.setToken(data.token);
+      this.tokenService.setUserName(data.username);
+      this.tokenService.setAuthorities(data.authorities);
+      this.roles = data.authorities;
+  
+      
+      window.location.replace('/')
+    },
+      err => {
+      this.isLogged = false;
+      this.isLoginFail = true;
+      this.errMsj = err.error.message;
+      // console.log(err.error.message);
+      }
+    );
   }
 
 }
+

@@ -3,35 +3,45 @@ mat-toolbar {
     color:white;
   }
   mat-sidenav{
-    margin:0px;
-    width: 303px;
+    margin: 0;
+    width: 250px;
     border-right:none;
-    background: #1177d1;
+    background: #5F9EA0;
     color:white;
-    border-radius: 0px ;
+    border-radius: 0;
     padding: 10px;
     text-align:initial;
-  
   }
-  
+
+  .logo{
+    margin: auto;
+    height: 50px;
+  }
+
+  mat-icon{
+    margin-right: 10px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+
+
   .content{
-    height: calc(100vh -98px);
+    height: calc(100vh - 100px);
     margin: 16px;
     margin-left: 32px;
-    display: flex;
     justify-content: center;
     align-items: center;
-  
-    font-size: 2rem;
+    font-size: 1rem;
     color:#1177d1;
-  
     border-radius: 9px;
-  
+
   }
+
   mat-sidenav-container{
   height: calc(100vh - 65px);
   }
-  
+
+
   .menu-button {
     width: 100%;
     display: flex;
@@ -40,6 +50,5 @@ mat-toolbar {
     font-size: 1rem;
     color:white;
     background: #1177d1;
-  
-  
+
   }

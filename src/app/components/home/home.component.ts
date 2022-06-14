@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { CarreraService } from 'src/app/services/carrera.service';
 
 @Component({
   selector: 'app-home',
@@ -7,7 +8,17 @@ import { Component, OnInit } from '@angular/core';
 })
 export class HomeComponent implements OnInit {
 
-  constructor() { }
+  public carreras: Array<any> = []
+  constructor(
+    private carreraService: CarreraService 
+    ) {
+
+      this.carreraService.getCarreras().subscribe((resp: any)=>{
+        console.log(resp.data)
+        this.carreras = resp.data
+      })
+
+     }
 
   ngOnInit(): void {
   }
