@@ -24,11 +24,6 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
-import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
-import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
-
-import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
-import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
 
 
 
@@ -44,12 +39,7 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-    ConsultaConvocatoriaComponent,
-    DesigTutorEmpresarialComponent,
-
-    DesigTutorAcademicoComponent,
-    ConsultasEstudiantesAsignadosComponent,
-    GestionEmpresaComponent
+    ConsultaConvocatoriaComponent
 
   ],
   imports: [
@@ -65,9 +55,8 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
     MatIconModule,
     MatDividerModule,
     MatCardModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

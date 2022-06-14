@@ -1,0 +1,56 @@
+<section class="vh-100">
+    <mat-card class="card">
+        <mat-card-header>
+            <mat-card-title>VISITAS A LA INSTITUCIÓN</mat-card-title>
+            <mat-card-subtitle>REGISTRO DE VISITAS</mat-card-subtitle>
+        </mat-card-header>
+        <mat-card-content>
+            <h3><strong>Tutor Academico: </strong> Juan Gabriel</h3>
+            <h3><strong>Tutor Empresarial: </strong> Thalia </h3>
+            <h3><strong>Estudiante: </strong>Lisseth Sizalima</h3>
+            <h3><strong>Ciclo: </strong>Quinto</h3>
+            <h3><strong>Empresa: </strong> lisseth</h3>
+            <h3><strong>Periodo Academico: </strong>2021-2022</h3>
+            <h3 class="titulo"><strong>Informe</strong></h3>
+
+            <div>
+                <h3>
+                    <mat-label color="black">Fecha de visita</mat-label>
+                </h3>
+                <br>
+
+                <!--<input matInput [min]="minDate" [matDatepicker]="picker"
+                                    [formControl]="row.get('fecha')">
+                                    <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+                                <mat-datepicker #picker></mat-datepicker> -->
+
+
+                <h3>
+                    <mat-label>Hora Inicio de la Reunion</mat-label><br>
+                    <input matInput type="time"><br>
+                    <mat-label>Hora Fin de la Reunion</mat-label><br>
+                    <input matInput type="time"><br>
+                </h3>
+                <h3>
+                    <mat-label>Asunto</mat-label><br>
+                    <input matInput placeholder="Tema a tratar de la Visita"><br>
+                </h3>
+
+                <h3>
+                    <mat-label>Actividades</mat-label><br>
+                    <textarea matInput></textarea><br>
+                </h3>
+
+                <h3>
+                    <mat-label>Observaciones</mat-label><br>
+                    <textarea matInput name="observacion"></textarea><br>
+                </h3>
+
+
+                <div style="text-align:center">
+                    <button type="submit" mat-raised-button color="primary" [disabled]="">GUARDAR</button>
+                </div>
+            </div>
+        </mat-card-content>
+    </mat-card>
+</section>
