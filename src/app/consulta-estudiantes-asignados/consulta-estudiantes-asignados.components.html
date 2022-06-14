@@ -8,8 +8,9 @@
       <div>
         <select class="form-control">
           <option>Seleccione una convocatoria </option>
-          <option *ngFor="let convocatoria of convocatorias">{{convocatoria.nombreConvocatoria}}</option>
+          <option *ngFor="let convocatoria of convocatorias" (click)="codigodeConvocatoria('1')">{{convocatoria.nombreConvocatoria}}</option>
         </select>
+        <button (click)="codigodeConvocatoria('1')">Mostrar trabajador</button>
       </div>
       <br><br>
       <h2 style="color: #1d3557;">{{listaTitulo}}</h2>
