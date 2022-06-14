@@ -29,6 +29,7 @@ import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tuto
 
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
+import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
 
 
 
@@ -49,7 +50,8 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
 
     DesigTutorAcademicoComponent,
     ConsultasEstudiantesAsignadosComponent,
-    GestionEmpresaComponent
+    GestionEmpresaComponent,
+    RegistroAsistenciaComponent
 
   ],
   imports: [

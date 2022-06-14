@@ -14,6 +14,7 @@ import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-
 
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
+import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
 
 
 const routes: Routes = [
@@ -32,6 +33,7 @@ const routes: Routes = [
   
   {path: 'gestion-empresa', component: GestionEmpresaComponent },
 
+  {path:'registro-asistencia', component: RegistroAsistenciaComponent},
 
   {path:'**',component:PagenotfoundComponent},
 
