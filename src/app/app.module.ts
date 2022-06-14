@@ -24,6 +24,7 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
+
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 
@@ -45,6 +46,7 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
+
     ConsultaConvocatoriaComponent,
     DesigTutorEmpresarialComponent,
 
@@ -67,9 +69,8 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
     MatIconModule,
     MatDividerModule,
     MatCardModule,
-    HttpClientModule,
-    ReactiveFormsModule,
-    MatMenuModule
+    MatMenuModule,
+    HttpClientModule
   ],
   providers: [],
   bootstrap: [AppComponent]

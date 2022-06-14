@@ -9,6 +9,7 @@ import { RegistroDocentesComponent} from "./registro-docentes/registro-docentes.
 import { RegistroEmpresasComponent } from './registro-empresas/registro-empresas.component';
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 import {ConsultaConvocatoriaComponent} from './consulta-convocatoria/consulta-convocatoria.component';
+
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 
@@ -19,13 +20,9 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
-  {path: 'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent },
-  {path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent },
-
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
-  {path: 'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path: 'consulta-ppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
