@@ -1,6 +1,6 @@
 import { SolicitudEmpresa } from "./SolicitudEmpresa";
 export class Convocatoria{
-    id_convocatoria : any;
+    id_convocatorias : any;
     doc_convocatoria: any;
     fecha_emision: any;
     fecha_maxima: any;

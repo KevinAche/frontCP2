@@ -9,12 +9,14 @@ export class ConsultasEstudiantesAsignadosComponent implements OnInit {
   public titulo="CONSULTA DE ESTUDIANTES ASIGNADOS";
   public convocatoriaTitulo="CONVOCATORIAS"
   public listaTitulo ="ESTUDIANTES"
-  public codigoConvocatoria: any;
   public convocatorias: Array<any>=[];
   public asignados:Array<any>=[];
+  usuario:string="";
 
+  opcionSeleccionado: string  = '0';
+  verSeleccion: string        = '';
   constructor(private convocatoriaService: ConvocatoriaService, private solicitudalumnoservice : SolicitudAlumnoService ){
-    this.codigoConvocatoria=0;
+    this.verSeleccion="Seleccione una convocatoria";
   }
 
   ngOnInit(): void {
@@ -37,9 +39,10 @@ export class ConsultasEstudiantesAsignadosComponent implements OnInit {
     )
   }
 
-  codigodeConvocatoria(codigo:any){
-      this.codigoConvocatoria=codigo;
-      alert(this.codigoConvocatoria);
-  }
+
+  capturarConvocatoria() {
+    this.verSeleccion = this.opcionSeleccionado;
+}
+
 
 }
