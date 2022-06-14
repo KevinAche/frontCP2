@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import { ChangeDetectorRef, Component, OnInit } from '@angular/core';
 import {TokenService} from "../services/token.service";
 import {AuthService} from "../services/auth.service";
 import {Router} from "@angular/router";
@@ -22,10 +22,12 @@ export class LoginComponent implements OnInit {
   constructor(
     private tokenService: TokenService,
     private authService: AuthService,
-    private router: Router
+    private router: Router,
+    private changeDedectionRef: ChangeDetectorRef
   ) { }
 
   ngOnInit() {
+    this.changeDedectionRef.detectChanges();
     if(this.tokenService.getToken()){
       this.isLogged = true;
       this.isLoginFail = false;
@@ -43,7 +45,9 @@ export class LoginComponent implements OnInit {
       this.tokenService.setUserName(data.username);
       this.tokenService.setAuthorities(data.authorities);
       this.roles = data.authorities;
-      this.router.navigate(['/']);
+  
+      
+      window.location.replace('/')
     },
       err => {
       this.isLogged = false;

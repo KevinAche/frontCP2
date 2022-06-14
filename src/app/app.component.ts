@@ -3,6 +3,8 @@ import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } f
 import { MatSidenav } from '@angular/material/sidenav';
 import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
 import { CarreraService } from './services/carrera.service';
+import { TokenService } from './services/token.service';
+import { ChangeDetectorRef } from '@angular/core';
 
 @Component({
   selector: 'app-root',
@@ -13,36 +15,56 @@ import { CarreraService } from './services/carrera.service';
 export class AppComponent implements OnInit {
 
   @ViewChild(MatSidenav)
- sidenav!: MatSidenav;
+ sidenav: MatSidenav;
   title = 'casopractico-dos';
   loginForm!: FormGroup;
+  roles: string[];
+  isUser = false;
+  isLogged = false;
+
 
   constructor(
-    private observer: BreakpointObserver
+    private observer: BreakpointObserver,
+    private tokenService: TokenService,
+    private changeDedectionRef: ChangeDetectorRef
     ) {
 
     }
 
   ngOnInit(): void {
-    this.loginForm = new FormGroup({
+    
+    this.changeDedectionRef.detectChanges();
+    if(this.tokenService.getToken()){
+      this.isLogged = true;
+      
+    }else {
+      this.isLogged = false;
+    }
+
+   /* this.loginForm = new FormGroup({
       email: new FormControl('', [Validators.required, Validators.email]),
       password: new FormControl('', [Validators.required])
-    })
-  }
-  get emailField(): any {
-    return this.loginForm.get('email');
-  }
-  get passwordField(): any {
-    return this.loginForm.get('password');
-  }
-  loginFormSubmit(): void {
-    console.log(this.loginForm.value);
-    // Call Api
-  }
-  
+    }); */
 
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol =>{
+      if(rol === 'ROLE_USER'){
+        this.isUser = true;
+      }
+    });
+  }
 
-  ngAfterViewInit() {
+  onLogOut(){
+    this.tokenService.logOut();
+    window.location.reload();
+  }
+
+  onLogIn(){
+    window.location.reload();
+  }
+
+  ngAfterContentInit() {
+    
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
@@ -53,4 +75,6 @@ export class AppComponent implements OnInit {
       }
     });
   }
+
+  
 }

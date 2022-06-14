@@ -11,13 +11,14 @@ import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion
 import {ConsultaConvocatoriaComponent} from './consulta-convocatoria/consulta-convocatoria.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
+import {ProdGuardService as guard} from "./guards/prod-guard.service";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
-  {path: 'consulta-ppp', component:ConsultaspppComponent },
+  {path: 'consulta-ppp', component:ConsultaspppComponent}, //,canActivate: [guard], data: {expectedRol: ['admin', 'user', 'docente']}},
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
