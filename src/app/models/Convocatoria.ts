@@ -1,3 +1,4 @@
+import { SolicitudEmpresa } from "./SolicitudEmpresa";
 export class Convocatoria{
     id_convocatoria : any;
     doc_convocatoria: any;
@@ -5,4 +6,7 @@ export class Convocatoria{
     fecha_maxima: any;
     id_solicitud_empresa : any;
 
+    constructor(){
+       
+    }
 }

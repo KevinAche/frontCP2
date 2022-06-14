@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class CarreraService {
 
-    _url ='http://localhost:8080/GestionCarrera'
+    _url ='http://localhost:8082/GestionCarrera'
 
   constructor(
     private http: HttpClient

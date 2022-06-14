@@ -10,6 +10,7 @@ import { ConvocatoriaService } from '../services/convocatoria.service';
   
 })
 
+/*
 export class SeleccionEstudiantesComponent implements OnInit {
   public titulo="SELECCIÓN DE ESTUDIANTES";
   public convocatoriaTitulo="CONVOCATORIAS"
@@ -24,4 +25,27 @@ export class SeleccionEstudiantesComponent implements OnInit {
     );
   }
   
+}*/
+
+
+export class SeleccionEstudiantesComponent implements OnInit {
+  public titulo="SELECCIÓN DE ESTUDIANTES";
+  public convocatoriaTitulo="CONVOCATORIAS"
+  public listaTitulo ="LISTA DE SOLICITUDES"
+  public convocatorias: Array<any>=[];
+ 
+  constructor(
+    private convocatoriaService: ConvocatoriaService
+    ) {
+
+     this.convocatoriaService.getConvocatoria().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.convocatorias = resp.data
+      })
+
+     }
+
+  ngOnInit(): void {
+  }
+
 }

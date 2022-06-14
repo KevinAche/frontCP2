@@ -9,8 +9,8 @@
       <h2 style="color: #1d3557;">{{convocatoriaTitulo}}</h2>
       <div>
         <select class="form-control">
-          <option>-Seleccione </option>
-          <--! <option *ngFor="let convo of convocatoria">{{convo.id_convocatoria}}</option> !-->
+          <option>Seleccione una convocatoria </option>
+          <option *ngFor="let convocatoria of convocatorias">{{convocatoria.idConvocatoria}}</option>
         </select>
       </div>
 
