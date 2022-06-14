@@ -24,7 +24,6 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
-import { ConvocatoriaService } from './services/convocatoria.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
@@ -67,7 +66,7 @@ import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-a
     ReactiveFormsModule,
     MatMenuModule
   ],
-  providers: [ConvocatoriaService],
+  providers: [],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
