@@ -27,7 +27,7 @@ const routes: Routes = [
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
-  
+  {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path: 'gestion-empresa', component: GestionEmpresaComponent },
 
   {path:'registro-asistencia', component: RegistroAsistenciaComponent},

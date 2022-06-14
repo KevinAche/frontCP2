@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ConvocatoriaService } from '../services/convocatoria.service';
+import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 
 
 @Component({
@@ -32,13 +33,17 @@ export class SeleccionEstudiantesComponent implements OnInit {
   public convocatoriaTitulo="CONVOCATORIAS"
   public listaTitulo ="LISTA DE SOLICITUDES"
   public convocatorias: Array<any>=[];
+  public solicitudes: Array<any>=[];
+  opcionSeleccionado: string  = '0';
+  verSeleccion: string        = '';
 
-  constructor( private convocatoriaService: ConvocatoriaService) {
-
+  constructor( private convocatoriaService: ConvocatoriaService,private solicitudesalumnoservice : SolicitudAlumnoService) {
+    this.verSeleccion="Seleccione una convocatoria";
      }
 
   ngOnInit(): void {
     this.listarDatos();
+    this.listarSolicitudAlumnos();
   }
 
   public listarDatos(){
@@ -47,5 +52,17 @@ export class SeleccionEstudiantesComponent implements OnInit {
       this.convocatorias = resp.data
       })
   }
+
+  listarSolicitudAlumnos(){
+    this.solicitudesalumnoservice.getSolicitudAlumno().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.solicitudes = resp.data
+    }
+    )
+  }
+
+  capturarConvocatoria() {
+    this.verSeleccion = this.opcionSeleccionado;
+}
 
 }
