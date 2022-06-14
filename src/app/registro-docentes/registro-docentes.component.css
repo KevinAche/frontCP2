@@ -20,3 +20,13 @@ height: 100%;
     border-radius: 5px;
 }
 }
+p {
+    font-family: Lato;
+  }
+  .btn{
+    padding: 10px;
+    background-color: rgb(4, 4, 59);
+    color: white;
+    border-radius: 5px;
+    text-decoration: none;
+  }
