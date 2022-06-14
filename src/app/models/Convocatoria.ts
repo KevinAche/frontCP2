@@ -4,9 +4,9 @@ export class Convocatoria{
     doc_convocatoria: any;
     fecha_emision: any;
     fecha_maxima: any;
-    id_solicitud_empresa : any;
+    solicitud_Empresa : SolicitudEmpresa;
 
     constructor(){
-       
+       this.solicitud_Empresa = new SolicitudEmpresa();
     }
 }

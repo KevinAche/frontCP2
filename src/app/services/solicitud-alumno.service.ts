@@ -18,8 +18,7 @@ export class ConvocatoriaService {
 
     return this.http.get(this._url+'/ListaConvocatoria',{
         headers: header
-
+        
     });
   }
-
 }

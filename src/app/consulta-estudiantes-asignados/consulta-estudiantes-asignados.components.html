@@ -2,15 +2,13 @@
 <div class="container-fluid" style="padding: 55px;">
     <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
         {{titulo}}
-      </mat-card-title>
-
-      <mat-card>
+    </mat-card-title>
+    <mat-card>
         <h2 style="color: #1d3557;">{{convocatoriaTitulo}}</h2>
       <div>
         <select class="form-control">
           <option>Seleccione una convocatoria </option>
-          <option>Opcion 1 </option>
-          <option>Opcion 2</option>
+          <option *ngFor="let convocatoria of convocatorias">{{convocatoria.idConvocatoria}}</option>
         </select>
       </div>
       <br><br>
@@ -20,7 +18,7 @@
         <table class="table table-striped">
           <thead>
             <tr>
-            <th scope="col">Fecha Emisión</th>   
+            <th scope="col">Fecha Emisión</th>
               <th scope="col">Apellidos</th>
               <th scope="col">Nombres</th>
               <th scope="col">Eliminar</th>
@@ -42,7 +40,7 @@
       </div>
 
       </form>
-      
-      </mat-card>
+    </mat-card>
+
 </div>
 </section>

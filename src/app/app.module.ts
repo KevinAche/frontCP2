@@ -27,6 +27,7 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConvocatoriaService } from './services/convocatoria.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
+import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 
 
 
@@ -45,7 +46,8 @@ import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tuto
     RegistroComponent,
     ConsultaConvocatoriaComponent,
     DesigTutorEmpresarialComponent,
-    DesigTutorAcademicoComponent
+    DesigTutorAcademicoComponent,
+    ConsultasEstudiantesAsignadosComponent
 
   ],
   imports: [
