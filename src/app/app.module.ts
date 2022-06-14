@@ -25,12 +25,9 @@ import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
 import { ConvocatoriaService } from './services/convocatoria.service';
-import { ViajeComponent } from './xlop/viaje.component';
-import { ViajeService } from './xlop/viaje.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
-import { ToastrModule } from 'ngx-toastr';
-import {interceptorProvider} from "./interceptors/prod-interceptor.service";
+
 
 
 
@@ -47,7 +44,6 @@ import {interceptorProvider} from "./interceptors/prod-interceptor.service";
     FooterComponent,
     RegistroComponent,
     ConsultaConvocatoriaComponent,
-    ViajeComponent,
     DesigTutorEmpresarialComponent,
     DesigTutorAcademicoComponent
 
@@ -66,11 +62,10 @@ import {interceptorProvider} from "./interceptors/prod-interceptor.service";
     MatDividerModule,
     MatCardModule,
     HttpClientModule,
-    ToastrModule.forRoot(),
     ReactiveFormsModule,
     MatMenuModule
   ],
-  providers: [ViajeService,ConvocatoriaService, interceptorProvider],
+  providers: [ConvocatoriaService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

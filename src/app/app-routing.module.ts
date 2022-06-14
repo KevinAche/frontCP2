@@ -9,7 +9,6 @@ import { RegistroDocentesComponent} from "./registro-docentes/registro-docentes.
 import { RegistroEmpresasComponent } from './registro-empresas/registro-empresas.component';
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
 import {ConsultaConvocatoriaComponent} from './consulta-convocatoria/consulta-convocatoria.component';
-import { ViajeComponent } from './xlop/viaje.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 
@@ -24,8 +23,7 @@ const routes: Routes = [
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'**',component:PagenotfoundComponent},
   {path: 'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent },
-  {path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent },
-  {path:'viaje',component:ViajeComponent}
+  {path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent }
 
 ];
 
