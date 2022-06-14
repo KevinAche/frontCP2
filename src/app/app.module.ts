@@ -27,9 +27,8 @@ import { HttpClientModule } from '@angular/common/http';
 import { ConvocatoriaService } from './services/convocatoria.service';
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
-import {MatTableModule} from '@angular/material/table';
+import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
-
 
 
 
@@ -49,7 +48,8 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
     ConsultaConvocatoriaComponent,
     DesigTutorEmpresarialComponent,
     DesigTutorAcademicoComponent,
-    GestionEmpresaComponent,
+    ConsultasEstudiantesAsignadosComponent,
+    GestionEmpresaComponent
 
   ],
   imports: [
@@ -67,8 +67,7 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
     MatCardModule,
     HttpClientModule,
     ReactiveFormsModule,
-    MatMenuModule,
-    MatTableModule
+    MatMenuModule
   ],
   providers: [ConvocatoriaService],
   bootstrap: [AppComponent]

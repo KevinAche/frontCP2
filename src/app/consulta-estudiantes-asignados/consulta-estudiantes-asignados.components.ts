@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { ConvocatoriaService } from '../services/convocatoria.service';
 
 @Component({
   selector: 'app-consultasppp',
@@ -8,9 +9,21 @@ export class ConsultasEstudiantesAsignadosComponent implements OnInit {
   public titulo="CONSULTA DE ESTUDIANTES ASIGNADOS";
   public convocatoriaTitulo="CONVOCATORIAS"
   public listaTitulo ="ESTUDIANTES"
-  constructor() { }
+  public convocatorias: Array<any>=[];
+
+  constructor(private convocatoriaService: ConvocatoriaService){
+
+  }
 
   ngOnInit(): void {
+    this.listar();
+  }
+
+  listar(){
+    this.convocatoriaService.getConvocatoria().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.convocatorias = resp.data
+      })
   }
 
 }
