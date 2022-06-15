@@ -1,6 +1,5 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-
 import { AppRoutingModule } from './app-routing.module';
 import { AppComponent } from './app.component';
 import { NgbModule } from '@ng-bootstrap/ng-bootstrap';
@@ -12,6 +11,7 @@ import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
 import { LoginComponent } from './login/login.component';
 import {MatToolbarModule} from '@angular/material/toolbar';
 import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDialogModule} from "@angular/material/dialog";
 import {MatButtonModule} from '@angular/material/button';
 import {MatIconModule} from '@angular/material/icon';
 import {MatDividerModule} from '@angular/material/divider';
@@ -24,14 +24,15 @@ import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
 import { HttpClientModule } from '@angular/common/http';
-
 import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
-
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
-import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
-
+import {RegistroAsistenciaComponent} from "./registro-asistencia/registro-asistencia.component";
+import {TableModule} from "primeng/table";
+import {DialogModule} from "primeng/dialog";
+import {ButtonModule} from "primeng/button";
+import {PanelModule} from "primeng/panel";
 
 
 @NgModule({
@@ -46,15 +47,12 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
     PagenotfoundComponent,
     FooterComponent,
     RegistroComponent,
-
     ConsultaConvocatoriaComponent,
     DesigTutorEmpresarialComponent,
-
     DesigTutorAcademicoComponent,
     ConsultasEstudiantesAsignadosComponent,
     GestionEmpresaComponent,
     RegistroAsistenciaComponent
-
   ],
   imports: [
     BrowserModule,
@@ -69,8 +67,14 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
     MatIconModule,
     MatDividerModule,
     MatCardModule,
+    HttpClientModule,
+    ReactiveFormsModule,
     MatMenuModule,
-    HttpClientModule
+    TableModule,
+    MatDialogModule,
+    DialogModule,
+    ButtonModule,
+    PanelModule,
   ],
   providers: [],
   bootstrap: [AppComponent]

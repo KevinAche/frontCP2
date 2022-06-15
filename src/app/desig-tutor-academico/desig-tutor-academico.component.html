@@ -3,34 +3,69 @@
     <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
       Designar Tutor Academico
     </mat-card-title>
-
     <form>
-
-
-    <input class="form-control mr-sm-2" type="search" placeholder="Buscar Persona" aria-label="Search">
-
-
+      <h2>Ingrese cedula: </h2>
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search">
+      <br>
       <table class="table table-striped">
         <thead style="background-color: #1d3557; color: white; font-size:20px;">
         <tr>
-          <th scope="col">Cedula</th>
-          <th scope="col">Apellidos</th>
-          <th scope="col">Nombres</th>
-          <th scope="col">---</th>
+          <th *ngFor="let col of columnasEstudiantes">
+            {{col.header}}
+          </th>
         </tr>
         </thead>
         <tbody style="font-size:20px;">
-        <tr>
-          <td>0106237142</td>
-          <td>Vanegas</td>
-          <td>Karen</td>
-          <td><a class="btn btn-danger" style="background-color:#1d3557; color:white;">Asignar</a></td>
+        <tr *ngFor="let alumno of dataAlumnos">
+          <td *ngFor="let col of columnasEstudiantes">
+            <div [ngSwitch]="col.field">
+                <span *ngSwitchCase="'aginarta'">
+                  <button type="button" class="btn btn-primary" (click)="asignarTutor()">Asignar</button>
+                </span>
+              <span *ngSwitchDefault>{{alumno[col.field]}}</span>
+            </div>
+          </td>
         </tr>
         </tbody>
       </table>
-      <button type="button" class="btn btn-warning">Asignar</button>
     </form>
   </mat-card>
-
-
 </section>
+<p-dialog
+  [(visible)]="dialogoAsignar"
+  [style]="{width:'50vw'}"
+  [draggable]="false"
+  [baseZIndex]="10000"
+  [modal]="true"
+  styleClass="p-fluid"
+>
+  <ng-template pTemplate="content">
+    <p-panel>
+      <ng-template pTemplate="header">
+        <h2>Asignacion de tutor academico</h2>
+      </ng-template>
+     <ng-template pTemplate="content">
+        <h5>Lista de docentes</h5>
+        <p>Designe el tutor academico de la lista de docentes: </p>
+        <!--<p-table [value]="products" selectionMode="single" dataKey="code" responsiveLayout="scroll">
+          <ng-template pTemplate="header">
+            <tr>
+              <th>Code</th>
+              <th>Name</th>
+              <th>Category</th>
+              <th>Quantity</th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-product>
+            <tr [pSelectableRow]="product">
+              <td>{{product.code}}</td>
+              <td>{{product.name}}</td>
+              <td>{{product.category}}</td>
+              <td>{{product.quantity}}</td>
+            </tr>
+          </ng-template>
+        </p-table> -->
+      </ng-template>
+    </p-panel>
+  </ng-template>
+</p-dialog>
