@@ -46,7 +46,6 @@ const routes: Routes = [
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
   {path:'**',component:PagenotfoundComponent},
 
-
 ];
 
 @NgModule({
