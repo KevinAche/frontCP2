@@ -34,22 +34,32 @@ export class RegistroEmpresasComponent implements OnInit {
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
       nombreEmpresa: ['', Validators.required]
-      
+
     });
     
   }
 
   public create(): void {
-    this.empresaservice.createEmpresa(this.empresa).subscribe(
-      Response => {
-        swal.fire(
-          'Usuario Guardado',
-          `Usuario ${this.empresa.nombreEmpresa} creado con exito!`,
-          'success'
-        )
-        this.limpiar()
-      }
-  )
+
+    if (this.formEmpresa.valid) {
+      this.empresaservice.createEmpresa(this.empresa).subscribe(
+        Response => {
+          swal.fire(
+            'Empresa Guardada',
+            `Empresa ${this.empresa.nombreEmpresa} creada con exito!`,
+            'success'
+          )
+          this.limpiar()
+        }
+      )
+    }else{
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+    }
+    
   }
 
   public limpiar(): void {
