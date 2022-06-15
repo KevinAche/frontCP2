@@ -9,27 +9,26 @@
   }
   .spacer {
     flex: 2 2 auto;
-  }
-.card-header{
+    }
+  .card-header{
    color:white;
    font-size: 16px;
    background-color: #0c3255;
-}
-.card-body{
-font-size: 16px;
-color:black;
-}
-.card-title{
-font-weight: bold;
-font-size: 16px;
-}
-.card-text{
-font-weight: bold;
-}
-  #CardP {
-      margin-left: 10px;
-      margin-right: 10px;
-
+  }
+  .card-body{
+  font-size: 16px;
+  color:black;
+  }
+  .card-title{
+  font-weight: bold;
+  font-size: 16px;
+  }
+  .card-text{
+  font-weight: bold;
+  }
+    #CardP {
+        margin-left: 10px;
+        margin-right: 10px;
     }
 
 
