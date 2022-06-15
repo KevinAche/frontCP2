@@ -38,6 +38,8 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
+import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
+import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 
 @NgModule({
   declarations: [
@@ -59,7 +61,11 @@ import { ConsultasReportesComponent } from './consultas-reportes/consultas-repor
     RegistroAsistenciaComponent,
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
-    ConsultasReportesComponent
+    ConsultasReportesComponent,
+//Franklin
+InformeFinalAlumnoComponent,
+EvaluacionEstudianteTutorEmpresarialComponent,
+
   ],
   imports: [
     BrowserModule,
