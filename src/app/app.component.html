@@ -10,6 +10,16 @@
     </button>
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
+
+  <button *ngIf="isLogged" (click)="onLogOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    Log Out</button>
+
+  <button *ngIf="!isLogged" routerLink="/login">
+    <mat-icon>account_circle</mat-icon>
+    Log In
+  </button>
+
 </mat-toolbar>
 
 <mat-sidenav-container>
@@ -112,7 +122,7 @@
       <span>Eva. Estudiante </span>
     </a>
 
-    
+
   </mat-sidenav>
 
   <mat-sidenav-content class="content mat-elevation-z4">

@@ -19,7 +19,7 @@ import { RegistroVisitaComponent } from './registro-visita/registro-visita.compo
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
-import { ConsultaEstadoComponent} from './consulta-estado/consulta-estado.component';
+
 
 
 const routes: Routes = [
@@ -39,7 +39,7 @@ const routes: Routes = [
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
-  {path:'consulta-estado',component:ConsultaEstadoComponent},
+  // {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
