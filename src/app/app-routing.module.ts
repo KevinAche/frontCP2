@@ -16,7 +16,7 @@ import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.compo
 import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
 import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
-
+import {ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -34,6 +34,7 @@ const routes: Routes = [
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
+  {path:'consultas-reportes',component:ConsultasReportesComponent},
   {path:'**',component:PagenotfoundComponent},
 
 

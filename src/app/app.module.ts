@@ -37,6 +37,7 @@ import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-est
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
+import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 
 @NgModule({
   declarations: [
@@ -57,7 +58,8 @@ import {MatFormFieldModule} from '@angular/material/form-field';
     GestionEmpresaComponent,
     RegistroAsistenciaComponent,
     RegistroVisitaComponent,
-    SolicitudEstudianteComponent
+    SolicitudEstudianteComponent,
+    ConsultasReportesComponent
   ],
   imports: [
     BrowserModule,
