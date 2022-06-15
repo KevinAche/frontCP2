@@ -19,6 +19,9 @@ import { RegistroVisitaComponent } from './registro-visita/registro-visita.compo
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 const routes: Routes = [
   { path: '', component: HomeComponent },
   { path: 'registro-docente', component: RegistroDocentesComponent },
@@ -36,10 +39,13 @@ const routes: Routes = [
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
+  
   //Franklin
+  { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
-
+  { path: 'cert-alumno', component: CertificadoAlumnoComponent },
+  { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
   { path: '**', component: PagenotfoundComponent },
 
 
