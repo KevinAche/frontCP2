@@ -33,7 +33,10 @@ import {TableModule} from "primeng/table";
 import {DialogModule} from "primeng/dialog";
 import {ButtonModule} from "primeng/button";
 import {PanelModule} from "primeng/panel";
-
+import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
+import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
+import {MatExpansionModule} from '@angular/material/expansion';
+import {MatFormFieldModule} from '@angular/material/form-field';
 
 @NgModule({
   declarations: [
@@ -52,7 +55,9 @@ import {PanelModule} from "primeng/panel";
     DesigTutorAcademicoComponent,
     ConsultasEstudiantesAsignadosComponent,
     GestionEmpresaComponent,
-    RegistroAsistenciaComponent
+    RegistroAsistenciaComponent,
+    RegistroVisitaComponent,
+    SolicitudEstudianteComponent
   ],
   imports: [
     BrowserModule,
@@ -75,6 +80,8 @@ import {PanelModule} from "primeng/panel";
     DialogModule,
     ButtonModule,
     PanelModule,
+    MatExpansionModule,
+    MatFormFieldModule,
   ],
   providers: [],
   bootstrap: [AppComponent]
