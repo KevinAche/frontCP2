@@ -17,6 +17,7 @@ import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asis
 import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 import {ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
+import { ConsultaEstadoComponent} from './consulta-estado/consulta-estado.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -35,6 +36,7 @@ const routes: Routes = [
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
+  {path:'consulta-estado',component:ConsultaEstadoComponent},
   {path:'**',component:PagenotfoundComponent},
 
 
