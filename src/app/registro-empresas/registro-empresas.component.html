@@ -4,37 +4,37 @@
         Registro de Empresa
       </mat-card-title>
       <div class="container-fluid" >
-      <form>
+      <form [formGroup]="formEmpresa">
         <div class="form-row">
           <div class="form-group col-md-6">
-            <label for="inputEmail4">Nombre Empresa:</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Ingrese el nombre de la empresa">
+            <label for="ruc">RUC:</label>
+            <input type="text" class="form-control" [(ngModel)]="empresa.ruc" id="ruc"  formControlName="ruc" placeholder="Ingrese el RUC">
           </div>
           <div class="form-group col-md-6">
-            <label for="inputPassword4">Gerente:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Ingrese el nombre del gerente">
+            <label for="empresa">Nombre Empresa:</label>
+            <input type="text" class="form-control" id="empresa"  formControlName="empresa" [(ngModel)]="empresa.nombreEmpresa" placeholder="Ingrese el nombre de la empresa">
           </div>
         </div>
         <div class="form-group">
-          <label for="inputAddress">Visión:</label>
-          <input type="text" class="form-control" id="inputAddress"  placeholder="Ingrese la visión de la empresa">
+          <label for="vision">Visión:</label>
+          <input type="text" class="form-control" id="vision" formControlName="vision" [(ngModel)]="empresa.vision"  placeholder="Ingrese la visión de la empresa">
         </div>
         <div class="form-group">
-          <label for="inputAddress2">Misión:</label>
-          <input type="text" class="form-control" id="inputAddress2" placeholder="Ingrese la misión de la empresa" >
+          <label for="mision">Misión:</label>
+          <input type="text" class="form-control" id="mision" formControlName="mision" [(ngModel)]="empresa.mision"  placeholder="Ingrese la misión de la empresa" >
         </div>
         <div class="form-row">
           <div class="form-group col-md-4">
-            <label for="inputCity">Telefono:</label>
-            <input type="text" class="form-control" id="inputCity" placeholder="123456789">
+            <label for="telefono">Telefono:</label>
+            <input type="text" class="form-control"  id="telefono" formControlName="telefono" [(ngModel)]="empresa.telefono"  placeholder="123456789">
           </div>
           <div class="form-group col-md-4">
-            <label for="inputState">Direccion:</label>
-            <input type="text" class="form-control" id="inputCity" placeholder="Apartamento, ciudad y provincia">
+            <label for="direccion">Direccion:</label>
+            <input type="text" class="form-control" id="direccion" formControlName="direccion" [(ngModel)]="empresa.direccion"  placeholder="Apartamento, ciudad y provincia">
           </div>
           <div class="form-group col-md-4">
-            <label for="inputState">Duración convenio:</label>
-            <select class="form-select" aria-label="Default select example">
+            <label for="duracionConvenio">Duración convenio:</label>
+            <select class="form-select" id="duracionConvenio" formControlName="duracionConvenio" [(ngModel)]="empresa.duracionConvenio"  aria-label="Default select example">
               <option selected>Seleccione la duración</option>
               <option value="1">6 meses</option>
               <option value="2">1 año</option>
@@ -46,14 +46,12 @@
         <br><br>
         <div class="row text-center">
           <div class="col">
-            <button type="submit" class="btn" style="background: #1d3557; color: white;">Registrar Empresa</button>
+            <button type="submit" (click)='create()' class="btn" style="background: #1d3557; color: white;">Registrar Empresa</button>
           </div>
           <div class="col">
             <button type="submit" class="btn" [routerLink]="['/gestion-empresa']" style="background: green; color: white;">Empresas</button>
           </div>
-          <div class="col">
-            <button type="submit" class="btn btn-danger">Regresar</button>
-          </div>
+          
         </div>
 
       </form>
