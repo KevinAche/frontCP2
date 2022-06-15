@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { TokenService } from '../services/token.service';
 
 @Component({
   selector: 'app-registro-docentes',
