@@ -40,6 +40,9 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 
 @NgModule({
   declarations: [
@@ -62,10 +65,12 @@ import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estu
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
     ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
 //Franklin
 InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
-
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
   ],
   imports: [
     BrowserModule,
