@@ -39,6 +39,7 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
+import { DialogoactaComponent } from './dialogoacta/dialogoacta.component';
 
 @NgModule({
   declarations: [
@@ -61,7 +62,8 @@ import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
     ConsultasReportesComponent,
-    ActaReunionComponent
+    ActaReunionComponent,
+    DialogoactaComponent
   ],
   imports: [
     BrowserModule,
