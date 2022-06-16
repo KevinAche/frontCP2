@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-gestion-empresa',
   templateUrl: './gestion-empresa.component.html',
-  styleUrls: ['./gestion-empresa.component.css'], 
+  styleUrls: ['./gestion-empresa.component.css'],
   providers: [MessageService]
 })
 export class GestionEmpresaComponent implements OnInit {
@@ -67,7 +67,7 @@ export class GestionEmpresaComponent implements OnInit {
       { field: 'duracionConvenio', header: 'Convenio' },
       { field: 'size', header: 'Acciones' },
     ];
-    this.listarEmpresas();
+    // this.listarEmpresas();
   }
 
   public limpiar(): void {
@@ -80,14 +80,14 @@ export class GestionEmpresaComponent implements OnInit {
     this.empresa.telefono = null;
     this.empresa.direccion = null;
     this.empresa.nombreEmpresa = null;
-    
+
   }
 
-  listarEmpresas():void {
-    this.empresaservice.getEmpresas().then(value => {
-      this.empresas=value['data'];
-      console.log(this.empresas)
-    })
-  }
-  
+  // listarEmpresas():void {
+  //   this.empresaservice.getEmpresas().then(value => {
+  //     this.empresas=value['data'];
+  //     console.log(this.empresas)
+  //   })
+  // }
+
 }
