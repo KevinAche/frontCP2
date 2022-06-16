@@ -43,6 +43,7 @@ import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/infor
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import {MatTreeModule} from '@angular/material/tree';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 
 @NgModule({
   declarations: [
@@ -65,6 +66,8 @@ import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
     RegistroAsistenciaComponent,
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
+    ConsultasReportesComponent,
+    ActaReunionComponent,
     ConsultasReportesComponent,
     // ConsultaEstadoComponent,
     ConsultasReportesComponent,
@@ -96,7 +99,6 @@ EvaluacionEstudianteTutorEmpresarialComponent,
     PanelModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatTreeModule
   ],
   providers: [],
   bootstrap: [AppComponent]

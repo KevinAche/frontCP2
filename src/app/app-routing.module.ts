@@ -20,15 +20,14 @@ import { ConsultasReportesComponent } from './consultas-reportes/consultas-repor
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
-
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
-  {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
-  {path: 'consultasppp', component:ConsultaspppComponent },
+  {path: 'consulta-ppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
@@ -44,7 +43,9 @@ const routes: Routes = [
   //Franklin
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+  {path:'acta-reunion',component:ActaReunionComponent},
   {path:'**',component:PagenotfoundComponent},
+
 
 ];
 
