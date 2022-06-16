@@ -14,12 +14,28 @@ import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
 import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
+import { SolicitudEstudianteComponent } from './solicitud-estudiante/solicitud-estudiante.component';
+import { RegistroVisitaComponent } from './registro-visita/registro-visita.component';
+import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
+import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
+import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
+import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
+import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { SolicitarRequerimientosComponent } from './solicitar-requerimientos/solicitar-requerimientos.component';
 import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 import {ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'registro-docente', component:RegistroDocentesComponent},
+  {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
@@ -35,6 +51,18 @@ const routes: Routes = [
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
+  // {path:'consulta-estado',component:ConsultaEstadoComponent},
+  //Franklin
+  { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
+  { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
+  { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+  {path:'acta-reunion',component:ActaReunionComponent},
+  { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
+  { path: 'cert-alumno', component: CertificadoAlumnoComponent },
+
+  //Liss
+  {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
+  {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
   {path:'**',component:PagenotfoundComponent},
 
 
