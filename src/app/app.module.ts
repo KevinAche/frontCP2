@@ -41,8 +41,9 @@ import { ConsultasReportesComponent } from './consultas-reportes/consultas-repor
 // import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {MatTreeModule} from '@angular/material/tree';
-
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 
 @NgModule({
   declarations: [
@@ -70,6 +71,11 @@ import {MatTreeModule} from '@angular/material/tree';
 //Franklin
 InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
+
+
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
 
   ],
   imports: [

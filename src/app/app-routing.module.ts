@@ -19,8 +19,8 @@ import { RegistroVisitaComponent } from './registro-visita/registro-visita.compo
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
-
-
+import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -43,6 +43,10 @@ const routes: Routes = [
   //Franklin
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+
+  //Liss
+  {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
+  {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
   {path:'**',component:PagenotfoundComponent},
 
 
