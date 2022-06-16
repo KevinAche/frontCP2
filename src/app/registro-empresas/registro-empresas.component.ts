@@ -32,8 +32,7 @@ export class RegistroEmpresasComponent implements OnInit {
       mision: ['', Validators.required],
       vision: ['', Validators.required],
       telefono: ['', Validators.required],
-      direccion: ['', Validators.required],
-      nombreEmpresa: ['', Validators.required]
+      direccion: ['', Validators.required]
 
     });
     
@@ -41,24 +40,26 @@ export class RegistroEmpresasComponent implements OnInit {
 
   public create(): void {
 
-    if (this.formEmpresa.valid) {
-      this.empresaservice.createEmpresa(this.empresa).subscribe(
-        Response => {
-          swal.fire(
-            'Empresa Guardada',
-            `Empresa ${this.empresa.nombreEmpresa} creada con exito!`,
-            'success'
-          )
-          this.limpiar()
-        }
-      )
-    }else{
+    if (this.formEmpresa.invalid) {
+      
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
         'error'
       )
+      return;
     }
+    this.empresaservice.createEmpresa(this.empresa).subscribe(
+      Response => {
+        swal.fire(
+          'Empresa Guardada',
+          `Empresa ${this.empresa.nombreEmpresa} creada con exito!`,
+          'success'
+        )
+        this.limpiar()
+      }
+    )
+    
     
   }
 
