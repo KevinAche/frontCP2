@@ -16,8 +16,8 @@ export class EmpresaService {
   private url_mater: string =environment.URL_APP;
 
   private urlCreate: string = this.url_mater+'/GestionEmpresa/CrearEmpresa';
-  private urlDelete: string = this.url_mater+'/GestionEmpresa/EditarEmpresa';
-  private urlUpdate: string = this.url_mater+'/GestionEmpresa/EliminarEmpresa';
+  private urlDelete: string = this.url_mater+'/GestionEmpresa/EliminarEmpresa';
+  private urlUpdate: string = this.url_mater+'/GestionEmpresa/EditarEmpresa';
   private urlSearch: string = this.url_mater+'/GestionEmpresa/ListaEmpresas';
   
 
@@ -25,10 +25,11 @@ export class EmpresaService {
 
   constructor(private http: HttpClient, private router: Router) { }
 
-  getEmpresas(): Observable<Empresa[]> {
-    return this.http.get(this.urlSearch).pipe(
-      map(response => response as Empresa[])
-    );
+
+  getEmpresas(): Promise<any[]> {
+    return this.http.get<any[]>(
+      this.urlSearch
+    ).toPromise();
   }
 
   createEmpresa(emp: Empresa): Observable<Empresa> {
@@ -50,8 +51,8 @@ export class EmpresaService {
     );
   }
 
-  deleteEmpresa(persid: number): Observable<Empresa> {
-    return this.http.delete<Empresa>(`${this.urlDelete}/${persid}`, { headers: this.httpHeaders }).pipe(
+  deleteEmpresa(empid: number): Observable<Empresa> {
+    return this.http.delete<Empresa>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         swal.fire('Error al eliminar', 'No se puede eliminar', 'error')
         return throwError(e);
