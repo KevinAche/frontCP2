@@ -27,6 +27,7 @@ import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alu
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { CrearActaComponent } from './crear-acta/crear-acta.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -51,6 +52,7 @@ const routes: Routes = [
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
   {path:'acta-reunion',component:ActaReunionComponent},
+  {path:'crear-acta',component:CrearActaComponent},
   { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
   { path: 'cert-alumno', component: CertificadoAlumnoComponent },
 

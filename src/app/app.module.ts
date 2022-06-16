@@ -49,6 +49,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { CrearActaComponent } from './crear-acta/crear-acta.component';
 
 @NgModule({
   declarations: [
@@ -87,6 +88,7 @@ CertificadoAlumnoComponent,
 //Lisseth
 EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
+CrearActaComponent,
 
   ],
   imports: [
