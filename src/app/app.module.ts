@@ -39,13 +39,19 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 // import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
+
+
+
+// import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
+import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
+import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import {MatTreeModule} from '@angular/material/tree';
-
-
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AnexosdePPPComponent,
     RegistroEmpresasComponent,
     RegistroDocentesComponent,
     ConsultaspppComponent,
@@ -66,7 +72,10 @@ import {MatTreeModule} from '@angular/material/tree';
     ConsultasReportesComponent,
     // ConsultaEstadoComponent,
     ConsultasReportesComponent,
-//Franklinss
+//Franklin
+InformeFinalAlumnoComponent,
+EvaluacionEstudianteTutorEmpresarialComponent,
+
 
 
   ],

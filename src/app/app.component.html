@@ -11,12 +11,21 @@
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
-  
+  <button *ngIf="isLogged" (click)="onLogOut()">
+    <mat-icon>exit_to_app</mat-icon>
+    Log Out
+  </button>
+
+  <button *ngIf="!isLogged" routerLink="/login">
+    <mat-icon>account_circle</mat-icon>
+    Log In
+  </button>
+
 </mat-toolbar>
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav" >
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
       <img class="logo" src="../assets/imagen/log.png">
@@ -41,16 +50,19 @@
 
     <mat-divider></mat-divider>
     <a class="nav-link" routerLink="/home" style="color: white;">
-      <mat-icon>dashboard</mat-icon><span>Inicio</span>
+      <mat-icon>dashboard</mat-icon>
+      <span>Inicio</span>
     </a>
 
 
     <a class="nav-link" routerLink="/registro-empresa" style="color: white;">
-      <mat-icon>home</mat-icon><span>Gestión de empresa</span>
+      <mat-icon>home</mat-icon>
+      <span>Gestión de empresa</span>
     </a>
 
     <a class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
-      <mat-icon>home</mat-icon><span>Gestión Convocatoria</span>
+      <mat-icon>home</mat-icon>
+      <span>Gestión Convocatoria</span>
     </a>
 
     <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
@@ -58,9 +70,9 @@
       <span>Consultas y Reportes </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;">
+    <a class="nav-link" routerLink="/consultasppp" style="color: white;">
       <mat-icon>supervisor_account</mat-icon>
-      <span>Designar </span>
+      <span>Consultas PPP </span>
     </a>
 
     <a class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
@@ -73,9 +85,9 @@
       <span>Designar Tutor Empresarial </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;">
+    <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
       <mat-icon>receipt</mat-icon>
-      <span>Gestión de Contratos </span>
+      <span>Anexos PPP </span>
     </a>
 
     <a class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
@@ -83,7 +95,7 @@
       <span>Gestión Estudiantes </span>
     </a>
 
-    <a class="nav-link" routerLink="/registro-asistencia" style="color: white;" >
+    <a class="nav-link" routerLink="/registro-asistencia" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Registro de asistencia</span>
     </a>
@@ -93,7 +105,7 @@
       <span>Consulta Estudiantes Asignados </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;" >
+    <a class="nav-link" routerLink="/" style="color: white;">
 
       <mat-icon>speaker_notes</mat-icon>
       <span>Gestión de Caso </span>
@@ -112,6 +124,22 @@
       <mat-icon>assignment</mat-icon>
       <span>Registro de Visitas</span>
     </a>
+    <a class="nav-link" routerLink="/consulta-estado" style="color: white;">
+      <mat-icon>assignment</mat-icon>
+      <span>Estado de Solicitudes</span>
+    </a>
+
+    <!--Franklin-->
+    <a class="nav-link" routerLink="/inf-fin-alumno" style="color: white;">
+      <mat-icon>perm_identity</mat-icon>
+      <span>Informe Final Alumno </span>
+    </a>
+
+    <a class="nav-link" routerLink="/eva-est-tu-empresarial" style="color: white;">
+      <mat-icon>perm_identity</mat-icon>
+      <span>Eva. Estudiante </span>
+    </a>
+
 
   </mat-sidenav>
 
