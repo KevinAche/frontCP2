@@ -1,65 +1,70 @@
-
-<div class="card card-w-title" style="padding: 55px;">
-    <h1>Empresas</h1>
-    <p-table #dt id="tempresas" 
-        [value]="empresas" 
-        [paginator]="true" 
-        [columns]="cols" 
-        [rows]="10" 
-        [showCurrentPageReport]="true"
-        [rowsPerPageOptions]="[10,25,50]" 
-        [paginator]="true"
-        [globalFilterFields]="['nombreEmpresa','ruc']"
-        >
-
-        <ng-template pTemplate="caption">
-            <div class="p-grid">
-                <div class="p-col" style="text-align: left;">
-                    <p>Lista de Empresas</p>
+<mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+  Empresas
+</mat-card-title>
+<mat-card>
+  <div>
+    <div class="card card-w-title" >
+      <p-table #dt id="tempresas" 
+          [value]="empresas" 
+          [paginator]="true" 
+          [columns]="cols" 
+          [rows]="10" 
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10,25,50]" 
+          [paginator]="true"
+          [globalFilterFields]="['nombreEmpresa','ruc']"
+          >
+  
+          <ng-template pTemplate="caption">
+              <div class="p-grid">
+                  <div class="p-col" style="text-align: left;">
+                      <p>Lista de Empresas</p>
+                  </div>
+                  <div class="p-col" style="text-align: right">
+                    <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                    <input type="text" pInputText size="50" placeholder="Busqueda: Nombre de empresa o ruc"
+                        (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
                 </div>
-                <div class="p-col" style="text-align: right">
-                  <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                  <input type="text" pInputText size="50" placeholder="Busqueda: Nombre de empresa o ruc"
-                      (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
               </div>
-            </div>
-        </ng-template>
-        <ng-template pTemplate="header" let-columns>
-            <tr>
-                <th *ngFor="let col of cols">
-                    {{col.header}}
-                </th>
-            </tr>
-        </ng-template>
-        
-        <ng-template pTemplate="body" let-empresas>
-            <tr>
-              <td>{{empresas.ruc}}</td>
-              <td>{{empresas.nombreEmpresa}}</td>
-              <td>{{empresas.vision}}</td>
-              <td>{{empresas.mision}}</td>
-              <td>{{empresas.telefono}}</td>
-              <td>{{empresas.direccion}}</td>
-              <td>{{empresas.duracionConvenio}}</td>
-              <td>
-                  <a class="edit" title="Edit" (click)="showDialogEdit(empresas)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                  <a class="delete" title="Delete" (click)="eliminarEmpresa(empresas)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-              </td>
-            </tr>
-        </ng-template>
-        <ng-template pTemplate="emptymessage">
-            <tr>
-                <td [attr.colspan]="cols.length">No hay datos.</td>
-            </tr>
-        </ng-template>
-        
-    </p-table>
-    <br><br>
-    <div class="text-center">
-        <button type="submit" class="btn btn-danger" [routerLink]="['/registro-empresa']">Regresar</button>
+          </ng-template>
+          <ng-template pTemplate="header" let-columns>
+              <tr>
+                  <th *ngFor="let col of cols">
+                      {{col.header}}
+                  </th>
+              </tr>
+          </ng-template>
+          
+          <ng-template pTemplate="body" let-empresas>
+              <tr>
+                <td>{{empresas.ruc}}</td>
+                <td>{{empresas.nombreEmpresa}}</td>
+                <td>{{empresas.vision}}</td>
+                <td>{{empresas.mision}}</td>
+                <td>{{empresas.telefono}}</td>
+                <td>{{empresas.direccion}}</td>
+                <td>{{empresas.duracionConvenio}}</td>
+                <td>
+                    <a class="edit" title="Edit" (click)="showDialogEdit(empresas)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                    <a class="delete" title="Delete" (click)="eliminarEmpresa(empresas)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                </td>
+              </tr>
+          </ng-template>
+          <ng-template pTemplate="emptymessage">
+              <tr>
+                  <td [attr.colspan]="cols.length">No hay datos.</td>
+              </tr>
+          </ng-template>
+          
+      </p-table>
+      <br><br>
+      <div class="text-center">
+          <button type="submit" class="btn btn-danger" [routerLink]="['/registro-empresa']">Regresar</button>
+      </div>
     </div>
-    
-</div>
+  </div>
+  
+</mat-card>
 <p-dialog header="Editar empresa" [(visible)]="dis" [modal]="true" [style]="{width: '40vw', height: '40vw'}"
         [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
         <form [formGroup]="formEmpresa">

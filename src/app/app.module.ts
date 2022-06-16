@@ -49,6 +49,10 @@ import {MatTreeModule} from '@angular/material/tree';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
+import {MatSelectModule} from '@angular/material/select';
+import { DropdownModule } from "primeng/dropdown";
 
 @NgModule({
   declarations: [
@@ -112,7 +116,11 @@ InformeFinalTutorAcademicoComponent,
     PanelModule,
     MatExpansionModule,
     MatFormFieldModule,
-    MatTreeModule
+    MatTreeModule,
+    TabMenuModule,
+    TabViewModule,
+    MatSelectModule,
+    DropdownModule
   ],
   providers: [],
   bootstrap: [AppComponent]
