@@ -41,10 +41,15 @@ import { ConsultasReportesComponent } from './consultas-reportes/consultas-repor
 // import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {MatTreeModule} from '@angular/material/tree';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 
 @NgModule({
   declarations: [
@@ -68,11 +73,16 @@ import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
     ConsultasReportesComponent,
+    ActaReunionComponent,
+    ConsultasReportesComponent,
     // ConsultaEstadoComponent,
     ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
 //Franklin
 InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
 
 
 //Lisseth

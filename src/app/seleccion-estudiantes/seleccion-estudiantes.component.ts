@@ -10,23 +10,6 @@ import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 
 })
 
-/*
-export class SeleccionEstudiantesComponent implements OnInit {
-  public titulo="SELECCIÓN DE ESTUDIANTES";
-  public convocatoriaTitulo="CONVOCATORIAS"
-  public listaTitulo ="LISTA DE SOLICITUDES"
-  convocatoria: Convocatoria[]=[];
-
-  constructor(private convocatoriaService:ConvocatoriaService) { }
-
-  ngOnInit(): void {
-    this.convocatoriaService.getConvocatoria().subscribe(
-      convocatoria=> this.convocatoria=this.convocatoria
-    );
-  }
-
-}*/
-
 
 export class SeleccionEstudiantesComponent implements OnInit {
   public titulo="SELECCIÓN DE ESTUDIANTES";

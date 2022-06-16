@@ -19,6 +19,12 @@ import { RegistroVisitaComponent } from './registro-visita/registro-visita.compo
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
+
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
@@ -44,8 +50,12 @@ const routes: Routes = [
   {path:'consultas-reportes',component:ConsultasReportesComponent},
   // {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
+  { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+  {path:'acta-reunion',component:ActaReunionComponent},
+  { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
+  { path: 'cert-alumno', component: CertificadoAlumnoComponent },
 
   //Liss
   {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
