@@ -13,7 +13,8 @@
 
   <button *ngIf="isLogged" (click)="onLogOut()">
     <mat-icon>exit_to_app</mat-icon>
-    Log Out</button>
+    Log Out
+  </button>
 
   <button *ngIf="!isLogged" routerLink="/login">
     <mat-icon>account_circle</mat-icon>
@@ -24,7 +25,7 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav" >
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
       <img class="logo" src="../assets/imagen/log.png">
@@ -35,16 +36,19 @@
 
     <mat-divider></mat-divider>
     <a class="nav-link" routerLink="/home" style="color: white;">
-      <mat-icon>dashboard</mat-icon><span>Inicio</span>
+      <mat-icon>dashboard</mat-icon>
+      <span>Inicio</span>
     </a>
 
 
     <a class="nav-link" routerLink="/registro-empresa" style="color: white;">
-      <mat-icon>home</mat-icon><span>Gestión de empresa</span>
+      <mat-icon>home</mat-icon>
+      <span>Gestión de empresa</span>
     </a>
 
     <a class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
-      <mat-icon>home</mat-icon><span>Gestión Convocatoria</span>
+      <mat-icon>home</mat-icon>
+      <span>Gestión Convocatoria</span>
     </a>
 
     <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
@@ -52,9 +56,9 @@
       <span>Consultas y Reportes </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;">
+    <a class="nav-link" routerLink="/consultasppp" style="color: white;">
       <mat-icon>supervisor_account</mat-icon>
-      <span>Designar </span>
+      <span>Consultas PPP </span>
     </a>
 
     <a class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
@@ -67,9 +71,9 @@
       <span>Designar Tutor Empresarial </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;">
+    <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
       <mat-icon>receipt</mat-icon>
-      <span>Gestión de Contratos </span>
+      <span>Anexos PPP </span>
     </a>
 
     <a class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
@@ -77,7 +81,7 @@
       <span>Gestión Estudiantes </span>
     </a>
 
-    <a class="nav-link" routerLink="/registro-asistencia" style="color: white;" >
+    <a class="nav-link" routerLink="/registro-asistencia" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Registro de asistencia</span>
     </a>
@@ -87,7 +91,7 @@
       <span>Consulta Estudiantes Asignados </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;" >
+    <a class="nav-link" routerLink="/" style="color: white;">
 
       <mat-icon>speaker_notes</mat-icon>
       <span>Gestión de Caso </span>

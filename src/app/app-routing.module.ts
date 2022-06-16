@@ -21,13 +21,16 @@ import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/infor
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
-  {path: 'consulta-ppp', component:ConsultaspppComponent },
+  {path: 'consultasppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},

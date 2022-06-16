@@ -44,10 +44,12 @@ import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estu
 import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {MatTreeModule} from '@angular/material/tree';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 
 @NgModule({
   declarations: [
     AppComponent,
+    AnexosdePPPComponent,
     RegistroEmpresasComponent,
     RegistroDocentesComponent,
     ConsultaspppComponent,
