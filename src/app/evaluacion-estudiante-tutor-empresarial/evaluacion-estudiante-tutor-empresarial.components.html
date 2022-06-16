@@ -1,0 +1,160 @@
+<section class="vh-100">
+  <div class="container-fluid" style="padding: 55px;">
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+      {{titulo}}
+    </mat-card-title>
+
+    <mat-card>
+      <h1 style=" text-align: center;color: #0a172a; "><u>DATOS ESTUDIANTE</u></h1>
+      <h2 style="color: #1d3557;">INGRESE CÉDULA</h2>
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search">
+      <br>
+      <h2 style="color: #1d3557;">DATOS DE ESTUDIANTE SELECCIONADO</h2>
+
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Cédula:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Estudiante:</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Empresa:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Carrera:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Desde:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Hasta:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+
+        </div>
+      </div>
+    </mat-card>
+<br>
+ <!-- INDICACIONES A CALIFICAR -->
+    <mat-card>
+      <h1 style=" text-align: center;color: #0a172a; "><u>CALIFICACIÓN</u></h1>
+      <h2 style="color: #1d3557;">{{indicacion1}}</h2>
+      <h3 style="color: #1d3557;">{{indicacion2}}</h3>
+
+     
+      <table class="table">
+        <thead>
+          <tr>
+            <th scope="col">Parámetro</th>
+            <th scope="col">Calificacion</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <!-- PARAMETRO 1 CALIFICACION -->
+            <td>{{parametroA}}</td>
+            <td>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+
+            <!-- PARAMETRO 2 CALIFICACION -->
+            <td>{{parametroB}}</td>
+            <td>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+             <!-- PARAMETRO 3 CALIFICACION -->
+            <td>{{parametroC}}</td>
+            <td>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+             <!-- PARAMETRO 4 CALIFICACION -->
+            <td>{{parametroD}}</td>
+            <td>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+          <tr>
+
+             <!-- PARAMETRO 5 CALIFICACION -->
+            <td>{{parametroE}}</td>
+            <td>
+              <select class="form-select form-select-sm" aria-label=".form-select-sm example">
+                <option selected>Seleccione</option>
+                <option value="1">1</option>
+                <option value="5">5</option>
+                <option value="10">10</option>
+                <option value="15">15</option>
+                <option value="20">20</option>
+              </select>
+            </td>
+          </tr>
+        </tbody>
+      </table>
+      <br>
+      <br>
+    </mat-card>
+    <br>
+    <mat-card>
+ <!-- BLOQUE CALIFICACION -->
+ <h1 style=" text-align: center;color: #0a172a; "><u>NOTA</u></h1>
+ <div class="d-grid gap-2 col-6 mx-auto" style="background-color:#f9f9f7">
+  <br>
+<label>Puntaje Total: </label>
+<input type="text"  placeholder="Dato" [disabled]="true">
+<br>
+<label>Número de horas: </label>
+<input type="text"  placeholder="Dato" [disabled]="true">
+<br>
+</div>
+<br><br>
+
+<!-- BLOQUE BOTON CALIFICAR -->
+<div class="d-grid gap-2 col-6 mx-auto">
+<button class="btn btn-primary" type="button">CALIFICAR ESTUDIANTE</button>
+</div>
+    </mat-card>
+
+  </div>
+
+</section>

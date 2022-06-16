@@ -38,9 +38,11 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
-// import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
+import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import {MatTreeModule} from '@angular/material/tree';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
@@ -71,10 +73,12 @@ import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
     ConsultasReportesComponent,
     // ConsultaEstadoComponent,
     ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
 //Franklin
 InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
-
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
   ],
   imports: [
     BrowserModule,
