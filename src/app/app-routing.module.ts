@@ -22,14 +22,15 @@ import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estu
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
+
+
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
-
-
+import {ConsultaEstadoComponent} from "./consulta-estado/consulta-estado.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -50,7 +51,7 @@ const routes: Routes = [
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
-  // {path:'consulta-estado',component:ConsultaEstadoComponent},
+  {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
