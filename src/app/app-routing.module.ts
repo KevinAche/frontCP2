@@ -27,6 +27,7 @@ import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alu
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -36,6 +37,7 @@ const routes: Routes = [
   {path: 'consulta-ppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
+  {path:'dashboard',component:DashboardComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
