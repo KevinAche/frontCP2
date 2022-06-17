@@ -29,14 +29,9 @@ mat-toolbar {
     height: calc(100vh - 98px);
     margin: 16px;
     margin-left: 32px;
-    justify-content: center;
-    align-items: center;
-
-    font-size: 1rem;
-
-    color:#1177d1;
     border-radius: 9px;
-
+    background: white;
+    overflow: scroll;
   }
 
   mat-sidenav-container{
@@ -53,4 +48,16 @@ mat-toolbar {
     color:white;
     background: #1177d1;
 
+  }
+
+.divimag{
+  display: flex;
+  justify-content: center;
+}
+
+
+  img{
+    width: 50px;
+    margin-top: 5px;
+    margin-bottom: 5px;
   }

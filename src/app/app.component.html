@@ -11,15 +11,15 @@
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
-  <button *ngIf="isLogged" (click)="onLogOut()">
-    <mat-icon>exit_to_app</mat-icon>
-    Log Out
-  </button>
+<!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
+<!--    <mat-icon>exit_to_app</mat-icon>-->
+<!--    Log Out-->
+<!--  </button>-->
 
-  <button *ngIf="!isLogged" routerLink="/login">
-    <mat-icon>account_circle</mat-icon>
-    Log In
-  </button>
+<!--  <button *ngIf="!isLogged" routerLink="/login">-->
+<!--    <mat-icon>account_circle</mat-icon>-->
+<!--    Log In-->
+<!--  </button>-->
 
 </mat-toolbar>
 
@@ -35,14 +35,19 @@
     </div>
 
     <mat-divider></mat-divider>
+<div class="divimag" > <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
+
 
     <div *ngFor="let persona of personas">
       <h3 *ngIf="isLogged" style="text-align: center;">{{persona.primerNombre+" "+persona.primerApellido}}</h3>
-      <p style="text-align: center;">{{realrol}}</p>
+      <p style="text-align: center;">{{realRol}}</p>
+      <p style="text-align: center;">{{persona.cedula}}</p>
+
     </div>
 
     <a class="nav-link btn mb-3 mt-3" routerLink="/login" style="color: white;" *ngIf="!isLogged">
       <mat-icon>login</mat-icon><span>LogIn</span>
+
     </a>
     <a class="nav-link btn mb-3 mt-3" (click)="onLogOut()" style="color: white;" *ngIf="isLogged">
       <mat-icon>logout</mat-icon><span>LogOut</span>
@@ -55,113 +60,113 @@
     </a>
 
 
-    <a class="nav-link" routerLink="/registro-empresa" style="color: white;">
+    <a *ngIf="isEmpleado || isAdmin"   class="nav-link" routerLink="/registro-empresa" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión de empresa</span>
     </a>
 
-    <a class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
+    <a *ngIf="isResponsable" class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión Convocatoria</span>
     </a>
 
-    <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
+    <a  class="nav-link" routerLink="/consultas-reportes" style="color: white;">
       <mat-icon>auto_stories</mat-icon>
       <span>Consultas y Reportes </span>
     </a>
 
-    <a class="nav-link" routerLink="/consultasppp" style="color: white;">
+    <a *ngIf="isResponsable" class="nav-link" routerLink="/consultasppp" style="color: white;">
       <mat-icon>supervisor_account</mat-icon>
       <span>Consultas PPP </span>
     </a>
 
-    <a class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
+    <a *ngIf="isResponsable" class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Designar Tutor Academico</span>
     </a>
 
-    <a class="nav-link" routerLink="/desig-tutor-empresarial" style="color: white;">
+    <a *ngIf="isAdmin" class="nav-link" routerLink="/desig-tutor-empresarial" style="color: white;">
       <mat-icon>description</mat-icon>
       <span>Designar Tutor Empresarial </span>
     </a>
 
-    <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
+    <a  class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
       <mat-icon>receipt</mat-icon>
       <span>Anexos PPP </span>
     </a>
 
-    <a class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Gestión Estudiantes </span>
     </a>
 
-    <a class="nav-link" routerLink="/registro-asistencia" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/registro-asistencia" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Registro de asistencia</span>
     </a>
 
-    <a class="nav-link" routerLink="/cons-est-asignados" style="color: white;">
+    <a *ngIf="isEstudiante || isEmpleado" class="nav-link" routerLink="/cons-est-asignados" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Consulta Estudiantes Asignados </span>
     </a>
 
-    <a class="nav-link" routerLink="/" style="color: white;">
+<!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
 
-      <mat-icon>speaker_notes</mat-icon>
-      <span>Gestión de Caso </span>
-    </a>
+<!--    <mat-icon>speaker_notes</mat-icon>-->
+<!--      <span>Gestión de Caso </span>-->
+<!--    </a>-->
 
-    <a class="nav-link" routerLink="/registro-docente" style="color: white;">
+    <a *ngIf="isAdmin" class="nav-link" routerLink="/registro-docente" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span>Gestión de Docentes </span>
     </a>
 
-    <a class="nav-link" routerLink="/solicitud-estudiante" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/solicitud-estudiante" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Solicitud de Estudiante Anexo 3 </span>
     </a>
-    <a class="nav-link" routerLink="/registro-visita" style="color: white;">
+    <a *ngIf="isTutorAcademico || isResponsable" class="nav-link" routerLink="/registro-visita" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Registro de Visitas</span>
     </a>
-    <a class="nav-link" routerLink="/consulta-estado" style="color: white;">
+    <a *ngIf="isResponsable" class="nav-link" routerLink="/consulta-estado" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Estado de Solicitudes</span>
     </a>
 
     <!--Franklin-->
-    <a class="nav-link" routerLink="/inf-fin-alumno" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/inf-fin-alumno" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span>Informe Final Alumno </span>
     </a>
 
-    <a class="nav-link" routerLink="/eva-est-tu-empresarial" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/eva-est-tu-empresarial" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span>Eva. Estudiante </span>
     </a>
 
-    <a class="nav-link" routerLink="/cert-alumno" style="color: white;">
+    <a *ngIf="isEstudiante || isTutorEmpresarial" class="nav-link" routerLink="/cert-alumno" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span>Certificado Alumno </span>
     </a>
 
-    <a class="nav-link" routerLink="/reg-seg-alumno" style="color: white;">
+    <a *ngIf="isTutorEmpresarial || isEmpleado" class="nav-link" routerLink="/reg-seg-alumno" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span>Registro Seguimiento TE </span>
     </a>
 
-    <a class="nav-link" routerLink="/registro-convocatoria" style="color: white;">
+    <a *ngIf="isResponsable" class="nav-link" routerLink="/registro-convocatoria" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
       <span> Registro convocatoria </span>
     </a>
 
 
-    <a class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico" style="color: white;">
+    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Evaluacion Estudiante Tutor Academico </span>
     </a>
 
-    <a class="nav-link" routerLink="/informe-final-tutor" style="color: white;">
+    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/informe-final-tutor" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Informe Final Tutor Academico </span>
     </a>

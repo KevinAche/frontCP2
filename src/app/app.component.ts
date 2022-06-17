@@ -21,8 +21,15 @@ export class AppComponent implements OnInit {
   loginForm!: FormGroup;
   roles: string[];
   isUser = false;
+  isAdmin = false;
+  isDocente = false;
+  isEstudiante = false;
+  isResponsable = false;
+  isTutorAcademico = false;
+  isTutorEmpresarial = false;
+  isEmpleado = false;
   isLogged = false;
-  realrol: String;
+  realRol: String;
 
   public personas: Array<any> = []
 
@@ -34,7 +41,7 @@ export class AppComponent implements OnInit {
     ) {
 
       console.log(this.tokenService.getUserName());
-      
+
 
       this.personaService.getPersonasByCedula(
         this.tokenService.getUserName()
@@ -48,11 +55,11 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit(): void {
-    
+
     this.changeDedectionRef.detectChanges();
     if(this.tokenService.getToken()){
       this.isLogged = true;
-      
+
     }else {
       this.isLogged = false;
     }
@@ -64,9 +71,38 @@ export class AppComponent implements OnInit {
 
     this.roles = this.tokenService.getAuthorities();
     this.roles.forEach(rol =>{
+      if(rol === 'ROLE_ADMIN'){
+        this.realRol = 'admin';
+        this.isAdmin = true;
+      }
       if(rol === 'ROLE_DOCENTE'){
-        this.isUser = true;
-        this.realrol = "Docente";
+        this.realRol = 'docente';
+        this.isDocente = true;
+      }
+
+      if(rol === 'ROLE_ESTUDIANTE'){
+        this.realRol = 'estudiante';
+        this.isEstudiante = true;
+      }
+
+      if(rol === 'ROLE_RESPONSABLEPPP'){
+        this.realRol = 'responsableppp';
+        this.isResponsable = true;
+      }
+
+      if(rol === 'ROLE_TUTORACADEMICO'){
+        this.realRol = 'tacademico';
+        this.isTutorAcademico = true;
+      }
+
+      if(rol === 'ROLE_TUTOREMPRESARIAL'){
+        this.realRol = 'tempresarial';
+        this.isTutorEmpresarial = true;
+      }
+
+      if(rol === 'ROLE_EMPLEADO'){
+        this.realRol = 'empleado';
+        this.isEmpleado = true;
       }
     });
   }
@@ -81,7 +117,7 @@ export class AppComponent implements OnInit {
   }
 
   ngAfterContentInit() {
-    
+
     this.observer.observe(['(max-width: 800px)']).subscribe((res) => {
       if (res.matches) {
         this.sidenav.mode = 'over';
@@ -93,5 +129,5 @@ export class AppComponent implements OnInit {
     });
   }
 
-  
+
 }

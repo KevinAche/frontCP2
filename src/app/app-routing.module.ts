@@ -31,6 +31,7 @@ import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academi
 import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ConsultaEstadoComponent} from "./consulta-estado/consulta-estado.component";
+import {ProdGuardService as guard} from "./guards/prod-guard.service";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -46,8 +47,10 @@ const routes: Routes = [
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia', component: RegistroAsistenciaComponent},
-  {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
+
+  {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent, canActivate:[guard],data:{expectedRol:['administrador']}},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
+
   {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
