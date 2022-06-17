@@ -51,7 +51,7 @@ const routes: Routes = [
   {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent, canActivate:[guard],data:{expectedRol:['administrador']}},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
 
-  {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
+  {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
   {path:'consulta-estado',component:ConsultaEstadoComponent},
