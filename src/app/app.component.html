@@ -35,6 +35,20 @@
     </div>
 
     <mat-divider></mat-divider>
+
+    <div *ngFor="let persona of personas">
+      <h3 *ngIf="isLogged" style="text-align: center;">{{persona.primerNombre+" "+persona.primerApellido}}</h3>
+      <p style="text-align: center;">{{realrol}}</p>
+    </div>
+
+    <a class="nav-link btn mb-3 mt-3" routerLink="/login" style="color: white;" *ngIf="!isLogged">
+      <mat-icon>login</mat-icon><span>LogIn</span>
+    </a>
+    <a class="nav-link btn mb-3 mt-3" (click)="onLogOut()" style="color: white;" *ngIf="isLogged">
+      <mat-icon>logout</mat-icon><span>LogOut</span>
+    </a>
+
+    <mat-divider></mat-divider>
     <a class="nav-link" routerLink="/home" style="color: white;">
       <mat-icon>dashboard</mat-icon>
       <span>Inicio</span>

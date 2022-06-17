@@ -5,6 +5,7 @@ import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
 import { CarreraService } from './services/carrera.service';
 import { TokenService } from './services/token.service';
 import { ChangeDetectorRef } from '@angular/core';
+import { PersonaService } from './services/persona.service';
 
 @Component({
   selector: 'app-root',
@@ -21,13 +22,28 @@ export class AppComponent implements OnInit {
   roles: string[];
   isUser = false;
   isLogged = false;
+  realrol: String;
 
+  public personas: Array<any> = []
 
   constructor(
     private observer: BreakpointObserver,
     private tokenService: TokenService,
-    private changeDedectionRef: ChangeDetectorRef
+    private changeDedectionRef: ChangeDetectorRef,
+    private personaService: PersonaService
     ) {
+
+      console.log(this.tokenService.getUserName());
+      
+
+      this.personaService.getPersonasByCedula(
+        this.tokenService.getUserName()
+      ).subscribe((resp: any)=>{
+        console.log(resp.data)
+        this.personas = resp.data
+      })
+
+      console.log("PERSONA GENERADA")
 
     }
 
@@ -48,8 +64,9 @@ export class AppComponent implements OnInit {
 
     this.roles = this.tokenService.getAuthorities();
     this.roles.forEach(rol =>{
-      if(rol === 'ROLE_USER'){
+      if(rol === 'ROLE_DOCENTE'){
         this.isUser = true;
+        this.realrol = "Docente";
       }
     });
   }
