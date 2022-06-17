@@ -58,6 +58,8 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import {MessageService,ConfirmationService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
+import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.component';
+import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,6 +99,8 @@ EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
 DashboardComponent,
 CrearActaComponent,
+CrearCarreraComponent,
+ListarCarrerasComponent,
 
   ],
   imports: [
