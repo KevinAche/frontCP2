@@ -38,10 +38,10 @@ export class RegistroVisitaService {
       );
   }
   getBuscarTutor() {
-      let header = new HttpHeaders().set('Type-content', 'aplication/json');
+    let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
-      return this.http.get(this._url + '/', {
-        headers: header,
-      });
-    }
+    return this.http.get(this._url + '/', {
+      headers: header,
+    });
+  }
 }
