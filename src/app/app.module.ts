@@ -38,7 +38,7 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
-// import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
+import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
@@ -49,6 +49,7 @@ import {MatTreeModule} from '@angular/material/tree';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import {MatSelectModule} from '@angular/material/select';
@@ -78,7 +79,7 @@ import { DropdownModule } from "primeng/dropdown";
     ConsultasReportesComponent,
     ActaReunionComponent,
     ConsultasReportesComponent,
-    // ConsultaEstadoComponent,
+    ConsultaEstadoComponent,
     ConsultasReportesComponent,
     RegistroConvocatoriaComponent,
 //Franklin
@@ -91,6 +92,7 @@ CertificadoAlumnoComponent,
 //Lisseth
 EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
+CrearActaComponent,
 
   ],
   imports: [

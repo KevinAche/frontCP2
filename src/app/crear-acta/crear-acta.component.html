@@ -1,0 +1,117 @@
+<section class="vh-100">
+    <div class="container-fluid" style="text-align:center; padding: 55px;">
+
+        <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+            ACTA REUNIÓN
+        </mat-card-title>
+        <br>
+        <br>
+        <br>
+        <mat-card>
+            <h1 style=" text-align: left;color: #0a172a; "><u>Fecha:</u></h1>
+
+            <input class="form-control mr-sm-2" type="date" id="start" name="trip-start" value="2022-06-15"
+                min="2022-01-01" max="2022-12-31">
+            <div class="form-group">
+                <label for="inputEmail4">Asistentes</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Asistentes" [disabled]="true">
+            </div>
+            <div class="form-group ">
+                <label for="inputEmail4">Asunto</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Asunto" [disabled]="true">
+            </div>
+            <div class="form-group ">
+                <label for="inputEmail4">Lugar de la reunión</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Lugar reunion" [disabled]="true">
+            </div>
+
+            <h2 style=" text-align: left;color: #0a172a; "><u>1.PLANIFICACION DE LA ACTIVIDAD</u></h2>
+            <div class="form-group col-md-6 ">
+                <label for="inputAddress2">Con base en la solicitud realizada por la empresa</label>
+                <div class="form-group col-md-6 "></div><input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Nombre empresa" [disabled]="true">
+                <label for="inputAddress2"> el-la-Sr.-Sra-Srta</label>
+                <div class="form-group col-md-6 "></div> <input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Nombre estudiante" [disabled]="true">
+                <label for="inputAddress2"> estudiante de</label>
+                <div class="form-group col-md-6 "></div><input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Ciclo" [disabled]="true"> <label for="inputAddress2">ciclo de la carrera</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Carrera" [disabled]="true"><label
+                    for="inputAddress2"> del Instituto Superior Tecnológico
+                    del Azuay llevará a cabo las siguientes actividades para cumplir con las</label>
+                <div class="form-group col-md-6 "></div> <input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Horas" [disabled]="true">
+                <label for="inputAddress2">horas de prácticas pre profesionales</label>
+            </div>
+            <br>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        <th>ÁREA</th>
+                        <th>ACTIVIDAD POR REALIZAR</th>
+                        <th>ASIGNATURA(S) RELACIONADA(S)</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+
+            <h3 style=" text-align: left;color: #000000; "><u>2.FECHAS IMPORTANTES Y HORARIOS DE PRÁCTICAS PRE
+                    PROFESIONALES</u></h3>
+            <div class="form-group col-md-6 ">
+                <label for="inputAddress2">El estudiante empezara a desarrollar sus practicas a partir de</label>
+                <div class="form-group col-md-6 "></div><input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Fecha inicio" [disabled]="true">
+                <label for="inputAddress2"> y terminara el</label>
+                <div class="form-group col-md-6 "></div> <input type="text" class="form-control" id="inputEmail4"
+                    placeholder="fecha fin" [disabled]="true">
+                <label for="inputAddress2"> en un horario de </label>
+                <div class="form-group col-md-6 "></div><input type="text" class="form-control" id="inputEmail4"
+                    placeholder="Hora" [disabled]="true"> <label for="inputAddress2">a</label>
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Hora" [disabled]="true">
+            </div>
+            <br>
+            <h3 style=" text-align: left;color: #000000; "><u>3.CRONOGRAMA</u></h3>
+            <table class="table table-striped table-hover table-bordered">
+                <thead>
+                    <tr class="text-center">
+                        
+                        <th>ACTIVIDAD POR REALIZAR</th>
+                        <th>SEMANA</th>
+                        <th>Nro. HORAS</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        <td> </td>
+                        
+
+                        <th>TOTAL HORAS</th>
+
+                    </tr>
+
+                </tbody>
+            </table>
+            <br>
+            <h4 style=" text-align: left;color: #000000; "><u>4.ACUERDOS VARIOS</u></h4>
+            <br>
+            <td>
+                <a class="edit" title="Edit" data-toggle="tooltip"><mat-icon>assignment_turned_in</mat-icon></a>
+                <a class="create" title="Create" data-toggle="tooltip">
+                    <mat-icon>assignment_returned</mat-icon>
+                </a>
+
+            </td>
+        </mat-card>
