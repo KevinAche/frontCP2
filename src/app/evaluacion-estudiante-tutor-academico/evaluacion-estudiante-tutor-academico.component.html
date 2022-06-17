@@ -3,14 +3,48 @@
   <mat-card-title>
     Evaluación Tutor Académico
   </mat-card-title>
+    <mat-card>
+      <h1 style=" text-align: center;color: #0a172a; "><u>DATOS ESTUDIANTE</u></h1>
+      <h2 style="color: #1d3557;">INGRESE CÉDULA</h2>
+      <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search">
+      <br>
+      <h2 style="color: #1d3557;">DATOS DE ESTUDIANTE SELECCIONADO</h2>
 
+      <div class="container-fluid">
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Cédula:</label>
+            <input type="text" class="form-control" id="inputPassword1" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputEmail4">Estudiante:</label>
+            <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Empresa:</label>
+            <input type="text" class="form-control" id="inputPassword2" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Carrera:</label>
+            <input type="text" class="form-control" id="inputPassword3" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Desde:</label>
+            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="inputPassword4">Hasta:</label>
+            <input type="text" class="form-control" id="inputPassword5" placeholder="Dato" [disabled]="true">
+          </div>
+
+        </div>
+      </div>
+    </mat-card>
     <mat-card>
       <h2 style="color: #000000; text-align:center;">
         <p>Valore el desempeño del Practicamente, calificando y registrando la calificación en cada uno de los aspectos descritos utilizando  los siguientes parametros.</p>
         <p> (1)Deficiente  (5)Regular  (10)Bueno  (15)Muy Bueno  (20)Sobresaliente</p>
       </h2>
-
-
       <form>
           <table class="table table-striped">
             <thead>
@@ -42,18 +76,30 @@
               <td> e. Valoración de los resultados tomando como base las actividades encomendadas al estudiante, así como el cumplimiento en los plazos establecidos. </td>
               <td> <input type="text" id="valoracion" name="valoracion" required> </td>
             </tr>
-            <tr>
-              <td>PUNTAJE TOTAL: </td>
-              <td> <input type="text" id="puntaje" name="puntaje" required> </td>
-            </tr>
             </tbody>
           </table>
-        <div style="text-align:center">
-          <button type="submit" mat-raised-button color="primary" [disabled]="">GUARDAR</button>
-        </div>
       </form>
     </mat-card>
   </div>
+  <mat-card>
+  <!-- BLOQUE CALIFICACION -->
+  <h1 style=" text-align: center;color: #0a172a; "><u>NOTA</u></h1>
+  <div class="d-grid gap-2 col-6 mx-auto" style="background-color:#f9f9f7">
+    <br>
+    <label>Puntaje Total: </label>
+    <input type="text"  placeholder="Dato" [disabled]="true">
+    <br>
+    <label>Número de horas: </label>
+    <input type="text"  placeholder="Dato" [disabled]="true">
+    <br>
+  </div>
+  <br><br>
+
+  <!-- BLOQUE BOTON CALIFICAR -->
+  <div class="d-grid gap-2 col-6 mx-auto">
+    <button class="btn btn-primary" type="button">CALIFICAR ESTUDIANTE</button>
+  </div>
+  </mat-card>
 </section>
 
 

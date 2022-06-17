@@ -21,7 +21,6 @@ import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/infor
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
-
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
@@ -30,12 +29,15 @@ import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academi
 import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 
+
+
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
-  {path: 'consulta-ppp', component:ConsultaspppComponent },
+  {path: 'consultasppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
   {path:'dashboard',component:DashboardComponent},
