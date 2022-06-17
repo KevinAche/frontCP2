@@ -41,7 +41,7 @@
     <div *ngFor="let persona of personas">
       <h3 *ngIf="isLogged" style="text-align: center;">{{persona.primerNombre+" "+persona.primerApellido}}</h3>
       <p style="text-align: center;">{{realRol}}</p>
-      <p style="text-align: center;">{{persona.cedula}}</p>
+      <p *ngIf="isLogged" style="text-align: center;">{{persona.cedula}}</p>
 
     </div>
 
