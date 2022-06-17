@@ -4,6 +4,7 @@ import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 import { saveAs } from "file-saver";
+import { Carrera } from 'src/app/models/Carrera';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -18,6 +19,8 @@ function loadFile(url, callback) {
 export class HomeComponent implements OnInit {
 
   public carreras: Array<any> = []
+  public carreraind: any
+
   constructor(
     private carreraService: CarreraService 
     ) {
@@ -31,7 +34,15 @@ export class HomeComponent implements OnInit {
 
   ngOnInit(): void {
   }
+
   
+  infoCarrera: boolean = false;
+  showDialog(carrera) {
+    console.log(carrera)
+    this.carreraind=carrera;
+    this.infoCarrera = true;
+}
+
   //https://drive.google.com/uc?export=download&id=1fxvfKsDHpCSrfpa2zy_NV6ySmUfHttf6
 
   nombre= "nombre de prueba";
