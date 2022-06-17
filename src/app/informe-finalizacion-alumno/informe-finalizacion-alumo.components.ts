@@ -1,4 +1,5 @@
 import { Component, OnInit } from '@angular/core';
+import { InformeFinalAlumnoService } from '../services/informe-finalizacion-alumo.services';
 
 @Component({
   selector: 'app-info-seguimiento',
@@ -6,10 +7,18 @@ import { Component, OnInit } from '@angular/core';
   
 })
 export class InformeFinalAlumnoComponent implements OnInit {
-
-  constructor() { }
+  public informeFinal:Array<any>=[];
+  constructor(private informeFinalAlumnoService:InformeFinalAlumnoService ) { }
 
   ngOnInit(): void {
+    this.listarInformeFinal();
   }
 
+  public listarInformeFinal(){
+    this.informeFinalAlumnoService.getInformeFinalAlumno().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.informeFinal= resp.data
+    })
+  }
+  
 }

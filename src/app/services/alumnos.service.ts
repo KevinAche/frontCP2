@@ -24,4 +24,15 @@ export class AlumnosService {
       environment.URL_APP+`GestionAlumno/BuscarAlumnoCedula/${cedula}`
     ).toPromise();
   }
+
+  getlistaAlumnos() {
+    let header = new HttpHeaders()
+    .set('Type-content','aplication/json')
+
+    return this.http.get(environment.URL_APP+'GestionAlumno/ListaDatosAlumnos',{
+        headers: header
+
+    });
+  }
+  
 }

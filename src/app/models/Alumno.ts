@@ -8,8 +8,7 @@ export class Alumno {
     promedio: any;
     persona: Persona;
     carrera: Carrera;
-
-    
+     
     constructor(){
         this.persona = new Persona();
         this.carrera = new Carrera();
