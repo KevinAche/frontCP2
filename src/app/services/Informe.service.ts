@@ -11,9 +11,6 @@ import swal from 'sweetalert2';
 export class InformeService {
   _urlI = 'http://localhost:8082/GestionInforme_Visita';
   urlCreateInforme = this._urlI + '/CrearInforme_Visita';
-  /*urlDelete: string = this.url_mater+'/GestionEmpresa/EliminarEmpresa';
-    urlUpdate: string = this.url_mater+'/GestionEmpresa/EditarEmpresa';
-  private urlSearch: string = this.url_mater+'/GestionEmpresa/ListaEmpresas';*/
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {}
