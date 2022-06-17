@@ -54,6 +54,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import {MatSelectModule} from '@angular/material/select';
 import { DropdownModule } from "primeng/dropdown";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+
 import {MessageService,ConfirmationService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 @NgModule({
@@ -93,6 +95,7 @@ CertificadoAlumnoComponent,
 //Lisseth
 EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
+DashboardComponent,
 CrearActaComponent,
 
   ],
