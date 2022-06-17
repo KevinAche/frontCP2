@@ -18,4 +18,10 @@ export class AlumnosService {
       environment.URL_APP+'GestionAlumno/ListaAlumnos'
     ).toPromise();
   }
+
+  getAlumnoCedula(cedula: string) {
+    return this.http.get<any[]>(
+      environment.URL_APP+`GestionAlumno/BuscarAlumnoCedula/${cedula}`
+    ).toPromise();
+  }
 }

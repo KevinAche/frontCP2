@@ -54,7 +54,8 @@ import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
 import {MatSelectModule} from '@angular/material/select';
 import { DropdownModule } from "primeng/dropdown";
-
+import {MessageService,ConfirmationService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
 @NgModule({
   declarations: [
     AppComponent,
@@ -122,9 +123,10 @@ CrearActaComponent,
     TabMenuModule,
     TabViewModule,
     MatSelectModule,
-    DropdownModule
+    DropdownModule,
+    ToastModule
   ],
-  providers: [],
+  providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
