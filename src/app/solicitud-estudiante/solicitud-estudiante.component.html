@@ -28,7 +28,8 @@
         <p><strong>NUMERO DE CONVOCATORIA: </strong> {{convocatoria.idConvocatoria}} </p>
         <p><strong>ENTIDAD: </strong> {{convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa|uppercase}}</p>
         <button class="mat-flat-button" style="width: 100% ; background-color:#91e705" colors="primary"
-          (click)="crearSolicitud(convocatoria.idConvocatoria)">POSTULAR</button>
+          (click)="crearSolicitud(convocatoria.idConvocatoria,id,convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa,
+          convocatoria.solicitudEmpresa.responsablePPP.docente.abrevTitulo+' '+convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerNombre+' '+convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerApellido)">POSTULAR</button>
 
       </mat-card-content>
     </mat-card>
@@ -49,45 +50,76 @@
 
       <div *ngIf="alumno.idAlumno==id">
 
-      <div class="form-group">
-        <label for="idConvocatoria">convocatoria:</label>
-        <input type="text" class="form-control" id="idConvocatoria" formControlName="idConvocatoria" [(ngModel)]="solicitudAlumno.convocatoria.idConvocatoria"  >
-      </div>
-      
-        
-      <div class="form-group">
-        <label for="idAlumno">Alumnos:</label>
-        <input type="text" class="form-control" id="idAlumno" formControlName="idAlumno" [(ngModel)]="solicitudAlumno.alumno.idAlumno" >
-      </div>
-
-      <div class="form-group col-md-6">
-        <label for="estado">Estado:</label>
-        <input type="text" class="form-control" id="estado"  formControlName="estado" [(ngModel)]="solicitudAlumno.estado">
-      </div>
      
+        <!--LINEA 1-->
       <div class="form-row">
         <div class="form-group col-md-6">
-          <label for="fechaEmision">Fecha:</label>
+          <label>CÉDULA:</label>
+          <input  class="form-control" placeholder="{{alumno.persona.cedula |uppercase}}" [disabled]="true" >
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="horasPPP">ALUMNO:</label>
+          <input class="form-control" placeholder="{{alumno.persona.primerApellido |uppercase}} {{alumno.persona.segundoApellido |uppercase}} {{alumno.persona.primerNombre |uppercase}} {{alumno.persona.segundoNombre |uppercase}}"
+          [disabled]="true">
+        </div>
+        
+      </div>
+
+       <!--LINEA 2-->
+       <div class="form-row">
+        <div class="form-group col-md-6">
+          <label>CURSO:</label>
+          <input  class="form-control" placeholder="{{alumno.ciclo |uppercase}} {{alumno.paralelo |uppercase}}" [disabled]="true" >
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="horasPPP">SUBIR DOCUMENTO:</label>
+          <input class="form-control" type="file">
+        </div>
+        
+      </div>
+<!--LINEA 3-->
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fechaEmision">FECHA SOLICITUD:</label>
           <input type="date" class="form-control" id="fechaEmision" formControlName="fechaEmision"[(ngModel)]="solicitudAlumno.fechaEmision"   >
         </div>
 
         <div class="form-group col-md-6">
-          <label for="horasPPP">Horas:</label>
-          <input type="number" class="form-control" id="horasPPP" formControlName="horasPPP" [(ngModel)]="solicitudAlumno.horasPPP" >
+          <label for="horasPPP">NÚMERO DE HORAS:</label>
+          <input type="number" class="form-control" id="horasPPP" formControlName="horasPPP" [(ngModel)]="solicitudAlumno.horasPPP">
         </div>
         
       </div>
 
+
+      <!--LINEA EXTRA-->
+     
+        <input type="text" id="idConvocatoria" formControlName="idConvocatoria" [(ngModel)]="solicitudAlumno.convocatoria.idConvocatoria"style="visibility: hidden;">
+        <input type="text" id="idAlumno" formControlName="idAlumno" [(ngModel)]="solicitudAlumno.alumno.idAlumno"style="visibility: hidden;" >
+        <input type="text" id="estado"  formControlName="estado" [(ngModel)]="solicitudAlumno.estado" style="visibility: hidden;">
+     
       <br><br>
+
+      <!--BOTONES-->
+
       <div class="row text-center">
-        <div class="col">
-          <button type="submit" (click)='create()' class="btn" style="background: #1d3557; color: white;">MANDAR SOLICITUD</button>
-        </div>
+        <div class="form-group col-md-6">
+          <button type="submit" (click)=' generate(alumno.persona.primerNombre+" "+alumno.persona.segundoNombre+" "+alumno.persona.primerApellido+" "
+          +alumno.persona.segundoApellido,alumno.persona.cedula,alumno.paralelo,alumno.ciclo,alumno.persona.correo,alumno.persona.telefono,
+          solicitudAlumno.horasPPP,solicitudAlumno.fechaEmision,alumno.carrera.nombre,
+          alumno.carrera.abreviatura,solicitudAlumno.convocatoria.idConvocatoria)' class="btn" style="background: #1d3557; color: white;">DESCARGAR DOCUMENTO</button>
+         </div>
+          <div class="form-group col-md-6">
+            <button type="submit" (click)='create()' class="btn" style="background: #1d3557; color: white;">MANDAR SOLICITUD</button>
+          </div>
         
       </div>
+
+
     </div>
-    </form>
-      
+    </form>      
   </ng-template>
   
 </p-dialog>
