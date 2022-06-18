@@ -28,6 +28,8 @@ export class SolicitudEstudianteComponent implements OnInit {
   public numConvocatoria: any;
   solicitud: SolicitudAlumno = new SolicitudAlumno();
   public id: String;
+  public empresaNombre:any;
+  public responsableNombre:any;
   dialogoCrearSolicitud: boolean;
   panelOpen = false;
 
@@ -74,12 +76,14 @@ export class SolicitudEstudianteComponent implements OnInit {
     })
   }
 
-  crearSolicitud(valor: any,ide:any) {
+  crearSolicitud(valor: any,ide:any,nomEmp:any,respo:any) {
     this.dialogoCrearSolicitud = true;
     this.numConvocatoria = valor;
     this.solicitudAlumno.estado="pendiente";
     this.solicitudAlumno.convocatoria.idConvocatoria=valor;
     this.solicitudAlumno.alumno.idAlumno=ide;
+    this.empresaNombre=nomEmp;
+    this.responsableNombre=respo;
     
   }
 
@@ -98,8 +102,8 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.solicitudAlumnoService.createSolicitudAlumno(this.solicitudAlumno).subscribe(
       Response => {
         swal.fire(
-          'Empresa Guardada',
-          `Empresa ${this.solicitudAlumno.horasPPP} creada con exito!`,
+          'Enviado',
+          `Solicitud creada con exito!`,
           'success'
         )
       }
@@ -107,7 +111,17 @@ export class SolicitudEstudianteComponent implements OnInit {
 
   }
 
-  generate(nom) {
+  generate(nom:any,ced:any,par:any,cic:any,corr:any,cell:any,hor,fec,carr,sig,conv) {
+    var empn=this.empresaNombre;
+    var res=this.responsableNombre;
+    if (this.formSolicitud.invalid) {
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+      return;
+    }
     loadFile("http://localhost:8082/files/anexo3.docx", function(
       error,
       content
@@ -119,6 +133,19 @@ export class SolicitudEstudianteComponent implements OnInit {
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
         nombreAlumno: nom,
+        datoCedula:ced,
+        datoParalelo:par,
+        datoCiclo:cic,
+        correoAlumno:corr,
+        celularAlumno:cell,
+        datoHoras:hor,
+        fecha:fec,
+        nombreCarrera:carr,
+        sigla:sig,
+        numeroConvocatoria:conv,
+        nombreEmpresa:empn,
+        periodoAcademico:"Mayo 2022 - Diciembre 2022",
+        nombreResponsablePracticas:res,
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
