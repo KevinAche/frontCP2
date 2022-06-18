@@ -1,40 +1,93 @@
 <section class="vh-100">
-  <mat-card class="card">
-    <mat-card-header>
-      <mat-card-title>Nombre del Proyecto:</mat-card-title>
-      <mat-card-subtitle><strong>Responsable: </strong></mat-card-subtitle>
-      <span class="example-spacer"></span>
-      <button mat-icon-button [matMenuTriggerFor]="menu" aria-label="Example icon-button with a menu">
-        <mat-icon>more_vert</mat-icon>
-      </button>
-      <mat-menu #menu="matMenu">
-        <button mat-menu-item>
-          <mat-icon color="warn">download</mat-icon>
-          <span>Descargar documentos</span>
-        </button>
-      </mat-menu>
-    </mat-card-header>
-    <mat-card-content>
-      <p><strong>Carrera: </strong></p>
-      <p><strong>Fecha de máxima recepción: </strong></p>
-      <p><strong>Número de Convocatoria: </strong></p>
-      <p><strong>Entidad: </strong></p>
-      <button mat-flat-button style="width: 100%" colors="primary" [disabled]="true">POSTULAR</button>
-      <br>
-      <br>
-      <mat-expansion-panel (opened)="panelOpen = true" (closed)="panelOpen = false">
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            Actividades del Proyecto
-          </mat-panel-title>
-        </mat-expansion-panel-header>
-        <p>
-          <mat-divider></mat-divider>
-          <br>Descripcion: <br>
-          Inicio: <br>
-          Fin:
-        </p>
-      </mat-expansion-panel>
-    </mat-card-content>
-  </mat-card>
+  <div class="container-fluid">
+
+    <!--Titulo-->
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+      SOLICITUD ESTUDIANTE
+    </mat-card-title>
+    <br><br>
+    <!--LISTA CONVOCATORIAS-->
+    <br>
+
+    <mat-card class="card" *ngFor="let convocatoria of convocatorias">
+      <mat-card-header>
+        <mat-card-title>
+          <h2 style=" text-align: center">{{convocatoria.nombreConvocatoria |uppercase}}</h2>
+        </mat-card-title>
+        <mat-card-subtitle><strong>RESPONSABLE:
+            {{convocatoria.solicitudEmpresa.responsablePPP.docente.abrevTitulo|uppercase}}
+            {{convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerNombre|uppercase}}
+            {{convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerApellido|uppercase}} </strong>
+        </mat-card-subtitle>
+        <span class="example-spacer"></span>
+
+      </mat-card-header>
+      <mat-card-content>
+        <p><strong>CARRERA: </strong> {{convocatoria.solicitudEmpresa.carrera.nombre|uppercase}}</p>
+        <p><strong>FECHA MÁXIMA DE RECEPCIÓN: </strong>{{convocatoria.fechaMaxima | date:'yyyy/MM/dd'}}</p>
+        <p><strong>NUMERO DE CONVOCATORIA: </strong> {{convocatoria.idConvocatoria}} </p>
+        <p><strong>ENTIDAD: </strong> {{convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa|uppercase}}</p>
+        <button class="mat-flat-button" style="width: 100% ; background-color:#91e705" colors="primary"
+          (click)="crearSolicitud(convocatoria.idConvocatoria)">POSTULAR</button>
+
+      </mat-card-content>
+    </mat-card>
+
+
+  </div>
 </section>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para mandar solicitud-->
+
+
+<p-dialog [(visible)]="dialogoCrearSolicitud" [style]="{width:'60vw'}" [draggable]="false" [baseZIndex]="10000"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <form [formGroup]="formSolicitud" *ngFor="let alumno of alumnos">
+
+      <div *ngIf="alumno.idAlumno==id">
+
+      <div class="form-group">
+        <label for="idConvocatoria">convocatoria:</label>
+        <input type="text" class="form-control" id="idConvocatoria" formControlName="idConvocatoria" [(ngModel)]="solicitudAlumno.convocatoria.idConvocatoria"  >
+      </div>
+      
+        
+      <div class="form-group">
+        <label for="idAlumno">Alumnos:</label>
+        <input type="text" class="form-control" id="idAlumno" formControlName="idAlumno" [(ngModel)]="solicitudAlumno.alumno.idAlumno" >
+      </div>
+
+      <div class="form-group col-md-6">
+        <label for="estado">Estado:</label>
+        <input type="text" class="form-control" id="estado"  formControlName="estado" [(ngModel)]="solicitudAlumno.estado">
+      </div>
+     
+      <div class="form-row">
+        <div class="form-group col-md-6">
+          <label for="fechaEmision">Fecha:</label>
+          <input type="date" class="form-control" id="fechaEmision" formControlName="fechaEmision"[(ngModel)]="solicitudAlumno.fechaEmision"   >
+        </div>
+
+        <div class="form-group col-md-6">
+          <label for="horasPPP">Horas:</label>
+          <input type="number" class="form-control" id="horasPPP" formControlName="horasPPP" [(ngModel)]="solicitudAlumno.horasPPP" >
+        </div>
+        
+      </div>
+
+      <br><br>
+      <div class="row text-center">
+        <div class="col">
+          <button type="submit" (click)='create()' class="btn" style="background: #1d3557; color: white;">MANDAR SOLICITUD</button>
+        </div>
+        
+      </div>
+    </div>
+    </form>
+      
+  </ng-template>
+  
+</p-dialog>

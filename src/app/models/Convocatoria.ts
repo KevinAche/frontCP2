@@ -1,12 +1,14 @@
 import { SolicitudEmpresa } from "./SolicitudEmpresa";
+
 export class Convocatoria{
-    id_convocatorias : any;
-    doc_convocatoria: any;
-    fecha_emision: any;
-    fecha_maxima: any;
-    solicitud_Empresa : SolicitudEmpresa;
+    idConvocatoria : any;
+    nombreConvocatoria:any;
+    fechaEmision:any;
+    fechaMaxima:any;
+    docConvocatoria:any;
+    solicitudEmpresa:SolicitudEmpresa;
 
     constructor(){
-       this.solicitud_Empresa = new SolicitudEmpresa();
+       this.solicitudEmpresa = new SolicitudEmpresa();
     }
 }

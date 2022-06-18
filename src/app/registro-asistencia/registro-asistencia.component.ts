@@ -7,6 +7,11 @@ import { Component, OnInit } from '@angular/core';
 })
 export class RegistroAsistenciaComponent implements OnInit {
 
+  dis: boolean;
+
+  showDialog() {
+    this.dis = true;
+  }
   constructor() { }
 
   ngOnInit(): void {

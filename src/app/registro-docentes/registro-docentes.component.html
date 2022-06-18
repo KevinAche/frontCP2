@@ -1,102 +1,136 @@
 
-
-
-<section class="vh-100" style="padding: 60px;">
-<mat-card>
+<mat-card *ngIf="this.banpersona == true">
     <mat-card-title style="background-color:#1d3557; color:white; padding: 35px; border-radius: 6px;">
-      <h1>Registro de Docente/Responsable PPP</h1>
+      
+    <div class="form-row">
+      <div class="form-group col-md-9">
+        <h1>Registro de Docente/Responsable PPP</h1>
+      </div>
+      <div class="form-group col-md-3">
+       
+        <button type="submit" class="btn" [routerLink]="['/gestion-empresa']" style="background: green; color: white;">Docentes</button>
+
+      </div>
+    </div>
     </mat-card-title>
     <div class="container-fluid" >
-  <form>
-
-      <div class="form-row">
-        <div class="form-group col-md-6">
-          <mat-card-subtitle>
-          <label for="inputEmail4">Nombres</label>
-
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Nombres" 
-          maxlength="50" required pattern="[A-Za-z]" >
-        </mat-card-subtitle>
-        </div>
-
-        <div class="form-row"></div>
-        <div class="form-group col-md-6">
-        <mat-card-subtitle>
-          <label for="inputEmail4">Apellidos</label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Apellidos" 
-          maxlength="50" required pattern="[A-Za-z]">
-        </mat-card-subtitle>
-        </div>
-        <div class="form-row"></div>
-        <div class="form-group col-md-6">
-        <mat-card-subtitle>
-          <label for="inputEmail4">Cedula</label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Cedula" 
-          maxlength="10" required pattern="[0-9]">
-        </mat-card-subtitle>
-        </div>
-        <div class="form-row"></div>
-        <div class="form-group col-md-6">
-        <mat-card-subtitle>
-          <label for="inputEmail4">Fecha de Nacimiento </label>
-          <input type="text" class="form-control" id="inputEmail4" placeholder="Fecha de Nacimiento" maxlength="10">
-        </mat-card-subtitle>
-        </div>
-        <div class="form-row"></div>
-          <div class="form-group col-md-6">
-          <mat-card-subtitle>
-            <label for="inputCity">Telefono</label>
-            <input type="text" class="form-control" id="Telefono" placeholder="Telefono" 
-            maxlength="10" required pattern="[0-9]">
-          </mat-card-subtitle>
+      <h1>Datos Personales</h1>
+      <form [formGroup]="formPersona">
+        <div class="form-row">
+          <div class="form-group col-md-3">
+            <label for="pnombre">Primer nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="persona.primerNombre" id="pnombre"  formControlName="pnombre" placeholder="Ingrese el primer nombre">
           </div>
-      </div>
-      <div class="form-row">
-        <div class="form-group col-md-6">
-      <mat-card-subtitle>
-        <label for="inputAddress">Correo</label>
-        <input type="text" class="form-control" id="Correo"placeholder="Correo" maxlength="50">
-      </mat-card-subtitle>
-      </div>
-
-      <div class="form-group">
-        <mat-card-subtitle>
-        <label for="inputAddress2">Direccion</label>
-        <input type="text" class="form-control" id="inputAddress2" placeholder="Apartment, studio, or floor" 
-        maxlength="70" required pattern="[A-Za-z0-9]">
-        </mat-card-subtitle>
-      </div>
-
-      <div class="form-group col-md-6">
-
-        <div class="form-check">
-          <input class="form-check-input" type="checkbox" id="gridCheck">
-          <mat-card-subtitle>
-           <label>
-             Registrar
-           </label>
-          </mat-card-subtitle>
+          <div class="form-group col-md-3">
+            <label for="snombre">Segundo nombre</label>
+            <input type="text" class="form-control" [(ngModel)]="persona.segundoNombre" id="snombre"  formControlName="snombre" placeholder="Ingrese el segundo nombre">
+          </div>
+          <div class="form-group col-md-3">
+            <label for="papellido">Primer apellido</label>
+            <input type="text" class="form-control" id="papellido"  formControlName="papellido" [(ngModel)]="persona.primerApellido" placeholder="Ingrese el primer apellido">
+          </div><div class="form-group col-md-3">
+            <label for="empresa">Segundo apellido</label>
+            <input type="text" class="form-control" id="empresa"  formControlName="empresa" [(ngModel)]="persona.segundoApellido" placeholder="Ingrese el segundo apellido">
+          </div>
+        </div><div class="form-row">
+          <div class="form-group col-md-9">
+            <label for="cedula">Cédula:</label>
+          <input type="text" class="form-control" id="cedula" formControlName="cedula" [(ngModel)]="persona.cedula"  placeholder="Ingrese la cédula">
+           
+          </div>
+          <div class="form-group col-md-3">
+           
+            <label for="fechan">Fecha de nacimiento</label>
+            <input type="text" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento">
+          </div>
         </div>
-      </div>
-      <mat-card-actions>
-      <button type="submit" class="btn btn-primary">Registrar Docente</button>
-    </mat-card-actions>
-      </div>
-    <div>
-      <div class="form-group col-md-6">
-    <mat-card-actions>
-    <button type="submit" class="btn btn-primary">Acta Reunión</button>
-  </mat-card-actions>
-  <a href="registro-docente/Acta reunión.pdf"
-class="btn"
-target="_blank"
-download="Acta reunión.pdf"
->Descargar</a>
+        <div class="form-group">
+          <label for="direccion">Dirección:</label>
+          <input type="text" class="form-control" id="direccion" formControlName="direccion" [(ngModel)]="persona.direccion"  placeholder="Ingrese la dirección" >
+        </div>
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="telefono">Telefono:</label>
+            <input type="text" class="form-control"  id="telefono" formControlName="telefono" [(ngModel)]="persona.telefono"  placeholder="123456789">
+          </div>
+          <div class="form-group col-md-6">
+            <label for="correo">Correo:</label>
+            <input type="text" class="form-control" id="correo" formControlName="correo" [(ngModel)]="persona.corre"  placeholder="Ingrese el correo eléctronico">
+          </div>
+        
+        </div>
+        <br><br>
+        <div class="row text-center">
+          <div class="col">
+          </div>
+          <div class="col">
+            <button type="submit" (click)='SiguienteDatos()' class="btn" style="background: #1d3557; color: white;">Siguiente</button>
+          </div>
+          
+        </div>
+
+      </form>
+    </div>
+</mat-card>
+<mat-card *ngIf="this.bantitulo == true">
+  <mat-card-title style="background-color:#1d3557; color:white; padding: 35px; border-radius: 6px;">
+    
+  <div class="form-row">
+    <div class="form-group col-md-9">
+      <h1>Registro de Docente/Responsable PPP</h1>
+    </div>
+    <div class="form-group col-md-3">
+     
+      <button type="submit" class="btn" [routerLink]="['/gestion-empresa']" style="background: green; color: white;">Docentes</button>
+
     </div>
   </div>
-  </form>
+  </mat-card-title>
+  <div class="container-fluid" >
+    <h1>Datos academicos</h1>
+    <form [formGroup]="formPersona">
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="abrev_titulo">Abreviación del Titulo</label>
+          <input type="text" class="form-control" [(ngModel)]="docente.abrevTitulo" id="abrev_titulo"  formControlName="abrev_titulo" placeholder="Abreviación del titulo">
+        </div>
+        <div class="form-group col-md-6">
+          <label for="titulo">Titulo</label>
+          <input type="text" class="form-control" [(ngModel)]="docente.titulo" id="snombre"  formControlName="snombre" placeholder="Ingrese el titulo">
+        </div>
+        <div class="form-group col-md-3">
+         
+          <label for="carrera">Carrera</label>
+          
+          <p-dropdown 
+            [options]="carreras" 
+            [(ngModel)]="dropselect" 
+            placeholder="Seleccione una opción"
+            optionLabel="nombre" 
+            [showClear]="true" 
+            (onChange)="OnChange($event)">
+          </p-dropdown>
+        </div>
+        
+      </div><div class="form-row">
+        <div class="form-group col-md-12">
+          <label for="area">Area</label>
+        <input type="text" class="form-control" id="area" formControlName="area" [(ngModel)]="docente.area"  placeholder="Ingrese la area">
+         
+        </div>
+        
+      </div>
+    
+      <br><br>
+      <div class="row text-center">
+        <div class="col">
+        </div>
+        <div class="col">
+          <button type="submit" (click)='create()' class="btn" style="background: #1d3557; color: white;">Guradar Docente</button>
+        </div>
+        
+      </div>
 
-    </div>
-
+    </form>
+  </div>
 </mat-card>
-</section>
