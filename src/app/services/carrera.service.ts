@@ -21,4 +21,11 @@ export class CarreraService {
         
     });
   }
+
+
+  getCarrerasGestionDocentes(): Promise<any[]> {
+    return this.http.get<any[]>(
+      this._url+'/ListarCarreras'
+    ).toPromise();
+  }
 }
