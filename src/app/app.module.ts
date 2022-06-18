@@ -56,6 +56,9 @@ import {MatSelectModule} from '@angular/material/select';
 import { DropdownModule } from "primeng/dropdown";
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
+import { SolicitarRequerimientosComponent } from './solicitar-requerimientos/solicitar-requerimientos.component';
+
 import {MessageService,ConfirmationService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 @NgModule({
@@ -98,6 +101,25 @@ InformeFinalTutorAcademicoComponent,
 DashboardComponent,
 CrearActaComponent,
 
+    ConsultasReportesComponent,
+    ActaReunionComponent,
+    ConsultasReportesComponent,
+    ConsultaEstadoComponent,
+    ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
+//Franklin
+InformeFinalAlumnoComponent,
+EvaluacionEstudianteTutorEmpresarialComponent,
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
+
+
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
+ConsultaConvPublicoComponent,
+SolicitarRequerimientosComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -127,7 +149,8 @@ CrearActaComponent,
     TabViewModule,
     MatSelectModule,
     DropdownModule,
-    ToastModule
+    ToastModule,
+    MatTreeModule
   ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]

@@ -25,7 +25,7 @@
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav" >
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
       <img class="logo" src="../assets/imagen/log.png">
@@ -35,22 +35,24 @@
     </div>
 
     <mat-divider></mat-divider>
-<div class="divimag" > <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
+    <div class="divimag"><img *ngIf="isLogged" src="/assets/imagen/programmer.png"></div>
 
 
     <div *ngFor="let persona of personas">
-      <h3 *ngIf="isLogged" style="text-align: center;">{{persona.primerNombre+" "+persona.primerApellido}}</h3>
+      <h3 *ngIf="isLogged" style="text-align: center;">{{persona.primerNombre + " " + persona.primerApellido}}</h3>
       <p style="text-align: center;">{{realRol}}</p>
       <p *ngIf="isLogged" style="text-align: center;">{{persona.cedula}}</p>
 
     </div>
 
     <a class="nav-link btn mb-3 mt-3" routerLink="/login" style="color: white;" *ngIf="!isLogged">
-      <mat-icon>login</mat-icon><span>LogIn</span>
+      <mat-icon>login</mat-icon>
+      <span>LogIn</span>
 
     </a>
     <a class="nav-link btn mb-3 mt-3" (click)="onLogOut()" style="color: white;" *ngIf="isLogged">
-      <mat-icon>logout</mat-icon><span>LogOut</span>
+      <mat-icon>logout</mat-icon>
+      <span>LogOut</span>
     </a>
 
     <mat-divider></mat-divider>
@@ -60,7 +62,7 @@
     </a>
 
 
-    <a *ngIf="isEmpleado || isAdmin"   class="nav-link" routerLink="/registro-empresa" style="color: white;">
+    <a *ngIf="isEmpleado || isAdmin" class="nav-link" routerLink="/registro-empresa" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión de empresa</span>
     </a>
@@ -70,7 +72,11 @@
       <span>Gestión Convocatoria</span>
     </a>
 
-    <a  class="nav-link" routerLink="/consultas-reportes" style="color: white;">
+    <a class="nav-link" routerLink="/solicitar-requerimientos" style="color: white;">
+      <mat-icon>auto_stories</mat-icon>
+      <span>Consultas y Reportes </span>
+    </a>
+    <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
       <mat-icon>auto_stories</mat-icon>
       <span>Consultas y Reportes </span>
     </a>
@@ -90,9 +96,15 @@
       <span>Designar Tutor Empresarial </span>
     </a>
 
-    <a  class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
+    <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
       <mat-icon>receipt</mat-icon>
       <span>Anexos PPP </span>
+    </a>
+
+
+    <a class="nav-link" routerLink="/consulta-conv-publico" style="color: white;">
+      <mat-icon>receipt</mat-icon>
+      <span>Gestión de Contratos </span>
     </a>
 
     <a *ngIf="isEstudiante" class="nav-link" routerLink="/seleccion-estudiantes" style="color: white;">
@@ -110,11 +122,15 @@
       <span>Consulta Estudiantes Asignados </span>
     </a>
 
-<!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
+    <!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
+    <a class="nav-link" routerLink="/consulta-conv-publico" style="color: white;">
 
-<!--    <mat-icon>speaker_notes</mat-icon>-->
-<!--      <span>Gestión de Caso </span>-->
-<!--    </a>-->
+      <!--    <mat-icon>speaker_notes</mat-icon>-->
+      <!--      <span>Gestión de Caso </span>-->
+      <!--    </a>-->
+      <mat-icon>speaker_notes</mat-icon>
+      <span>Consultas Convocatoria Publico </span>
+    </a>
 
     <a *ngIf="isAdmin" class="nav-link" routerLink="/registro-docente" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
@@ -161,7 +177,8 @@
     </a>
 
 
-    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico" style="color: white;">
+    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico"
+       style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Evaluacion Estudiante Tutor Academico </span>
     </a>
@@ -172,6 +189,14 @@
     </a>
 
 
+    <a class="nav-link" routerLink="/registro-visita" style="color: white;">
+      <mat-icon>assignment</mat-icon>
+      <span>Anexos de PPP</span>
+    </a>
+    <a class="nav-link" routerLink="/solicitar-requerimientos" style="color: white;">
+      <mat-icon>assignment</mat-icon>
+      <span>Anexos 1</span>
+    </a>
   </mat-sidenav>
 
   <mat-sidenav-content class="content mat-elevation-z4">
