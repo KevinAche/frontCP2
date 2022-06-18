@@ -66,13 +66,13 @@
     <div *ngIf="isAdmin" >
       <mat-accordion  multi>
         <mat-expansion-panel >
-          <mat-expansion-panel-header>    
+          <mat-expansion-panel-header>
             <mat-panel-title>
               <mat-icon>person_pin</mat-icon>
               Alumno
             </mat-panel-title>
           </mat-expansion-panel-header>
-          
+
           <button mat-button class="button-accordion" routerLink="/evaluacion-estudiante-tutor-academico">
             <mat-icon>assignment</mat-icon>
             <span>Evaluacion Tutor Academico </span>
@@ -98,12 +98,12 @@
             <span>Estudiantes Asignados</span>
           </button>
 
-          
-          
+
+
         </mat-expansion-panel>
     </mat-accordion>
     </div>
-    
+
   <!--ACORDION-->
 
     <a *ngIf="isEmpleado || isAdmin"   class="nav-link" routerLink="/registro-empresa" style="color: white;">
@@ -154,6 +154,11 @@
     <a *ngIf="isEstudiante || isEmpleado" class="nav-link" routerLink="/cons-est-asignados" style="color: white;">
       <mat-icon>person_pin</mat-icon>
       <span>Consulta Estudiantes Asignados </span>
+    </a>
+
+    <a *ngIf="isAdmin || isEmpleado" class="nav-link" routerLink="/solicitud-empresa" style="color: white;">
+      <mat-icon>person_pin</mat-icon>
+      <span>Generar solicitud empresa </span>
     </a>
 
 <!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
