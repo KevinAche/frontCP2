@@ -19,4 +19,7 @@ export class SolicitudAlumnoService {
         headers: header
     });
   }
+
+
+
 }

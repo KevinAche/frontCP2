@@ -30,8 +30,8 @@
             <td *ngFor="let col of columnasEstudiantes">
               <div [ngSwitch]="col.field">
                 <span *ngSwitchCase="'fecha_nac'">{{dataAlumnos[col.field]}}</span>
-                  <span *ngSwitchCase="'aginarta'">
-                    <button type="button" class="btn btn-primary"  (click)="asignarTutor()">Designar</button>
+                <span *ngSwitchCase="'aginarta'">
+                    <button type="button" class="btn btn-primary" (click)="asignarTutor()">Designar</button>
                   </span>
                 <span *ngSwitchDefault>{{dataAlumnos[col.field]}}</span>
               </div>
@@ -55,12 +55,12 @@
       <ng-template pTemplate="header">
         <h2>Asignacion de tutor academico</h2>
       </ng-template>
-     <ng-template pTemplate="content">
-       <h2>Datos de alumno seleccionado: </h2>
-       <h2>Nombres: {{ObjetoAlumno['primer_nombre']}} {{ObjetoAlumno['segundo_nombre']}}</h2>
-       <h2>Apellidos: {{ObjetoAlumno['primer_apellido']}} {{ObjetoAlumno['segundo_apellido']}}</h2>
-       <h2>Carrera: {{ObjetoAlumno['carrera']}}</h2>
-       <h5>Lista de docentes</h5>
+      <ng-template pTemplate="content">
+        <h2>Datos de alumno seleccionado: </h2>
+        <h2>Nombres: {{ObjetoAlumno['nombres']}}</h2>
+        <h2>Apellidos: {{ObjetoAlumno['apellidos']}} </h2>
+        <h2>Carrera: {{ObjetoAlumno['carrera']}}</h2>
+        <h2>Empresa: {{ObjetoAlumno['nombre_empresa']}}</h2>
         <p>Designe el tutor academico de la lista de docentes: </p>
         <p-table [value]="dataDocentes"
                  [columns]="conlumnasDocentes"
