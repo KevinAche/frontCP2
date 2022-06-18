@@ -124,7 +124,6 @@ export class HomeComponent implements OnInit {
     const reader = new FileReader();
     reader.readAsBinaryString(file);
     reader.onload = (event) => result.next(btoa(event.target.result.toString()));
-    console.log(result)
     return result;
   }
 }

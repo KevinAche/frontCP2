@@ -12,6 +12,8 @@ import { saveAs } from "file-saver";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 import Docxtemplater from "docxtemplater";
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -31,6 +33,7 @@ export class SolicitudEstudianteComponent implements OnInit {
   public empresaNombre:any;
   public responsableNombre:any;
   dialogoCrearSolicitud: boolean;
+  base64Output : string;
   panelOpen = false;
 
   empresa: Empresa = new Empresa();
@@ -89,7 +92,9 @@ export class SolicitudEstudianteComponent implements OnInit {
 
 
   public create(): void {
-    if (this.formSolicitud.invalid) {
+    var docubas=this.base64Output;
+    
+    if (this.formSolicitud.invalid || docubas=="undefined") {
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -99,6 +104,8 @@ export class SolicitudEstudianteComponent implements OnInit {
     }
 
 
+this.solicitudAlumno.documentoSoliEstudiante=docubas;
+
     this.solicitudAlumnoService.createSolicitudAlumno(this.solicitudAlumno).subscribe(
       Response => {
         swal.fire(
@@ -106,10 +113,15 @@ export class SolicitudEstudianteComponent implements OnInit {
           `Solicitud creada con exito!`,
           'success'
         )
+        this.limpiar();
       }
     )
 
+    
+
   }
+
+  //Generar documento
 
   generate(nom:any,ced:any,par:any,cic:any,corr:any,cell:any,hor,fec,carr,sig,conv) {
     var empn=this.empresaNombre;
@@ -189,4 +201,31 @@ export class SolicitudEstudianteComponent implements OnInit {
   }
 
 
+
+
+  //Convertir a base 64 un documento
+
+  onFileSelected(event) {
+    this.convertFile(event.target.files[0]).subscribe(base64 => {
+      this.base64Output = base64;
+
+    });
+  }
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
+  }
+  
+
+  //LimpiarCampos
+
+  limpiar(){
+    this.solicitudAlumno.fechaEmision=null;
+    this.solicitudAlumno.horasPPP=null;
+    this.solicitudAlumno.documentoSoliEstudiante="undefined";
+  }
 }
