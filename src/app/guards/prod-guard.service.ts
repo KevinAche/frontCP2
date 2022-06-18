@@ -27,7 +27,28 @@ export class ProdGuardService implements CanActivate{
       if(rol === 'ROLE_DOCENTE'){
         this.realRol = 'docente';
       }
+
+      if(rol === 'ROLE_ESTUDIANTE'){
+        this.realRol = 'estudiante';
+      }
+
+      if(rol === 'ROLE_RESPONSABLEPPP'){
+        this.realRol = 'responsableppp';
+      }
+
+      if(rol === 'ROLE_TUTORACADEMICO'){
+        this.realRol = 'tacademico';
+      }
+
+      if(rol === 'ROLE_TUTOREMPRESARIAL'){
+        this.realRol = 'tempresarial';
+      }
+
+      if(rol === 'ROLE_EMPLEADO'){
+        this.realRol = 'empleado';
+      }
     });
+
 
     if(!this.tokenService.getToken() || expectedRol.indexOf(this.realRol) === -1){
       this.router.navigate(['/']);

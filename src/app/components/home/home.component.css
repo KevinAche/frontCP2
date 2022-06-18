@@ -17,3 +17,8 @@
     color: darkgray;
     font-size: 1rem;
 }
+
+h3 {
+    font-weight: bolder;
+    margin-bottom: 0;
+}

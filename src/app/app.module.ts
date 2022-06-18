@@ -38,15 +38,35 @@ import {RegistroVisitaComponent} from './registro-visita/registro-visita.compone
 import {MatExpansionModule} from '@angular/material/expansion';
 import {MatFormFieldModule} from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
+import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
 import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
+import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
+import {MatTreeModule} from '@angular/material/tree';
+import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
+import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { CrearActaComponent } from './crear-acta/crear-acta.component';
+import { TabMenuModule } from 'primeng/tabmenu';
+import { TabViewModule } from 'primeng/tabview';
+import {MatSelectModule} from '@angular/material/select';
+import { DropdownModule } from "primeng/dropdown";
+import { DashboardComponent } from './components/dashboard/dashboard.component';
 
+import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
+import { SolicitarRequerimientosComponent } from './solicitar-requerimientos/solicitar-requerimientos.component';
+
+import {MessageService,ConfirmationService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.component';
+import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
 @NgModule({
   declarations: [
     AppComponent,
+    AnexosdePPPComponent,
     RegistroEmpresasComponent,
     RegistroDocentesComponent,
     ConsultaspppComponent,
@@ -65,12 +85,45 @@ import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alu
     RegistroVisitaComponent,
     SolicitudEstudianteComponent,
     ConsultasReportesComponent,
+    ActaReunionComponent,
+    ConsultasReportesComponent,
+    ConsultaEstadoComponent,
+    ConsultasReportesComponent,
     RegistroConvocatoriaComponent,
 //Franklin
 InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
 RegistroSeguimientoAlumnoComponent,
 CertificadoAlumnoComponent,
+
+
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
+DashboardComponent,
+CrearActaComponent,
+CrearCarreraComponent,
+ListarCarrerasComponent,
+
+    ConsultasReportesComponent,
+    ActaReunionComponent,
+    ConsultasReportesComponent,
+    ConsultaEstadoComponent,
+    ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
+//Franklin
+InformeFinalAlumnoComponent,
+EvaluacionEstudianteTutorEmpresarialComponent,
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
+
+
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
+ConsultaConvPublicoComponent,
+SolicitarRequerimientosComponent,
+
   ],
   imports: [
     BrowserModule,
@@ -95,8 +148,15 @@ CertificadoAlumnoComponent,
     PanelModule,
     MatExpansionModule,
     MatFormFieldModule,
+    MatTreeModule,
+    TabMenuModule,
+    TabViewModule,
+    MatSelectModule,
+    DropdownModule,
+    ToastModule,
+    MatTreeModule
   ],
-  providers: [],
+  providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }
