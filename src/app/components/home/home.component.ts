@@ -52,7 +52,7 @@ export class HomeComponent implements OnInit {
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
         rpp: nom,
-        numestudiantes: "123"
+        numestudiantes: "2501"
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
