@@ -1,4 +1,5 @@
-<mat-toolbar style="background-color:#1d3557">
+
+<mat-toolbar>
   <div class="container">
     <button mat-icon-button (click)="sidenav.toggle()">
       <mat-icon *ngIf="!sidenav.opened">
@@ -23,7 +24,9 @@
 
 </mat-toolbar>
 
+
 <mat-sidenav-container>
+
 
   <mat-sidenav #sidenav="matSidenav" >
 
@@ -59,13 +62,56 @@
       <span>Inicio</span>
     </a>
 
+    <!--ACORDION-->
+    <div *ngIf="isAdmin" >
+      <mat-accordion  multi>
+        <mat-expansion-panel >
+          <mat-expansion-panel-header>    
+            <mat-panel-title>
+              <mat-icon>person_pin</mat-icon>
+              Alumno
+            </mat-panel-title>
+          </mat-expansion-panel-header>
+          
+          <button mat-button class="button-accordion" routerLink="/evaluacion-estudiante-tutor-academico">
+            <mat-icon>assignment</mat-icon>
+            <span>Evaluacion Tutor Academico </span>
+          </button>
+
+          <button mat-button class="button-accordion" routerLink="/cert-alumno">
+            <mat-icon>perm_identity</mat-icon>
+            <span>Certificado Alumno </span>
+          </button>
+
+          <button mat-button class="button-accordion" routerLink="/eva-est-tu-empresarial">
+            <mat-icon>perm_identity</mat-icon>
+            <span>Evaluación Tutor Empresarial </span>
+          </button>
+
+          <button mat-button class="button-accordion" routerLink="/inf-fin-alumno">
+            <mat-icon>perm_identity</mat-icon>
+            <span>Informe Final</span>
+          </button>
+
+          <button mat-button class="button-accordion" routerLink="/cons-est-asignados">
+            <mat-icon>perm_identity</mat-icon>
+            <span>Estudiantes Asignados</span>
+          </button>
+
+          
+          
+        </mat-expansion-panel>
+    </mat-accordion>
+    </div>
+    
+  <!--ACORDION-->
 
     <a *ngIf="isEmpleado || isAdmin"   class="nav-link" routerLink="/registro-empresa" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión de empresa</span>
     </a>
 
-    <a *ngIf="isResponsable" class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
+    <a *ngIf="isResponsable || isAdmin" class="nav-link" routerLink="/consulta-convocatoria" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión Convocatoria</span>
     </a>
@@ -80,7 +126,7 @@
       <span>Consultas PPP </span>
     </a>
 
-    <a *ngIf="isResponsable" class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
+    <a *ngIf="isResponsable || isAdmin" class="nav-link" routerLink="/desig-tutor-academico" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Designar Tutor Academico</span>
     </a>
@@ -121,7 +167,7 @@
       <span>Gestión de Docentes </span>
     </a>
 
-    <a *ngIf="isEstudiante" class="nav-link" routerLink="/solicitud-estudiante" style="color: white;">
+    <a *ngIf="isEstudiante" class="nav-link" routerLink="/solicitud-estudiante/6" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Solicitud de Estudiante Anexo 3 </span>
     </a>
@@ -180,4 +226,5 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
 <app-footer></app-footer>

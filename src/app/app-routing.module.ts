@@ -32,6 +32,8 @@ import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import {DashboardComponent} from "./components/dashboard/dashboard.component";
 import {ConsultaEstadoComponent} from "./consulta-estado/consulta-estado.component";
 import {ProdGuardService as guard} from "./guards/prod-guard.service";
+import {CrearCarreraComponent} from "./carreras/crear-carrera/crear-carrera.component";
+import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carreras.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -42,7 +44,10 @@ const routes: Routes = [
   {path: 'consultasppp', component:ConsultaspppComponent },
   {path: 'login', component:LoginComponent },
   {path:'home',component:HomeComponent},
+  //KevinAche
   {path:'dashboard',component:DashboardComponent},
+  {path:'crear-carrera',component:CrearCarreraComponent},
+  {path:'listar-carreras', component:ListarCarrerasComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
@@ -61,6 +66,18 @@ const routes: Routes = [
   { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
   {path:'acta-reunion',component:ActaReunionComponent},
   {path:'crear-acta',component:CrearActaComponent},
+  { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
+  { path: 'cert-alumno', component: CertificadoAlumnoComponent },
+
+  //Liss
+  {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
+  {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
+  // {path:'consulta-estado',component:ConsultaEstadoComponent},
+  //Franklin
+  { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
+  { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
+  { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+  {path:'acta-reunion',component:ActaReunionComponent},
   { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
   { path: 'cert-alumno', component: CertificadoAlumnoComponent },
 
