@@ -11,21 +11,21 @@
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
-<!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
-<!--    <mat-icon>exit_to_app</mat-icon>-->
-<!--    Log Out-->
-<!--  </button>-->
+  <!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
+  <!--    <mat-icon>exit_to_app</mat-icon>-->
+  <!--    Log Out-->
+  <!--  </button>-->
 
-<!--  <button *ngIf="!isLogged" routerLink="/login">-->
-<!--    <mat-icon>account_circle</mat-icon>-->
-<!--    Log In-->
-<!--  </button>-->
+  <!--  <button *ngIf="!isLogged" routerLink="/login">-->
+  <!--    <mat-icon>account_circle</mat-icon>-->
+  <!--    Log In-->
+  <!--  </button>-->
 
 </mat-toolbar>
 
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav" >
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
       <img class="logo" src="../assets/imagen/log.png">
@@ -35,7 +35,7 @@
     </div>
 
     <mat-divider></mat-divider>
-<div class="divimag" > <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
+    <div class="divimag"> <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
 
 
     <div *ngFor="let persona of personas">
@@ -60,7 +60,7 @@
     </a>
 
 
-    <a *ngIf="isEmpleado || isAdmin"   class="nav-link" routerLink="/registro-empresa" style="color: white;">
+    <a *ngIf="isEmpleado || isAdmin" class="nav-link" routerLink="/registro-empresa" style="color: white;">
       <mat-icon>home</mat-icon>
       <span>Gestión de empresa</span>
     </a>
@@ -70,7 +70,7 @@
       <span>Gestión Convocatoria</span>
     </a>
 
-    <a  class="nav-link" routerLink="/consultas-reportes" style="color: white;">
+    <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
       <mat-icon>auto_stories</mat-icon>
       <span>Consultas y Reportes </span>
     </a>
@@ -90,7 +90,7 @@
       <span>Designar Tutor Empresarial </span>
     </a>
 
-    <a  class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
+    <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
       <mat-icon>receipt</mat-icon>
       <span>Anexos PPP </span>
     </a>
@@ -110,11 +110,11 @@
       <span>Consulta Estudiantes Asignados </span>
     </a>
 
-<!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
+    <!--    <a *ngIf="" class="nav-link" routerLink="/" style="color: white;">-->
 
-<!--    <mat-icon>speaker_notes</mat-icon>-->
-<!--      <span>Gestión de Caso </span>-->
-<!--    </a>-->
+    <!--    <mat-icon>speaker_notes</mat-icon>-->
+    <!--      <span>Gestión de Caso </span>-->
+    <!--    </a>-->
 
     <a *ngIf="isAdmin" class="nav-link" routerLink="/registro-docente" style="color: white;">
       <mat-icon>perm_identity</mat-icon>
@@ -161,7 +161,8 @@
     </a>
 
 
-    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico" style="color: white;">
+    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico"
+      style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Evaluacion Estudiante Tutor Academico </span>
     </a>
@@ -171,6 +172,10 @@
       <span>Informe Final Tutor Academico </span>
     </a>
 
+    <a class="nav-link" routerLink="/lista-responsableppp" style="color: white;">
+      <mat-icon>assignment</mat-icon>
+      <span>Lista Responsable PPP </span>
+    </a>
 
   </mat-sidenav>
 

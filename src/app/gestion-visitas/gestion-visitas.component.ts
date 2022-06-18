@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InformeVisita } from '../models/Visita';
 import { InformeService } from '../services/Informe.service';
+import swal from 'sweetalert2';
 
 @Component({
   selector: 'app-gestion-visitas',
@@ -27,6 +28,19 @@ export class GestionVisitasComponent implements OnInit {
     this.dis = true;
   }
 
+  showDialogEdit(informe: InformeVisita): void {
+    this.dis = true;
+    this.informe = {
+      idinforme: informe.idinforme,
+      fecha: informe.fecha,
+      horaInicio: informe.horaInicio,
+      horaFin: informe.horaFin,
+      asunto: informe.asunto,
+      actividades: informe.actividades,
+      observaciones: informe.observaciones,
+    };
+  }
+
   constructor(
     private informeservice: InformeService,
     private formBuilder: FormBuilder
@@ -44,7 +58,7 @@ export class GestionVisitasComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'idinforme', header: 'idinforme' },
+      { field: 'idinforme', header: 'IdInforme' },
       { field: 'fecha', header: 'Fecha' },
       { field: 'horainicio', header: 'Hora Inicio' },
       { field: 'horafin', header: 'Hora Fin' },
@@ -60,5 +74,55 @@ export class GestionVisitasComponent implements OnInit {
       this.dataInformes = value['data'];
       console.log(this.dataInformes);
     });
+  }
+
+  editarInforme(): void {
+    this.informeservice.updateInforme(this.informe).subscribe((informe) => {
+      swal.fire('InformeVisita', 'Informe editado con exito.', 'success');
+      this.listarInfome();
+    });
+    this.dis = false;
+  }
+  eliminarInforme(inf: InformeVisita): void {
+    const swalWithBootstrapButtons = swal.mixin({
+      customClass: {
+        confirmButton: 'btn btn-success',
+        cancelButton: 'btn btn-danger',
+      },
+      buttonsStyling: false,
+    });
+    swalWithBootstrapButtons
+      .fire({
+        title: 'Esta seguro que desea eliminar?',
+        text: `¡No podrás revertir esto! eliminar el ${inf.asunto}`,
+        icon: 'warning',
+        showCancelButton: true,
+        confirmButtonText: 'Si, Eliminar! ',
+        cancelButtonText: ' No, Cancelar!',
+        reverseButtons: true,
+      })
+      .then((result) => {
+        if (result.isConfirmed) {
+          this.informeservice
+            .deleteInforme(inf.idinforme)
+            .subscribe((response) => {
+              this.informes = this.informes.filter((servi) => servi !== inf);
+              swalWithBootstrapButtons.fire(
+                'Eliminado!',
+                `La empresa  fue eliminada.`,
+                'success'
+              );
+            });
+        } else if (
+          /* Read more about handling dismissals below */
+          result.dismiss === swal.DismissReason.cancel
+        ) {
+          swalWithBootstrapButtons.fire(
+            'Cancelado',
+            'La empresa no se elimino.',
+            'error'
+          );
+        }
+      });
   }
 }

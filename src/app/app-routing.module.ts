@@ -32,6 +32,7 @@ import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
+import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 
 const routes: Routes = [
   { path: '', component: HomeComponent },
@@ -117,6 +118,7 @@ const routes: Routes = [
     component: InformeFinalTutorAcademicoComponent,
   },
   { path: 'gestion-visitas', component: GestionVisitasComponent },
+  { path: 'lista-responsableppp', component: ListaResponsablepppComponent },
   { path: '**', component: PagenotfoundComponent },
 ];
 

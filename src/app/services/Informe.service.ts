@@ -43,7 +43,7 @@ export class InformeService {
       );
   }
 
-  updateEmpresa(infvisita: InformeVisita): Observable<InformeVisita> {
+  updateInforme(infvisita: InformeVisita): Observable<InformeVisita> {
     return this.http
       .put<InformeVisita>(
         `${this.urlUpdateInforme}/${infvisita.idinforme}`,
@@ -64,7 +64,7 @@ export class InformeService {
       );
   }
 
-  deleteEmpresa(persid: number): Observable<InformeVisita> {
+  deleteInforme(persid: any): Observable<InformeVisita> {
     return this.http
       .delete<InformeVisita>(`${this.urlDeleteInforme}/${persid}`, {
         headers: this.httpHeaders,

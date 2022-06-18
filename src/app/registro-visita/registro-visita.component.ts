@@ -4,6 +4,7 @@ import { RegistroVisitaService } from '../services/registro-visita.service';
 import swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { InformeService } from '../services/Informe.service';
+import { TutorAService } from '../services/tutorA.service';
 
 @Component({
   selector: 'app-registro-visita',
@@ -15,15 +16,18 @@ export class RegistroVisitaComponent implements OnInit {
   registro: Visita = new Visita();
   informe: InformeVisita = new InformeVisita();
   formInforme: FormGroup;
+  dataTutor: any[];
 
   constructor(
     private registroVisita: RegistroVisitaService,
     private formBuilder: FormBuilder,
-    private informeserv: InformeService
+    private informeserv: InformeService,
+    private tutor: TutorAService
   ) {}
 
   ngOnInit(): void {
     this.listarRegistroVisita();
+    this.listarTutor();
 
     this.formInforme = this.formBuilder.group({
       fecha: ['', Validators.required],
@@ -39,6 +43,12 @@ export class RegistroVisitaComponent implements OnInit {
     this.registroVisita.getRegistroVisita().subscribe((resp: any) => {
       console.log(resp.data);
       this.registrovisita = resp.data;
+    });
+  }
+  public listarTutor() {
+    this.tutor.getTutoresAcademicos().then((value) => {
+      this.dataTutor = value['data'];
+      console.log(this.dataTutor);
     });
   }
 

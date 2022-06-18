@@ -46,8 +46,10 @@
                 <td>{{visita.actividades}}</td>
                 <td>{{visita.observaciones}}</td>
                 <td>
-                    <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                    <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                    <a class="edit" title="Edit" (click)="showDialogEdit(visita)" data-toggle="tooltip"><i
+                            class="material-icons">&#xE254;</i></a>
+                    <a class="delete" title="Delete" (click)="eliminarInforme(visita)" data-toggle="tooltip"><i
+                            class="material-icons">&#xE872;</i></a>
                 </td>
             </tr>
         </ng-template>
@@ -68,6 +70,11 @@
     <form [formGroup]="formInforme">
         <h3 class="titulo"><strong>Informe</strong></h3>
         <div class="form-row">
+            <div class="form-group col-md-6">
+                <label for="idinforme">Id Informe:</label>
+                <input type="text" class="form-control" [(ngModel)]="informe.idinforme" id="idinforme"
+                    formControlName="idinforme" placeholder="Ingrese la Fecha de Visita">
+            </div>
             <div class="form-group col-md-6">
                 <label for="fecha">Fecha de Visita:</label>
                 <input type="text" class="form-control" [(ngModel)]="informe.fecha" id="fecha" formControlName="fecha"
@@ -101,7 +108,7 @@
         </div>
     </form>
     <p-footer>
-        <button type="button" pButton icon="pi pi-save" label="Editar"></button>
+        <button type="button" pButton icon="pi pi-save" (click)="editarInforme()" label="Editar"></button>
         <button type="button" pButton icon="pi pi-times" (click)="dis=false" label="Cancelar"
             class="ui-button-secondary"></button>
     </p-footer>

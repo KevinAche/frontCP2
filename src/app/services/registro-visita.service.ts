@@ -4,11 +4,13 @@ import { Observable, throwError } from 'rxjs';
 import { InformeVisita, Visita } from '../models/Visita';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
 })
 export class RegistroVisitaService {
+  _urlP = 'http://localhost:8082/';
   _url = 'http://localhost:8082/GestionRegistroVisitaEmpresa';
   urlCreate = this._url + '/CrearRegistro_VisitaEmpresa';
 
@@ -18,9 +20,12 @@ export class RegistroVisitaService {
   getRegistroVisita() {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
-    return this.http.get(this._url + '/ListaRegistro_VisitaEmpresa', {
-      headers: header,
-    });
+    return this.http.get(
+      this._urlP + 'GestionTutorAcademico/ListaTutorAcademico',
+      {
+        headers: header,
+      }
+    );
   }
 
   createVisita(visita: Visita): Observable<Visita> {
@@ -36,12 +41,5 @@ export class RegistroVisitaService {
           return throwError(e);
         })
       );
-  }
-  getBuscarTutor() {
-    let header = new HttpHeaders().set('Type-content', 'aplication/json');
-
-    return this.http.get(this._url + '/', {
-      headers: header,
-    });
   }
 }

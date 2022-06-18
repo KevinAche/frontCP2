@@ -59,6 +59,7 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { MessageService, ConfirmationService } from 'primeng/api';
 import { ToastModule } from 'primeng/toast';
+import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -102,6 +103,7 @@ import { ToastModule } from 'primeng/toast';
     EvaluacionEstudianteTutorAcademicoComponent,
     InformeFinalTutorAcademicoComponent,
     GestionVisitasComponent,
+    ListaResponsablepppComponent,
   ],
   imports: [
     BrowserModule,

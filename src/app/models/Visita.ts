@@ -1,5 +1,5 @@
 export class Visita {
-  id?: Number;
+  id: any;
   tutoracademico?: String;
   tutorempresarial?: String;
   alumno?: String;
@@ -10,7 +10,7 @@ export class Visita {
 }
 
 export class InformeVisita {
-  idinforme?: Number;
+  idinforme?: any;
   asunto?: String;
   actividades?: String;
   observaciones?: String;
