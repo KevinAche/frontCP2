@@ -5,8 +5,8 @@ export class Persona{
   segundoNombre: any;
   primerApellido: any;
   segundoApellido: any;
-  fechaNac: any;
+  fechaNac: Date;
   telefono: any;
   direccion: any;
-  corre: any;
+  correo: any;
 }

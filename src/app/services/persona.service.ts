@@ -1,12 +1,18 @@
 import { Injectable } from '@angular/core';
 import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Persona } from '../models/Persona';
+import { catchError, Observable, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
 
-  _url ='http://localhost:8082/GestionPersona'
+  _url ='http://localhost:8082/GestionPersona';
+  private urlCreate: string = this._url+'/CrearPersona';
+
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(
     private http: HttpClient
@@ -21,5 +27,14 @@ export class PersonaService {
         headers: header
         
     });
+  }
+
+  createPersona(pers: Persona): Observable<Persona> {
+    return this.http.post<Persona>(this.urlCreate, pers, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al guardar', 'NO se puede guardar a la persona', 'error')
+        return throwError(e);
+      })
+    );
   }
 }

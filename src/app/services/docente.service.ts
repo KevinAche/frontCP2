@@ -13,9 +13,9 @@ export class DocenteService {
 
   _url = 'http://localhost:8082/GestionDocente'
 
-  private urlCreate: string = this._url+'/GestionEmpresa/CrearEmpresa';
-  private urlDelete: string = this._url+'/GestionEmpresa/EliminarEmpresa';
-  private urlUpdate: string = this._url+'/GestionEmpresa/EditarEmpresa';
+  private urlCreate: string = this._url+'/CrearDocente';
+  private urlDelete: string = this._url+'/BuscarDocente';
+  private urlUpdate: string = this._url+'/EliminarDocente';
   
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -36,10 +36,10 @@ export class DocenteService {
     ).toPromise();
   }
 
-  createDocente(doc: Docente): Observable<Docente> {
-    return this.http.post<Docente>(this.urlCreate, doc, { headers: this.httpHeaders }).pipe(
+  createDocente(doc: Docente, ced :String, id : number): Observable<Docente> {
+    return this.http.post<Docente>(`${this.urlCreate}/${ced}/${id}`, doc, { headers: this.httpHeaders }).pipe(
       catchError(e => {
-        Swal.fire('Error al guardar', 'NO se puede guardar a la empresa', 'error')
+        Swal.fire('Error al guardar', 'NO se puede guardar al docente', 'error')
         return throwError(e);
       })
     );
