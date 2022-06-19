@@ -13,7 +13,7 @@ import swal from "sweetalert2";
 })
 export class CarreraService {
 
-    _url ='http://localhost:8082/GestionCarrera'
+    _url ='http://localhost:4200/GestionActividades_Cronograma'
 
   constructor(
     private http: HttpClient
