@@ -33,6 +33,7 @@ export class SolicitudEstudianteComponent implements OnInit {
   public empresaNombre:any;
   public responsableNombre:any;
   dialogoCrearSolicitud: boolean;
+  dialogoMisSolicitudes: boolean;
   base64Output : string;
   panelOpen = false;
 
@@ -89,6 +90,12 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.responsableNombre=respo;
     
   }
+
+  misSolicitudes(va:any){
+    this.dialogoMisSolicitudes=true;
+    this.id=va;
+  }
+
 
 
   public create(): void {
