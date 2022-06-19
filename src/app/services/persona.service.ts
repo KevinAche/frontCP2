@@ -9,14 +9,14 @@ import Swal from 'sweetalert2';
 })
 export class PersonaService {
 
-  _url ='http://localhost:8082/GestionPersona';
+  _url ='https://backendg1c2.herokuapp.com/GestionPersona'
   private urlCreate: string = this._url+'/CrearPersona';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
   constructor(
     private http: HttpClient
-  ) { 
+  ) {
   }
 
   getPersonasByCedula(cedula: any) {
@@ -25,7 +25,7 @@ export class PersonaService {
 
     return this.http.get(this._url+'/PersonaByCedula/'+cedula,{
         headers: header
-        
+
     });
   }
 

@@ -11,12 +11,12 @@ import { Docente } from '../models/Docente';
 })
 export class DocenteService {
 
-  _url = 'http://localhost:8082/GestionDocente'
+  _url = 'https://backendg1c2.herokuapp.com/GestionDocente'
 
   private urlCreate: string = this._url+'/CrearDocente';
   private urlDelete: string = this._url+'/BuscarDocente';
   private urlUpdate: string = this._url+'/EliminarDocente';
-  
+
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 

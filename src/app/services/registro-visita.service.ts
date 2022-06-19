@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class RegistroVisitaService {
-  _url = 'http://localhost:8082/GestionRegistroVisitaEmpresa';
+  _url = 'https://backendg1c2.herokuapp.com/GestionRegistroVisitaEmpresa';
   urlCreate = this._url + '/CrearRegistro_VisitaEmpresa';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });

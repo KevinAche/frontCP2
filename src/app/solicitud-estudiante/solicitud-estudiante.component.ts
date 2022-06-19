@@ -88,7 +88,7 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.solicitudAlumno.alumno.idAlumno=ide;
     this.empresaNombre=nomEmp;
     this.responsableNombre=respo;
-    
+
   }
 
   misSolicitudes(va:any){
@@ -100,7 +100,7 @@ export class SolicitudEstudianteComponent implements OnInit {
 
   public create(): void {
     var docubas=this.base64Output;
-    
+
     if (this.formSolicitud.invalid || docubas=="undefined") {
       swal.fire(
         'Error de entrada',
@@ -124,7 +124,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
       }
     )
 
-    
+
 
   }
 
@@ -141,7 +141,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
       )
       return;
     }
-    loadFile("http://localhost:8082/files/anexo3.docx", function(
+    loadFile("https://backendg1c2.herokuapp.com/files/anexo3.docx", function(
       error,
       content
     ) {
@@ -226,7 +226,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
     reader.onload = (event) => result.next(btoa(event.target.result.toString()));
     return result;
   }
-  
+
 
   //LimpiarCampos
 

@@ -9,7 +9,7 @@ import swal from 'sweetalert2';
   providedIn: 'root',
 })
 export class InformeService {
-  _urlI = 'http://localhost:8082/GestionInforme_Visita';
+  _urlI = 'https://backendg1c2.herokuapp.com/GestionInforme_Visita';
   urlCreateInforme = this._urlI + '/CrearInforme_Visita';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });

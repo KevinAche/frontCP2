@@ -13,7 +13,7 @@ import swal from "sweetalert2";
 })
 export class CarreraService {
 
-    _url ='http://localhost:4200/GestionActividades_Cronograma'
+    _url ='https://backendg1c2.herokuapp.com/GestionCarrera'
 
   constructor(
     private http: HttpClient
