@@ -4,21 +4,20 @@ import { Injectable } from '@angular/core';
 @Injectable({
   providedIn: 'root'
 })
-export class CarreraService {
+export class SolicitudAlumnoService {
 
-    _url ='http://localhost:4200/GestionActividades_Cronograma'
+    _url ='http://localhost:8082/GestionActividades_Cronograma'
 
   constructor(
     private http: HttpClient
   ) { }
 
-  getCarreras() {
+  getActividades_Cronograma(){
     let header = new HttpHeaders()
     .set('Type-content','aplication/json')
-
-    return this.http.get(this._url+'/ListarCarreras',{
+    return this.http.get(this._url+'/ListaActividades_Cronograma',{
         headers: header
-        
     });
   }
 }
+  
