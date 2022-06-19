@@ -5,21 +5,21 @@ import { Injectable } from '@angular/core';
     providedIn: 'root'
   })
   export class InformeFinalAlumnoService {
-  
-      _url ='http://localhost:8082/GestionInformeFinal'
-  
+
+      _url ='https://backendg1c2.herokuapp.com/GestionInformeFinal'
+
     constructor(
       private http: HttpClient
     ) { }
-  
+
     getInformeFinalAlumno() {
       let header = new HttpHeaders()
       .set('Type-content','aplication/json')
-  
+
       return this.http.get(this._url+'/ListaInformeFinal',{
           headers: header
-  
+
       });
     }
-  
+
   }

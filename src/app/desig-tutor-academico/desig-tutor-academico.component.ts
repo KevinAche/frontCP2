@@ -176,7 +176,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
         };
         this.dialogoAsignar=false;
         this.dialogoPasos=true;
-        this.generate(datageneral,'http://localhost:8082/files/anexo6.docx',nombreDocumento);
+        this.generate(datageneral,'https://backendg1c2.herokuapp.com/files/anexo6.docx',nombreDocumento);
       } else {
         this.mostrarMensajeError('El docente no ha sido clickeado')
       }
