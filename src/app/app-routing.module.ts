@@ -57,7 +57,7 @@ const routes: Routes = [
   {path:'registro-asistencia', component: RegistroAsistenciaComponent},
   {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
-  {path:'solicitud-estudiante',component: SolicitudEstudianteComponent},
+  {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
   {path:'consulta-estado',component:ConsultaEstadoComponent},

@@ -8,6 +8,16 @@ import swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { EmpresaService } from '../services/empresa.service';
 import { Empresa } from '../services/empresa';
+import { saveAs } from "file-saver";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import Docxtemplater from "docxtemplater";
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
+
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
 
 @Component({
   selector: 'app-solicitud-estudiante',
@@ -19,8 +29,12 @@ export class SolicitudEstudianteComponent implements OnInit {
   public alumnos: Array<any> = [];
   public numConvocatoria: any;
   solicitud: SolicitudAlumno = new SolicitudAlumno();
-  id: String;
+  public id: String;
+  public empresaNombre:any;
+  public responsableNombre:any;
   dialogoCrearSolicitud: boolean;
+  dialogoMisSolicitudes: boolean;
+  base64Output : string;
   panelOpen = false;
 
   empresa: Empresa = new Empresa();
@@ -66,14 +80,28 @@ export class SolicitudEstudianteComponent implements OnInit {
     })
   }
 
-  crearSolicitud(valor: any) {
+  crearSolicitud(valor: any,ide:any,nomEmp:any,respo:any) {
     this.dialogoCrearSolicitud = true;
     this.numConvocatoria = valor;
+    this.solicitudAlumno.estado="pendiente";
+    this.solicitudAlumno.convocatoria.idConvocatoria=valor;
+    this.solicitudAlumno.alumno.idAlumno=ide;
+    this.empresaNombre=nomEmp;
+    this.responsableNombre=respo;
+    
+  }
+
+  misSolicitudes(va:any){
+    this.dialogoMisSolicitudes=true;
+    this.id=va;
   }
 
 
+
   public create(): void {
-    if (this.formSolicitud.invalid) {
+    var docubas=this.base64Output;
+    
+    if (this.formSolicitud.invalid || docubas=="undefined") {
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -83,17 +111,128 @@ export class SolicitudEstudianteComponent implements OnInit {
     }
 
 
+this.solicitudAlumno.documentoSoliEstudiante=docubas;
+
     this.solicitudAlumnoService.createSolicitudAlumno(this.solicitudAlumno).subscribe(
       Response => {
         swal.fire(
-          'Empresa Guardada',
-          `Empresa ${this.solicitudAlumno.horasPPP} creada con exito!`,
+          'Enviado',
+          `Solicitud creada con exito!`,
           'success'
         )
+        this.limpiar();
       }
     )
 
+    
+
+  }
+
+  //Generar documento
+
+  generate(nom:any,ced:any,par:any,cic:any,corr:any,cell:any,hor,fec,carr,sig,conv) {
+    var empn=this.empresaNombre;
+    var res=this.responsableNombre;
+    if (this.formSolicitud.invalid) {
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+      return;
+    }
+    loadFile("http://localhost:8082/files/anexo3.docx", function(
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+      doc.setData({
+        nombreAlumno: nom,
+        datoCedula:ced,
+        datoParalelo:par,
+        datoCiclo:cic,
+        correoAlumno:corr,
+        celularAlumno:cell,
+        datoHoras:hor,
+        fecha:fec,
+        nombreCarrera:carr,
+        sigla:sig,
+        numeroConvocatoria:conv,
+        nombreEmpresa:empn,
+        periodoAcademico:"Mayo 2022 - Diciembre 2022",
+        nombreResponsablePracticas:res,
+      });
+      try {
+        // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+              error,
+              key
+            ) {
+              error[key] = value[key];
+              return error;
+            },
+            {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "anexo3.docx");
+    });
   }
 
 
+
+
+  //Convertir a base 64 un documento
+
+  onFileSelected(event) {
+    this.convertFile(event.target.files[0]).subscribe(base64 => {
+      this.base64Output = base64;
+
+    });
+  }
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
+  }
+  
+
+  //LimpiarCampos
+
+  limpiar(){
+    this.solicitudAlumno.fechaEmision=null;
+    this.solicitudAlumno.horasPPP=null;
+    this.solicitudAlumno.documentoSoliEstudiante="undefined";
+  }
 }

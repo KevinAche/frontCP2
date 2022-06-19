@@ -12,4 +12,5 @@ export class InformeFinalTutorAcademicoComponent implements OnInit {
   ngOnInit(): void {
   }
 
+  
 }
