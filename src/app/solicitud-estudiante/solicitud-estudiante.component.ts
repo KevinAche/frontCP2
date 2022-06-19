@@ -27,6 +27,7 @@ function loadFile(url, callback) {
 export class SolicitudEstudianteComponent implements OnInit {
   public convocatorias: Array<any> = [];
   public alumnos: Array<any> = [];
+  public solicitudes: Array<any>=[];
   public numConvocatoria: any;
   solicitud: SolicitudAlumno = new SolicitudAlumno();
   public id: String;
@@ -36,7 +37,6 @@ export class SolicitudEstudianteComponent implements OnInit {
   dialogoMisSolicitudes: boolean;
   base64Output : string;
   panelOpen = false;
-
   empresa: Empresa = new Empresa();
   solicitudAlumno: SolicitudAlumno=new SolicitudAlumno();
   formSolicitud: FormGroup;
@@ -55,6 +55,7 @@ export class SolicitudEstudianteComponent implements OnInit {
   ngOnInit(): void {
     this.listarConvocatorias();
     this.listarAlumnos();
+    this.listarSolicitudAlumnos();
     this.id = this.route.snapshot.paramMap.get('id');
 
     this.formSolicitud = this.formBuilder.group({
@@ -121,6 +122,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
           'success'
         )
         this.limpiar();
+        this.listarSolicitudAlumnos();
       }
     )
 
@@ -129,7 +131,6 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
   }
 
   //Generar documento
-
   generate(nom:any,ced:any,par:any,cic:any,corr:any,cell:any,hor,fec,carr,sig,conv) {
     var empn=this.empresaNombre;
     var res=this.responsableNombre;
@@ -235,4 +236,14 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
     this.solicitudAlumno.horasPPP=null;
     this.solicitudAlumno.documentoSoliEstudiante="undefined";
   }
+
+  //LISTAR SOLICITUDES
+  listarSolicitudAlumnos(){
+    this.solicitudAlumnoService.getSolicitudAlumno().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.solicitudes = resp.data
+    }
+    )
+  }
+
 }

@@ -45,7 +45,7 @@
       <p style="text-align: center;">{{realRol}}</p>
       <p *ngIf="isLogged" style="text-align: center;">{{persona.cedula}}</p>
 
-    </div>
+    
 
     <a class="nav-link btn mb-3 mt-3" routerLink="/login" style="color: white;" *ngIf="!isLogged">
       <mat-icon>login</mat-icon>
@@ -181,7 +181,7 @@
             <span>Generar Anexo3</span>
           </button>
 
-          <button mat-button class="button-accordion" routerLink="/registro-asistencia">
+          <button mat-button class="button-accordion" routerLink="/registro-asistencia/{{persona.cedula}}">
             <mat-icon>how_to_reg</mat-icon>
             <span>Registro Asistencia </span>
           </button>
@@ -337,7 +337,7 @@
       <span>Evaluacion Estudiante Tutor Academico </span>
     </a>
 
-
+  </div>
 
   </mat-sidenav>
 

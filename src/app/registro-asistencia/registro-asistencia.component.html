@@ -1,120 +1,110 @@
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-    <title>Gestión empresas</title>
-    <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto">
-    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/css/bootstrap.min.css">
-    <link rel="stylesheet" href="https://fonts.googleapis.com/icon?family=Material+Icons">
-    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css">
-    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.0/js/bootstrap.min.js"></script>
-    
-    <script>
-    $(document).ready(function(){
-        $('[data-toggle="tooltip"]').tooltip();
-    });
-    </script>
-</head>
+<!--Section de barra de título-->
+<section>
 
-<body>
-    <mat-card >
-    <mat-card-title class="text-center" style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
-    Registro de asistencia y actividades PPP
+  <mat-card>
+
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+      REGISTRO DE ASISTENCIA
     </mat-card-title>
-        <div class="container-fluid" >
-            <div class="form-row">
-                <div class="form-group col-md-6">
-                <label for="inputEmail4">Estudiante:</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Jaime Vargas" [disabled]="true">
-                </div>
-                <div class="form-group col-md-6">
-                <label for="inputPassword4">Empresa:</label>
-                <input type="text" class="form-control" id="inputPassword4" placeholder="Los 4 Rios" [disabled]="true">
-                </div>
+
+  </mat-card>
+
+</section>
+
+
+<!--Section para ver si esta apto para aplicar a las actividades-->
+<section>
+  <mat-card>
+    <mat-card-content>
+
+
+      <body *ngFor="let lista of listaAnexo9Datos">
+
+
+        <!--Esta Aprobado-->
+        <div *ngIf="lista.cedula_a==cedulaAlumno ; else noAprobado">
+
+          <body *ngFor="let registro of listaRegistroActividades">
+
+           
+            <!--Si el estudiante ya inicio con sus actividades-->
+            <div *ngIf="lista.id_alumno == registro.alumno.idAlumno; else registrarModulo">
+              <h2>Aqui andamos</h2>
+              <h4>tfgyhu</h4>
             </div>
-            <div class="form-group">
-                <label for="inputAddress">Tutor empresarial:</label>
-                <input type="text" class="form-control" id="inputAddress"  placeholder="Mgs. Jessica Pinos" [disabled]="true">
-            </div>
+
+            <!--Si el estudiante ingresa por primera vez-->
+            <ng-template #registrarModulo>
+              <h2> No me crearon</h2>
+            </ng-template>
+          
+
+          </body>
 
         </div>
-        <div class="container-xl">
-            <div class="table-responsive">
-                <div class="table-wrapper">
-                    <div class="table-title">
-                        <div class="row">
-                            <div class="col-sm-8"><h2>Registro de asistencia</h2></div>
-                            <div class="col-sm-4"><button pButton type="button" (click)="showDialog()"  style="background: #1d3557; color: white;">Registrar Asistencia</button></div>
-                        </div>
-                    </div>
-                    <table class="table table-striped table-hover table-bordered">
-                        <thead>
-                            <tr class="text-center">
-                                <th>#</th>
-                                <th>Fecha</th>
-                                <th>Hora inicio</th>
-                                <th>Hora salida</th>
-                                <th>Actividades realizadas</th>
-                                <th>Horas</th>
-                                <th>Acciones</th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr>
-                                <td>1</td>
-                                <td>21-07-2022</td>
-                                <td>13:00</td>
-                                <td>17:00</td>
-                                <td>Configuración de un servidor Linux</td>
-                                <th>4</th>
-                                <td>
-                                    <a class="edit" title="Edit" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                                    <a class="delete" title="Delete" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
-                                </td>
-                            </tr>
-                            
-                        </tbody>
-                    </table>
-                    
-                </div>
-            </div>  
-        </div> 
-    </mat-card>
-    <p-dialog header="Registrar asistencia" [(visible)]="dis" [modal]="true" [style]="{width: '40vw'}"
-        [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-        <form [formGroup]>
-            <div class="container-fluid" >
-                <div class="form-row">
-                    <div class="form-group col-md-4">
-                    <label for="fecha">Fecha:</label>
-                    <input type="text" class="form-control" id="fecha" placeholder="15-07-2021" >
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label for="inicio">Inicio:</label>
-                    <input type="text" class="form-control" id="inicio" placeholder="Hora de inicio" >
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label for="salida">Salida:</label>
-                    <input type="text" class="form-control" id="salida" placeholder="Hora de salida" >
-                    </div>
-                </div>
-                <div class="form-row">
-                    <div class="form-group col-md-8">
-                    <label for="actividades">Actividades:</label>
-                    <input type="text" class="form-control" id="actividades" placeholder="15-07-2021" >
-                    </div>
-                    <div class="form-group col-md-4">
-                    <label for="horas">Horas:</label>
-                    <input type="text" class="form-control" id="horas" placeholder="Hora de inicio" >
-                    </div>
-                </div>
+
+
+        <!--No esta aprobado-->
+        <ng-template #noAprobado>
+          <br><br><br><br><br>
+          <h2 style="color: #1d3557; text-align: center;"> ESTIMADO ESTUDIANTE, AL MOMENTO USTED NO TIENE HABILITADO
+            ESTA SECCION </h2>
+          <br><br><br><br><br>
+          <br><br><br><br><br>
+        </ng-template>
+
+
+      </body>
+
+
+    </mat-card-content>
+  </mat-card>
+</section>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<br><br><br><br><br><br><br><br><br><br><br><br><br><br><br>
+
+
+
+<section>
+  <div>
+    <mat-card>
+
+      <mat-card>
+
+
+        <!--Bloque para informacion general-->
+        <h2 style="color: #1d3557;">DATOS GENERALES DE LA EMPRESA / INSTITUCIÓN</h2>
+        <div class="container-fluid">
+          <div class="form-row">
+            <div class="form-group col-md-6">
+              <label for="inputPassword4">Dato:</label>
+              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
             </div>
-        </form>
-        <p-footer>
-            <button type="button" pButton icon="pi pi-save" label="Guardar"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="dis=false" label="Cancelar"
-                class="ui-button-secondary"></button>
-        </p-footer>
-    </p-dialog>
-</body>
+            <div class="form-group col-md-6">
+              <label for="inputEmail4">Dato:</label>
+              <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true">
+            </div>
+          </div>
+        </div>
+
+      </mat-card>
+
+
+
+    </mat-card>
+  </div>
+</section>
