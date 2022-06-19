@@ -19,5 +19,12 @@ export class SolicitudAlumnoService {
         headers: header
     });
   }
+  postActividades_Cronograma(){
+    let header = new HttpHeaders()
+    .set('Type-content','aplication/json')
+    return this.http.get(this._url+'/CrearActividades_Cronograma',{
+        headers: header
+    });
+  }
 }
   
