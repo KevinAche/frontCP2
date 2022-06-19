@@ -35,8 +35,8 @@ export class SolicitudAlumnoService {
         swal.fire('Error al guardar', 'NO se puede guardar registro Alumno', 'error')
         return throwError(e);
       })
-    ); 
+    );
   }
 
- 
+
 }

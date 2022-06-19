@@ -64,6 +64,7 @@ import {ToastModule} from "primeng/toast";
 import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.component';
 import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -125,6 +126,7 @@ InformeFinalTutorAcademicoComponent,
 ConsultaConvPublicoComponent,
 SolicitarRequerimientosComponent,
 GestionDocentesComponent,
+SolicitudEmpresaComponent,
 
   ],
   imports: [

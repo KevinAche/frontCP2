@@ -35,12 +35,12 @@ import {ProdGuardService as guard} from "./guards/prod-guard.service";
 import {CrearCarreraComponent} from "./carreras/crear-carrera/crear-carrera.component";
 import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carreras.component";
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
+
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
   {path: 'anexosde-ppp', component:AnexosdePPPComponent},
-  {path: 'registro-docente', component:RegistroDocentesComponent},
-  {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
   {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
@@ -86,6 +86,9 @@ const routes: Routes = [
   //Liss
   {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
   {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
+
+  {path:'solicitud-empresa',component: SolicitudEmpresaComponent},
+
   {path:'**',component:PagenotfoundComponent},
 
 
