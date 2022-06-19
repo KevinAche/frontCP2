@@ -45,4 +45,22 @@ export class DocenteService {
     );
   }
 
+  deleteDocente(empid: number): Observable<Docente> {
+    return this.http.delete<Docente>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al eliminar', 'No se puede eliminar', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
+  updateDocente(emp: Docente): Observable<Docente> {
+    return this.http.put<Docente>(`${this.urlUpdate}/${emp.idDocente}`, emp, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al actualizar', 'NO se puede actualizar a empresa', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
 }

@@ -34,6 +34,7 @@ import {ConsultaEstadoComponent} from "./consulta-estado/consulta-estado.compone
 import {ProdGuardService as guard} from "./guards/prod-guard.service";
 import {CrearCarreraComponent} from "./carreras/crear-carrera/crear-carrera.component";
 import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carreras.component";
+import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -72,6 +73,7 @@ const routes: Routes = [
   //Liss
   {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
   {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
+  { path: 'gestion-docentes', component: GestionDocentesComponent },
   // {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
