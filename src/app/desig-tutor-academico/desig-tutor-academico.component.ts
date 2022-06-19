@@ -9,6 +9,8 @@ import PizZipUtils from "pizzip/utils/index.js";
 import {saveAs} from "file-saver";
 import Docxtemplater from "docxtemplater";
 import {EmpresaService} from "../services/empresa.service";
+import {Observable, ReplaySubject} from "rxjs";
+
 
 function loadFile(url: any, callback: any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -39,25 +41,34 @@ export class DesigTutorAcademicoComponent implements OnInit {
               private _messageService: MessageService) {
   }
 
+  //ARCHIVOS BASE
+  base64Output: string;
+
+
   //DATAS PARA RECIBIR DATOS
   dataDocentes: any[];
+  dataTutores: any[];
   dataRowAlumno: any;
   dataAlumnos: any[];
   dataRowDocente: any;
+  dataRowTutor: any;
   ObjetoAlumno: any;
+  ObjetoDocente: any;
+  ObjetoTutor: any;
+  tutor: any;
 
   //COLUMNAS DE TABLAS
   columnasEstudiantes: any[];
   conlumnasDocentes: any[];
+  columnasTutoresA: any[];
 
   //DIALOGOS Y FORMS PARA HACER VISIBLES DIALOGOS Y CONTROLAR INGRESO DE DATOS
   dialogoAsignar: boolean;
   formTutor: FormGroup;
+  dialogoPasos: boolean;
+  dialogoAlumnos: boolean;
 
-  //DATOS PARA DROPDOWNS
-  empresaSeleccionada: any;
-  dataEmpresas: any[];
-  ddEmpresas = [];
+
 
 
   ngOnInit(): void {
@@ -85,7 +96,27 @@ export class DesigTutorAcademicoComponent implements OnInit {
       {field: 'designarC', header: 'Designar como tutor'}
     ];
 
-    this.obtenerAlumnos();
+    this.columnasTutoresA=[
+      {field: 'id_tutor_academico', header: 'Id tutor'},
+      {field: 'a_nombres', header: 'Nombres alumno'},
+      {field: 'a_apellidos', header: 'Apellidos alumno'},
+      {field: 'd_nombres', header: 'Nombres docente'},
+      {field: 'd_apellidos', header: 'Apellidos docente'},
+      {field: 'doc_asignacion', header: 'Documento'},
+      {field: 'eliminarta', header: 'Eliminar tutor'},
+    ];
+
+    this.obtenerListaTutores();
+  }
+
+  obtenerListaTutores():void{
+    this._tutorACrud.getTutoresAcademicosVista().then(value => {
+      this.dataTutores=value['data'];
+      this.mostarMensajeCorrecto(value['mensaje']);
+      console.log(this.dataTutores);
+    }).catch((err)=>{
+      this.mostrarMensajeError('El listado de tutores no se genero exitosamente');
+    })
   }
 
   obtenerAlumnos(): void {
@@ -99,21 +130,17 @@ export class DesigTutorAcademicoComponent implements OnInit {
       );
   }
 
-  obtenerEmpresas(): void {
-    this._empresasCrud.getEmpresas().then(value => {
-      const obj: any = {label: 'empresa', items: []}
-      value['data'].forEach(nombres => {
-        obj.items.push(nombres.nombreEmpresa)
+  eliminarTutor(): void{
+    if(this.ObjetoTutor!=null){
+      this._tutorACrud.deleteTutorAcademico(this.ObjetoTutor['id_tutor_academico']).then( value => {
+        this.obtenerListaTutores();
+        this.mostarMensajeCorrecto(value['mensaje'])
+      }).catch((err)=>{
+        this.mostrarMensajeError('El tutor no se puede borrar por que se encuentra es mas procesos')
       })
-
-      obj.items.forEach((valor) => {
-        console.log(valor)
-        this.ddEmpresas.push(valor.toString())
-      })
-
-    }).catch((err) => {
-      this.mostrarMensajeError('Error al listar empresas ' + err);
-    })
+    }else{
+      this.mostrarMensajeError('No puede elimar por que no ha clickeado sobre la fila')
+    }
   }
 
 
@@ -123,9 +150,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
     this.obtenerDocentes();
   }
 
-
   designarDocente() {
-    console.log('DOCENTE DESIGNADO COMO TUTOR ACADEMICO')
     if (this.dataRowAlumno != null) {
       if (this.dataRowDocente != null) {
         let docenteG: any;
@@ -136,14 +161,9 @@ export class DesigTutorAcademicoComponent implements OnInit {
         this._alumnoCrud.getAlumnoCedula(this.dataRowAlumno['cedula']).then(value => {
           alumnoG = value['data'];
         });
-
         let nombreDocumento: string = 'anexo6.' + this.dataRowDocente['primer_nombre'] + [this.dataRowDocente['primer_apellido']] + '.docx';
-        let tutor: any = {
-          docAsignacion: 'fdsfsd'
-        };
         let fechaActual = new Date().toLocaleDateString();
         let fechacortada: any[] = fechaActual.split('/');
-        console.log(fechaActual)
         let datageneral: any = {
           dia: fechacortada[0],
           mes: this.devolvermes(fechacortada[1]),
@@ -153,15 +173,10 @@ export class DesigTutorAcademicoComponent implements OnInit {
           datosD: this.dataRowDocente['primer_nombre'] + ' ' + this.dataRowDocente['segundo_nombre'] + ' ' + this.dataRowDocente['primer_apellido'] + ' ' + this.dataRowDocente['segundo_apellido'],
           carrera: this.dataRowAlumno['carrera'],
           empresa: this.dataRowAlumno['nombre_empresa']
-        }
-        this._tutorACrud.createTutorAcademico(this.dataRowDocente['cedula'], this.dataRowAlumno['cedula'], tutor).then(value => {
-          this.mostarMensajeCorrecto(value['mensaje']);
-          this.generate(datageneral, 'http://localhost:8082/files/anexo6.docx', nombreDocumento);
-          this.obtenerAlumnos();
-          this.dialogoAsignar = false;
-        }).catch((err) => {
-          this.mostrarMensajeError("No se pudo designar tutor")
-        });
+        };
+        this.dialogoAsignar=false;
+        this.dialogoPasos=true;
+        this.generate(datageneral,'http://localhost:8082/files/anexo6.docx',nombreDocumento);
       } else {
         this.mostrarMensajeError('El docente no ha sido clickeado')
       }
@@ -170,22 +185,36 @@ export class DesigTutorAcademicoComponent implements OnInit {
     }
   }
 
+  crearTutorAcademico():void{
+    this._tutorACrud.createTutorAcademico(this.dataRowDocente['cedula'], this.dataRowAlumno['cedula'], this.tutor).then(value => {
+      this.mostarMensajeCorrecto(value['mensaje']);
+      this.dialogoAsignar = false;
+      this.dialogoPasos=false;
+      this.dialogoAlumnos=false;
+      this.obtenerListaTutores();
+    }).catch((err) => {
+      this.mostrarMensajeError("No se pudo designar tutor")
+    });
+  }
 
   obtenerDocentes(): void {
     this._docenteCrud.getDocentes().then(value => {
       this.dataDocentes = value['data'];
       this.mostarMensajeCorrecto('Lista de docentes generada');
-      this.obtenerEmpresas();
     })
   }
 
-
+  generarDesignacion():void{
+    this.dialogoAlumnos=true;
+    this.obtenerAlumnos();
+  }
   lazyLoad(event: LazyLoadEvent): void {
     setTimeout(() => {
       this.obtenerAlumnos();
     }, 0);
   }
 
+//-> METODOS PARA CARGA DE MENSAJES
 
   mostrarMensajeError(mensaje: String): void {
     this._messageService.add({
@@ -206,15 +235,15 @@ export class DesigTutorAcademicoComponent implements OnInit {
     });
   }
 
+//->METODOS PARA OBTENER OBJETO DE LA FILA SELECCIONADA
 
   onRowSelectDocente(event): void {
+    this.ObjetoDocente=null;
     if (event.data) {
       this.dataRowDocente = event.data;
-      let ob: any = {...this.dataRowDocente};
-      console.log(ob);
+      this.ObjetoDocente = {...this.dataRowDocente};
     }
   }
-
 
   onRowUnSelectDocente(event): void {
     if (event.data) {
@@ -222,16 +251,13 @@ export class DesigTutorAcademicoComponent implements OnInit {
     }
   }
 
-
   onRowSelectAlumno(event): void {
     this.ObjetoAlumno = null;
     if (event.data) {
       this.dataRowAlumno = event.data;
       this.ObjetoAlumno = {...this.dataRowAlumno};
-      console.log(this.ObjetoAlumno);
     }
   }
-
 
   onRowUnSelectAlumno(event): void {
     if (event.data) {
@@ -239,6 +265,22 @@ export class DesigTutorAcademicoComponent implements OnInit {
     }
   }
 
+  onRowSelectTutor(event): void {
+    this.ObjetoTutor = null;
+    if (event.data) {
+      this.dataRowTutor = event.data;
+      this.ObjetoTutor = {...this.dataRowTutor};
+    }
+  }
+
+  onRowUnSelectTutor(event): void {
+    if (event.data) {
+      this.dataRowTutor = null;
+    }
+  }
+
+
+//-> DEPENDIENDO DE LA FECHA OBTENIDA SE SACA MES EN ESPANOL
 
   devolvermes(mes: any): any {
     switch (mes) {
@@ -294,7 +336,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
 
 //-> PARA CARGA DE ARCHIVOS
 
-  generate(nom: any, anexoRequerido: string, nombreDoc: string) {
+  generate(nom: any, anexoRequerido: string, nombreDoc: string):void  {
     loadFile(anexoRequerido, function (
       error,
       content
@@ -324,14 +366,14 @@ export class DesigTutorAcademicoComponent implements OnInit {
           return value;
         }
 
-        console.log(JSON.stringify({error: error}, replaceErrors));
+        //console.log(JSON.stringify({error: error}, replaceErrors));
         if (error.properties && error.properties.errors instanceof Array) {
           const errorMessages = error.properties.errors
             .map(function (error) {
               return error.properties.explanation;
             })
             .join("\n");
-          console.log("errorMessages", errorMessages);
+          //console.log("errorMessages", errorMessages);
         }
         throw error;
       }
@@ -343,14 +385,6 @@ export class DesigTutorAcademicoComponent implements OnInit {
       // Output the document using Data-URI
       saveAs(out, nombreDoc);
     });
-  }
-
-  convertFile(docum: any) {
-    //console.log(docum)
-    //Usage example:
-    var file = this.dataURLtoFile(docum, 'Anexo7.pdf');
-    //console.log(file);
-    saveAs(file, 'Anexo7.pdf');
   }
 
   dataURLtoFile(dataurl: any, filename: any) {
@@ -365,8 +399,24 @@ export class DesigTutorAcademicoComponent implements OnInit {
     return new File([u8arr], filename, {type: mime});
   }
 
-
-  convertirBase64(e) {
-
+  onFileSelected(event) {
+    this.convertFile(event.files['0']).subscribe(base64 => {
+      this.base64Output = base64;
+      this.tutor = {
+        docAsignacion: this.base64Output
+      };
+      this.mostarMensajeCorrecto('El archivo fue cargado con exito')
+    });
   }
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    console.log(result)
+    return result;
+  }
+
+
 }

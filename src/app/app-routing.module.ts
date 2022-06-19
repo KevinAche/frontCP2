@@ -55,6 +55,7 @@ const routes: Routes = [
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia', component: RegistroAsistenciaComponent},
+
   {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
   {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},

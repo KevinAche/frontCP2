@@ -65,6 +65,9 @@ import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.co
 import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
+import {StepsModule} from "primeng/steps";
+import {AccordionModule} from "primeng/accordion";
+import {FileUploadModule} from "primeng/fileupload";
 @NgModule({
   declarations: [
     AppComponent,
@@ -158,7 +161,10 @@ SolicitudEmpresaComponent,
     MatSelectModule,
     DropdownModule,
     ToastModule,
-    MatTreeModule
+    MatTreeModule,
+    StepsModule,
+    AccordionModule,
+    FileUploadModule
   ],
   providers: [MessageService,ConfirmationService],
   bootstrap: [AppComponent]
