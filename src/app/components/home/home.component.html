@@ -1,47 +1,44 @@
+<mat-card>
+  <mat-card-title>
+    LISTA DE CARRERAS
+  </mat-card-title>
+
+  <div class="row justify-content-center" >
+    <div class="card p-3 m-4 col-sm-4" *ngFor="let carrera of carreras">
+
+      <mat-icon (click)="showDialog(carrera)">info</mat-icon>
+
+
+      <h4 class="carrera-titulo">{{carrera.nombre}}</h4>
+      <p class="carrera-body">{{carrera.modalidad}}</p>
+
+      <p-dialog
+        [(visible)]="infoCarrera"
+        [draggable] ="false" *ngIf="infoCarrera">
+
+        <ng-template pTemplate="header">
+          <h2 style="margin-top: 10px;">Información de la Carrera</h2>
+        </ng-template>
+        <h3>Nombre de la carrera</h3>
+        <span>{{carreraind.nombre}}</span>
+        <h3>Abreviatura</h3>
+        <span>{{carreraind.abreviatura}}</span>
+        <h3>Modalidad</h3>
+        <span>{{carreraind.modalidad}}</span>
+
+      </p-dialog>
+    </div>
+  </div>
+
+</mat-card>
+
 <div class="container text-center">
     <br><br>
-    <h1>Practicas Pre-Profecionales</h1>
-    <img alt="LogotipoISTA" src="https://pbs.twimg.com/profile_images/928263014431719424/sV7-AlCl_400x400.jpg"/>
     <button (click)="generate(nombre)">Generate document</button>
-    
-    <div class="container" >
-        <h1>CARRERAS</h1>
-       
-            <div class="row justify-content-center" >
-                <div class="card p-3 m-4 col-sm-4" *ngFor="let carrera of carreras">
-                   
-                    <mat-icon (click)="showDialog(carrera)">info</mat-icon>
-                   
-                        
-                        <h4 class="carrera-titulo">{{carrera.nombre}}</h4>
-                        <p class="carrera-body">{{carrera.modalidad}}</p>
-
-                        <p-dialog
-                        [(visible)]="infoCarrera"
-                        [draggable] ="false" *ngIf="infoCarrera">
-                        
-                        <ng-template pTemplate="header">
-                            <h2 style="margin-top: 10px;">Información de la Carrera</h2>
-                          </ng-template>
-                        <h3>Nombre de la carrera</h3>
-                        <span>{{carreraind.nombre}}</span>
-                        <h3>Abreviatura</h3>
-                        <span>{{carreraind.abreviatura}}</span>
-                        <h3>Modalidad</h3>
-                        <span>{{carreraind.modalidad}}</span>
-                            
-                        </p-dialog>
-                </div>
-            </div>
-            
-
-    </div>
-
-
     <input type="file" (change)="onFileSelected($event)" accept=".pdf"/>
 
     <br /><br />
     base64 Output : <br />
     {{base64Output}}
 </div>
-  
+
