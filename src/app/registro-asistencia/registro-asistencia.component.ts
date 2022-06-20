@@ -3,7 +3,9 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActividadesDiariasService } from '../services/actividades-diarias.service';
 import { Anexo9Service } from '../services/anexo9.service';
 import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
-
+import swal from 'sweetalert2';
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { ActividadesDiarias } from '../models/actividades-diarias';
 
 
 @Component({
@@ -20,8 +22,15 @@ export class RegistroAsistenciaComponent implements OnInit {
   public listaAnexo9Datos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
 
+  actividadesDiarias: ActividadesDiarias=new ActividadesDiarias();
+  
+
+  public dialogoMiRegistro: boolean;
+  public contador=0;
   public dis: boolean;
   public cedulaAlumno: any;
+  formValidacion:FormGroup;
+  
 
 
   showDialog() {
@@ -33,7 +42,8 @@ export class RegistroAsistenciaComponent implements OnInit {
     private router: Router, private route: ActivatedRoute,
     private actividadesDiariasService: ActividadesDiariasService,
     private anexo9Service: Anexo9Service,
-    private registroAsistenciaService: RegistroAsistenciaService
+    private registroAsistenciaService: RegistroAsistenciaService,
+    private formBuilder: FormBuilder,
   ) { }
 
 
@@ -42,8 +52,17 @@ export class RegistroAsistenciaComponent implements OnInit {
     this.listarActividades();
     this.listarAnexo9();
     this.listarregistroAsistencia();
+
+    this.formValidacion = this.formBuilder.group({
+      //fecha: ['', Validators.required],
+      //estado: ['', Validators.required],
+      //idConvocatoria: ['', Validators.required],
+      //idAlumno: ['', Validators.required],
+      //horasPPP: ['', Validators.required],
+    });
   }
 
+  
 
   //metodos de listar
   public listarActividades() {
@@ -67,6 +86,44 @@ export class RegistroAsistenciaComponent implements OnInit {
       this.listaRegistroActividades = resp.data
     })
   }
+
+
+
+  //Metodo de crear actividades
+
+  public create(): void {
+   
+    
+    if (this.formValidacion.invalid) {
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+      return;
+    }
+
+alert('pasa');
+
+/*
+    
+    this.actividadesDiariasService.createregistroActividades(this.actividadesDiarias).subscribe(
+      Response => {
+        swal.fire(
+          'Enviado',
+          `Actividad creada con exito!`,
+          'success'
+        )
+        //this.limpiar();
+        //this.listarSolicitudAlumnos();
+      }
+    )
+
+*/
+
+  }
+
+
 
 
 }
