@@ -4,7 +4,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { map, catchError } from 'rxjs/operators';
 import { Router } from '@angular/router';
 import swal from 'sweetalert2';
-import { environment } from 'src/environments/environment.prod';
+import { environment } from 'src/environments/environment';
 import { Empresa } from './empresa';
 
 @Injectable({
@@ -15,10 +15,10 @@ export class EmpresaService {
 
   private url_mater: string =environment.URL_APP;
 
-  private urlCreate: string = this.url_mater+'/GestionEmpresa/CrearEmpresa';
-  private urlDelete: string = this.url_mater+'/GestionEmpresa/EliminarEmpresa';
-  private urlUpdate: string = this.url_mater+'/GestionEmpresa/EditarEmpresa';
-  private urlSearch: string = this.url_mater+'/GestionEmpresa/ListaEmpresas';
+  private urlCreate: string = this.url_mater+'GestionEmpresa/CrearEmpresa';
+  private urlDelete: string = this.url_mater+'GestionEmpresa/EliminarEmpresa';
+  private urlUpdate: string = this.url_mater+'GestionEmpresa/EditarEmpresa';
+  private urlSearch: string = this.url_mater+'GestionEmpresa/ListaEmpresas';
   
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })

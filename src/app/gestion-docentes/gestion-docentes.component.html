@@ -39,11 +39,11 @@
             <ng-template pTemplate="body" let-docentes>
                 <tr>
                   <td>{{docentes.idDocente}}</td>
-                  <td>{{docentes.abrevTitulo}}</td>
+                  <td>{{docentes.abrev_titulo}}</td>
                   <td>{{docentes.titulo}}</td>
                   <td>{{docentes.area}}</td>
                   <td>{{docentes.carrera}}</td>
-                  <td>{{docentes.persona}} </td>
+                  <td>{{docentes.primer_nombre}} {{docentes.primer_apellido}} </td>
                   <td>
                       <a class="edit" title="Edit" (click)="showDialogEdit(docentes)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                       <a class="delete" title="Delete" (click)="eliminarEmpresa(docentes)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>

@@ -81,11 +81,11 @@ export class GestionDocentesComponent implements OnInit {
     });
     this.cols = [
       { field: 'idDocente', header: 'ID' },
-      { field: 'abrevTitulo', header: 'Abrev.' },
+      { field: 'abrev_titulo', header: 'Abrev.' },
       { field: 'titulo', header: 'Titulo' },
       { field: 'area', header: 'Area' },
       { field: 'carrera', header: 'Carrera' },
-      { field: 'persona', header: 'Nombre' },
+      { field: 'primer_nombre', header: 'Nombre' },
       { field: 'acc', header: 'Acciones' },
     ];
     this.persona  = new Persona();

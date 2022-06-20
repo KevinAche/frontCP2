@@ -7,4 +7,5 @@ export class Empresa {
     direccion:string;
     telefono:string;
     duracionConvenio:String;
+    naturaleza:String;
 }
