@@ -14,8 +14,8 @@ export class DocenteService {
   _url = 'https://backendg1c2.herokuapp.com/GestionDocente'
 
   private urlCreate: string = this._url+'/CrearDocente';
-  private urlDelete: string = this._url+'/BuscarDocente';
-  private urlUpdate: string = this._url+'/EliminarDocente';
+  private urlDelete: string = this._url+'/EliminarDocente';
+  private urlUpdate: string = this._url+'/EditarDocente';
 
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -55,8 +55,8 @@ export class DocenteService {
     );
   }
 
-  updateDocente(emp: Docente): Observable<Docente> {
-    return this.http.put<Docente>(`${this.urlUpdate}/${emp.id_docente}`, emp, { headers: this.httpHeaders }).pipe(
+  updateDocente(emp: Docente, ced : String): Observable<Docente> {
+    return this.http.put<Docente>(`${this.urlUpdate}/${ced}`, emp, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al actualizar', 'NO se puede actualizar a empresa', 'error')
         return throwError(e);

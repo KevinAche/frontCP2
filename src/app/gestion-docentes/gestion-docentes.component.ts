@@ -35,20 +35,17 @@ export class GestionDocentesComponent implements OnInit {
   tipo_d: String;
 
 
-  showDialogEdit(doc:Docente):void {
+  showDialogEdit(doc:any):void {
+    
+    this.BuscarPersonaCedula( doc.cedula.toString());
     this.dis= true;
-    this.docente = {
-      id_docente:doc.id_docente,
-      area: doc.area,
-      titulo:doc.titulo,
-      carrera:doc.carrera,
-      abrevTitulo:doc.abrevTitulo,
-      persona: doc.persona
-    };
-    this.persona = doc.persona;
+    this.docente =doc;
+    
+    this.docente.abrevTitulo =doc.abrev_titulo;
+    this.tipo_d = doc.carrera;
+    this.banpersona=true;
+    this.bantitulo=false;
   }
-
- 
 
   constructor(
     private router: Router,
@@ -84,6 +81,13 @@ export class GestionDocentesComponent implements OnInit {
     this.listarCarreras();
   }
 
+  public BuscarPersonaCedula(ced: String): void {
+    this.personaservice.getPersonasByCedula(ced).subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.persona = resp.data[0];
+    })
+
+  }
   
   listarCarreras():void {
     this.carreraservice.getCarreras().subscribe(value => {
@@ -111,13 +115,19 @@ export class GestionDocentesComponent implements OnInit {
       return;
     }
 
-    this.docente.carrera=this.carrera;
-    console.log(this.docente);
-    this.dis=false;
-    swal.fire(
-      'Docente Guardado',
-      `Docente ${this.docente.persona.primerNombre} creado con exito!`,
-      'success'
+    this.docente.carrera=this.dropselect;
+  
+    this.docenteservice.updateDocente(this.docente, this.persona.cedula)
+      .subscribe(docente => {
+        
+        swal.fire(
+          'Docente Guardado',
+          `Docente ${this.persona.primerNombre} actualizado con exito!`,
+          'success'
+        )
+        this.dis = false;
+        window.location.reload();
+      }
     )
     
   }
@@ -132,14 +142,20 @@ export class GestionDocentesComponent implements OnInit {
       )
       return;
     }
-    
-    this.banpersona=false;
+
+    this.personaservice.updatePersona(this.persona)
+    .subscribe(persona => {
+      this.banpersona=false;
     this.bantitulo=true;
     swal.fire(
       'Datos personales',
       `Datos actualizados correctamente!`,
       'success'
     )
+    }
+  )
+    
+    
   }
 
 

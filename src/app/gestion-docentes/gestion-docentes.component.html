@@ -42,7 +42,7 @@
                   <td>{{doc.area}}</td>
                   <td>{{doc.carrera}}</td>
                   <td>{{doc.primer_nombre}} {{doc.segundo_nombre}} {{doc.primer_apellido}} {{doc.segundo_apellido}} </td>
-                  <td>{{doc.cedula}}</td>
+                  <td >{{doc.cedula}}</td>
                   <td>
                       <a class="edit" title="Edit" (click)="showDialogEdit(doc)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
                       <a class="delete" title="Delete" (click)="eliminarDocente(doc)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
@@ -97,7 +97,7 @@
                 <div class="form-group col-md-3">
                 
                     <label for="fechan">Fecha de nacimiento</label>
-                    <input type="date" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento">
+                    <input type="text" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento" >
                 </div>
                 </div>
                 <div class="form-group">
@@ -134,35 +134,38 @@
             <h1>Datos academicos</h1>
             <form [formGroup]="formDocente" >
             <div class="form-row">
-                <div class="form-group col-md-3">
+                <div class="form-group col-md-4">
                 <label for="abrevtitulo">Abreviación del Titulo</label>
                 <input type="text" class="form-control" [(ngModel)]="docente.abrevTitulo" id="abrevtitulo"  formControlName="abrevtitulo" placeholder="Abreviación del titulo">
                 </div>
-                <div class="form-group col-md-6">
+                <div class="form-group col-md-8">
                 <label for="titulo">Titulo</label>
                 <input type="text" class="form-control" [(ngModel)]="docente.titulo" id="titulo"  formControlName="titulo" placeholder="Ingrese el titulo">
                 </div>
-                <div class="form-group col-md-3">
                 
-                <label for="carrera">Carrera</label>
                 
-                <p-dropdown 
-                    [options]="carreras" 
-                    [(ngModel)]="dropselect" 
-                    placeholder="Seleccione una opción"
-                    optionLabel="nombre" 
-                    [showClear]="true" 
-                    (onChange)="OnChange($event)"
-                    [(ngModel)]="docente.carrera" >
-                </p-dropdown>
-                </div>
-                
-            </div><div class="form-row">
-                <div class="form-group col-md-12">
+            </div>
+            <div class="form-row">
+                <div class="form-group col-md-6">
                 <label for="area">Area</label>
                 <input type="text" class="form-control" id="area" formControlName="area" [(ngModel)]="docente.area"  placeholder="Ingrese la area">
                 
                 </div>
+                <div class="form-group col-md-6">
+                
+                    <label for="carrera">Carrera</label><br>
+                    
+                    <span><p-dropdown 
+                        [options]="carreras" 
+                        [(ngModel)]="dropselect" 
+                        placeholder="Seleccione una opción"
+                        optionLabel="nombre" 
+                        [showClear]="true" 
+                        (onChange)="OnChange($event)"
+                        [(ngModel)]="docente.carrera" >
+                    </p-dropdown></span>
+                    
+                    </div>
                 
             </div>
             

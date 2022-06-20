@@ -11,6 +11,7 @@ export class PersonaService {
 
   _url ='https://backendg1c2.herokuapp.com/GestionPersona'
   private urlCreate: string = this._url+'/CrearPersona';
+  private urlUpdate: string = this._url+'/EditarPersona';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
 
@@ -33,6 +34,15 @@ export class PersonaService {
     return this.http.post<Persona>(this.urlCreate, pers, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al guardar', 'NO se puede guardar a la persona', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
+  updatePersona(emp: Persona): Observable<Persona> {
+    return this.http.put<Persona>(`${this.urlUpdate}/${emp.idPersona}`, emp, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al actualizar', 'No se puede actualizar a la persona', 'error')
         return throwError(e);
       })
     );
