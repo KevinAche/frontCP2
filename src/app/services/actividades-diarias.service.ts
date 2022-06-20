@@ -1,24 +1,45 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
+import { Observable, throwError } from 'rxjs';
+import { map, catchError } from 'rxjs';
+import swal from 'sweetalert2';
+import { environment } from "../../environments/environment";
+import { ActividadesDiarias } from '../models/actividades-diarias';
 @Injectable({
-    providedIn: 'root'
-  })
-  export class ActividadesDiariasService {
+  providedIn: 'root'
+})
 
-      _url ='https://backendg1c2.herokuapp.com/ActividadesDiarias'
 
-    constructor(
-      private http: HttpClient
-    ) { }
+export class ActividadesDiariasService {
 
-    getInformeActividadesDiarias() {
-      let header = new HttpHeaders()
-      .set('Type-content','aplication/json')
+  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+  _url = 'https://backendg1c2.herokuapp.com/ActividadesDiarias'
 
-      return this.http.get(this._url+'/ListaActividadesDiarias',{
-          headers: header
+  private url_mater: string = environment.URL_APP;
 
-      });
-    }
+  constructor(
+    private http: HttpClient
+  ) { }
 
+  getInformeActividadesDiarias() {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + '/ListaActividadesDiarias', {
+      headers: header
+
+    });
   }
+
+  createregistroActividades(act: ActividadesDiarias): Observable<ActividadesDiarias> {
+    return this.http.post<ActividadesDiarias>(environment.URL_APP + 'ActividadesDiarias/CrearActividadesDiarias', act, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        swal.fire('Error al guardar', 'NO se puede guardar la actividad', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
+
+}
+
