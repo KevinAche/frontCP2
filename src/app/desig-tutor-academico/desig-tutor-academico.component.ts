@@ -198,7 +198,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
   }
 
   obtenerDocentes(): void {
-    this._docenteCrud.getDocentes().then(value => {
+    this._docenteCrud.getDocentes().subscribe(value => {
       this.dataDocentes = value['data'];
       this.mostarMensajeCorrecto('Lista de docentes generada');
     })

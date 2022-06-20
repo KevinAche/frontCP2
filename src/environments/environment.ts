@@ -3,6 +3,7 @@
 // The list of file replacements can be found in `angular.json`.
 
 export const environment = {
+  //URL_APP: 'http://localhost:8082',
   URL_APP: 'https://backendg1c2.herokuapp.com/',
   production: false
 };

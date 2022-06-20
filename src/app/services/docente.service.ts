@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import {environment} from "../../environments/environment";
 import { Docente } from '../models/Docente';
@@ -29,12 +29,13 @@ export class DocenteService {
     ).toPromise();
   }
 
-
-  getDocentes(): Promise<any[]> {
-    return this.http.get<any[]>(
-      environment.URL_APP+`GestionDocente/ListaDocentes`
-    ).toPromise();
+  getDocentes(): Observable<Docente[]> {
+    return this.http.get(environment.URL_APP+`GestionDocente/ListaDocentes`).pipe(
+      map(response => response as Docente[])
+    );
   }
+
+
 
   createDocente(doc: Docente, ced :String, id : number): Observable<Docente> {
     return this.http.post<Docente>(`${this.urlCreate}/${ced}/${id}`, doc, { headers: this.httpHeaders }).pipe(
@@ -55,7 +56,7 @@ export class DocenteService {
   }
 
   updateDocente(emp: Docente): Observable<Docente> {
-    return this.http.put<Docente>(`${this.urlUpdate}/${emp.idDocente}`, emp, { headers: this.httpHeaders }).pipe(
+    return this.http.put<Docente>(`${this.urlUpdate}/${emp.id_docente}`, emp, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al actualizar', 'NO se puede actualizar a empresa', 'error')
         return throwError(e);

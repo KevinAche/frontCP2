@@ -8,12 +8,11 @@
             dataKey="idDocente"
             [value]="docentes" 
             [paginator]="true" 
-            [columns]="cols" 
             [rows]="10" 
             [showCurrentPageReport]="true"
             [rowsPerPageOptions]="[10,25,50]" 
             [paginator]="true"
-            [globalFilterFields]="['persona.cedula','titulo']"
+            styleClass="p-datatable-customers p-datatable-gridlines"
             >
     
             <ng-template pTemplate="caption">
@@ -21,38 +20,38 @@
                     <div class="p-col" style="text-align: left;">
                         <p>Lista de Docentes</p>
                     </div>
-                    <div class="p-col" style="text-align: right">
-                      <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
-                      <input type="text" pInputText size="50" placeholder="Busqueda: cedula"
-                          (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
-                  </div>
                 </div>
             </ng-template>
-            <ng-template pTemplate="header" let-columns>
+            <ng-template pTemplate="header">
+               
                 <tr>
-                    <th *ngFor="let col of cols">
-                        {{col.header}}
-                    </th>
+                    <th style="width: 80px;">Abr.</th>
+                    <th>Titulo</th>
+                    <th>Carrera</th>
+                    <th>Area</th>
+                    <th>Nombre</th>
+                    <th>Cedula</th>
+                    <th style="width: 100px;">Acciones</th>
                 </tr>
             </ng-template>
             
-            <ng-template pTemplate="body" let-docentes>
+            <ng-template pTemplate="body" let-doc>
                 <tr>
-                  <td>{{docentes.idDocente}}</td>
-                  <td>{{docentes.abrevTitulo}}</td>
-                  <td>{{docentes.titulo}}</td>
-                  <td>{{docentes.area}}</td>
-                  <td>{{docentes.carrera}}</td>
-                  <td>{{docentes.persona}} </td>
+                  <td>{{doc.abrev_titulo}}</td>
+                  <td>{{doc.titulo}}</td>
+                  <td>{{doc.area}}</td>
+                  <td>{{doc.carrera}}</td>
+                  <td>{{doc.primer_nombre}} {{doc.segundo_nombre}} {{doc.primer_apellido}} {{doc.segundo_apellido}} </td>
+                  <td>{{doc.cedula}}</td>
                   <td>
-                      <a class="edit" title="Edit" (click)="showDialogEdit(docentes)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
-                      <a class="delete" title="Delete" (click)="eliminarEmpresa(docentes)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+                      <a class="edit" title="Edit" (click)="showDialogEdit(doc)" data-toggle="tooltip"><i class="material-icons">&#xE254;</i></a>
+                      <a class="delete" title="Delete" (click)="eliminarDocente(doc)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
                   </td>
                 </tr>
             </ng-template>
             <ng-template pTemplate="emptymessage">
                 <tr>
-                    <td [attr.colspan]="cols.length">No hay datos.</td>
+                    <td >No hay datos.</td>
                 </tr>
             </ng-template>
             
@@ -65,7 +64,7 @@
     </div>
     
   </mat-card>
-  <p-dialog header="Editar empresa" [(visible)]="dis" [modal]="true" [style]="{width: '40vw', height: '40vw'}"
+  <p-dialog header="Editar docente" [(visible)]="dis" [modal]="true" [style]="{width: '50vw', height: '40vw'}"
           [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
           
         <mat-card *ngIf="this.banpersona == true">

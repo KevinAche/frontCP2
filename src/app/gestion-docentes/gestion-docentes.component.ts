@@ -19,29 +19,12 @@ import { Persona } from '../models/Persona';
 })
 export class GestionDocentesComponent implements OnInit {
 
-
-  cols: any[];
   dis: boolean;
   docentes : Docente[];
-
-
-
-  showDialogEdit(doc:Docente):void {
-    this.dis= true;
-    this.docente = {
-      idDocente:doc.abrevTitulo,
-      area: doc.area,
-      titulo:doc.titulo,
-      carrera:doc.carrera,
-      abrevTitulo:doc.abrevTitulo,
-      persona: doc.persona
-    };
-  }
-
   docente: Docente;
   formDocente: FormGroup;
   formPersona: FormGroup;
-  persona: Persona;
+  persona: Persona = new Persona();
   carreras : Carrera[];
   carrera :Carrera;
 
@@ -50,6 +33,22 @@ export class GestionDocentesComponent implements OnInit {
 
   dropselect: Carrera;
   tipo_d: String;
+
+
+  showDialogEdit(doc:Docente):void {
+    this.dis= true;
+    this.docente = {
+      id_docente:doc.id_docente,
+      area: doc.area,
+      titulo:doc.titulo,
+      carrera:doc.carrera,
+      abrevTitulo:doc.abrevTitulo,
+      persona: doc.persona
+    };
+    this.persona = doc.persona;
+  }
+
+ 
 
   constructor(
     private router: Router,
@@ -61,8 +60,7 @@ export class GestionDocentesComponent implements OnInit {
   ) {   }
  
   ngOnInit(): void {
-    this.listarDocentes();
-    this.listarCarreras();
+   
     this.formDocente = this.formBuilder.group({
       abrevtitulo: ['', Validators.required],
       titulo: ['', Validators.required],
@@ -79,18 +77,11 @@ export class GestionDocentesComponent implements OnInit {
       fechan: ['', Validators.required],
       telefono: ['', Validators.required],
     });
-    this.cols = [
-      { field: 'idDocente', header: 'ID' },
-      { field: 'abrevTitulo', header: 'Abrev.' },
-      { field: 'titulo', header: 'Titulo' },
-      { field: 'area', header: 'Area' },
-      { field: 'carrera', header: 'Carrera' },
-      { field: 'persona', header: 'Nombre' },
-      { field: 'acc', header: 'Acciones' },
-    ];
+
     this.persona  = new Persona();
     this.docente = new Docente();
-    this.docente.persona=this.persona;
+    this.listaDocentes();
+    this.listarCarreras();
   }
 
   
@@ -98,6 +89,14 @@ export class GestionDocentesComponent implements OnInit {
     this.carreraservice.getCarreras().subscribe(value => {
       this.carreras=value['data'];
     })
+  }
+
+  listaDocentes(){
+    this.docenteservice.getDocentes().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.docentes = resp.data
+    }
+    )
   }
 
 
@@ -160,14 +159,9 @@ export class GestionDocentesComponent implements OnInit {
     this.dis = false;
   }
 
-  listarDocentes():void {
-    this.docenteservice.getDocentes().then(value => {
-      this.docentes=value['data'];
-      console.log(this.docentes)
-    })
-  }
 
-  eliminarEmpresa(emp: Docente): void {
+
+  eliminarDocente(emp: Docente): void {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -185,7 +179,7 @@ export class GestionDocentesComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.docenteservice.deleteDocente(emp.idDocente).subscribe(
+        this.docenteservice.deleteDocente(emp.id_docente).subscribe(
           response => {
             this.docentes = this.docentes.filter(servi => servi !== emp)
             swalWithBootstrapButtons.fire(
