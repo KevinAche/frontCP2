@@ -36,6 +36,7 @@ import {CrearCarreraComponent} from "./carreras/crear-carrera/crear-carrera.comp
 import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carreras.component";
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
+import {HistorialComponent} from "./historial/historial.component";
 
 
 const routes: Routes = [
@@ -89,6 +90,7 @@ const routes: Routes = [
   {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
 
   {path:'solicitud-empresa',component: SolicitudEmpresaComponent},
+  {path:'historial',component: HistorialComponent},
 
   {path:'**',component:PagenotfoundComponent},
 

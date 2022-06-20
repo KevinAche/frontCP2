@@ -31,8 +31,8 @@ export class ConsultaEstadoComponent implements OnInit, DoCheck, OnDestroy {
     this.columnasConvocatorias = [
       {field:'idConvocatoria',header:'Id'},
       {field:'docConvocatoria',header:'Documento'},
-      {field:'fechaEmision',header:'Recibido'},
-      {field:'fechaMaxima',header:'Hasta'},
+      {field:'fechaEmision',header:'F. Recibido'},
+      {field:'fechaMaxima',header:'F. Hasta'},
       {field:'nombreConvocatoria',header:'Nombre '},
       {field:'SolicitudEmpresa',header:'Id Empresa'}
     ]
@@ -54,6 +54,10 @@ export class ConsultaEstadoComponent implements OnInit, DoCheck, OnDestroy {
   //   })
   // }
 
+  // calculoDiasRestantes(){
+  //   var fecha1 = moment(this.dataConvocatoria.);
+  //
+  // }
   ngDoCheck(): void {
     console.log("Componente iniciado DoCheck")
 

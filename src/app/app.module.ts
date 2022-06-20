@@ -68,6 +68,12 @@ import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa
 import {StepsModule} from "primeng/steps";
 import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
+import { HistorialComponent } from './historial/historial.component';
+import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
+import {StepsModule} from "primeng/steps";
+import {AccordionModule} from "primeng/accordion";
+import {FileUploadModule} from "primeng/fileupload";
 @NgModule({
   declarations: [
     AppComponent,
@@ -128,6 +134,9 @@ EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
 ConsultaConvPublicoComponent,
 SolicitarRequerimientosComponent,
+GestionDocentesComponent,
+SolicitudEmpresaComponent,
+HistorialComponent,
 GestionDocentesComponent,
 SolicitudEmpresaComponent,
 
