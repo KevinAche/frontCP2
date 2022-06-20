@@ -46,7 +46,7 @@ export class DocenteService {
     );
   }
 
-  deleteDocente(empid: number): Observable<Docente> {
+  deleteDocente(empid: String): Observable<Docente> {
     return this.http.delete<Docente>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al eliminar', 'No se puede eliminar', 'error')

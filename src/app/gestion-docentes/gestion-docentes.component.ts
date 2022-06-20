@@ -187,7 +187,7 @@ export class GestionDocentesComponent implements OnInit {
     })
     swalWithBootstrapButtons.fire({
       title: 'Esta seguro que desea eliminar?',
-      text: `¡No podrás revertir esto! eliminar a ${emp.persona.cedula}`,
+      text: `¡No podrás revertir esto! eliminar a ${this.persona.cedula}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, Eliminar! ',
@@ -195,7 +195,7 @@ export class GestionDocentesComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.docenteservice.deleteDocente(emp.id_docente).subscribe(
+        this.docenteservice.deleteDocente(this.persona.cedula).subscribe(
           response => {
             this.docentes = this.docentes.filter(servi => servi !== emp)
             swalWithBootstrapButtons.fire(

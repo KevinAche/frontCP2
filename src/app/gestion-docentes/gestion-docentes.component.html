@@ -13,12 +13,18 @@
             [rowsPerPageOptions]="[10,25,50]" 
             [paginator]="true"
             styleClass="p-datatable-customers p-datatable-gridlines"
+            [globalFilterFields]="['cedula','primer_nombre']"
             >
     
             <ng-template pTemplate="caption">
                 <div class="p-grid">
                     <div class="p-col" style="text-align: left;">
                         <p>Lista de Docentes</p>
+                    </div>
+                    <div class="p-col" style="text-align: right">
+                        <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                        <input type="text" pInputText size="50" placeholder="Busqueda: ingrese el numero de cédula"
+                            (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
                     </div>
                 </div>
             </ng-template>
