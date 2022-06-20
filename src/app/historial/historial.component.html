@@ -1,1 +1,81 @@
-<p>historial works!</p>
+<!DOCTYPE html>
+<html lang="es">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+</head>
+<section class="vh-100" style="padding: 55px;">
+  <mat-card>
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
+      {{titulo}}
+    </mat-card-title>
+    <body>
+
+    <div class="container mt-5">
+      <div class="col-12">
+
+        <div class="row">
+          <div class="col-12 grid-margin">
+            <div class="card">
+              <div class="card-body">
+
+                <h4 class="card-title">Buscador</h4>
+
+
+                <form id="form2" name="form2" method="POST" action="index.php">
+                  <div class="col-12 row">
+                    <div class="col-11">
+                      <!--Entrada de datos para busqueda -->
+<!--                      <label  class="form-label">Nombre a buscar</label>-->
+                      <input type="text" class="form-control" id="buscar" name="buscar" value="" >
+                    </div>
+                    <!--Boton de busqueda de datos -->
+                    <div class="col-1">
+                      <input type="submit" class="btn btn-success" value="Ver" style="margin-top: 0px;">
+                    </div>
+                  </div>
+
+
+                  <p style="font-weight: bold; color:#1d3557;"><i class="mdi mdi-file-document"></i> Resultados encontrados</p>
+                </form>
+
+
+                <div class="table-responsive">
+                  <!----Tabla------>
+                  <table class="table">
+                    <thead>
+                    <tr style="background-color: #eab207; color:#070707;">
+<!--                      <th *ngFor="let col of columnasConvocatorias"> {{col.header}}</th>-->
+                    </tr>
+                    </thead>
+                    <tbody>
+                    <tr >
+                      <td >
+                        <div >
+<!--                          <span *ngSwitchCase="'fechaMaxima'"> {{convocatoria[col.field] | date}} </span>-->
+<!--                          <span *ngSwitchDefault>{{convocatoria[col.field]}}</span>-->
+                        </div>
+                      </td>
+                    </tr>
+                    </tbody>
+                  </table>
+                  <!------------------------------------------------------------------------------->
+                </div>
+
+
+              </div>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+    </div>
+
+    </body>
+  </mat-card>
+
+
+</section>
+</html>

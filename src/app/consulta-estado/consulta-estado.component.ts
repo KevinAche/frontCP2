@@ -46,8 +46,8 @@ export class ConsultaEstadoComponent implements OnInit, DoCheck, OnDestroy {
         console.log(this.dataConvocatoria);
       })
   }
-  //
-  // obtenerConvocatoriasId(id:bigint ): void{
+
+  // obtenerConvocatoriasId(id:bigint ): ConEstadoService[] {
   //   this._conEstadoService.getConvocatorias().then( value => {
   //     this.dataConvocatoria = value['data'];
   //     console.log(this.dataConvocatoria.filter( convocatoria => convocatoria.id == id));
@@ -58,9 +58,9 @@ export class ConsultaEstadoComponent implements OnInit, DoCheck, OnDestroy {
   //   var fecha1 = moment(this.dataConvocatoria.);
   //
   // }
+
   ngDoCheck(): void {
     console.log("Componente iniciado DoCheck")
-
   }
 
   ngOnDestroy(): void {
