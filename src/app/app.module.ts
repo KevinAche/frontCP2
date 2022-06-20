@@ -68,6 +68,7 @@ import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa
 import {StepsModule} from "primeng/steps";
 import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
+import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -130,6 +131,7 @@ ConsultaConvPublicoComponent,
 SolicitarRequerimientosComponent,
 GestionDocentesComponent,
 SolicitudEmpresaComponent,
+CrearEmpleadoComponent,
 
   ],
   imports: [

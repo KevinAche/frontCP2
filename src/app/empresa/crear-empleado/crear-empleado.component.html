@@ -1,0 +1,84 @@
+<mat-card>
+  <mat-card-title>
+    CREAR EMPLEADO
+  </mat-card-title>
+  <div class="container-fluid">
+    <form>
+      <div class="form-row">
+        <div class="form-group col-md-3">
+          <label for="cedula">Cédula:</label>
+          <input [(ngModel)]="empleado.persona.cedula" type="text" class="form-control" id="cedula"
+                 formControlName="cedula" placeholder="Cédula">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="primernombre">Primer Nombre:</label>
+          <input [(ngModel)]="empleado.persona.primerNombre" type="text" class="form-control" id="primernombre"
+                 formControlName="primernombre" placeholder="Primer Nombre">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="segundonombre">Segundo Nombre:</label>
+          <input [(ngModel)]="empleado.persona.segundoNombre" type="text" class="form-control" id="segundonombre"
+                 formControlName="segundonombre" placeholder="Segundo Nombre">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="primerapellido">Primer Apellido:</label>
+          <input [(ngModel)]="empleado.persona.primerApellido" type="text" class="form-control" id="primerapellido"
+                 formControlName="primerapellido" placeholder="Primer Apellido">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="segundoapellido">Segundo Apellido:</label>
+          <input [(ngModel)]="empleado.persona.segundoApellido" type="text" class="form-control" id="segundoapellido"
+                 formControlName="segundoapellido" placeholder="Segundo Apellido">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="fechan">Fecha de Nacimiento</label>
+          <input type="date" class="form-control" id="fechan" formControlName="fechan"
+                 [(ngModel)]="empleado.persona.fechaNac" placeholder="Ingrese la fecha de nacimiento">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="direccion">Dirección:</label>
+          <input type="text" class="form-control" id="direccion" formControlName="direccion"
+                 [(ngModel)]="empleado.persona.direccion" placeholder="Ingrese la dirección">
+        </div>
+
+        <div class="form-group col-md-3">
+            <label for="telefono">Telefono:</label>
+            <input type="text" class="form-control" id="telefono" formControlName="telefono"
+                   [(ngModel)]="empleado.persona.telefono" placeholder="123456789">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="correo">Correo:</label>
+          <input type="text" class="form-control" id="correo" formControlName="correo" [(ngModel)]="persona.correo"
+                 placeholder="Ingrese el correo eléctronico">
+        </div>
+
+
+        <div class="form-group col-md-3">
+          <label for="cargo">Cargo:</label>
+          <input [(ngModel)]="empleado.cargo" type="text" class="form-control" id="cargo" formControlName="cargo"
+                 placeholder="Cargo">
+        </div>
+
+        <div class="form-group col-md-3">
+          <label for="titulo">Título:</label>
+          <input [(ngModel)]="empleado.abrev_titulo" type="text" class="form-control" id="titulo"
+                 formControlName="titulo" placeholder="Abreviatura Titulo">
+        </div>
+
+      </div>
+      <br>
+      <mat-card-actions>
+        <button mat-raised-button color="primary">Crear Carrera</button>
+        <button mat-raised-button color="warn">Regresar</button>
+      </mat-card-actions>
+    </form>
+  </div>
+
+</mat-card>
