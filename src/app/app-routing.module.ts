@@ -57,7 +57,7 @@ const routes: Routes = [
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
-  {path:'registro-asistencia', component: RegistroAsistenciaComponent},
+  {path:'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},
   { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
   { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
