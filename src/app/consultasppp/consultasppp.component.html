@@ -1,27 +1,38 @@
-<section class="vh-100">
-  <mat-card id="CardP">
-    <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
-      Consultas de PPP
-    </mat-card-title>
-    <h2>Convocatorias </h2>
-    <input class="form-control mr-sm-2" type="search" placeholder="Buscar convocatoria" aria-label="Search">
-  </mat-card>
-  <br>
-  <form>
-    <div>
-      <mat-card class="card">
-        <mat-card-header>
-          <mat-card-title>Nombre del Proyecto:</mat-card-title>
-          <mat-card-subtitle><strong>Responsable: </strong></mat-card-subtitle>
-        </mat-card-header>
-        <mat-card-content>
-          <p><strong>Carrera: </strong></p>
-          <p><strong>Número de Convocatoria: </strong></p>
-          <p><strong>Entidad: </strong></p>
-          <p><strong>Estado: </strong></p>
-          <p><strong>Estudiantes Asignados:</strong></p>
-        </mat-card-content>
-      </mat-card>
-    </div>
-  </form>
-</section>
+
+<mat-card id="CardP">
+  <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
+    Practicas Pre-Profecionales | Consultas
+  </mat-card-title>
+  
+
+  <mat-card-content>
+    <p-orderList [value]="convocatorias" [listStyle]="{'max-height':'30rem'}" header="Lista" filterBy="idConvocatoria" filterPlaceholder="Busqueda por el numero de convocatoria" [dragdrop]="true">
+      <ng-template let-conv pTemplate="item">
+          <div class="product-item">
+              <div class="image-container">
+                      <img src="../assets/imagen/log.png" [alt]="conv.nombreConvocatoria" class="product-image" />
+              </div>
+              <div class="product-list-detail">
+                  <h5 class="mb-2">{{conv.nombreConvocatoria}}</h5>
+                  <h5 class="mb-2">Carrera: {{conv.solicitudEmpresa.carrera.nombre}}</h5>
+                  <i class="pi pi-user product-category-icon"></i>
+                  <span class="product-category"> {{conv.solicitudEmpresa.responsablePPP.docente.persona.primerNombre}} {{conv.solicitudEmpresa.responsablePPP.docente.persona.segundoNombre}} {{conv.solicitudEmpresa.responsablePPP.docente.persona.primerApellido}} {{conv.solicitudEmpresa.responsablePPP.docente.persona.segundoApellido}}</span>
+              </div>
+              <div class="product-list-action">
+                  <h6 class="mb-2">Número de convocatoria:{{conv.idConvocatoria}}</h6>
+                  <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == false">
+                    
+                    <p-message severity="error" text="Pendiente"></p-message>
+
+                  </span>
+                  <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == true">
+                    
+                    <p-message severity="success" text="Aprobado"></p-message>
+
+                  </span>
+              </div>
+          </div>
+      </ng-template>
+  </p-orderList>
+  </mat-card-content>
+</mat-card>

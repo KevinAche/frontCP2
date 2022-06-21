@@ -73,6 +73,12 @@ import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
+import {OrderListModule} from 'primeng/orderlist';
+
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -180,7 +186,10 @@ SolicitudEmpresaComponent,
     ToastModule,
     StepsModule,
     AccordionModule,
-    FileUploadModule
+    FileUploadModule,
+    OrderListModule,
+    MessagesModule,
+    MessageModule
 
   ],
   providers: [MessageService,ConfirmationService],
