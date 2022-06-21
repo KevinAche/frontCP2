@@ -29,6 +29,8 @@ export class PersonaService {
     });
   }
 
+  
+
   createPersona(pers: Persona): Observable<Persona> {
     return this.http.post<Persona>(this.urlCreate, pers, { headers: this.httpHeaders }).pipe(
       catchError(e => {

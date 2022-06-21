@@ -33,10 +33,10 @@ export class RegistroAsistenciaComponent implements OnInit {
 
 
 
-  showDialog(idRegiAsi:any) {
+  showDialog(idRegiAsi: any) {
     this.dis = true;
-    this.actividadesDiarias.registroAsistencia.idRegistroAsistencia = idRegiAsi;
-    
+    this.actividadesDiarias.registroA.idRegistroAsistencia = idRegiAsi;
+
   }
 
 
@@ -54,6 +54,7 @@ export class RegistroAsistenciaComponent implements OnInit {
     this.listarActividades();
     this.listarAnexo9();
     this.listarregistroAsistencia();
+
 
     this.formValidacion = this.formBuilder.group({
       fecha: ['', Validators.required],
@@ -105,26 +106,63 @@ export class RegistroAsistenciaComponent implements OnInit {
     }
 
 
-
-        
-        this.actividadesDiariasService.createregistroActividades(this.actividadesDiarias).subscribe(
-          Response => {
-            swal.fire(
-              'Enviado',
-              `Actividad creada con exito!`,
-              'success'
-            )
-            //this.limpiar();
-            //this.listarSolicitudAlumnos();
-          }
+    this.actividadesDiariasService.createregistroActividades(this.actividadesDiarias).subscribe(
+      Response => {
+        swal.fire(
+          'Enviado',
+          `Actividad creada con exito!`,
+          'success'
         )
-    
-    
+        this.listarActividades();
+        this.limpiar();
 
-        
+      }
+    )
+
   }
 
 
+  limpiar() {
+    this.actividadesDiarias.fecha = null;
+    this.actividadesDiarias.numHoras = null;
+    this.actividadesDiarias.horaLlegada = null;
+    this.actividadesDiarias.horaSalida = null;
+    this.actividadesDiarias.descripcion = null;
+  }
+
+
+  //Metodo de borrar
+
+  borrarActividad(id: ActividadesDiarias) {
+
+    swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.actividadesDiariasService.deleteActividad(id.idActividadesD).subscribe(
+          Response=>{
+            this.listaActividades =this.listaActividades.filter(servi=> servi !== id)
+
+            swal.fire(
+              'Borrado!',
+              'Su actividad ha sido eliminada.',
+              'success'
+            )
+          }
+        )
+
+        
+        
+      }
+    })
+  }
 
 
 }
