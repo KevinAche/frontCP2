@@ -4,6 +4,7 @@ import { Observable, throwError } from 'rxjs';
 import { InformeVisita, Visita } from '../models/Visita';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
+import { environment } from '../../environments/environment';
 
 @Injectable({
   providedIn: 'root',
@@ -18,9 +19,12 @@ export class RegistroVisitaService {
   getRegistroVisita() {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
-    return this.http.get(this._url + '/ListaRegistro_VisitaEmpresa', {
-      headers: header,
-    });
+    return this.http.get(
+      this._url + 'GestionTutorAcademico/ListaTutorAcademico',
+      {
+        headers: header,
+      }
+    );
   }
 
   createVisita(visita: Visita): Observable<Visita> {

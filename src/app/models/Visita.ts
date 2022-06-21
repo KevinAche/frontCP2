@@ -1,20 +1,20 @@
-export class Visita{
-    id?:Number;
-    tutoracademico?:String
-    tutorempresarial?:String
-    alumno?:String
-    ciclo?:String
-    empresa?:String
-    observaciones?:String
-    documento?:String
-  }
- 
-  export class InformeVisita{
-    id?:Number;
-    asunto?:String;
-    actividades?:String;
-    observaciones?:String;
-    horaInicio?:String;
-    horaFin?:String;
-    fecha?:Date;
-  }
+export class Visita {
+  id: any;
+  tutoracademico?: String;
+  tutorempresarial?: String;
+  alumno?: String;
+  ciclo?: String;
+  empresa?: String;
+  observaciones?: String;
+  documento?: String;
+}
+
+export class InformeVisita {
+  idinforme?: any;
+  asunto?: String;
+  actividades?: String;
+  observaciones?: String;
+  horaInicio?: String;
+  horaFin?: String;
+  fecha?: Date;
+}

@@ -2,21 +2,20 @@
   <mat-card class="card">
     <mat-card-title>VISITAS A LA INSTITUCIÓN</mat-card-title>
     <mat-card-subtitle>REGISTRO DE VISITAS</mat-card-subtitle>
+    <form *ngFor="let registro of registrovisita">
+      <mat-card-content>
+        <h3><strong>Tutor Academico: </strong>{{registro.docente.persona.primerNombre}}</h3>
+        <h3><strong>Tutor Empresarial: </strong></h3>
+        <h3><strong>Estudiante:</strong></h3>
+        <h3><strong>Ciclo: </strong>
+        </h3>
+        <h3><strong>Empresa:</strong></h3>
+        <h3><strong>Periodo Academico: </strong>2021-2022</h3>
+      </mat-card-content>
+    </form>
 
     <div class="container-fluid">
       <form [formGroup]="formInforme">
-        <!--<mat-card-content *ngFor="let registro of registrovisita">
-          <h3><strong>Tutor Academico: </strong>{{registro.tutoracademico.docente.persona==registro.idAlumno}}</h3>
-          <h3><strong>Tutor Empresarial: </strong></h3>
-          <h3><strong>Estudiante: </strong>{{registro.alumno.persona.idPersona}}
-            {{registro.alumno.persona.segundoApellido}} {{registro.alumno.persona.primerNombre}}
-            {{registro.alumno.persona.segundoNombre}}*/</h3>
-          <h3><strong>Ciclo: </strong>{{registro.alumno.paralelo}}</h3>
-          <h3><strong>Empresa: <input matInput type="text"> </strong></h3>
-          <h3><strong>Periodo Academico: </strong>2021-2022</h3> 
-        </mat-card-content>-->
-
-
         <h3 class="titulo"><strong>Informe</strong></h3>
         <div class="form-row">
           <div class="form-group col-md-6">
@@ -58,10 +57,13 @@
               style="background: #1d3557; color: white;">Registrar
               Visita</button>
           </div>
+          <div class="col">
+            <button type="submit" class="btn" [routerLink]="['/gestion-visitas']"
+              style="background:aqua; color: white;">Visitas</button>
+          </div>
         </div>
+
       </form>
     </div>
   </mat-card>
-
-
 </section>

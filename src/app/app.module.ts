@@ -9,17 +9,17 @@ import { RegistroEmpresasComponent } from './registro-empresas/registro-empresas
 import { RegistroDocentesComponent } from './registro-docentes/registro-docentes.component';
 import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
 import { LoginComponent } from './login/login.component';
-import {MatToolbarModule} from '@angular/material/toolbar';
-import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDialogModule} from "@angular/material/dialog";
-import {MatButtonModule} from '@angular/material/button';
-import {MatIconModule} from '@angular/material/icon';
-import {MatDividerModule} from '@angular/material/divider';
-import {MatMenuModule} from '@angular/material/menu';
+import { MatToolbarModule } from '@angular/material/toolbar';
+import { MatSidenavModule } from '@angular/material/sidenav';
+import { MatDialogModule } from '@angular/material/dialog';
+import { MatButtonModule } from '@angular/material/button';
+import { MatIconModule } from '@angular/material/icon';
+import { MatDividerModule } from '@angular/material/divider';
+import { MatMenuModule } from '@angular/material/menu';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { SeleccionEstudiantesComponent } from './seleccion-estudiantes/seleccion-estudiantes.component';
-import {MatCardModule} from '@angular/material/card';
+import { MatCardModule } from '@angular/material/card';
 import { FooterComponent } from './footer/footer.component';
 import { RegistroComponent } from './auth/registro.component';
 import { ConsultaConvocatoriaComponent } from './consulta-convocatoria/consulta-convocatoria.component';
@@ -28,15 +28,15 @@ import { DesigTutorEmpresarialComponent } from './desig-tutor-empresarial/desig-
 import { DesigTutorAcademicoComponent } from './desig-tutor-academico/desig-tutor-academico.component';
 import { ConsultasEstudiantesAsignadosComponent } from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import { GestionEmpresaComponent } from './gestion-empresa/gestion-empresa.component';
-import {RegistroAsistenciaComponent} from "./registro-asistencia/registro-asistencia.component";
-import {TableModule} from "primeng/table";
-import {DialogModule} from "primeng/dialog";
-import {ButtonModule} from "primeng/button";
-import {PanelModule} from "primeng/panel";
-import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
-import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
-import {MatExpansionModule} from '@angular/material/expansion';
-import {MatFormFieldModule} from '@angular/material/form-field';
+import { RegistroAsistenciaComponent } from './registro-asistencia/registro-asistencia.component';
+import { TableModule } from 'primeng/table';
+import { DialogModule } from 'primeng/dialog';
+import { ButtonModule } from 'primeng/button';
+import { PanelModule } from 'primeng/panel';
+import { SolicitudEstudianteComponent } from './solicitud-estudiante/solicitud-estudiante.component';
+import { RegistroVisitaComponent } from './registro-visita/registro-visita.component';
+import { MatExpansionModule } from '@angular/material/expansion';
+import { MatFormFieldModule } from '@angular/material/form-field';
 import { ConsultasReportesComponent } from './consultas-reportes/consultas-reportes.component';
 import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { InformeFinalAlumnoComponent } from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
@@ -45,15 +45,16 @@ import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
-import {MatTreeModule} from '@angular/material/tree';
+import { MatTreeModule } from '@angular/material/tree';
+import { InformeFinalTutorAcademicoComponent } from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
-import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import { GestionVisitasComponent } from './gestion-visitas/gestion-visitas.component';
 import { CrearActaComponent } from './crear-acta/crear-acta.component';
 import { TabMenuModule } from 'primeng/tabmenu';
 import { TabViewModule } from 'primeng/tabview';
-import {MatSelectModule} from '@angular/material/select';
-import { DropdownModule } from "primeng/dropdown";
+import { MatSelectModule } from '@angular/material/select';
+import { DropdownModule } from 'primeng/dropdown';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
 import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
@@ -70,6 +71,7 @@ import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa
 import {StepsModule} from "primeng/steps";
 import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
+import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -97,12 +99,17 @@ import {FileUploadModule} from "primeng/fileupload";
     ConsultaEstadoComponent,
     ConsultasReportesComponent,
     RegistroConvocatoriaComponent,
-//Franklin
-InformeFinalAlumnoComponent,
-EvaluacionEstudianteTutorEmpresarialComponent,
-RegistroSeguimientoAlumnoComponent,
-CertificadoAlumnoComponent,
+    //Franklin
+    InformeFinalAlumnoComponent,
+    EvaluacionEstudianteTutorEmpresarialComponent,
+    RegistroSeguimientoAlumnoComponent,
+    CertificadoAlumnoComponent,
 
+    //Lisseth
+    EvaluacionEstudianteTutorAcademicoComponent,
+    InformeFinalTutorAcademicoComponent,
+    DashboardComponent,
+    CrearActaComponent,
 
 //Lisseth
 EvaluacionEstudianteTutorAcademicoComponent,
@@ -134,6 +141,11 @@ HistorialComponent,
 GestionDocentesComponent,
 SolicitudEmpresaComponent,
 
+    //Lisseth
+    EvaluacionEstudianteTutorAcademicoComponent,
+    InformeFinalTutorAcademicoComponent,
+    GestionVisitasComponent,
+    ListaResponsablepppComponent,
   ],
   imports: [
     BrowserModule,
@@ -164,7 +176,6 @@ SolicitudEmpresaComponent,
     MatSelectModule,
     DropdownModule,
     ToastModule,
-    MatTreeModule,
     StepsModule,
     AccordionModule,
     FileUploadModule
