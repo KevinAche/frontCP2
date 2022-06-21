@@ -1,20 +1,26 @@
+import { Alumno } from './Alumno';
+
 export class Visita {
-  id: any;
-  tutoracademico?: String;
-  tutorempresarial?: String;
-  alumno?: String;
-  ciclo?: String;
-  empresa?: String;
-  observaciones?: String;
-  documento?: String;
+  idRegistroVisitaE?: any;
+  alumno?: Alumno;
+  observaciones?: any;
+  docRegistroVisita?: any;
+
+  constructor() {
+    this.alumno = new Alumno();
+  }
 }
 
 export class InformeVisita {
-  idinforme?: any;
+  idInformeVisita: number;
   asunto?: String;
   actividades?: String;
   observaciones?: String;
   horaInicio?: String;
   horaFin?: String;
   fecha?: Date;
+  registroVisitaEmpresa?: Visita;
+  constructor() {
+    this.registroVisitaEmpresa = new Visita();
+  }
 }

@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { InformeVisita, Visita } from '../models/Visita';
+import { Visita } from '../models/Visita';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
@@ -17,7 +17,7 @@ export class RegistroVisitaService {
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {}
 
-  getRegistroVisita() {
+  getTutorA() {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
     return this.http.get(
@@ -28,18 +28,34 @@ export class RegistroVisitaService {
     );
   }
 
-  createVisita(visita: Visita): Observable<Visita> {
+  createVisita(visita: Visita): Promise<any> {
     return this.http
-      .post<Visita>(this.urlCreate, visita, { headers: this.httpHeaders })
-      .pipe(
-        catchError((e) => {
-          swal.fire(
-            'Error al guardar',
-            'NO se puede guardar a la visita',
-            'error'
-          );
-          return throwError(e);
-        })
-      );
+      .post(this.urlCreate, visita, { headers: this.httpHeaders })
+      .toPromise();
+  }
+  createTutorAcademico(registro: any): Promise<any> {
+    return this.http
+      .post(
+        environment.URL_APP +
+          `GestionRegistroVisitaEmpresa/CrearRegistro_VisitaEmpresa`,
+        {
+          ...registro,
+        },
+        {
+          headers: this.httpHeaders,
+        }
+      )
+      .toPromise();
+  }
+
+  getVisita() {
+    let header = new HttpHeaders().set('Type-content', 'aplication/json');
+
+    return this.http.get(
+      this._urlP + 'GestionRegistroVisitaEmpresa/ListaRegistro_VisitaEmpresa',
+      {
+        headers: header,
+      }
+    );
   }
 }
