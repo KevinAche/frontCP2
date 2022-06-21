@@ -4,18 +4,18 @@
   <mat-card>
     <div>
       <div class="card card-w-title" >
-        <p-table #dt id="tdocentes" 
+        <p-table #dt id="tdocentes"
             dataKey="idDocente"
-            [value]="docentes" 
-            [paginator]="true" 
-            [rows]="10" 
+            [value]="docentes"
+            [paginator]="true"
+            [rows]="10"
             [showCurrentPageReport]="true"
-            [rowsPerPageOptions]="[10,25,50]" 
+            [rowsPerPageOptions]="[10,25,50]"
             [paginator]="true"
             styleClass="p-datatable-customers p-datatable-gridlines"
             [globalFilterFields]="['cedula','primer_nombre']"
             >
-    
+
             <ng-template pTemplate="caption">
                 <div class="p-grid">
                     <div class="p-col" style="text-align: left;">
@@ -29,7 +29,7 @@
                 </div>
             </ng-template>
             <ng-template pTemplate="header">
-               
+
                 <tr>
                     <th style="width: 80px;">Abr.</th>
                     <th>Titulo</th>
@@ -40,7 +40,7 @@
                     <th style="width: 100px;">Acciones</th>
                 </tr>
             </ng-template>
-            
+
             <ng-template pTemplate="body" let-doc>
                 <tr>
                   <td>{{doc.abrev_titulo}}</td>
@@ -60,7 +60,7 @@
                     <td >No hay datos.</td>
                 </tr>
             </ng-template>
-            
+
         </p-table>
         <br><br>
         <div class="text-center">
@@ -68,13 +68,13 @@
         </div>
       </div>
     </div>
-    
+
   </mat-card>
   <p-dialog header="Editar docente" [(visible)]="dis" [modal]="true" [style]="{width: '50vw', height: '40vw'}"
           [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
-          
+
         <mat-card *ngIf="this.banpersona == true">
-            
+
             <div class="container-fluid" >
             <h1>Datos Personales</h1>
             <form [formGroup]="formPersona">
@@ -98,10 +98,10 @@
                 <div class="form-group col-md-9">
                     <label for="cedula">Cédula:</label>
                 <input type="text" class="form-control" id="cedula" formControlName="cedula" [(ngModel)]="persona.cedula"  placeholder="Ingrese la cédula">
-                
+
                 </div>
                 <div class="form-group col-md-3">
-                
+
                     <label for="fechan">Fecha de nacimiento</label>
                     <input type="text" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento" >
                 </div>
@@ -119,7 +119,7 @@
                     <label for="correo">Correo:</label>
                     <input type="text" class="form-control" id="correo" formControlName="correo" [(ngModel)]="persona.correo"  placeholder="Ingrese el correo eléctronico">
                 </div>
-                
+
                 </div>
                 <br><br>
                 <div class="row text-center">
@@ -128,14 +128,14 @@
                 <div class="col">
                     <button type="submit" (click)='SiguienteDatos()' class="btn" style="background: #1d3557; color: white;">Siguiente</button>
                 </div>
-                
+
                 </div>
 
             </form>
             </div>
         </mat-card>
         <mat-card *ngIf="this.bantitulo == true">
-        
+
         <div class="container-fluid" >
             <h1>Datos academicos</h1>
             <form [formGroup]="formDocente" >
@@ -148,33 +148,33 @@
                 <label for="titulo">Titulo</label>
                 <input type="text" class="form-control" [(ngModel)]="docente.titulo" id="titulo"  formControlName="titulo" placeholder="Ingrese el titulo">
                 </div>
-                
-                
+
+
             </div>
             <div class="form-row">
                 <div class="form-group col-md-6">
                 <label for="area">Area</label>
                 <input type="text" class="form-control" id="area" formControlName="area" [(ngModel)]="docente.area"  placeholder="Ingrese la area">
-                
+
                 </div>
                 <div class="form-group col-md-6">
-                
+
                     <label for="carrera">Carrera</label><br>
-                    
-                    <span><p-dropdown 
-                        [options]="carreras" 
-                        [(ngModel)]="dropselect" 
+
+                    <span><p-dropdown
+                        [options]="carreras"
+                        [(ngModel)]="dropselect"
                         placeholder="Seleccione una opción"
-                        optionLabel="nombre" 
-                        [showClear]="true" 
+                        optionLabel="nombre"
+                        [showClear]="true"
                         (onChange)="OnChange($event)"
                         [(ngModel)]="docente.carrera" >
                     </p-dropdown></span>
-                    
+
                     </div>
-                
+
             </div>
-            
+
             <br><br>
             <div class="row text-center">
                 <div class="col">
@@ -182,14 +182,14 @@
                 <div class="col">
                 <button type="submit" (click)='actualizar()' class="btn" style="background: #1d3557; color: white;">Actualizar Docente</button>
                 </div>
-                
+
             </div>
 
             </form>
         </div>
         </mat-card>
     <p-footer>
-        
+
         <button type="button" pButton icon="pi pi-times" (click)="dis=false" label="Cancelar" class="ui-button-secondary"></button>
     </p-footer>
 </p-dialog>

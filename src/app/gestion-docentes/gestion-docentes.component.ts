@@ -36,11 +36,11 @@ export class GestionDocentesComponent implements OnInit {
 
 
   showDialogEdit(doc:any):void {
-    
+
     this.BuscarPersonaCedula( doc.cedula.toString());
     this.dis= true;
     this.docente =doc;
-    
+
     this.docente.abrevTitulo =doc.abrev_titulo;
     this.tipo_d = doc.carrera;
     this.banpersona=true;
@@ -55,9 +55,9 @@ export class GestionDocentesComponent implements OnInit {
     private carreraservice:CarreraService,
     private personaservice : PersonaService
   ) {   }
- 
+
   ngOnInit(): void {
-   
+
     this.formDocente = this.formBuilder.group({
       abrevtitulo: ['', Validators.required],
       titulo: ['', Validators.required],
@@ -88,7 +88,7 @@ export class GestionDocentesComponent implements OnInit {
     })
 
   }
-  
+
   listarCarreras():void {
     this.carreraservice.getCarreras().subscribe(value => {
       this.carreras=value['data'];
@@ -116,10 +116,10 @@ export class GestionDocentesComponent implements OnInit {
     }
 
     this.docente.carrera=this.dropselect;
-  
+
     this.docenteservice.updateDocente(this.docente, this.persona.cedula)
       .subscribe(docente => {
-        
+
         swal.fire(
           'Docente Guardado',
           `Docente ${this.persona.primerNombre} actualizado con exito!`,
@@ -129,12 +129,12 @@ export class GestionDocentesComponent implements OnInit {
         window.location.reload();
       }
     )
-    
+
   }
   public SiguienteDatos(): void {
-    
+
     if (this.formPersona.invalid) {
-      
+
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -154,8 +154,8 @@ export class GestionDocentesComponent implements OnInit {
     )
     }
   )
-    
-    
+
+
   }
 
 
@@ -217,5 +217,5 @@ export class GestionDocentesComponent implements OnInit {
       }
     })
   }
-  
+
 }

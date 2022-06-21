@@ -44,7 +44,8 @@ export class GestionEmpresaComponent implements OnInit {
       mision:emp.mision,
       vision:emp.vision,
       duracionConvenio: emp.duracionConvenio,
-      ruc: emp.ruc
+      ruc: emp.ruc,
+      naturaleza: emp.naturaleza
     };
   }
 
@@ -78,13 +79,16 @@ export class GestionEmpresaComponent implements OnInit {
       { field: 'telefono', header: 'Telefono' },
       { field: 'direccion', header: 'Dirección' },
       { field: 'duracionConvenio', header: 'Convenio' },
+      { field: 'naturaleza', header: 'Naturaleza' },
       { field: 'size', header: 'Acciones' },
+      
     ];
     this.listarEmpresas();
   }
 
   editarEmpresa():void {
     if (this.formEmpresa.invalid) {
+      console.log("invalido")
       return;
     }
 
