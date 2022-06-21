@@ -130,6 +130,7 @@ const routes: Routes = [
   {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
   {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
   { path: 'gestion-docentes', component: GestionDocentesComponent },
+  // {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },

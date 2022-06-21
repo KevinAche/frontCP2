@@ -11,21 +11,23 @@
   </div>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
-<!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
-<!--    <mat-icon>exit_to_app</mat-icon>-->
-<!--    Log Out-->
-<!--  </button>-->
+  <!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
+  <!--    <mat-icon>exit_to_app</mat-icon>-->
+  <!--    Log Out-->
+  <!--  </button>-->
 
-<!--  <button *ngIf="!isLogged" routerLink="/login">-->
-<!--    <mat-icon>account_circle</mat-icon>-->
-<!--    Log In-->
-<!--  </button>-->
+  <!--  <button *ngIf="!isLogged" routerLink="/login">-->
+  <!--    <mat-icon>account_circle</mat-icon>-->
+  <!--    Log In-->
+  <!--  </button>-->
 
 </mat-toolbar>
 
+
 <mat-sidenav-container>
 
-  <mat-sidenav #sidenav="matSidenav" >
+
+  <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
       <img class="logo" src="../assets/imagen/log.png">
@@ -179,7 +181,7 @@
             <span>Generar Anexo3</span>
           </button>
 
-          <button mat-button class="button-accordion" routerLink="/registro-asistencia">
+          <button mat-button class="button-accordion" routerLink="/registro-asistencia/{{persona.cedula}}">
             <mat-icon>how_to_reg</mat-icon>
             <span>Registro Asistencia </span>
           </button>
@@ -310,7 +312,6 @@
       <mat-icon>assignment</mat-icon>
       <span>Registro de Visitas</span>
     </a>
-
     <a *ngIf="isResponsable" class="nav-link" routerLink="/consulta-estado" style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Estado de Solicitudes</span>
@@ -342,16 +343,12 @@
     </a>
 
 
-    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico" style="color: white;">
+    <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico"
+       style="color: white;">
       <mat-icon>assignment</mat-icon>
       <span>Evaluacion Estudiante Tutor Academico </span>
     </a>
 
-
-    <a class="nav-link" routerLink="/lista-responsableppp" style="color: white;">
-      <mat-icon>assignment</mat-icon>
-      <span>Lista Responsable PPP </span>
-    </a>
 
   </mat-sidenav>
 
@@ -361,4 +358,5 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+
 <app-footer></app-footer>
