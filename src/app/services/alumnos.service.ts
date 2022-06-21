@@ -40,5 +40,15 @@ export class AlumnosService {
 
     });
   }
+
+  getDetalleAlumnos(){
+    let header = new HttpHeaders()
+    .set('Type-content','aplication/json')
+
+    return this.http.get(environment.URL_APP+'GestionAlumno/ListaAlumnos',{
+        headers: header
+
+    });
+  }
   
 }

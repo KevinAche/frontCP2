@@ -94,7 +94,7 @@ const routes: Routes = [
 
   {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
-  {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
+  {path:'solicitud-estudiante/:rol/:cedula',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
   {
