@@ -59,4 +59,10 @@ export class PersonaService {
       }
     ).toPromise();
   }
+
+  deletePersona(id: any): Promise<any[]> {
+    return this.http.delete<any[]>(
+      environment.URL_APP + `GestionPersona/EliminarPersona/${id}`
+    ).toPromise();
+  }
 }
