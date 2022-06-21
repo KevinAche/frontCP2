@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Persona } from '../models/Persona';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
 
-  _url ='https://backendg1c2.herokuapp.com/GestionPersona'
+  _url ='https://backendg1c2.herokuapp.com/GestionPersona';
   private urlCreate: string = this._url+'/CrearPersona';
   private urlUpdate: string = this._url+'/EditarPersona';
 
@@ -46,5 +47,16 @@ export class PersonaService {
         return throwError(e);
       })
     );
+  }
+
+  crearPersona(persona: any): Promise<any> {
+    return this.http.post(
+      environment.URL_APP + `GestionPersona/CrearPersona`,
+      {
+        ...persona
+      }, {
+        headers: this.httpHeaders
+      }
+    ).toPromise();
   }
 }

@@ -72,6 +72,7 @@ import {StepsModule} from "primeng/steps";
 import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
+import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -146,6 +147,7 @@ SolicitudEmpresaComponent,
     InformeFinalTutorAcademicoComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
+    CrearEmpleadoComponent,
   ],
   imports: [
     BrowserModule,
