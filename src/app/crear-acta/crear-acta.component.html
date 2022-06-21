@@ -5,16 +5,17 @@
             ACTA REUNIÓN
         </mat-card-title>
         <br>
+      <div style=" text-align: left;color: #be152f; "><h2>Id Actividad:</h2></div>
         <br>
         <br>
         <mat-card>
-            <h1 style=" text-align: left;color: #0a172a; "><u>Fecha:</u></h1>
-
+            <h1 style=" text-align: left;color: #0a172a; "><u>Fecha de Actividad:</u></h1>
+<!--Campos Fecha-->
             <input class="form-control mr-sm-2" type="date" id="start" name="trip-start" value="2022-06-15"
                 min="2022-01-01" max="2022-12-31">
             <div class="form-group">
                 <label for="inputEmail4">Asistentes</label>
-                <input type="text" class="form-control" id="inputEmail4" placeholder="Asistentes" [disabled]="true">
+                <input type="text" class="form-control" id="inputEmail4" placeholder="Asistentes" >
             </div>
             <div class="form-group ">
                 <label for="inputEmail4">Asunto</label>
@@ -24,7 +25,7 @@
                 <label for="inputEmail4">Lugar de la reunión</label>
                 <input type="text" class="form-control" id="inputEmail4" placeholder="Lugar reunion" [disabled]="true">
             </div>
-
+<!--Actividad-->
             <h2 style=" text-align: left;color: #0a172a; "><u>1.PLANIFICACION DE LA ACTIVIDAD</u></h2>
             <div class="form-group col-md-6 ">
                 <label for="inputAddress2">Con base en la solicitud realizada por la empresa</label>
@@ -84,7 +85,7 @@
             <table class="table table-striped table-hover table-bordered">
                 <thead>
                     <tr class="text-center">
-                        
+
                         <th>ACTIVIDAD POR REALIZAR</th>
                         <th>SEMANA</th>
                         <th>Nro. HORAS</th>
@@ -96,7 +97,7 @@
                         <td> </td>
                         <td> </td>
                         <td> </td>
-                        
+
 
                         <th>TOTAL HORAS</th>
 

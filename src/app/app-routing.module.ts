@@ -58,14 +58,7 @@ const routes: Routes = [
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia', component: RegistroAsistenciaComponent},
-  { path: '', component: HomeComponent },
-  { path: 'anexosde-ppp', component: AnexosdePPPComponent },
-  { path: 'registro-docente', component: RegistroDocentesComponent },
-  { path: 'registro-empresa', component: RegistroEmpresasComponent },
   { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
-  { path: 'consultasppp', component: ConsultaspppComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',
@@ -81,9 +74,7 @@ const routes: Routes = [
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
-  // {path:'consulta-estado',component:ConsultaEstadoComponent},
   { path: '', component: HomeComponent },
-  { path: 'anexosde-ppp', component: AnexosdePPPComponent },
   { path: 'registro-docente', component: RegistroDocentesComponent },
   { path: 'registro-empresa', component: RegistroEmpresasComponent },
   { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
@@ -104,7 +95,6 @@ const routes: Routes = [
   {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
-  {path:'consulta-estado',component:ConsultaEstadoComponent},
   {
     path: 'desig-tutor-academico',
     component: DesigTutorAcademicoComponent,
@@ -115,7 +105,6 @@ const routes: Routes = [
     path: 'desig-tutor-empresarial',
     component: DesigTutorEmpresarialComponent,
   },
-
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
@@ -141,7 +130,6 @@ const routes: Routes = [
   {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
   {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
   { path: 'gestion-docentes', component: GestionDocentesComponent },
-  // {path:'consulta-estado',component:ConsultaEstadoComponent},
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
   { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
@@ -157,13 +145,6 @@ const routes: Routes = [
   {path:'solicitud-empresa',component: SolicitudEmpresaComponent},
   {path:'historial',component: HistorialComponent},
 
-  {path:'**',component:PagenotfoundComponent},
-
-
-  {
-    path: 'evaluacion-estudiante-tutor-academico',
-    component: EvaluacionEstudianteTutorAcademicoComponent,
-  },
   {
     path: 'informe-final-tutor',
     component: InformeFinalTutorAcademicoComponent,
