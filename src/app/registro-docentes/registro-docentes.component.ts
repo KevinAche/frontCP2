@@ -40,7 +40,7 @@ export class RegistroDocentesComponent implements OnInit {
   ) {  this.listarCarreras(); }
 
   ngOnInit(): void {
-
+    this.persona  = new Persona();
     this.formDocente = this.formBuilder.group({
       abrevtitulo: ['', Validators.required],
       titulo: ['', Validators.required],
@@ -58,7 +58,7 @@ export class RegistroDocentesComponent implements OnInit {
       telefono: ['', Validators.required],
     });
     this.listarCarreras();
-    this.persona  = new Persona();
+    
   }
 
   public create(): void {

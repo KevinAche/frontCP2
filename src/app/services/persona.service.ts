@@ -3,13 +3,14 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Persona } from '../models/Persona';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class PersonaService {
 
-  _url ='https://backendg1c2.herokuapp.com/GestionPersona'
+  _url = environment.URL_APP+'GestionPersona'
   private urlCreate: string = this._url+'/CrearPersona';
   private urlUpdate: string = this._url+'/EditarPersona';
 

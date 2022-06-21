@@ -11,7 +11,7 @@ import { Docente } from '../models/Docente';
 })
 export class DocenteService {
 
-  _url = 'https://backendg1c2.herokuapp.com/GestionDocente'
+  _url =  environment.URL_APP+'GestionDocente'
 
   private urlCreate: string = this._url+'/CrearDocente';
   private urlDelete: string = this._url+'/EliminarDocente';
@@ -31,6 +31,12 @@ export class DocenteService {
 
   getDocentes(): Observable<Docente[]> {
     return this.http.get(environment.URL_APP+`GestionDocente/ListaDocentes`).pipe(
+      map(response => response as Docente[])
+    );
+  }
+
+  getDocentesGeneral(): Observable<Docente[]> {
+    return this.http.get(environment.URL_APP+`GestionDocente/ListaDocentesGeneral`).pipe(
       map(response => response as Docente[])
     );
   }
