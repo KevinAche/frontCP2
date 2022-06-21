@@ -10,6 +10,12 @@ import {TokenService} from "../services/token.service";
 })
 export class SolicitudEmpresaComponent implements OnInit {
 
+  dialogoResponsable: boolean;
+  dataResponsable: any[];
+  dataRowResponsable: any;
+  ObjetoResponsable: any;
+  columnasResponsable: any[];
+
   constructor(private _solicitudEmpresaCrud: Solicitud_empresaService,
               private _messageService: MessageService,
               private _tokenCrud: TokenService) {
@@ -26,11 +32,24 @@ export class SolicitudEmpresaComponent implements OnInit {
       {field: 'responsable', header: 'Responsable PPP'}
     ];
     this.obtenerSolicitudes();
+
+    this.columnasResponsable = [
+      {field: 'cedula', header: 'Cedula'},
+      {field: 'nombres', header: 'Primer nombre'},
+      {field: 'apellidos', header: 'Segundo Nombre'},
+      {field: 'ciclo', header: 'Primer apellido'},
+      {field: 'paralelo', header: 'Segundo Apellido'},
+      {field: 'promedio', header: 'Correo'},
+      {field: 'carrera', header: 'Carrera'},
+      {field: 'nombre_empresa', header: 'Solicitud a empresa'},
+      {field: 'aginarta', header: 'Asignar tutor'},
+    ];
   }
 
 
 
   ngOnInit(): void {
+
   }
 
   //
@@ -70,6 +89,24 @@ export class SolicitudEmpresaComponent implements OnInit {
       detail: 'Correcto: ' + mensaje,
       life: 3000,
     });
+  }
+
+  desplegarResponsables(){
+    this.dialogoResponsable = true;
+  }
+
+  onRowSelectResponsable(event): void {
+    this.ObjetoResponsable=null;
+    if (event.data) {
+      this.dataRowResponsable = event.data;
+      this.ObjetoResponsable = {...this.dataRowResponsable};
+    }
+  }
+
+  onRowUnSelectResponsable(event): void {
+    if (event.data) {
+      this.dataRowResponsable = null;
+    }
   }
 
 }
