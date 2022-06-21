@@ -6,6 +6,5 @@ export class Empresa {
     vision:string;
     direccion:string;
     telefono:string;
-    duracionConvenio:String;
     naturaleza:String;
 }

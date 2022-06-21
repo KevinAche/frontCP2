@@ -39,6 +39,7 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
+import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 
 
 const routes: Routes = [
@@ -55,6 +56,7 @@ const routes: Routes = [
   {path:'crear-carrera',component:CrearCarreraComponent},
   {path:'listar-carreras', component:ListarCarrerasComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
+  {path:'crear-empleado', component:CrearEmpleadoComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},

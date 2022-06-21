@@ -28,21 +28,20 @@ export class RegistroEmpresasComponent implements OnInit {
     this.formEmpresa = this.formBuilder.group({
       ruc: ['', Validators.required],
       empresa: ['', Validators.required],
-      duracionConvenio: ['', Validators.required],
       mision: ['', Validators.required],
       vision: ['', Validators.required],
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
       naturaleza: ['', Validators.required]
     });
-    
+
   }
 
   public create(): void {
 
     if (this.formEmpresa.invalid) {
-      
-      
+
+
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -61,13 +60,12 @@ export class RegistroEmpresasComponent implements OnInit {
         this.limpiar()
       }
     )
-    
-    
+
+
   }
 
   public limpiar(): void {
     this.empresa.direccion = null;
-    this.empresa.duracionConvenio = null;
     this.empresa.idEmpresa = null;
     this.empresa.mision = null;
     this.empresa.vision = null;
@@ -75,7 +73,7 @@ export class RegistroEmpresasComponent implements OnInit {
     this.empresa.telefono = null;
     this.empresa.direccion = null;
     this.empresa.nombreEmpresa = null;
-    
+
   }
 
 }
