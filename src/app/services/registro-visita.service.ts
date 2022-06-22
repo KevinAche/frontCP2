@@ -10,8 +10,8 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class RegistroVisitaService {
-  _url = 'https://backendg1c2.herokuapp.com/GestionRegistroVisitaEmpresa';
-  urlCreate = this._url + '/CrearRegistro_VisitaEmpresa';
+  _url = 'https://backendg1c2.herokuapp.com/';
+  urlCreate = this._url + 'GestionRegistroVisitaEmpresa/CrearRegistro_VisitaEmpresa';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
   constructor(private http: HttpClient) {}
@@ -51,7 +51,7 @@ export class RegistroVisitaService {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
     return this.http.get(
-      this._urlP + 'GestionRegistroVisitaEmpresa/ListaRegistro_VisitaEmpresa',
+      this._url + 'GestionRegistroVisitaEmpresa/ListaRegistro_VisitaEmpresa',
       {
         headers: header,
       }
