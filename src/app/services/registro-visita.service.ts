@@ -10,8 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class RegistroVisitaService {
-  _urlP = 'http://localhost:8082/';
-  _url = 'http://localhost:8082/GestionRegistroVisitaEmpresa';
+  _url = 'https://backendg1c2.herokuapp.com/GestionRegistroVisitaEmpresa';
   urlCreate = this._url + '/CrearRegistro_VisitaEmpresa';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' });
@@ -21,7 +20,7 @@ export class RegistroVisitaService {
     let header = new HttpHeaders().set('Type-content', 'aplication/json');
 
     return this.http.get(
-      this._urlP + 'GestionTutorAcademico/ListaTutorAcademico',
+      this._url + 'GestionTutorAcademico/ListaTutorAcademico',
       {
         headers: header,
       }
@@ -58,4 +57,11 @@ export class RegistroVisitaService {
       }
     );
   }
+  getBuscarTutor() {
+      let header = new HttpHeaders().set('Type-content', 'aplication/json');
+
+      return this.http.get(this._url + '/', {
+        headers: header,
+      });
+    }
 }

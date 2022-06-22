@@ -8,6 +8,7 @@ export class SolicitudAlumno{
     convocatoria: Convocatoria;
     alumno:Alumno;
     horasPPP:String;
+    documentoSoliEstudiante:any;
 
     constructor(){
         this.alumno = new Alumno();

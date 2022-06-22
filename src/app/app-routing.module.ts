@@ -23,6 +23,7 @@ import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
 
+
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
@@ -33,16 +34,33 @@ import { DashboardComponent } from './components/dashboard/dashboard.component';
 import { ConsultaEstadoComponent } from './consulta-estado/consulta-estado.component';
 import { ProdGuardService as guard } from './guards/prod-guard.service';
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
+import {CrearCarreraComponent} from "./carreras/crear-carrera/crear-carrera.component";
+import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carreras.component";
+import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
+import {HistorialComponent} from "./historial/historial.component";
+import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
+
 
 const routes: Routes = [
-  { path: '', component: HomeComponent },
-  { path: 'anexosde-ppp', component: AnexosdePPPComponent },
-  { path: 'registro-docente', component: RegistroDocentesComponent },
-  { path: 'registro-empresa', component: RegistroEmpresasComponent },
+  {path: '', component:HomeComponent },
+  {path: 'anexosde-ppp', component:AnexosdePPPComponent},
+  {path: 'registro-docente', component:RegistroDocentesComponent},
+  {path: 'registro-empresa', component:RegistroEmpresasComponent },
+  {path: 'seleccion-estudiantes', component:SeleccionEstudiantesComponent},
+  {path: 'consultasppp', component:ConsultaspppComponent },
+  {path: 'login', component:LoginComponent },
+  {path:'home',component:HomeComponent},
+  //KevinAche
+  {path:'dashboard',component:DashboardComponent},
+  {path:'crear-carrera',component:CrearCarreraComponent},
+  {path:'listar-carreras', component:ListarCarrerasComponent},
+  {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
+  {path:'crear-empleado', component:CrearEmpleadoComponent},
+  {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
+  {path:'gestion-empresa', component: GestionEmpresaComponent },
+  {path:'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},
   { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
-  { path: 'consultasppp', component: ConsultaspppComponent },
-  { path: 'login', component: LoginComponent },
-  { path: 'home', component: HomeComponent },
   { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',
@@ -58,9 +76,7 @@ const routes: Routes = [
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
-  // {path:'consulta-estado',component:ConsultaEstadoComponent},
   { path: '', component: HomeComponent },
-  { path: 'anexosde-ppp', component: AnexosdePPPComponent },
   { path: 'registro-docente', component: RegistroDocentesComponent },
   { path: 'registro-empresa', component: RegistroEmpresasComponent },
   { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
@@ -76,6 +92,11 @@ const routes: Routes = [
   { path: 'gestion-empresa', component: GestionEmpresaComponent },
   { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
 
+  {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
+  {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
+  {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
+  {path:'registro-visita',component:RegistroVisitaComponent},
+  {path:'consultas-reportes',component:ConsultasReportesComponent},
   {
     path: 'desig-tutor-academico',
     component: DesigTutorAcademicoComponent,
@@ -86,7 +107,6 @@ const routes: Routes = [
     path: 'desig-tutor-empresarial',
     component: DesigTutorEmpresarialComponent,
   },
-
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
@@ -109,10 +129,25 @@ const routes: Routes = [
   { path: 'cert-alumno', component: CertificadoAlumnoComponent },
 
   //Liss
-  {
-    path: 'evaluacion-estudiante-tutor-academico',
-    component: EvaluacionEstudianteTutorAcademicoComponent,
-  },
+  {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
+  {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
+  { path: 'gestion-docentes', component: GestionDocentesComponent },
+  // {path:'consulta-estado',component:ConsultaEstadoComponent},
+  //Franklin
+  { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
+  { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
+  { path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent },
+  {path:'acta-reunion',component:ActaReunionComponent},
+  { path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent },
+  { path: 'cert-alumno', component: CertificadoAlumnoComponent },
+
+  //Liss
+  {path:'evaluacion-estudiante-tutor-academico',component:EvaluacionEstudianteTutorAcademicoComponent},
+  {path:'informe-final-tutor',component:InformeFinalTutorAcademicoComponent},
+
+  {path:'solicitud-empresa',component: SolicitudEmpresaComponent},
+  {path:'historial',component: HistorialComponent},
+
   {
     path: 'informe-final-tutor',
     component: InformeFinalTutorAcademicoComponent,
@@ -124,6 +159,6 @@ const routes: Routes = [
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
-  exports: [RouterModule],
+  exports: [RouterModule]
 })
-export class AppRoutingModule {}
+export class AppRoutingModule { }

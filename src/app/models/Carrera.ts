@@ -3,5 +3,5 @@ export class Carrera {
     nombre: any;
     abreviatura: any;
     modalidad: any;
-    
+    duracion: any;
 }

@@ -6,7 +6,7 @@ import { Injectable } from '@angular/core';
 })
 export class ConvocatoriaService {
 
-    _url ='http://localhost:8082/GestionConvocatoria'
+    _url ='https://backendg1c2.herokuapp.com/GestionConvocatoria'
 
   constructor(
     private http: HttpClient

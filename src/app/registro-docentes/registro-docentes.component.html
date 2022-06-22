@@ -4,11 +4,11 @@
       
     <div class="form-row">
       <div class="form-group col-md-9">
-        <h1>Registro de Docente/Responsable PPP</h1>
+        <h1>Registro de Docente/Datos Personales</h1>
       </div>
       <div class="form-group col-md-3">
        
-        <button type="submit" class="btn" [routerLink]="['/gestion-empresa']" style="background: green; color: white;">Docentes</button>
+        <button type="submit" class="btn" [routerLink]="['/gestion-docentes']" style="background: green; color: white;">Docentes</button>
 
       </div>
     </div>
@@ -29,8 +29,8 @@
             <label for="papellido">Primer apellido</label>
             <input type="text" class="form-control" id="papellido"  formControlName="papellido" [(ngModel)]="persona.primerApellido" placeholder="Ingrese el primer apellido">
           </div><div class="form-group col-md-3">
-            <label for="empresa">Segundo apellido</label>
-            <input type="text" class="form-control" id="empresa"  formControlName="empresa" [(ngModel)]="persona.segundoApellido" placeholder="Ingrese el segundo apellido">
+            <label for="sapellido">Segundo apellido</label>
+            <input type="text" class="form-control" id="sapellido"  formControlName="sapellido" [(ngModel)]="persona.segundoApellido" placeholder="Ingrese el segundo apellido">
           </div>
         </div><div class="form-row">
           <div class="form-group col-md-9">
@@ -41,7 +41,7 @@
           <div class="form-group col-md-3">
            
             <label for="fechan">Fecha de nacimiento</label>
-            <input type="text" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento">
+            <input type="date" class="form-control" id="fechan"  formControlName="fechan" [(ngModel)]="persona.fechaNac" placeholder="Ingrese la fecha de nacimiento">
           </div>
         </div>
         <div class="form-group">
@@ -55,7 +55,7 @@
           </div>
           <div class="form-group col-md-6">
             <label for="correo">Correo:</label>
-            <input type="text" class="form-control" id="correo" formControlName="correo" [(ngModel)]="persona.corre"  placeholder="Ingrese el correo eléctronico">
+            <input type="text" class="form-control" id="correo" formControlName="correo" [(ngModel)]="persona.correo"  placeholder="Ingrese el correo eléctronico">
           </div>
         
         </div>
@@ -72,6 +72,7 @@
       </form>
     </div>
 </mat-card>
+
 <mat-card *ngIf="this.bantitulo == true">
   <mat-card-title style="background-color:#1d3557; color:white; padding: 35px; border-radius: 6px;">
     
@@ -81,22 +82,22 @@
     </div>
     <div class="form-group col-md-3">
      
-      <button type="submit" class="btn" [routerLink]="['/gestion-empresa']" style="background: green; color: white;">Docentes</button>
+      <button type="submit" class="btn" [routerLink]="['/gestion-docentes']" style="background: green; color: white;">Docentes</button>
 
     </div>
   </div>
   </mat-card-title>
   <div class="container-fluid" >
     <h1>Datos academicos</h1>
-    <form [formGroup]="formPersona">
+    <form [formGroup]="formDocente" >
       <div class="form-row">
         <div class="form-group col-md-3">
-          <label for="abrev_titulo">Abreviación del Titulo</label>
-          <input type="text" class="form-control" [(ngModel)]="docente.abrevTitulo" id="abrev_titulo"  formControlName="abrev_titulo" placeholder="Abreviación del titulo">
+          <label for="abrevtitulo">Abreviación del Titulo</label>
+          <input type="text" class="form-control" [(ngModel)]="docente.abrevTitulo" id="abrevtitulo"  formControlName="abrevtitulo" placeholder="Abreviación del titulo">
         </div>
         <div class="form-group col-md-6">
           <label for="titulo">Titulo</label>
-          <input type="text" class="form-control" [(ngModel)]="docente.titulo" id="snombre"  formControlName="snombre" placeholder="Ingrese el titulo">
+          <input type="text" class="form-control" [(ngModel)]="docente.titulo" id="titulo"  formControlName="titulo" placeholder="Ingrese el titulo">
         </div>
         <div class="form-group col-md-3">
          
@@ -108,7 +109,8 @@
             placeholder="Seleccione una opción"
             optionLabel="nombre" 
             [showClear]="true" 
-            (onChange)="OnChange($event)">
+            (onChange)="OnChange($event)"
+            [(ngModel)]="docente.carrera" >
           </p-dropdown>
         </div>
         

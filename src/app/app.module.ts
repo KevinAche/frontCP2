@@ -57,9 +57,28 @@ import { MatSelectModule } from '@angular/material/select';
 import { DropdownModule } from 'primeng/dropdown';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
 
-import { MessageService, ConfirmationService } from 'primeng/api';
-import { ToastModule } from 'primeng/toast';
+import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
+import { SolicitarRequerimientosComponent } from './solicitar-requerimientos/solicitar-requerimientos.component';
+
+import {MessageService,ConfirmationService} from "primeng/api";
+import {ToastModule} from "primeng/toast";
+import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.component';
+import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
+
+import { HistorialComponent } from './historial/historial.component';
+import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
+import {StepsModule} from "primeng/steps";
+import {AccordionModule} from "primeng/accordion";
+import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
+import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
+import {OrderListModule} from 'primeng/orderlist';
+
+import {MessagesModule} from 'primeng/messages';
+import {MessageModule} from 'primeng/message';
+
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -99,11 +118,42 @@ import { ListaResponsablepppComponent } from './lista-responsableppp/lista-respo
     DashboardComponent,
     CrearActaComponent,
 
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
+DashboardComponent,
+CrearActaComponent,
+CrearCarreraComponent,
+ListarCarrerasComponent,
+
+    ConsultasReportesComponent,
+    ActaReunionComponent,
+    ConsultasReportesComponent,
+    ConsultaEstadoComponent,
+    ConsultasReportesComponent,
+    RegistroConvocatoriaComponent,
+//Franklin
+InformeFinalAlumnoComponent,
+EvaluacionEstudianteTutorEmpresarialComponent,
+RegistroSeguimientoAlumnoComponent,
+CertificadoAlumnoComponent,
+
+
+//Lisseth
+EvaluacionEstudianteTutorAcademicoComponent,
+InformeFinalTutorAcademicoComponent,
+ConsultaConvPublicoComponent,
+SolicitarRequerimientosComponent,
+HistorialComponent,
+GestionDocentesComponent,
+SolicitudEmpresaComponent,
+
     //Lisseth
     EvaluacionEstudianteTutorAcademicoComponent,
     InformeFinalTutorAcademicoComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
+    CrearEmpleadoComponent,
   ],
   imports: [
     BrowserModule,
@@ -129,14 +179,20 @@ import { ListaResponsablepppComponent } from './lista-responsableppp/lista-respo
     MatExpansionModule,
     MatFormFieldModule,
     MatTreeModule,
-    MatTreeModule,
     TabMenuModule,
     TabViewModule,
     MatSelectModule,
     DropdownModule,
     ToastModule,
+    StepsModule,
+    AccordionModule,
+    FileUploadModule,
+    OrderListModule,
+    MessagesModule,
+    MessageModule
+
   ],
-  bootstrap: [AppComponent],
-  providers: [MessageService, ConfirmationService],
+  providers: [MessageService,ConfirmationService],
+  bootstrap: [AppComponent]
 })
-export class AppModule {}
+export class AppModule { }

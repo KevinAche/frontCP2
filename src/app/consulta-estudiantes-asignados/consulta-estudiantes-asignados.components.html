@@ -35,6 +35,7 @@
               <tr *ngIf="asignado.estado==false; else login">
               </tr>
 
+              
               <ng-template #login>
                 <tr *ngIf="asignado.convocatoria.nombreConvocatoria==verSeleccion">
                   <td>{{asignado.alumno.persona.primerApellido}} {{asignado.alumno.persona.segundoApellido}}</td>
@@ -44,12 +45,10 @@
                   <td><a class="btn btn-danger btn-xs" style="color: white">Eliminar</a></td>
                 </tr>
               </ng-template>
-
-              
             </tbody>
 
-            <tbody *ngFor="let asignado of asignados">
-              
+
+            <tbody *ngFor="let asignado of asignados">  
               <tr *ngIf="asignado.estado==false; else login">
               </tr>
 

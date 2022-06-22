@@ -10,7 +10,7 @@ import { environment } from '../../environments/environment';
   providedIn: 'root',
 })
 export class InformeService {
-  _urlI = 'http://localhost:8082/GestionInforme_Visita';
+  _urlI = 'https://backendg1c2.herokuapp.com/GestionInforme_Visita';
   urlCreateInforme = this._urlI + '/CrearInforme_Visita';
   urlUpdateInforme = this._urlI + '/EditarInforme_Visita';
   urlDeleteInforme = this._urlI + '/EliminarInforme_Visita';

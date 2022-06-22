@@ -6,6 +6,9 @@ import PizZipUtils from "pizzip/utils/index.js";
 import { saveAs } from "file-saver";
 import { Carrera } from 'src/app/models/Carrera';
 
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
+
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
 }
@@ -20,6 +23,8 @@ export class HomeComponent implements OnInit {
 
   public carreras: Array<any> = []
   public carreraind: any
+
+  base64Output : string;
 
   constructor(
     private carreraService: CarreraService 
@@ -63,7 +68,7 @@ export class HomeComponent implements OnInit {
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
         rpp: nom,
-        numestudiantes: "123"
+        numestudiantes: "2501"
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
@@ -104,5 +109,21 @@ export class HomeComponent implements OnInit {
       // Output the document using Data-URI
       saveAs(out, "output.docx");
     });
+  }
+
+  //Subir un archivo a la base
+
+  onFileSelected(event) {
+    this.convertFile(event.target.files[0]).subscribe(base64 => {
+      this.base64Output = base64;
+    });
+  }
+
+  convertFile(file : File) : Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    return result;
   }
 }
