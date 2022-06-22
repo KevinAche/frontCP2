@@ -1,5 +1,5 @@
 import { Alumno } from "./Alumno";
-export class RegistroAsistencia{
+export class registroA{
     idRegistroAsistencia:Number;
     docRegistroA:string;
     alumno:Alumno;

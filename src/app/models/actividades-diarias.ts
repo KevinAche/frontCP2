@@ -1,16 +1,16 @@
-import { RegistroAsistencia } from "./RegistroAsistencia";
+import { registroA } from "./RegistroAsistencia";
 export class ActividadesDiarias{
 
-    idActividadesD:Number;
+    idActividadesD:any;
     fecha:String;
     horaLlegada:String;
     horaSalida:String;
     descripcion:String;
     numHoras:number;
-    registroAsistencia:RegistroAsistencia;
+    registroA:registroA;
 
     constructor(){
-        this.registroAsistencia = new RegistroAsistencia();
+        this.registroA = new registroA();
     }
 
 }
