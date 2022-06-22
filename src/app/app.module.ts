@@ -83,6 +83,9 @@ import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { GestionConvocatoriaComponent } from './responsable/gestion-convocatoria/gestion-convocatoria.component';
+import {DividerModule} from 'primeng/divider';
+import {CalendarModule} from 'primeng/calendar';
+
 
 @NgModule({
   declarations: [
@@ -200,7 +203,9 @@ SolicitudEmpresaComponent,
    ListboxModule,
    OverlayPanelModule,
    SidebarModule,
-   VirtualScrollerModule
+   VirtualScrollerModule,
+   DividerModule,
+   CalendarModule
 
   ],
   providers: [MessageService,ConfirmationService],
