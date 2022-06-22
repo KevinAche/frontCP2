@@ -22,8 +22,6 @@ import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estu
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
-
-
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
@@ -37,10 +35,11 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
-
+import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'informe-acreditacion', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
