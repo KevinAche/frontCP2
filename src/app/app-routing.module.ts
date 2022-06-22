@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
@@ -39,6 +38,7 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
+import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 
 import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
@@ -156,6 +156,7 @@ const routes: Routes = [
   },
   { path: 'gestion-visitas', component: GestionVisitasComponent },
   { path: 'lista-responsableppp', component: ListaResponsablepppComponent },
+
   { path: '**', component: PagenotfoundComponent },
 ];
 
