@@ -82,6 +82,7 @@ import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acred
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { GestionConvocatoriaComponent } from './responsable/gestion-convocatoria/gestion-convocatoria.component';
 
 @NgModule({
   declarations: [
@@ -159,6 +160,7 @@ SolicitudEmpresaComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
     CrearEmpleadoComponent,
+    GestionConvocatoriaComponent,
   ],
   imports: [
     BrowserModule,

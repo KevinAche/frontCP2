@@ -42,6 +42,7 @@ import { RegistroSeguimientoService } from './services/registro-seguimiento.serv
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 
 import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
+import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -59,6 +60,7 @@ const routes: Routes = [
   {path:'listar-carreras', component:ListarCarrerasComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'crear-empleado', component:CrearEmpleadoComponent},
+  {path:'gestion-convocatoria', component:GestionConvocatoriaComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},

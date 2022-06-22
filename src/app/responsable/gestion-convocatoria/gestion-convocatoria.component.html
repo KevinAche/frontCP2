@@ -1,0 +1,38 @@
+<mat-card>
+  <mat-card-title>
+    LISTA SOLICITUDES EMPRESA
+  </mat-card-title>
+  <div class="container-fluid">
+    <form>
+      <p-table [value]="dataSolicitudes"
+               [columns]="columnaSolicitud"
+               [paginator]="true"
+               [rows]="3"
+               [autoLayout]="true"
+               [(selection)]="dataRowSolicitud"
+               (onRowSelect)="onRowSelectSolicitud($event)"
+               (onRowUnselect)="onRowUnSelectSolicitud($event)"
+               [scrollable]="true"
+               selectionMode="single">
+        <ng-template pTemplate="header">
+          <tr>
+            <th *ngFor="let columna of columnaSolicitud">
+              {{columna.header}}
+            </th>
+          </tr>
+        </ng-template>
+        <ng-template pTemplate="body" let-dataSolicitudes>
+          <tr [pSelectableRow]="dataSolicitudes">
+            <td *ngFor="let col of columnaSolicitud">
+              <div [ngSwitch]="col.field">
+
+              </div>
+
+            </td>
+          </tr>
+        </ng-template>
+
+      </p-table>
+    </form>
+  </div>
+</mat-card>
