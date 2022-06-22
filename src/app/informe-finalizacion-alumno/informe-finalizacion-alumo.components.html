@@ -1,13 +1,241 @@
+<section>
+
+  <div *ngFor="let datosAlumno of alumnosDatos">
+
+    <div *ngIf="cedula == datosAlumno.cedula">
+
+      <div *ngFor="let datosSolicitud of solicitudAlumnosDatos">
+
+        <div *ngIf="datosSolicitud.alumno.idAlumno == datosAlumno.id_alumno">
+
+          <div *ngFor="let datosTutEmpresarial of TutorEmpresarialDatos">
+
+
+            <div *ngIf="datosTutEmpresarial.alumno.idAlumno == datosAlumno.id_alumno">
+
+              <section>
+
+                <mat-card>
+                  <div class="card">
+
+                    <mat-card>
+
+                      <!--Bloque para informacion general-->
+                      <div class="container-fluid" style="padding: 55px;">
+                        <mat-card-title
+                          style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+                          INFORME DE CULMINACIÓN DE PRÁCTICAS PREPROFESIONALES
+                        </mat-card-title>
+                      </div>
+
+                      <form>
+
+                        <div class="card2">
+
+                          <div class="card-header">
+                            <h2 style=" text-align: center;color: #1d3557; ">INFORMACIÓN GENERAL</h2>
+                          </div>
+
+
+                          <div class="card-body">
+
+
+
+
+
+
+                            <!--BLOQUE DATOS EMPRESA-->
+
+                            <h2 style="color: #1d3557;">DATOS GENERALES DE LA EMPRESA / INSTITUCIÓN</h2>
+
+                            <div class="container-fluid">
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>NOMBRE:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa}}"
+                                    [disabled]="true">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="inputEmail4">FECHA:</label>
+                                  <input type="date" class="form-control" id="inputEmail4" placeholder="Dato">
+                                </div>
+                              </div>
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>UBICACION:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.direccion}}"
+                                    [disabled]="true">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label>ÁREA O DEPARTAMENTO:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.naturaleza}}"
+                                    [disabled]="true">
+                                </div>
+                              </div>
+
+                            </div>
+
+                            <!--BLOQUE DATOS TUTOR EMPRESARIAL-->
+
+                            <h2 style="color: #1d3557;">DATOS TUTOR EMPRESARIAL</h2>
+
+                            <div class="container-fluid">
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>NOMBRE:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosTutEmpresarial.personalEmpresa.persona.primerNombre}} {{datosTutEmpresarial.personalEmpresa.persona.segundoNombre}} {{datosTutEmpresarial.personalEmpresa.persona.primerApellido}} {{datosTutEmpresarial.personalEmpresa.persona.segundoApellido}}"
+                                    [disabled]="true">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label>CÉDULA DE IDENTIDAD:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosTutEmpresarial.personalEmpresa.persona.cedula}}"
+                                    [disabled]="true">
+                                </div>
+                              </div>
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>CARGO:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosTutEmpresarial.personalEmpresa.cargo}}"
+                                    [disabled]="true">
+                                </div>
+
+                                <div class="form-group col-md-6">
+                                  <label>TÉLEFONO EMPRESA:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.telefono}}"
+                                    [disabled]="true">
+                                </div>
+                              </div>
+
+
+                              <div class="form-group">
+                                <label>CORREO ELECTRÓNICO:</label>
+                                <input type="text" class="form-control"
+                                  placeholder="{{datosTutEmpresarial.personalEmpresa.persona.correo}}"
+                                  [disabled]="true">
+                              </div>
+
+                            </div>
+
+
+
+
+
+
+
+
+                          </div>
+
+
+                        </div>
+
+                        <!--BLOQUE INICIO-->
+                        <br>
+
+                        <div class="card2">
+
+                          <div class="card-header">
+                            <h2 style=" text-align: center;color: #1d3557; ">INFORMACIÓN GENERAL</h2>
+                          </div>
+
+
+                          <div class="card-body">
+
+
+
+
+                            <!--Bloque para informacion general-->
+                            <h2 style="color: #1d3557;">DATOS GENERALES DE LA EMPRESA / INSTITUCIÓN</h2>
+
+                            <div class="container-fluid">
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>NOMBRE:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa}}"
+                                    [disabled]="true">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label for="inputEmail4">FECHA:</label>
+                                  <input type="date" class="form-control" id="inputEmail4" placeholder="Dato">
+                                </div>
+                              </div>
+
+                              <div class="form-row">
+                                <div class="form-group col-md-6">
+                                  <label>UBICACION:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.direccion}}"
+                                    [disabled]="true">
+                                </div>
+                                <div class="form-group col-md-6">
+                                  <label>ÁREA O DEPARTAMENTO:</label>
+                                  <input type="text" class="form-control"
+                                    placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.naturaleza}}"
+                                    [disabled]="true">
+                                </div>
+                              </div>
+
+                            </div>
+
+
+
+
+                          </div>
+
+
+                        </div>
+
+                      </form>
+
+                    </mat-card>
+                  </div>
+                </mat-card>
+
+              </section>
+
+            </div>
+
+
+          </div>
+
+        </div>
+
+      </div>
+
+    </div>
+
+  </div>
+
+</section>
+
+
+
+
+
+
+
 <section class="vh-100">
   <div class="container-fluid" style="padding: 55px;">
     <!--Titulo-->
     <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
       INFORME DE CULMINACIÓN DE PRÁCTICAS PREPROFESIONALES
     </mat-card-title>
-    
 
-   
-<!--------------------------------------------------------------------------------------------------------------->
+
+
+    <!--------------------------------------------------------------------------------------------------------------->
     <!--BLOQUE INFORMACION GENERAL-->
     <mat-card>
       <h1 style=" text-align: center;color: #0a172a; "><u>INFORMACIÓN GENERAL</u></h1>
@@ -121,11 +349,11 @@
 
 
     <br><br>
-     <!--------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------->
     <!--BLOQUE DESCRIPCIÓN DETALLADA DE ACTIVIDADES REALIZADAS-->
     <mat-card>
       <h1 style=" text-align: center;color: #0a172a; "><u>DESCRIPCIÓN DETALLADA DE ACTIVIDADES REALIZADAS
-      </u></h1>
+        </u></h1>
       <br>
 
       <!--Bloque para informacion general-->
@@ -145,12 +373,12 @@
     </mat-card>
 
     <br><br>
-     <!--------------------------------------------------------------------------------------------------------------->
+    <!--------------------------------------------------------------------------------------------------------------->
     <!--BLOQUE DESCRIPCIÓN DETALLADA DE CONCLUSIONES Y RECOMENDACIONES -->
     <mat-card>
-      <h1 style=" text-align: center;color: #0a172a; "><u>CONCLUSIONES Y RECOMENDACIONES 
+      <h1 style=" text-align: center;color: #0a172a; "><u>CONCLUSIONES Y RECOMENDACIONES
 
-      </u></h1>
+        </u></h1>
       <br>
 
       <!--Bloque para informacion general-->
@@ -170,14 +398,14 @@
     </mat-card>
 
 
-<br><br>
+    <br><br>
 
-<!--------------------------------------------------------------------------------------------------------------->
- <!-- BLOQUE BOTON GENERAR -->
+    <!--------------------------------------------------------------------------------------------------------------->
+    <!-- BLOQUE BOTON GENERAR -->
     <mat-card>
-<div class="d-grid gap-2 col-6 mx-auto">
-  <button class="btn btn-primary" type="button">GENERAR INFORME FINAL</button>
-  </div>
+      <div class="d-grid gap-2 col-6 mx-auto">
+        <button class="btn btn-primary" type="button">GENERAR INFORME FINAL</button>
+      </div>
     </mat-card>
 
 
@@ -186,8 +414,8 @@
 </section>
 
 
-<input type="file" (change)="onFileSelected($event)" />
 
-<br /><br />
-base64 Output : <br />
-{{base64Output}}
+
+<!--
+ <input type="file" (change)="onFileSelected($event)" />
+-->
