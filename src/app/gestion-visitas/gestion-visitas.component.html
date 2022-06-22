@@ -1,6 +1,6 @@
 <div class="card card-w-title" style="padding: 55px;">
     <h1>Visitas</h1>
-    <p-table #d id="tvisitas" [value]="dataInformes" [paginator]="true" [columns]="cols" [rows]="1"
+    <p-table #d id="tvisitas" [value]="dataInformes" [paginator]="true" [columns]="cols" [rows]="10"
         [showCurrentPageReport]="true" [rowsPerPageOptions]="[10,25,50]" [paginator]="true"
         [globalFilterFields]="['asunto','fecha']" styleClass="p-datatable-customers p-datatable-gridlines">
 
@@ -36,15 +36,15 @@
                 </td>
             </tr>
         </tbody>
-        <ng-template pTemplate="body">
-            <tr *ngFor="let visita of dataInformes">
-                <td>{{visita.idInformeVisita}}</td>
+        <ng-template pTemplate="body" let-visita>
+            <tr>
                 <td>{{visita.fecha | date}}</td>
                 <td>{{visita.horaInicio}}</td>
                 <td>{{visita.horaFin}}</td>
                 <td>{{visita.asunto}}</td>
                 <td>{{visita.actividades}}</td>
                 <td>{{visita.observaciones}}</td>
+
                 <td>
                     <a class="edit" title="Edit" (click)="showDialogEdit(visita)" data-toggle="tooltip"><i
                             class="material-icons">&#xE254;</i></a>
@@ -65,16 +65,11 @@
         <button type="submit" class="btn btn-danger" [routerLink]="['/registro-visita']">Regresar</button>
     </div>
 </div>
-<p-dialog header="Editar informe" [(visible)]="dis" [modal]="true" [style]="{width: '40vw', height: '20vw'}"
+<p-dialog header="Editar informe" [(visible)]="dis" [modal]="true" [style]="{width: '50vw', height: '40vw'}"
     [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
     <form [formGroup]="formInforme">
         <h3 class="titulo"><strong>Informe</strong></h3>
         <div class="form-row">
-            <div class="form-group col-md-6">
-                <label for="idinforme">Id Informe:</label>
-                <input type="text" class="form-control" [(ngModel)]="informe.idinforme" id="idinforme"
-                    formControlName="idinforme" placeholder="Ingrese la Fecha de Visita">
-            </div>
             <div class="form-group col-md-6">
                 <label for="fecha">Fecha de Visita:</label>
                 <input type="text" class="form-control" [(ngModel)]="informe.fecha" id="fecha" formControlName="fecha"

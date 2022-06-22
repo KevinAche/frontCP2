@@ -1,26 +1,25 @@
-import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
+import { Component, OnInit } from '@angular/core';
+import { HistorialService} from '../services/historial.services';
 
 @Component({
   selector: 'app-historial',
   templateUrl: './historial.component.html',
   styleUrls: ['./historial.component.css']
 })
-export class HistorialComponent implements OnInit, DoCheck, OnDestroy {
-  public titulo: string;
-  public columnasHistorial: any[];
 
-  constructor() {
-    this.titulo = "Historial de Busquedas"
-  }
+export class HistorialComponent implements OnInit {
+
+  public historialC:Array<any>=[];
+  constructor(private historialService:HistorialService) { }
 
   ngOnInit(): void {
-
+    this.listarHistorial();
   }
 
-  ngDoCheck(): void {
+  public listarHistorial(){
+    this.historialService.getHistorial().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.historialC= resp.data
+    })
   }
-
-  ngOnDestroy(): void {
-  }
-
 }

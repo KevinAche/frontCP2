@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable, throwError } from 'rxjs';
-import { InformeVisita } from '../models/Visita';
+import { InformeVisita, Visita } from '../models/Visita';
 import { map, catchError } from 'rxjs/operators';
 import swal from 'sweetalert2';
 import { environment } from '../../environments/environment';
@@ -46,7 +46,7 @@ export class InformeService {
   updateInforme(infvisita: InformeVisita): Observable<InformeVisita> {
     return this.http
       .put<InformeVisita>(
-        `${this.urlUpdateInforme}/${infvisita.idinforme}`,
+        `${this.urlUpdateInforme}/${infvisita.idInformeVisita}`,
         infvisita,
         {
           headers: this.httpHeaders,
@@ -64,7 +64,7 @@ export class InformeService {
       );
   }
 
-  deleteInforme(persid: any): Observable<InformeVisita> {
+  deleteInforme(persid: number): Observable<InformeVisita> {
     return this.http
       .delete<InformeVisita>(`${this.urlDeleteInforme}/${persid}`, {
         headers: this.httpHeaders,

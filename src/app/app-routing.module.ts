@@ -41,9 +41,11 @@ import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.c
 import {HistorialComponent} from "./historial/historial.component";
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 
+import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'informe-acreditacion', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
