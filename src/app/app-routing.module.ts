@@ -115,7 +115,7 @@ const routes: Routes = [
   { path: 'consulta-estado', component: ConsultaEstadoComponent },
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
-  { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
+  { path: 'inf-fin-alumno/:cedula', component: InformeFinalAlumnoComponent },
   {
     path: 'eva-est-tu-empresarial',
     component: EvaluacionEstudianteTutorEmpresarialComponent,

@@ -16,7 +16,7 @@ export class ActividadesDiariasService {
   _url = 'https://backendg1c2.herokuapp.com/ActividadesDiarias'
 
   private url_mater: string = environment.URL_APP;
-  private urlDelete: string = this.url_mater+'/ActividadesDiarias/EliminarActividadDiaria';
+  private urlDelete: string = this.url_mater+'ActividadesDiarias/EliminarActividadDiaria';
 
   constructor(
     private http: HttpClient
