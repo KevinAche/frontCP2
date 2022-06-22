@@ -26,9 +26,7 @@ import {ConsultaConvocatoriaComponent} from './consulta-convocatoria/consulta-co
 import {HttpClientModule} from '@angular/common/http';
 import {DesigTutorEmpresarialComponent} from './desig-tutor-empresarial/desig-tutor-empresarial.component';
 import {DesigTutorAcademicoComponent} from './desig-tutor-academico/desig-tutor-academico.component';
-import {
-  ConsultasEstudiantesAsignadosComponent
-} from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
+import { ConsultasEstudiantesAsignadosComponent} from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import {GestionEmpresaComponent} from './gestion-empresa/gestion-empresa.component';
 import {RegistroAsistenciaComponent} from './registro-asistencia/registro-asistencia.component';
 import {TableModule} from 'primeng/table';
@@ -42,19 +40,13 @@ import {MatFormFieldModule} from '@angular/material/form-field';
 import {ConsultasReportesComponent} from './consultas-reportes/consultas-reportes.component';
 import {ConsultaEstadoComponent} from './consulta-estado/consulta-estado.component';
 import {InformeFinalAlumnoComponent} from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
-import {
-  EvaluacionEstudianteTutorEmpresarialComponent
-} from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import {EvaluacionEstudianteTutorEmpresarialComponent} from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import {RegistroConvocatoriaComponent} from './registro-convocatoria/registro-convocatoria.component';
 import {RegistroSeguimientoAlumnoComponent} from './registro-seguimiento/registro-seguimiento.components';
 import {CertificadoAlumnoComponent} from './certificado-alumno/certificado-alumno.components';
-import {
-  EvaluacionEstudianteTutorAcademicoComponent
-} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
+import {EvaluacionEstudianteTutorAcademicoComponent} from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
 import {MatTreeModule} from '@angular/material/tree';
-import {
-  InformeFinalTutorAcademicoComponent
-} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
+import {InformeFinalTutorAcademicoComponent} from './informe-final-tutor-academico/informe-final-tutor-academico.component';
 import {AnexosdePPPComponent} from './anexosde-ppp/anexosde-ppp.component';
 import {ActaReunionComponent} from './acta-reunion/acta-reunion.component';
 import {GestionVisitasComponent} from './gestion-visitas/gestion-visitas.component';
@@ -79,7 +71,7 @@ import {ListaResponsablepppComponent} from './lista-responsableppp/lista-respons
 import {CrearEmpleadoComponent} from './empresa/crear-empleado/crear-empleado.component';
 import {OrderListModule} from 'primeng/orderlist';
 import {SolicitudEmpresa} from "./models/SolicitudEmpresa";
-
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
@@ -158,6 +150,7 @@ import {HistorialComponent} from "./historial/historial.component";
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,

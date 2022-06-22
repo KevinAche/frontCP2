@@ -18,7 +18,7 @@
       <form>
         <h3>
           <table class="table table-striped">
-            <thead>
+            <thead class="bg-warning">
             <tr>
               <th scope="col">Cedula</th>
               <th scope="col">Apellidos</th>
@@ -48,7 +48,6 @@
 
             <tr *ngIf="solitud.estado==true; else login">
             </tr>
-
             <ng-template #login>
               <tr *ngIf="verSeleccion=='Seleccione una convocatoria'">
                 <td>{{solitud.alumno.persona.primerApellido}} {{solitud.alumno.persona.segundoApellido}}</td>
@@ -59,14 +58,9 @@
               </tr>
             </ng-template>
             </tbody>
-
-
           </table>
         </h3>
       </form>
-
-
     </mat-card>
-
   </div>
 </section>

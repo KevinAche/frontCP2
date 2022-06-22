@@ -1,71 +1,27 @@
 import {Component, DoCheck, OnDestroy, OnInit} from '@angular/core';
-import {ConEstadoService} from "../services/conEstado.service";
 import {Convocatoria} from "../models/Convocatoria";
+import { HistorialService} from '../services/historial.services';
 
 @Component({
   selector: 'app-consulta-estado',
   templateUrl: './consulta-estado.component.html',
-  styleUrls: ['./consulta-estado.component.css'],
-  providers: [ConEstadoService]
+  styleUrls: ['./consulta-estado.component.css']
 })
 
-export class ConsultaEstadoComponent implements OnInit, DoCheck, OnDestroy {
-  public titulo: string;
-  public columnasConvocatorias: any[];
+export class ConsultaEstadoComponent implements OnInit {
 
-
-  constructor(private  _conEstadoService: ConEstadoService ) {
-    this.titulo = "Estado de Convocatorias"
-
-  }
-
-  // varible data es la lista de convocatorias y es de tipo any por que no se sabe el ipo que sera
-
-  dataConvocatoria: any[];
-
+  searchText: any;
+  public ConsultaEstado:Array<any>=[];
+  constructor(private historialService:HistorialService) { }
 
   ngOnInit(): void {
-    //Probando funcionamiento
-    console.log("Componente iniciado On init")
-    // console.log(this._conEstadoService.holaMundo());
-    this.columnasConvocatorias = [
-      {field:'idConvocatoria',header:'Id'},
-      {field:'docConvocatoria',header:'Documento'},
-      {field:'fechaEmision',header:'F. Recibido'},
-      {field:'fechaMaxima',header:'F. Hasta'},
-      {field:'nombreConvocatoria',header:'Nombre '},
-      {field:'SolicitudEmpresa',header:'Id Empresa'}
-    ]
-    this.obtenerConvocatorias();
-
+    this.listarConsultaEstado();
   }
 
-  obtenerConvocatorias(): void{
-    this._conEstadoService.getConvocatorias().then( value => {
-        this.dataConvocatoria = value['data'];
-        console.log(this.dataConvocatoria);
-      })
+  public listarConsultaEstado(){
+    this.historialService.getHistorial().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.ConsultaEstado= resp.data
+    })
   }
-
-  // obtenerConvocatoriasId(id:bigint ): ConEstadoService[] {
-  //   this._conEstadoService.getConvocatorias().then( value => {
-  //     this.dataConvocatoria = value['data'];
-  //     console.log(this.dataConvocatoria.filter( convocatoria => convocatoria.id == id));
-  //   })
-  // }
-
-  // calculoDiasRestantes(){
-  //   var fecha1 = moment(this.dataConvocatoria.);
-  //
-  // }
-
-  ngDoCheck(): void {
-    console.log("Componente iniciado DoCheck")
-  }
-
-  ngOnDestroy(): void {
-    console.log("Componente iniciado OnDestroy")
-  }
-
-
 }

@@ -6,24 +6,17 @@
     </mat-card-title>
     <br>
     <mat-card>
-      <h2 style="color: #1d3557;">Convocatorias</h2>
-      <!--<div>
-        <select class="form-control">
-          <option>Seleccione una convocatoria </option>
-          <option >Lsas Patas</option>
-        </select>
-      </div>-->
-      <br>
-        <div>
-          <input class="form-control mr-sm-2" type="search" placeholder="Buscar Proceso" aria-label="Search">
-        </div>
+      <h2 style="color: #1d3557;">Buscar Convocatorias</h2>
+      <div class="search-historial">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="">
+      </div>
 
       <br>
       <h2 style="color: #1d3557;">Historial de procesos</h2>
       <form>
         <h3>
           <table class="table table-striped">
-            <thead>
+            <thead class="bg-warning">
             <tr>
               <th scope="col">Fecha Emision</th>
               <th scope="col">Fecha Maxima</th>
@@ -35,7 +28,7 @@
             </thead>
 
             <tbody >
-              <tr *ngFor="let historial of historialC">
+              <tr *ngFor="let historial of historialC | filter:searchText">
                 <td>{{historial.fechaEmision}}</td>
                 <td>{{historial.fechaMaxima}}</td>
                 <td>{{historial.nombreConvocatoria}}</td>
