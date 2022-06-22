@@ -68,15 +68,14 @@
             <span>Carreras</span>
           </mat-panel-title>
         </mat-expansion-panel-header>
-
-        <button mat-button class="button-accordion" routerLink="/listar-carreras">
-          <mat-icon>list</mat-icon>
-          <span>Listar </span>
-        </button>
-
+      
         <button mat-button class="button-accordion" routerLink="/crear-carrera">
           <mat-icon>add</mat-icon>
           <span> Nueva </span>
+        </button>
+        <button mat-button class="button-accordion" routerLink="/listar-carreras">
+          <mat-icon>list</mat-icon>
+          <span>Listar </span>
         </button>
 
       </mat-expansion-panel>
@@ -95,6 +94,33 @@
           <mat-icon>add</mat-icon>
           <span>Nuevo</span>
         </button>
+        <button mat-button class="button-accordion" routerLink="/gestion-docentes">
+          <mat-icon>list</mat-icon>
+          <span>Listar</span>
+        </button>
+
+      </mat-expansion-panel>
+    </mat-accordion>
+
+
+    <mat-accordion multi>
+      <mat-expansion-panel>
+        <mat-expansion-panel-header>
+          <mat-panel-title>
+            <mat-icon>business</mat-icon>
+            <span>Empresa</span>
+          </mat-panel-title>
+        </mat-expansion-panel-header>
+
+        <button mat-button class="button-accordion" routerLink="/registro-empresa">
+          <mat-icon>add</mat-icon>
+          <span>Nuevo</span>
+        </button>
+        <button mat-button class="button-accordion" routerLink="/gestion-empresa">
+          <mat-icon>list</mat-icon>
+          <span>Listar</span>
+        </button>
+        
 
       </mat-expansion-panel>
     </mat-accordion>

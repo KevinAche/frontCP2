@@ -64,7 +64,7 @@ export class GestionEmpresaComponent implements OnInit {
       vision: ['', Validators.required],
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
-      nombreEmpresa: ['', Validators.required]
+      
 
     });
 
@@ -77,6 +77,7 @@ export class GestionEmpresaComponent implements OnInit {
       { field: 'direccion', header: 'Dirección' },
       { field: 'naturaleza', header: 'Naturaleza' },
       { field: 'size', header: 'Acciones' },
+      { field: 'convenio', header: 'Convenio' },
 
     ];
     this.listarEmpresas();
