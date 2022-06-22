@@ -6,6 +6,7 @@ import {EmpleadoService} from "../../services/empleado.service";
 import {Persona} from "../../models/Persona";
 import {TokenService} from "../../services/token.service";
 import {PersonaService} from "../../services/persona.service";
+import {MessageService} from "primeng/api";
 
 @Component({
   selector: 'app-crear-empleado',
@@ -28,7 +29,8 @@ export class CrearEmpleadoComponent implements OnInit {
     private activatedRoute: ActivatedRoute,
     private empleadoService: EmpleadoService,
     private tokenservice: TokenService,
-    private personaService: PersonaService
+    private personaService: PersonaService,
+    private _messageService: MessageService
   ) {
   }
 
@@ -84,20 +86,47 @@ export class CrearEmpleadoComponent implements OnInit {
 
       this.personaService.crearPersona(objetoPersona).then(value => {
         this.empleadoService.crearEmpleado(objetoPersona.cedula, this.empresaData[0].idEmpresa, objetoEmpleado).then(value1 => {
-          console.log('EMPLEADO REGISTRADO')
+          this.mostarMensajeCorrecto('El empleado fue registrado exitosamente')
+          this.formEmpleado.reset();
         })
           .catch((err) => {
-            console.log('ERROR EN CREAR EMPLEADO', err)
+            this.personaService.getPersonasByCedula(objetoPersona.cedula).subscribe(value1 => {
+              this.personaService.deletePersona(value1[0].idPersona).then(value2 => {
+                this.mostrarMensajeError('SE CREO PERSONA PERO COMO NO SE CREO PERSONAL SE ELIMINO')
+              })
+            })
           })
         console.log(value['mensaje'])
       }).catch((err) => {
         console.log('ERROR AL CREAR PERSONA', err)
+        this.mostrarMensajeError('ERROR AL CREAR PERSONA')
       })
 
     } else {
-      console.log('EL FORMULARIO NO ES VALIDO')
+      this.mostrarMensajeError('NO ESTAN INGRESADOS TODOS LOS DATOS, VERIFICAR!')
     }
 
   }
 
+
+
+  //metodos para mensajes en pantalla
+  mostrarMensajeError(mensaje: String): void {
+    this._messageService.add({
+      severity: 'error',
+      summary: 'Error',
+      detail: 'Incorrecto: ' + mensaje,
+      life: 3000,
+    });
+  }
+
+
+  mostarMensajeCorrecto(mensaje: String): void {
+    this._messageService.add({
+      severity: 'success',
+      summary: 'Hecho',
+      detail: 'Correcto: ' + mensaje,
+      life: 3000,
+    });
+  }
 }
