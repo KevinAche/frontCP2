@@ -1,4 +1,4 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
 import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
@@ -39,6 +39,7 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
+import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
 
 
 const routes: Routes = [
@@ -152,6 +153,7 @@ const routes: Routes = [
   },
   { path: 'gestion-visitas', component: GestionVisitasComponent },
   { path: 'lista-responsableppp', component: ListaResponsablepppComponent },
+  
   { path: '**', component: PagenotfoundComponent },
 ];
 

@@ -8,7 +8,8 @@
           <mat-card>
             <h1 style=" text-align: center;color: #0a172a; "><u>DATOS ESTUDIANTE</u></h1>
             <h2 style="color: #1d3557;">INGRESE CÉDULA</h2>
-            <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search">
+            <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search"
+            (keyup)="buscarestudiante($event)">
             <br>
             <h2 style="color: #1d3557;">DATOS DE ESTUDIANTE SELECCIONADO</h2>
 
@@ -17,15 +18,18 @@
 
                 <div class="form-group col-md-6">
                   <label for="inputEmail4">Estudiante:</label>
-                  <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true">
+                  <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true"
+                  [(ngModel)]="estudiante">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">Empresa:</label>
-                  <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+                  <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true"
+                  [(ngModel)]="tutore.personalEmpresa.empresa.nombreEmpresa">
                 </div>
                 <div class="form-group col-md-6">
                   <label for="inputPassword4">TUTOR ACADEMICO:</label>
-                  <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true">
+                  <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true"
+                  [(ngModel)]="tutoracademico">
                 </div>
               </div>
             </div>
@@ -40,29 +44,34 @@
 
             <div class="form-group col-md-6">
               <label for="inputEmail4">Fecha de Seguimiento:</label>
-              <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" >
+              <input type="date" class="form-control" id="inputEmail4" placeholder="Dato" 
+              [(ngModel)]="cronograma.fechaSeguimiento">
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Actividades según cronograma:</label>
-              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" >
+              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" 
+              [(ngModel)]="cronograma.numActividad">
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Fecha Finalización Prevista:</label>
-              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" >
+              <input type="date" class="form-control" id="inputPassword4" placeholder="Dato" 
+              [(ngModel)]="cronograma.fechaFinalizacion" >
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Porcentaje de Avance:</label>
-              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato">
+              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato"
+              [(ngModel)]="cronograma.porcentaje" >
             </div>
             <div class="form-group col-md-6">
               <label for="inputPassword4">Observaciones:</label>
-              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato">
+              <input type="text" class="form-control" id="inputPassword4" placeholder="Dato"
+              [(ngModel)]="cronograma.observacion" >
             </div>
           </div>
         </div>
 
         <div class="d-grid gap-2 col-6 mx-auto">
-          <button class="btn btn-primary" type="button">Agregar Registro</button>
+          <button class="btn btn-primary" type="button" (click)="CrearRegistro()">Agregar Registro</button>
         </div>
       </mat-card>
 <br><br>
@@ -102,3 +111,4 @@
     </div>
 
 </section>
+
