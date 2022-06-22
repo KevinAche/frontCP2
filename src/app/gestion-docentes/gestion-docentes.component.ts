@@ -19,29 +19,12 @@ import { Persona } from '../models/Persona';
 })
 export class GestionDocentesComponent implements OnInit {
 
-
-  cols: any[];
   dis: boolean;
   docentes : Docente[];
-
-
-
-  showDialogEdit(doc:Docente):void {
-    this.dis= true;
-    this.docente = {
-      idDocente:doc.abrevTitulo,
-      area: doc.area,
-      titulo:doc.titulo,
-      carrera:doc.carrera,
-      abrevTitulo:doc.abrevTitulo,
-      persona: doc.persona
-    };
-  }
-
   docente: Docente;
   formDocente: FormGroup;
   formPersona: FormGroup;
-  persona: Persona;
+  persona: Persona = new Persona();
   carreras : Carrera[];
   carrera :Carrera;
 
@@ -51,6 +34,19 @@ export class GestionDocentesComponent implements OnInit {
   dropselect: Carrera;
   tipo_d: String;
 
+
+  showDialogEdit(doc:any):void {
+
+    this.BuscarPersonaCedula( doc.cedula.toString());
+    this.dis= true;
+    this.docente =doc;
+
+    this.docente.abrevTitulo =doc.abrev_titulo;
+    this.tipo_d = doc.carrera;
+    this.banpersona=true;
+    this.bantitulo=false;
+  }
+
   constructor(
     private router: Router,
     private formBuilder: FormBuilder,
@@ -59,10 +55,9 @@ export class GestionDocentesComponent implements OnInit {
     private carreraservice:CarreraService,
     private personaservice : PersonaService
   ) {   }
- 
+
   ngOnInit(): void {
-    this.listarDocentes();
-    this.listarCarreras();
+
     this.formDocente = this.formBuilder.group({
       abrevtitulo: ['', Validators.required],
       titulo: ['', Validators.required],
@@ -79,25 +74,33 @@ export class GestionDocentesComponent implements OnInit {
       fechan: ['', Validators.required],
       telefono: ['', Validators.required],
     });
-    this.cols = [
-      { field: 'idDocente', header: 'ID' },
-      { field: 'abrevTitulo', header: 'Abrev.' },
-      { field: 'titulo', header: 'Titulo' },
-      { field: 'area', header: 'Area' },
-      { field: 'carrera', header: 'Carrera' },
-      { field: 'persona', header: 'Nombre' },
-      { field: 'acc', header: 'Acciones' },
-    ];
+
     this.persona  = new Persona();
     this.docente = new Docente();
-    this.docente.persona=this.persona;
+    this.listaDocentes();
+    this.listarCarreras();
   }
 
-  
+  public BuscarPersonaCedula(ced: String): void {
+    this.personaservice.getPersonasByCedula(ced).subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.persona = resp.data[0];
+    })
+
+  }
+
   listarCarreras():void {
     this.carreraservice.getCarreras().subscribe(value => {
       this.carreras=value['data'];
     })
+  }
+
+  listaDocentes(){
+    this.docenteservice.getDocentes().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.docentes = resp.data
+    }
+    )
   }
 
 
@@ -112,20 +115,26 @@ export class GestionDocentesComponent implements OnInit {
       return;
     }
 
-    this.docente.carrera=this.carrera;
-    console.log(this.docente);
-    this.dis=false;
-    swal.fire(
-      'Docente Guardado',
-      `Docente ${this.docente.persona.primerNombre} creado con exito!`,
-      'success'
+    this.docente.carrera=this.dropselect;
+
+    this.docenteservice.updateDocente(this.docente, this.persona.cedula)
+      .subscribe(docente => {
+
+        swal.fire(
+          'Docente Guardado',
+          `Docente ${this.persona.primerNombre} actualizado con exito!`,
+          'success'
+        )
+        this.dis = false;
+        window.location.reload();
+      }
     )
-    
+
   }
   public SiguienteDatos(): void {
-    
+
     if (this.formPersona.invalid) {
-      
+
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -133,14 +142,20 @@ export class GestionDocentesComponent implements OnInit {
       )
       return;
     }
-    
-    this.banpersona=false;
+
+    this.personaservice.updatePersona(this.persona)
+    .subscribe(persona => {
+      this.banpersona=false;
     this.bantitulo=true;
     swal.fire(
       'Datos personales',
       `Datos actualizados correctamente!`,
       'success'
     )
+    }
+  )
+
+
   }
 
 
@@ -160,14 +175,9 @@ export class GestionDocentesComponent implements OnInit {
     this.dis = false;
   }
 
-  listarDocentes():void {
-    this.docenteservice.getDocentes().then(value => {
-      this.docentes=value['data'];
-      console.log(this.docentes)
-    })
-  }
 
-  eliminarEmpresa(emp: Docente): void {
+
+  eliminarDocente(emp: Docente): void {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -177,7 +187,7 @@ export class GestionDocentesComponent implements OnInit {
     })
     swalWithBootstrapButtons.fire({
       title: 'Esta seguro que desea eliminar?',
-      text: `¡No podrás revertir esto! eliminar a ${emp.persona.cedula}`,
+      text: `¡No podrás revertir esto! eliminar a ${this.persona.cedula}`,
       icon: 'warning',
       showCancelButton: true,
       confirmButtonText: 'Si, Eliminar! ',
@@ -185,7 +195,7 @@ export class GestionDocentesComponent implements OnInit {
       reverseButtons: true
     }).then((result) => {
       if (result.isConfirmed) {
-        this.docenteservice.deleteDocente(emp.idDocente).subscribe(
+        this.docenteservice.deleteDocente(this.persona.cedula).subscribe(
           response => {
             this.docentes = this.docentes.filter(servi => servi !== emp)
             swalWithBootstrapButtons.fire(
@@ -207,5 +217,5 @@ export class GestionDocentesComponent implements OnInit {
       }
     })
   }
-  
+
 }

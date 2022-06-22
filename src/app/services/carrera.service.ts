@@ -14,6 +14,7 @@ import swal from "sweetalert2";
 export class CarreraService {
 
     _url ='https://backendg1c2.herokuapp.com/GestionCarrera'
+    private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
   constructor(
     private http: HttpClient
@@ -37,6 +38,16 @@ export class CarreraService {
           return throwError(e);
         })
       );
+  }
+
+  updateCarrera(id: String,carrera: Carrera): Observable<Carrera>{
+    return this.http.put<Carrera>(`${environment.URL_APP+'GestionCarrera/EditarCarrera'}/
+    ${id}`, carrera, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al actualizar', 'NO se puede actualizar la carrera', 'error')
+        return throwError(e);
+      })
+    );
   }
 
 

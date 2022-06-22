@@ -35,7 +35,7 @@
                     <button  pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="eliminarTutor()"></button>
                 </span>
                 <span *ngSwitchCase="'doc_asignacion'" >
-                    <button pButton pRipple type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary" >
+                    <button pButton pRipple type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary" (click)="checkForMIMEType()">
                     </button>
                 </span>
                 <span *ngSwitchDefault>{{dataTutores[col.field]}}</span>

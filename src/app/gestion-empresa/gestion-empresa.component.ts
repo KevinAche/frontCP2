@@ -10,7 +10,7 @@ import { MessageService } from 'primeng/api';
 @Component({
   selector: 'app-gestion-empresa',
   templateUrl: './gestion-empresa.component.html',
-  styleUrls: ['./gestion-empresa.component.css'], 
+  styleUrls: ['./gestion-empresa.component.css'],
   providers: [MessageService]
 })
 export class GestionEmpresaComponent implements OnInit {
@@ -24,7 +24,6 @@ export class GestionEmpresaComponent implements OnInit {
 
   showDialog() {
     this.empresa.direccion = null;
-    this.empresa.duracionConvenio = null;
     this.empresa.idEmpresa = null;
     this.empresa.mision = null;
     this.empresa.vision = null;
@@ -43,8 +42,8 @@ export class GestionEmpresaComponent implements OnInit {
       telefono : emp.telefono,
       mision:emp.mision,
       vision:emp.vision,
-      duracionConvenio: emp.duracionConvenio,
-      ruc: emp.ruc
+      ruc: emp.ruc,
+      naturaleza: emp.naturaleza
     };
   }
 
@@ -61,7 +60,6 @@ export class GestionEmpresaComponent implements OnInit {
     this.formEmpresa = this.formBuilder.group({
       ruc: ['', Validators.required],
       empresa: ['', Validators.required],
-      duracionConvenio: ['', Validators.required],
       mision: ['', Validators.required],
       vision: ['', Validators.required],
       telefono: ['', Validators.required],
@@ -77,14 +75,16 @@ export class GestionEmpresaComponent implements OnInit {
       { field: 'mision', header: 'Mision' },
       { field: 'telefono', header: 'Telefono' },
       { field: 'direccion', header: 'Dirección' },
-      { field: 'duracionConvenio', header: 'Convenio' },
+      { field: 'naturaleza', header: 'Naturaleza' },
       { field: 'size', header: 'Acciones' },
+
     ];
     this.listarEmpresas();
   }
 
   editarEmpresa():void {
     if (this.formEmpresa.invalid) {
+      console.log("invalido")
       return;
     }
 
@@ -142,5 +142,5 @@ export class GestionEmpresaComponent implements OnInit {
       }
     })
   }
-  
+
 }

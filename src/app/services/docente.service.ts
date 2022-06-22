@@ -1,7 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Router } from '@angular/router';
-import { catchError, Observable, throwError } from 'rxjs';
+import { catchError, map, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
 import {environment} from "../../environments/environment";
 import { Docente } from '../models/Docente';
@@ -11,11 +11,11 @@ import { Docente } from '../models/Docente';
 })
 export class DocenteService {
 
-  _url = 'https://backendg1c2.herokuapp.com/GestionDocente'
+  _url =  environment.URL_APP+'GestionDocente'
 
   private urlCreate: string = this._url+'/CrearDocente';
-  private urlDelete: string = this._url+'/BuscarDocente';
-  private urlUpdate: string = this._url+'/EliminarDocente';
+  private urlDelete: string = this._url+'/EliminarDocente';
+  private urlUpdate: string = this._url+'/EditarDocente';
 
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
@@ -29,12 +29,19 @@ export class DocenteService {
     ).toPromise();
   }
 
-
-  getDocentes(): Promise<any[]> {
-    return this.http.get<any[]>(
-      environment.URL_APP+`GestionDocente/ListaDocentes`
-    ).toPromise();
+  getDocentes(): Observable<Docente[]> {
+    return this.http.get(environment.URL_APP+`GestionDocente/ListaDocentes`).pipe(
+      map(response => response as Docente[])
+    );
   }
+
+  getDocentesGeneral(): Observable<Docente[]> {
+    return this.http.get(environment.URL_APP+`GestionDocente/ListaDocentesGeneral`).pipe(
+      map(response => response as Docente[])
+    );
+  }
+
+
 
   createDocente(doc: Docente, ced :String, id : number): Observable<Docente> {
     return this.http.post<Docente>(`${this.urlCreate}/${ced}/${id}`, doc, { headers: this.httpHeaders }).pipe(
@@ -45,7 +52,7 @@ export class DocenteService {
     );
   }
 
-  deleteDocente(empid: number): Observable<Docente> {
+  deleteDocente(empid: String): Observable<Docente> {
     return this.http.delete<Docente>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al eliminar', 'No se puede eliminar', 'error')
@@ -54,8 +61,8 @@ export class DocenteService {
     );
   }
 
-  updateDocente(emp: Docente): Observable<Docente> {
-    return this.http.put<Docente>(`${this.urlUpdate}/${emp.idDocente}`, emp, { headers: this.httpHeaders }).pipe(
+  updateDocente(emp: Docente, ced : String): Observable<Docente> {
+    return this.http.put<Docente>(`${this.urlUpdate}/${ced}`, emp, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al actualizar', 'NO se puede actualizar a empresa', 'error')
         return throwError(e);

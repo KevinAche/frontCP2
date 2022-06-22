@@ -10,6 +10,7 @@ import {saveAs} from "file-saver";
 import Docxtemplater from "docxtemplater";
 import {EmpresaService} from "../services/empresa.service";
 import {Observable, ReplaySubject} from "rxjs";
+import { toBase64String } from '@angular/compiler/src/output/source_map';
 
 
 function loadFile(url: any, callback: any) {
@@ -136,7 +137,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
         this.obtenerListaTutores();
         this.mostarMensajeCorrecto(value['mensaje'])
       }).catch((err)=>{
-        this.mostrarMensajeError('El tutor no se puede borrar por que se encuentra es mas procesos')
+        this.mostrarMensajeError('El tutor no se puede borrar por que se encuentra en mas procesos')
       })
     }else{
       this.mostrarMensajeError('No puede elimar por que no ha clickeado sobre la fila')
@@ -198,7 +199,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
   }
 
   obtenerDocentes(): void {
-    this._docenteCrud.getDocentes().then(value => {
+    this._docenteCrud.getDocentes().subscribe(value => {
       this.dataDocentes = value['data'];
       this.mostarMensajeCorrecto('Lista de docentes generada');
     })
@@ -386,6 +387,47 @@ export class DesigTutorAcademicoComponent implements OnInit {
       saveAs(out, nombreDoc);
     });
   }
+
+
+
+  checkForMIMEType() {
+    var response = this.ObjetoTutor['doc_asignacion'];
+    console.log(response)
+    var blob;
+    if (response.mimetype == 'pdf') {
+      
+      blob = this.converBase64toBlob(response.content, 'application/pdf');
+    } else if (response.mimetype == 'doc') {
+      blob = this.converBase64toBlob(response.content, 'application/msword'); 
+        }
+
+    /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */  
+
+    blob = this.converBase64toBlob(response, 'application/pdf');
+    var blobURL = URL.createObjectURL(blob);
+    window.open(blobURL);
+  }
+  converBase64toBlob(content, contentType) {
+    contentType = contentType || '';
+    var sliceSize = 512;
+    var byteCharacters = window.atob(content); //method which converts base64 to binary
+    var byteArrays = [
+    ];
+    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
+      var slice = byteCharacters.slice(offset, offset + sliceSize);
+      var byteNumbers = new Array(slice.length);
+      for (var i = 0; i < slice.length; i++) {
+        byteNumbers[i] = slice.charCodeAt(i);
+      }
+      var byteArray = new Uint8Array(byteNumbers);
+      byteArrays.push(byteArray);
+    }
+    var blob = new Blob(byteArrays, {
+      type: contentType
+    }); //statement which creates the blob
+    return blob;
+  }
+
 
   dataURLtoFile(dataurl: any, filename: any) {
     let arr = dataurl.split(','),

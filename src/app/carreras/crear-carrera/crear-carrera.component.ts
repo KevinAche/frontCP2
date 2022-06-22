@@ -24,7 +24,8 @@ export class CrearCarreraComponent implements OnInit {
     this.formCarrera = this.formBuilder.group({
       nombre: ['', Validators.required],
       abreviatura: ['', Validators.required],
-      modalidad: ['', Validators.required]
+      modalidad: ['', Validators.required],
+      duracion: ['', Validators.required]
     });
   }
 
@@ -60,6 +61,8 @@ export class CrearCarreraComponent implements OnInit {
     this.carrera.nombre = null;
     this.carrera.abreviatura = null;
     this.carrera.modalidad = null;
+    this.carrera.duracion = null;
+    this.carrera.idCarrera = null;
   }
 
 }
