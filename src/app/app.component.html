@@ -9,7 +9,7 @@
       </mat-icon>
     </button>
   </div>
-  <a (click)="bannoti = true" style="padding: 10px;">
+  <a (click)="bannoti = true" style="padding: 20px;">
     <i class="pi pi-inbox"></i>
   </a>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
@@ -411,9 +411,10 @@
 
 </mat-sidenav-container>
 <p-sidebar [(visible)]="bannoti" position="right" [baseZIndex]="10000">
-  
+  <mat-card-title>Notificaciones</mat-card-title>
+  <br><br>
     <div class="card">
-      
+     
       <p-table [value]="notificaciones" responsiveLayout="scroll">
         
         <ng-template pTemplate="body" let-noti>
