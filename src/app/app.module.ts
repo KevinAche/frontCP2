@@ -78,7 +78,7 @@ import {OrderListModule} from 'primeng/orderlist';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ListboxModule} from 'primeng/listbox';
-
+import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -111,7 +111,7 @@ import {ListboxModule} from 'primeng/listbox';
     EvaluacionEstudianteTutorEmpresarialComponent,
     RegistroSeguimientoAlumnoComponent,
     CertificadoAlumnoComponent,
-
+    InformeAcreditacionComponent,
     //Lisseth
     EvaluacionEstudianteTutorAcademicoComponent,
     InformeFinalTutorAcademicoComponent,
@@ -137,6 +137,7 @@ InformeFinalAlumnoComponent,
 EvaluacionEstudianteTutorEmpresarialComponent,
 RegistroSeguimientoAlumnoComponent,
 CertificadoAlumnoComponent,
+
 
 
 //Lisseth
