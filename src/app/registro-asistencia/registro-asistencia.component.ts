@@ -46,7 +46,7 @@ export class RegistroAsistenciaComponent implements OnInit {
   public datoEstudiante: any;
   public datoEmpresa: any;
   public datoTutor: any;
-  public datoCarrera:any;
+  public datoCarrera: any;
 
   showDialog(idRegiAsi: any) {
     this.dis = true;
@@ -54,13 +54,13 @@ export class RegistroAsistenciaComponent implements OnInit {
 
   }
 
-  showDialogGuardar(est: any, emp: any, tut: any,carr:any) {
+  showDialogGuardar(est: any, emp: any, tut: any, carr: any) {
     this.dialogoGuardaryGenerar = true;
     this.datoEstudiante = est;
     this.datoEmpresa = emp;
     this.datoTutor = tut;
-    this.datoCarrera=carr;
-    
+    this.datoCarrera = carr;
+
   }
 
 
@@ -167,7 +167,7 @@ export class RegistroAsistenciaComponent implements OnInit {
 
   //Metodo de borrar
 
-  borrarActividad(id: ActividadesDiarias) {
+  borrarActividad(id:any) {
 
     swal.fire({
       title: '¿Estas seguro?',
@@ -180,7 +180,8 @@ export class RegistroAsistenciaComponent implements OnInit {
     }).then((result) => {
       if (result.isConfirmed) {
 
-        this.actividadesDiariasService.deleteActividad(id.idActividadesD).subscribe(
+        this.actividadesDiariasService.deleteActividad(id).subscribe(
+          
           Response => {
             this.listaActividades = this.listaActividades.filter(servi => servi !== id)
 
@@ -189,6 +190,7 @@ export class RegistroAsistenciaComponent implements OnInit {
               'Su actividad ha sido eliminada.',
               'success'
             )
+            this.listarActividades();
           }
         )
 
@@ -201,7 +203,7 @@ export class RegistroAsistenciaComponent implements OnInit {
 
   //metodo generar documento
 
-  generate(est: any , emp:any , tut:any , car:any) {
+  generate(est: any, emp: any, tut: any, car: any) {
 
     loadFile("https://backendg1c2.herokuapp.com/files/anexo9.docx", function (
       error,
@@ -216,11 +218,11 @@ export class RegistroAsistenciaComponent implements OnInit {
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
-        
+
         estudiante: est,
-        empresa:emp,
-        NombreTutor:tut,
-        carrera:car,
+        empresa: emp,
+        NombreTutor: tut,
+        carrera: car,
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
