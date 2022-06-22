@@ -33,17 +33,26 @@ export class RegistroAsistenciaComponent implements OnInit {
 
 
   public dialogoMiRegistro: boolean;
+  public dialogoGuardaryGenerar: boolean;
   public contador = 0;
   public dis: boolean;
   public cedulaAlumno: any;
   formValidacion: FormGroup;
+  formGuardar:FormGroup;
 
-
+  public datoEstudiante:any;
+  public datoEmpresa:any;
+  public datoTutor:any;
 
   showDialog(idRegiAsi: any) {
     this.dis = true;
     this.actividadesDiarias.registroA.idRegistroAsistencia = idRegiAsi;
 
+  }
+
+  showDialogGuardar() {
+    this.dialogoGuardaryGenerar=true;
+    
   }
 
 

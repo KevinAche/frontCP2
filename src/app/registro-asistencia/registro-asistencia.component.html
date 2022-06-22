@@ -120,13 +120,13 @@
 
 
                 <div class="d-grid gap-2 col-3 mx-auto">
-                  <button class="btn btn-primary" style="background: #5c1818; color: white;" pButton icon="pi pi-download"
-                    label="GENERAR DOCUMENTO" (click)="generate('Franklin')"></button>
+                  <button class="btn btn-primary" style="background: #5c1818; color: white;" pButton
+                    icon="pi pi-check-circle" label="DOCUMENTACIÓN" (click)="showDialogGuardar()"></button>
                 </div>
 
               </mat-card>
 
-              
+
 
             </div>
 
@@ -212,11 +212,67 @@
 
 
       <div class="d-grid gap-2 col-4 mx-auto">
-        <button type="submit" pButton icon="pi pi-save" (click)="create()" label="ENVIAR"
-          class="ui-button-secondary" style="background: #223a32; color: white;"></button>
+        <button type="submit" pButton icon="pi pi-save" (click)="create()" label="ENVIAR" class="ui-button-secondary"
+          style="background: #223a32; color: white;"></button>
       </div>
 
     </form>
 
   </p-dialog>
 </section>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para mandar solicitud-->
+<p-dialog [(visible)]="dialogoGuardaryGenerar" [style]="{width:'60vw'}" [draggable]="false" [baseZIndex]="10000"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <mat-card class="card" style="width: 100%;">
+
+      <form [formGroup]="formGuardar">
+
+
+        <!--LINEA 1-->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="fecha">ESTUDIANTE:</label>
+            <input type="text" class="form-control" id="fecha" formControlName="fecha">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="numHoras">EMPRESA:</label>
+            <input type="text" class="form-control" id="numHoras" formControlName="numHoras">
+          </div>
+
+        </div>
+
+        <!--LINEA 2-->
+        <div class="form-row">
+          <div class="form-group col-md-6">
+            <label for="horaLlegada">TUTOR:</label>
+            <input type="text" class="form-control" id="horaLlegada" formControlName="horaLlegada">
+          </div>
+
+          <div class="form-group col-md-6">
+            <label for="horaSalida">SELECCIONE DOCUMENTO</label>
+            <input type="file" class="form-control" id="horaSalida" formControlName="horaSalida">
+          </div>
+
+        </div>
+
+        <!--botones-->
+
+        <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+          <button class="btn btn-primary me-md-2" type="button"  style="background: #9f2a2a; color: white;" >DESCARGAR DOCUMENTO</button>
+          <button class="btn btn-primary" type="button" style="background: #28528d; color: white;">SUBIR DOCUMENTO</button>
+        </div>
+
+
+      </form>
+
+    </mat-card>
+
+  </ng-template>
+
+</p-dialog>
