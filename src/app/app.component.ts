@@ -20,6 +20,7 @@ export class AppComponent implements OnInit {
   title = 'casopractico-dos';
   loginForm!: FormGroup;
   roles: string[];
+  bannoti:boolean;
   isUser = false;
   isAdmin = false;
   isDocente = false;
@@ -30,6 +31,10 @@ export class AppComponent implements OnInit {
   isEmpleado = false;
   isLogged = false;
   realRol: String;
+
+
+  notificaciones: noti[];
+  notificacion: noti;
 
   public personas: Array<any> = []
 
@@ -55,6 +60,30 @@ export class AppComponent implements OnInit {
     }
 
   ngOnInit(): void {
+
+    // Array de notifcaciones ejemplo
+
+    this.notificaciones=[
+      {name: "Primera notificacion", descripcion:"Se confirmo su participacion en la empresa TTTT"},
+      {name: "Segunda notificacion", descripcion:"Nueva solicitud enviada a la empresa TTTT"},
+      {name: "Tercera notificacion", descripcion:"Se ha sido asignado a los alumnos en la empresa TTTT"},
+      {name: "Cuarta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Quinta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Sexta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Septima notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Octava notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Novena notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Decima notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+      ,
+      {name: "Onceava notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
+
+  ];
 
     this.changeDedectionRef.detectChanges();
     if(this.tokenService.getToken()){
@@ -130,4 +159,9 @@ export class AppComponent implements OnInit {
   }
 
 
+}
+
+interface noti{
+  name:String;
+  descripcion:String;
 }

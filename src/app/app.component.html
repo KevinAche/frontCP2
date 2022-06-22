@@ -9,6 +9,9 @@
       </mat-icon>
     </button>
   </div>
+  <a (click)="bannoti = true" style="padding: 10px;">
+    <i class="pi pi-inbox"></i>
+  </a>
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
   <!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
@@ -407,5 +410,20 @@
   </mat-sidenav-content>
 
 </mat-sidenav-container>
+<p-sidebar [(visible)]="bannoti" position="right" [baseZIndex]="10000">
+  
+    <div class="card">
+      
+      <p-table [value]="notificaciones" responsiveLayout="scroll">
+        
+        <ng-template pTemplate="body" let-noti>
+          <tr>
+              <td>{{noti.name}} | {{noti.descripcion}} </td>
+              
+          </tr>
 
+        </ng-template>
+    </p-table>
+  </div>
+</p-sidebar>
 <app-footer></app-footer>

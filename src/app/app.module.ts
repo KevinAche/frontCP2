@@ -79,6 +79,10 @@ import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ListboxModule} from 'primeng/listbox';
 import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {SidebarModule} from 'primeng/sidebar';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+
 @NgModule({
   declarations: [
     AppComponent,
@@ -191,7 +195,10 @@ SolicitudEmpresaComponent,
     OrderListModule,
     MessagesModule,
     MessageModule,
-   ListboxModule
+   ListboxModule,
+   OverlayPanelModule,
+   SidebarModule,
+   VirtualScrollerModule
 
   ],
   providers: [MessageService,ConfirmationService],
