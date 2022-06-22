@@ -83,6 +83,7 @@ export class DesigTutorAcademicoComponent implements OnInit {
       {field: 'carrera', header: 'Carrera'},
       {field: 'nombre_empresa', header: 'Solicitud a empresa'},
       {field: 'aginarta', header: 'Asignar tutor'},
+
     ];
 
     this.conlumnasDocentes = [
@@ -395,13 +396,13 @@ export class DesigTutorAcademicoComponent implements OnInit {
     console.log(response)
     var blob;
     if (response.mimetype == 'pdf') {
-      
+
       blob = this.converBase64toBlob(response.content, 'application/pdf');
     } else if (response.mimetype == 'doc') {
-      blob = this.converBase64toBlob(response.content, 'application/msword'); 
+      blob = this.converBase64toBlob(response.content, 'application/msword');
         }
 
-    /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */  
+    /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */
 
     blob = this.converBase64toBlob(response, 'application/pdf');
     var blobURL = URL.createObjectURL(blob);
@@ -441,14 +442,14 @@ export class DesigTutorAcademicoComponent implements OnInit {
     return new File([u8arr], filename, {type: mime});
   }
 
-  onFileSelected(event) {
-    this.convertFile(event.files['0']).subscribe(base64 => {
-      this.base64Output = base64;
-      this.tutor = {
-        docAsignacion: this.base64Output
-      };
-      this.mostarMensajeCorrecto('El archivo fue cargado con exito')
-    });
+    onFileSelected(event) {
+      this.convertFile(event.files['0']).subscribe(base64 => {
+        this.base64Output = base64;
+        this.tutor = {
+          docAsignacion: this.base64Output
+        };
+        this.mostarMensajeCorrecto('El archivo fue cargado con exito')
+      });
   }
 
   convertFile(file : File) : Observable<string> {

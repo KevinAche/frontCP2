@@ -26,7 +26,7 @@ export class ListaResponsablepppComponent implements OnInit {
   }
 
   obtenerResponsable(): void {
-    this.responsableppp.getResponsable().then((value) => {
+    this.responsableppp.getResponsables().then((value) => {
       this.dataResponsable = value['data'];
       console.log(this.dataResponsable);
     });

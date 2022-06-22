@@ -22,6 +22,12 @@ export class EmpleadoService {
     return this.httpClient.get<Empleado[]>(environment.URL_APP + 'GestionPersonalEmpresa/ListaPersonal');
   }
 
+  getEmpleadosFiltrar(): Promise<any[]> {
+    return this.httpClient.get<any[]>(
+      environment.URL_APP + `GestionPersonalEmpresa/ListaPersonal`
+    ).toPromise();
+  }
+
   createEmpleado(empleado: Empleado, cedula: String, idEmp: number): Observable<Empleado> {
     return this.httpClient
       .post<Empleado>(environment.URL_APP + `GestionPersonalEmpresa/CrearPersonal/${cedula}/${idEmp}` ,empleado)

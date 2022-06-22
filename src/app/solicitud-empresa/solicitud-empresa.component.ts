@@ -1,4 +1,4 @@
-import { Component, OnInit } from '@angular/core';
+import {Component, OnInit, Pipe} from '@angular/core';
 import {Solicitud_empresaService} from "../services/solicitud_empresa.service";
 import {MessageService} from "primeng/api";
 import {TokenService} from "../services/token.service";
@@ -11,6 +11,9 @@ import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils";
 import {saveAs} from "file-saver";
+import {PersonaService} from "../services/persona.service";
+import {FormBuilder, FormGroup, Validators} from "@angular/forms";
+import {DatePipe} from "@angular/common";
 
 
 function loadFile(url: any, callback: any) {
@@ -25,6 +28,7 @@ function getBase64(file: any) {
     reader.onerror = error => reject(error);
   });
 }
+
 @Component({
   selector: 'app-solicitud-empresa',
   templateUrl: './solicitud-empresa.component.html',
@@ -44,6 +48,10 @@ export class SolicitudEmpresaComponent implements OnInit {
   objetoSolicitud: any;
   solicitud: any;
   base64Output: string;
+  datosLogeado: any[];
+  dataEmpleados: any[];
+  empleado: any;
+  formSolicitud: FormGroup;
 
   constructor(private _solicitudEmpresaCrud: Solicitud_empresaService,
               private _messageService: MessageService,
@@ -51,9 +59,11 @@ export class SolicitudEmpresaComponent implements OnInit {
               private _crudResponsable: ResponsablepppService,
               private _crudActividades: ActividadesConvenioService,
               private _crudEmpleado: EmpleadoService,
+              private _crudPersona: PersonaService,
+              private formBuilder: FormBuilder
   ) {
 
-    this.columnasSolicitudes=[
+    this.columnasSolicitudes = [
       {field: 'id_solicitud_empresa', header: 'Id Solicitud'},
       {field: 'fecha_emision', header: 'Fecha Emision'},
       {field: 'fecha_inicio', header: 'Fecha de incio'},
@@ -74,22 +84,27 @@ export class SolicitudEmpresaComponent implements OnInit {
       {field: 'nombre_carrera', header: 'Carrera a cargo'},
       {field: 'nombres_r', header: 'Nombres responsable'},
       {field: 'apellidos_r', header: 'Apellidos responsable'},
-      {field: 'designarC',header: 'Dirigida ha'},
+      {field: 'designarC', header: 'Dirigida ha'},
     ];
 
 
-    this.columnasActividades=[
+    this.columnasActividades = [
       {field: 'area', header: 'Area de activiadad'},
       {field: 'descripcion', header: 'Descripcion '},
     ];
 
     this.obtenerActividadesConvenio();
+    this.cargarLogeado();
+    this.obtenerEmpleado();
   }
-
 
 
   ngOnInit(): void {
 
+    this.formSolicitud = this.formBuilder.group({
+      fechaTentativa: ['', Validators.required],
+      numeroEstudiantes: ['', Validators.required]
+    });
   }
 
   //
@@ -98,49 +113,121 @@ export class SolicitudEmpresaComponent implements OnInit {
   dataSolicitudes: any[];
 
 
-
-  obtenerSolicitudes(): void{
+  obtenerSolicitudes(): void {
     this._solicitudEmpresaCrud.getSolicitudesEmpresa(this._tokenCrud.getUserName()).then(value => {
-      this.dataSolicitudes= value['data'];
+      this.dataSolicitudes = value['data'];
       this.mostarMensajeCorrecto('Se genero exitosamente listado de solicitudes generadas');
       console.log(this.dataSolicitudes);
-    }).catch((err)=>{
+    }).catch((err) => {
       this.mostrarMensajeError('No se genero listado de solicitudes');
     })
   }
 
-  obtenerResponsables(){
-    this._crudResponsable.getResponsables().then(value => {
-      this.dataResponsable=value['data'];
-      this.mostarMensajeCorrecto('EL LISTADO DE REPRESANTES SE GENERO EXITOSAMENTE');
-    }).catch((err)=>{
-      this.mostarMensajeCorrecto('ERROR AL LISTAR RESPONSABLES')
-    })
+  obtenerResponsables() {
+    if (this.formSolicitud.valid) {
+      let nombreDocumento: any = 'anexo1.' + this.empleado.primer_nombre + this.empleado.primer_apellido + '.docx';
+      let fechaActual = new Date().toLocaleDateString();
+      let fechacortada: any[] = fechaActual.split('/');
+      let actividadesDoc: any[] = [];
+      this.dataActividadesConvenio.forEach(value => {
+        let des: any = {
+          descripcion: value.descripcion
+        }
+        actividadesDoc.push(des);
+      });
+      console.log(actividadesDoc)
+      let dataGeneral: any = {
+        dia: fechacortada[0],
+        mes: this.devolvermes(fechacortada[1]),
+        año: fechacortada[2],
+        titulo: this.dataActividadesConvenio[0].abrev_titulo,
+        nombresrp: this.dataActividadesConvenio[0].nombresrp + ' ',
+        apellidosrp: this.dataActividadesConvenio[0].apellidosrp,
+        carrera: this.dataActividadesConvenio[0].carrera,
+        empresa: this.dataEmpresa[0].nombreEmpresa,
+        numestudiantes: this.formSolicitud.value.numeroEstudiantes,
+        actividades: actividadesDoc,
+        fechainicio: this.formSolicitud.value.fechaTentativa,
+        nombreempleado: this.empleado.primer_nombre + ' ' + this.empleado.primer_apellido,
+        cargo: this.empleado.cargo
+      }
+      this.generate(dataGeneral, 'https://backendg1c2.herokuapp.com/files/anexo1.docx', nombreDocumento);
+
+    } else {
+      this.mostrarMensajeError('NO PUEDE GENERAR EL DOCUMENTO POR QUE NO HA LLENADO LOS CAMPOS REQUERIDOS')
+    }
   }
 
-  anadirResponsable(){
-    if(this.ObjetoResponsable!= null){
+
+  enviarSolicitud() {
+    if (this.solicitud != null) {
+
+      let fechaActual = new Date().toLocaleDateString();
+      let fechacortada: any[] = fechaActual.split('/');
+      let pipefecha =  new DatePipe('en-US');
+      let fecha=null;
+      fecha=pipefecha.transform(Date.now(),'yyyy-MM-dd');
+      console.log(fecha);
+      let solicitud: any = {
+        estado: false,
+        fechaEmision: fecha,
+        fechaInicio: this.formSolicitud.value.fechaTentativa,
+        numeroAlumnos: this.formSolicitud.value.numeroEstudiantes,
+        pdfSolicitud: this.base64Output,
+        respuesta: "respuesta en espera"
+      }
+
+      console.log('CEDULA DE EMPLEADO LOGEADO: ' + this._tokenCrud.getUserName());
+      console.log('CEDULA DE RESPONSABLE  : ' + this.dataActividadesConvenio[0].cedula);
+      console.log('OBJETO PARA GUARAR :' ,solicitud);
+      let cedulaResponsables : any = this.dataActividadesConvenio[0].cedula;
+      this._solicitudEmpresaCrud.createSolicitud(this._tokenCrud.getUserName(),cedulaResponsables, solicitud).then(value => {
+        this.mostarMensajeCorrecto('SOLICITUD ENVIADA CORRECTAMENTE');
+        console.log(value['data']);
+      }).catch((err)=>{
+        console.log(err)
+        this.mostrarMensajeError('ERROR AL ENVIAR DOCUMENTO' +err.toString())
+      })
+
+
+    } else {
+      this.mostrarMensajeError('NO PUEDE ENVIAR SOLICITUD POR QUE NO HA ADJUNTADO EL DOCUMENTO')
+    }
+  }
+
+  anadirResponsable() {
+    if (this.ObjetoResponsable != null) {
       console.log(this.ObjetoResponsable);
 
-    }else{
+    } else {
       this.mostrarMensajeError('No puede continuar por que no seleccino ninguna fila');
     }
   }
 
 
-  obtenerActividadesConvenio():void {
+  obtenerActividadesConvenio(): void {
     this._crudEmpleado.getEmpresaLogeado(this._tokenCrud.getUserName()).then(value => {
-      this.dataEmpresa=value['data'];
+      this.dataEmpresa = value['data'];
       this._crudActividades.getActividadesEmpresaConvenio(this.dataEmpresa[0].idEmpresa).then(value1 => {
-        this.dataActividadesConvenio=value1['data'];
+        this.dataActividadesConvenio = value1['data'];
         console.log(this.dataActividadesConvenio)
       })
     })
   }
 
 
+  obtenerEmpleado() {
+    this._crudEmpleado.getEmpleadosFiltrar().then(value => {
+      this.dataEmpleados = value['data'];
+      console.log(this.dataEmpleados)
+      this.dataEmpleados.forEach(value1 => {
+        if (value1.cedula == this._tokenCrud.getUserName()) {
+          this.empleado = value1;
+        }
+      })
+    })
 
-
+  }
 
 
   mostrarMensajeError(mensaje: String): void {
@@ -162,17 +249,23 @@ export class SolicitudEmpresaComponent implements OnInit {
     });
   }
 
-  desplegarResponsables(){
+  desplegarResponsables() {
     this.dialogoResponsable = true;
-    this.obtenerResponsables();
   }
 
   onRowSelectResponsable(event): void {
-    this.ObjetoResponsable=null;
+    this.ObjetoResponsable = null;
     if (event.data) {
       this.dataRowResponsable = event.data;
       this.ObjetoResponsable = {...this.dataRowResponsable};
     }
+  }
+
+  cargarLogeado() {
+    this._crudPersona.getForPersona(this._tokenCrud.getUserName()).then(value => {
+      this.datosLogeado = value['data'];
+      console.log(this.datosLogeado);
+    })
   }
 
   onRowUnSelectResponsable(event): void {
@@ -182,8 +275,9 @@ export class SolicitudEmpresaComponent implements OnInit {
     }
   }
 
+  'https://backendg1c2.herokuapp.com/files/anexo1.docx'
 
-  generate(nom: any, anexoRequerido: string, nombreDoc: string):void  {
+  generate(nom: any, anexoRequerido: string, nombreDoc: string): void {
     loadFile(anexoRequerido, function (
       error,
       content
@@ -212,6 +306,7 @@ export class SolicitudEmpresaComponent implements OnInit {
           }
           return value;
         }
+
         //console.log(JSON.stringify({error: error}, replaceErrors));
         if (error.properties && error.properties.errors instanceof Array) {
           const errorMessages = error.properties.errors
@@ -234,9 +329,8 @@ export class SolicitudEmpresaComponent implements OnInit {
   }
 
 
-
   checkForMIMEType() {
-    var response = this.objetoSolicitud['doc_asignacion'];
+    var response = this.objetoSolicitud['pdf_solicitud'];
     console.log(response)
     var blob;
     if (response.mimetype == 'pdf') {
@@ -252,12 +346,12 @@ export class SolicitudEmpresaComponent implements OnInit {
     var blobURL = URL.createObjectURL(blob);
     window.open(blobURL);
   }
+
   converBase64toBlob(content, contentType) {
     contentType = contentType || '';
     var sliceSize = 512;
     var byteCharacters = window.atob(content); //method which converts base64 to binary
-    var byteArrays = [
-    ];
+    var byteArrays = [];
     for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
       var slice = byteCharacters.slice(offset, offset + sliceSize);
       var byteNumbers = new Array(slice.length);
@@ -290,13 +384,13 @@ export class SolicitudEmpresaComponent implements OnInit {
     this.convertFile(event.files['0']).subscribe(base64 => {
       this.base64Output = base64;
       this.solicitud = {
-        docAsignacion: this.base64Output
+        pdfSolicitud: this.base64Output
       };
       this.mostarMensajeCorrecto('El archivo fue cargado con exito')
     });
   }
 
-  convertFile(file : File) : Observable<string> {
+  convertFile(file: File): Observable<string> {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -306,5 +400,55 @@ export class SolicitudEmpresaComponent implements OnInit {
   }
 
 
+  devolvermes(mes: any): any {
+    switch (mes) {
+      case '1':
+        return 'enero'
+        break;
 
+      case '2':
+        return 'febrero'
+        break;
+
+      case '3':
+        return 'marzo'
+        break;
+
+      case '4':
+        return 'abril'
+        break;
+
+      case '5':
+        return 'mayo'
+        break;
+
+      case '6':
+        return 'junio'
+        break;
+
+      case '7':
+        return 'julio'
+        break;
+
+      case '8':
+        return 'agosto'
+        break;
+
+      case '9':
+        return 'septiembre'
+        break;
+
+      case '10':
+        return 'octubre'
+        break;
+
+      case '11':
+        return 'noviembre'
+        break;
+
+      case '12':
+        return 'diciembre'
+        break;
+    }
+  }
 }

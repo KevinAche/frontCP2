@@ -31,7 +31,7 @@ export class PersonaService {
     });
   }
 
-  
+
 
   createPersona(pers: Persona): Observable<Persona> {
     return this.http.post<Persona>(this.urlCreate, pers, { headers: this.httpHeaders }).pipe(
@@ -65,6 +65,12 @@ export class PersonaService {
   deletePersona(id: any): Promise<any[]> {
     return this.http.delete<any[]>(
       environment.URL_APP + `GestionPersona/EliminarPersona/${id}`
+    ).toPromise();
+  }
+
+  getForPersona(cedula: any): Promise<any[]> {
+    return this.http.get<any[]>(
+      environment.URL_APP + `GestionPersona/PersonaByCedula/${cedula}`
     ).toPromise();
   }
 }

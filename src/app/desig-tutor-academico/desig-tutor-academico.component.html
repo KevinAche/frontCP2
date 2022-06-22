@@ -5,7 +5,8 @@
       Tutores academicos
     </mat-card-title>
     <mat-card-content>
-      <button pButton pRipple type="button" label="Generar nueva designacion" (click)="generarDesignacion()"  class="p-button-rounded"></button>
+      <button pButton pRipple type="button" label="Generar nueva designacion" (click)="generarDesignacion()"
+              class="p-button-rounded"></button>
     </mat-card-content>
     <form>
       <br>
@@ -31,13 +32,15 @@
           <tr [pSelectableRow]="dataTutores">
             <td *ngFor="let col of columnasTutoresA">
               <div [ngSwitch]="col.field">
-                <span *ngSwitchCase="'eliminarta'" >
-                    <button  pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger" (click)="eliminarTutor()"></button>
-                </span>
-                <span *ngSwitchCase="'doc_asignacion'" >
-                    <button pButton pRipple type="button" icon="pi pi-bookmark" class="p-button-rounded p-button-secondary" (click)="checkForMIMEType()">
-                    </button>
-                </span>
+                  <span *ngSwitchCase="'eliminarta'">
+                      <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"
+                              (click)="eliminarTutor()"></button>
+                  </span>
+                <span *ngSwitchCase="'doc_asignacion'">
+                      <button pButton pRipple type="button" icon="pi pi-bookmark"
+                              class="p-button-rounded p-button-secondary" (click)="checkForMIMEType()">
+                      </button>
+                  </span>
                 <span *ngSwitchDefault>{{dataTutores[col.field]}}</span>
               </div>
             </td>

@@ -20,6 +20,17 @@ export class Solicitud_empresaService {
     ).toPromise();
   }
 
+  createSolicitud(cedulaE: any, cedulaR: any, solicitud:any): Promise<any> {
+    return this.http.post(
+      environment.URL_APP + `GestionSolicitudEmpresa/CrearSolicitudEmpresa/${cedulaE}/${cedulaR}`,
+      {
+        ...solicitud
+      }, {
+        headers: this.headers
+      }
+    ).toPromise();
+  }
+
 
 
 }
