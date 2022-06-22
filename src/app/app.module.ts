@@ -82,6 +82,8 @@ import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acred
 import {OverlayPanelModule} from 'primeng/overlaypanel';
 import {SidebarModule} from 'primeng/sidebar';
 import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import {DividerModule} from 'primeng/divider';
+import {CalendarModule} from 'primeng/calendar';
 
 @NgModule({
   declarations: [
@@ -198,7 +200,9 @@ SolicitudEmpresaComponent,
    ListboxModule,
    OverlayPanelModule,
    SidebarModule,
-   VirtualScrollerModule
+   VirtualScrollerModule,
+   DividerModule,
+   CalendarModule
 
   ],
   providers: [MessageService,ConfirmationService],
