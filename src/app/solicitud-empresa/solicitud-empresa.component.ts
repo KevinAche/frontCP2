@@ -72,7 +72,8 @@ export class SolicitudEmpresaComponent implements OnInit {
       {field: 'respuesta', header: 'Respuesta'},
       //{field: 'estado', header: 'Estado'},
       {field: 'empleado', header: 'Empleado que genero'},
-      {field: 'responsable', header: 'Responsable PPP'}
+      {field: 'responsable', header: 'Responsable PPP'},
+      {field: 'eliminartS', header: 'Eliminar solicitud'},
     ];
     this.obtenerSolicitudes();
 
@@ -183,12 +184,14 @@ export class SolicitudEmpresaComponent implements OnInit {
       let cedulaResponsables : any = this.dataActividadesConvenio[0].cedula;
       this._solicitudEmpresaCrud.createSolicitud(this._tokenCrud.getUserName(),cedulaResponsables, solicitud).then(value => {
         this.mostarMensajeCorrecto('SOLICITUD ENVIADA CORRECTAMENTE');
+        this.formSolicitud.reset();
+        this.dialogoResponsable = false;
+        this.obtenerSolicitudes();
         console.log(value['data']);
       }).catch((err)=>{
         console.log(err)
         this.mostrarMensajeError('ERROR AL ENVIAR DOCUMENTO' +err.toString())
       })
-
 
     } else {
       this.mostrarMensajeError('NO PUEDE ENVIAR SOLICITUD POR QUE NO HA ADJUNTADO EL DOCUMENTO')
@@ -253,6 +256,20 @@ export class SolicitudEmpresaComponent implements OnInit {
     this.dialogoResponsable = true;
   }
 
+
+  eliminarSolicitud(): void{
+    if(this.ObjetoResponsable!=null){
+      this._solicitudEmpresaCrud.deleteSolicitud(this.ObjetoResponsable['id_solicitud_empresa']).then( value => {
+        this.obtenerSolicitudes();
+        this.mostarMensajeCorrecto(value['mensaje'])
+      }).catch((err)=>{
+        this.mostrarMensajeError('La solicitud no se puede borrar por que se encuentra en mas procesos')
+      })
+    }else{
+      this.mostrarMensajeError('No puede elimar por que no ha clickeado sobre la fila')
+    }
+  }
+
   onRowSelectResponsable(event): void {
     this.ObjetoResponsable = null;
     if (event.data) {
@@ -264,7 +281,7 @@ export class SolicitudEmpresaComponent implements OnInit {
   cargarLogeado() {
     this._crudPersona.getForPersona(this._tokenCrud.getUserName()).then(value => {
       this.datosLogeado = value['data'];
-      console.log(this.datosLogeado);
+
     })
   }
 
@@ -330,8 +347,8 @@ export class SolicitudEmpresaComponent implements OnInit {
 
 
   checkForMIMEType() {
-    var response = this.objetoSolicitud['pdf_solicitud'];
-    console.log(response)
+    var response = this.ObjetoResponsable['pdf_solicitud'];
+    //console.log(response)
     var blob;
     if (response.mimetype == 'pdf') {
 

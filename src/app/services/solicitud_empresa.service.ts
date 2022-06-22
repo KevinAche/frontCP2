@@ -31,6 +31,12 @@ export class Solicitud_empresaService {
     ).toPromise();
   }
 
+  deleteSolicitud(id: any): Promise<any[]> {
+    return this.http.delete<any[]>(
+      environment.URL_APP + `GestionSolicitudEmpresa/EliminarSolicitud/${id}`
+    ).toPromise();
+  }
+
 
 
 }
