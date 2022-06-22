@@ -93,7 +93,7 @@ export class SolicitudEstudianteComponent implements OnInit {
       this.alumnosDatos = resp.data
     })
   }
-  
+
   crearSolicitud(valor: any,ide:any,nomEmp:any,respo:any) {
     this.dialogoCrearSolicitud = true;
     this.numConvocatoria = valor;

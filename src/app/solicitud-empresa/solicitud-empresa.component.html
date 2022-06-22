@@ -54,25 +54,107 @@
     <h2>Lista Responsables</h2>
   </ng-template>
   <ng-template pTemplate="content">
-    <p-table
-      [value]="dataResponsable"
-      [columns]="columnasResponsable"
-      [paginator]="true"
-      [rows]="3"
-      [autoLayout]="true"
-      [(selection)]="dataRowResponsable"
-      (onRowSelect)="onRowSelectResponsable($event)"
-      (onRowUnselect)="onRowUnSelectResponsable($event)"
-      [scrollable]="true"
-      selectionMode="single">
-      <ng-template pTemplate="header">
-        <tr>
-          <th *ngFor="let columna of columnasResponsable">
-            {{columna.header}}
-          </th>
-        </tr>
-      </ng-template>
+    <h2>DATOS PARA LA SOLICITUD</h2>
+    <p-accordion>
+      <p-accordionTab header="Informacion de solicitante">
+        <p-panel header="Solicitante">
+          <ng-template pTemplate="content">
+            <div mat-row="">
+              <h3>Nombres:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+              <h3>Apellidos:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+              <h3>Cargo:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+            </div>
+          </ng-template>
+        </p-panel>
+      </p-accordionTab>
+      <p-accordionTab header="Responsable al que se dirige">
+        <p-panel header="Responsable a cargo">
+          <ng-template pTemplate="content">
+            <div mat-row="">
+              <h3>Nombres:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+              <h3>Apellidos:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+              <h3>Carrera:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+              <h3>Abrev Titulo:  {{this.dataEmpresa[0].idEmpresa}} </h3>
+            </div>
+          </ng-template>
+        </p-panel>
+      </p-accordionTab>
+      <p-accordionTab header="Actividades">
+        <p-table [value]="dataActividadesConvenio"
+                 [columns]="columnasActividades"
+                 [paginator]="false"
+                 [rows]="10"
+                 [autoLayout]="true"
+                 [scrollable]="true">
+          <ng-template pTemplate="header">
+            <tr>
+              <th *ngFor="let columna of columnasActividades">
+                {{columna.header}}
+              </th>
+            </tr>
+          </ng-template>
+          <ng-template pTemplate="body" let-dataActividadesConvenio>
+            <tr>
+              <td *ngFor="let col  of columnasActividades">
+                {{dataActividadesConvenio[col.field]}}
+              </td>
+            </tr>
+          </ng-template>
+        </p-table>
+      </p-accordionTab>
+      <p-accordionTab header="Subida de documento">
+        <p-panel header="Envio de documento">
+          <ng-template pTemplate="content">
+            <div mat-row="">
+              <h3>Ingrese el documento firmado que se genero: </h3>
+              <p-fileUpload
+                [customUpload]="true"
+                [showCancelButton]="false"
+                [multiple]="false"
+                (uploadHandler)="onFileSelected($event)"
+                chooseLabel="Seleccionar anexo"
+                uploadLabel="Cargar anexo"
+                invalidFileTypeMessageSummary="Archivo no valido"
+                invalidFileSizeMessageDetail="Solo se acepta archivos con extensiones .doc - docx."
+              >
+              </p-fileUpload>
+            </div>
+          </ng-template>
+        </p-panel>
+      </p-accordionTab>
+    </p-accordion>
 
-    </p-table>
+    <!-- <p-table
+       [value]="dataResponsable"
+       [columns]="columnasResponsable"
+       [paginator]="true"
+       [rows]="3"
+       [autoLayout]="true"
+       [(selection)]="dataRowResponsable"
+       (onRowSelect)="onRowSelectResponsable($event)"
+       (onRowUnselect)="onRowUnSelectResponsable($event)"
+       [scrollable]="true"
+       selectionMode="single">
+       <ng-template pTemplate="header">
+         <tr>
+           <th *ngFor="let columna of columnasResponsable">
+             {{columna.header}}
+           </th>
+         </tr>
+       </ng-template>
+       <ng-template pTemplate="body" let-dataRespo>
+         <tr [pSelectableRow]="dataRespo">
+           <td *ngFor="let col of columnasResponsable">
+             <div [ngSwitch]="col.field">
+                   <span *ngSwitchCase="'designarC'">
+                     <button type="button" class="btn btn-primary" (click)="anadirResponsable()">Asignar</button>
+                   </span>
+               <span *ngSwitchDefault>{{dataRespo[col.field]}}</span>
+             </div>
+           </td>
+         </tr>
+       </ng-template>
+     </p-table>-->
   </ng-template>
 </p-dialog>
+
