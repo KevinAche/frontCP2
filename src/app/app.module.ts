@@ -56,21 +56,17 @@ import { TabViewModule } from 'primeng/tabview';
 import { MatSelectModule } from '@angular/material/select';
 import { DropdownModule } from 'primeng/dropdown';
 import { DashboardComponent } from './components/dashboard/dashboard.component';
-
 import { ConsultaConvPublicoComponent } from './consulta-conv-publico/consulta-conv-publico.component';
 import { SolicitarRequerimientosComponent } from './solicitar-requerimientos/solicitar-requerimientos.component';
-
 import {MessageService,ConfirmationService} from "primeng/api";
 import {ToastModule} from "primeng/toast";
 import { CrearCarreraComponent } from './carreras/crear-carrera/crear-carrera.component';
 import { ListarCarrerasComponent } from './carreras/listar-carreras/listar-carreras.component';
-
-import { HistorialComponent } from './historial/historial.component';
-import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
-import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
 import {StepsModule} from "primeng/steps";
 import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
+import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
+import { SolicitudEmpresaComponent } from './solicitud-empresa/solicitud-empresa.component';
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
 import {OrderListModule} from 'primeng/orderlist';
@@ -78,6 +74,9 @@ import {OrderListModule} from 'primeng/orderlist';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
+
+import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
+import {HistorialComponent} from "./historial/historial.component";
 
 @NgModule({
   declarations: [
@@ -140,20 +139,18 @@ CertificadoAlumnoComponent,
 
 
 //Lisseth
-EvaluacionEstudianteTutorAcademicoComponent,
-InformeFinalTutorAcademicoComponent,
-ConsultaConvPublicoComponent,
-SolicitarRequerimientosComponent,
-HistorialComponent,
-GestionDocentesComponent,
-SolicitudEmpresaComponent,
-
-    //Lisseth
-    EvaluacionEstudianteTutorAcademicoComponent,
+    ConsultaConvPublicoComponent,
+    SolicitarRequerimientosComponent,
+    GestionDocentesComponent,
+    SolicitudEmpresaComponent,
+    HistorialComponent,
+    GestionDocentesComponent,
+    SolicitudEmpresaComponent,
+    InformeAcreditacionComponent,
     InformeFinalTutorAcademicoComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
-    CrearEmpleadoComponent,
+    CrearEmpleadoComponent
   ],
   imports: [
     BrowserModule,
@@ -184,6 +181,7 @@ SolicitudEmpresaComponent,
     MatSelectModule,
     DropdownModule,
     ToastModule,
+    MatTreeModule,
     StepsModule,
     AccordionModule,
     FileUploadModule,
