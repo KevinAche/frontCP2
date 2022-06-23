@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { InformeFinal } from '../models/InformeFinal';
 import { InformeFinalAlumnoService } from '../services/informe-finalizacion-alumo.services';
 import { AlumnosService } from '../services/alumnos.service';
 import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
@@ -10,8 +11,10 @@ import { Observable } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { saveAs } from "file-saver";
 import Docxtemplater from "docxtemplater";
+import swal from 'sweetalert2';
 
 
 function loadFile(url, callback) {
@@ -26,17 +29,25 @@ function loadFile(url, callback) {
 })
 export class InformeFinalAlumnoComponent implements OnInit {
   //Variables
-  public informeFinal: Array<any> = [];
+  public informeFinalDatos: Array<any> = [];
   public alumnosDatos: Array<any> = [];
   public solicitudAlumnosDatos: Array<any> = [];
   public TutorEmpresarialDatos: Array<any> = [];
   public TutorAcademicoDatos: Array<any> = [];
   public ActaReunionDatos: Array<any> = [];
 
+  informeFinal: InformeFinal = new InformeFinal();
+
 
   public base64Output: string;
   public cedula: String;
   public areaEmpresa: String;
+  public vava: any;
+
+  formGuardar: FormGroup;
+
+  public dialogoGuardaryGenerar: boolean;
+  public dialogoEliminar: boolean;
 
 
   //constructor y OnInit
@@ -54,6 +65,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   ngOnInit(): void {
     this.cedula = this.route.snapshot.paramMap.get('cedula');
     this.areaEmpresa = 'Desarrollo';
+    this.capturarFecha();
     this.listarInformeFinal();
     this.listarDetalladaAlumnos();
     this.listarSolicitudAlumnos();
@@ -67,7 +79,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public listarInformeFinal() {
     this.informeFinalAlumnoService.getInformeFinalAlumno().subscribe((resp: any) => {
       console.log(resp.data)
-      this.informeFinal = resp.data
+      this.informeFinalDatos = resp.data
     })
   }
 
@@ -111,8 +123,114 @@ export class InformeFinalAlumnoComponent implements OnInit {
     )
   }
 
+  //Metodo para crear
 
-  //M+etodo para subir documento en base 64
+  public create(): void {
+
+    var docubas=this.base64Output;
+
+    this.informeFinal.docInformeFinal='documento';
+    this.informeFinal.fechaEmision=null;
+    
+alert(docubas);
+    
+    if (docubas=="undefined") {
+      swal.fire(
+        'Error de entrada',
+        'Seleccione documento',
+        'error'
+      )
+      return;
+    }
+    
+    this.informeFinal.docInformeFinal=docubas;
+
+    this.informeFinalAlumnoService.createInformeFinal(this.informeFinal).subscribe(
+      Response => {
+        swal.fire(
+          'Enviado',
+          `Informe creada con exito!`,
+          'success'
+        )
+       this.dialogoGuardaryGenerar=false;
+       location.reload();
+
+      }
+    )
+
+  }
+
+
+  //Metodo de borrar
+
+  borrarInforme(id: any) {
+
+    swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.informeFinalAlumnoService.deleteInformeFinal(id).subscribe(
+
+          Response => {
+            this.informeFinalDatos = this.informeFinalDatos.filter(servi => servi !== id)
+            
+            swal.fire(
+              'Borrado!',
+              'Su actividad ha sido eliminada.',
+              'success'
+            )
+            
+            this.dialogoEliminar = false;
+            location.reload();
+            
+          }
+        )
+
+
+      }
+    })
+  }
+
+  //Metodo capturar fecha
+
+  capturarFecha() {
+    let date = new Date();
+    this.informeFinal.fechaEmision = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+  }
+
+  //metodo Dialogo
+
+  showDialogGuardar(idAlumno: any) {
+    var con = 0;
+    this.dialogoEliminar = null;
+    this.dialogoGuardaryGenerar = false;
+    this.informeFinal.alumno.idAlumno = idAlumno;
+
+    for (var i = 0; i < this.informeFinalDatos.length; i++) {
+
+      if (this.informeFinalDatos[i].alumno.idAlumno == this.informeFinal.alumno.idAlumno) {
+        con = 1;
+        //alert(this.informeFinalDatos[i].alumno.idAlumno);
+      }
+
+    }
+
+    if (con == 1) {
+      this.dialogoEliminar = true;
+
+    } else {
+      this.dialogoGuardaryGenerar = true;
+    }
+
+  }
+
+  //Metodo para subir documento en base 64
   onFileSelected(event) {
     this.convertFile(event.target.files[0]).subscribe(base64 => {
       this.base64Output = base64;
@@ -131,90 +249,110 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   //Metodo para generar documento
 
-  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any) {
-    loadFile("https://backendg1c2.herokuapp.com/files/anexo13.docx", function (
-      error,
-      content
-    ) {
-      if (error) {
-        throw error;
-      }
+  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any) {
+
+    var fech = this.informeFinal.fechaEmision;
+    if (actPrin == 0 || prinEmp == 0 || conclu == 0) {
+
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+      return;
+
+
+    } else {
+
+
+      loadFile("https://backendg1c2.herokuapp.com/files/anexo13.docx", function (
+        error,
+        content
+      ) {
+        if (error) {
+          throw error;
+        }
 
 
 
-      const zip = new PizZip(content);
-      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-      doc.setData({
+        const zip = new PizZip(content);
+        const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+        doc.setData({
 
-        nombreEmpresa: nomEm,
-        ubicacionEmpresa: ubiEm,
-        areaEmpresa: areEm,
+          nombreEmpresa: nomEm.toUpperCase(),
+          ubicacionEmpresa: ubiEm.toUpperCase(),
+          areaEmpresa: areEm.toUpperCase(),
 
-        nombreTutorE: nomte,
-        cedulaTutorE: cedte,
-        cargoTutorE: carte,
-        telefonoEmpresa: telem,
-        correoTutorE: corte,
+          nombreTutorE: nomte.toUpperCase(),
+          cedulaTutorE: cedte.toUpperCase(),
+          cargoTutorE: carte.toUpperCase(),
+          telefonoEmpresa: telem.toUpperCase(),
+          correoTutorE: corte,
 
-        nombreEstudiante: nomEs,
-        cedulaEstudiante: cedEs,
-        ciclo: cicEs,
-        correoEstudiante: corEst,
-        telefonoEstudiante: corEs,
+          nombreEstudiante: nomEs.toUpperCase(),
+          cedulaEstudiante: cedEs,
+          ciclo: cicEs.toUpperCase(),
+          correoEstudiante: corEst,
+          telefonoEstudiante: corEs.toUpperCase(),
 
-        nombreTutorA: nomtac,
-        cedulaTutorA: cedtac,
-        correoTutorA: cortac,
+          nombreTutorA: nomtac.toUpperCase(),
+          cedulaTutorA: cedtac.toUpperCase(),
+          correoTutorA: cortac,
 
-        horasPPP: horpp,
-        fechaInicio: fein,
-        fechaFin: fefi,
+          horasPPP: horpp,
+          fechaInicio: fein,
+          fechaFin: fefi,
 
-        constitucionEmpresa: consEmp,
-        misionEmpresa: misEmpr,
-        visionEmpresa: visEmpr,
+          constitucionEmpresa: consEmp,
+          misionEmpresa: misEmpr,
+          visionEmpresa: visEmpr,
 
+          actividadEmpresa: actPrin,
+          principiosEmpresa: prinEmp,
+          conclusion: conclu,
+          fecha: fech,
 
-      });
-      try {
-        // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
-        doc.render();
-      } catch (error) {
-        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
-        function replaceErrors(key, value) {
-          if (value instanceof Error) {
-            return Object.getOwnPropertyNames(value).reduce(function (
-              error,
-              key
-            ) {
-              error[key] = value[key];
-              return error;
-            },
-              {});
+        });
+        try {
+          // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
+          doc.render();
+        } catch (error) {
+          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+          function replaceErrors(key, value) {
+            if (value instanceof Error) {
+              return Object.getOwnPropertyNames(value).reduce(function (
+                error,
+                key
+              ) {
+                error[key] = value[key];
+                return error;
+              },
+                {});
+            }
+            return value;
           }
-          return value;
-        }
-        console.log(JSON.stringify({ error: error }, replaceErrors));
+          console.log(JSON.stringify({ error: error }, replaceErrors));
 
-        if (error.properties && error.properties.errors instanceof Array) {
-          const errorMessages = error.properties.errors
-            .map(function (error) {
-              return error.properties.explanation;
-            })
-            .join("\n");
-          console.log("errorMessages", errorMessages);
+          if (error.properties && error.properties.errors instanceof Array) {
+            const errorMessages = error.properties.errors
+              .map(function (error) {
+                return error.properties.explanation;
+              })
+              .join("\n");
+            console.log("errorMessages", errorMessages);
 
+          }
+          throw error;
         }
-        throw error;
-      }
-      const out = doc.getZip().generate({
-        type: "blob",
-        mimeType:
-          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        const out = doc.getZip().generate({
+          type: "blob",
+          mimeType:
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        // Output the document using Data-URI
+        saveAs(out, "anexo13.docx");
       });
-      // Output the document using Data-URI
-      saveAs(out, "anexo13.docx");
-    });
+    }
   }
 
 }
