@@ -1,6 +1,7 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { Observable } from 'rxjs';
+import { RegistroSeguimiento } from '../models/Registro-seguimiento';
 import { TutorE } from '../models/TutorE';
 
 @Injectable({
@@ -17,12 +18,12 @@ export class RegistroSeguimientoService {
     private http: HttpClient
   ) { }
 
-  getActividades_Cronograma(){
+  getActividades_Cronograma():Promise<any>{
     let header = new HttpHeaders()
     .set('Type-content','aplication/json')
-    return this.http.get(this._url+'/ListaActividades_Cronograma',{
+    return this.http.get<any>(this._url+'/ListaActividades_Cronograma',{
         headers: header
-    });
+    }).toPromise();
   }
   postActividades_Cronograma(){
     let header = new HttpHeaders()

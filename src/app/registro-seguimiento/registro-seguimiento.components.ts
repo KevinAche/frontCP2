@@ -24,7 +24,7 @@ export class RegistroSeguimientoAlumnoComponent implements OnInit {
   estudiante: any;
   tutoracademico: any;
   tutora: TutorA = new TutorA();
-  cronograma:ActividadesCronograma=new ActividadesCronograma();
+  cronograma: ActividadesCronograma = new ActividadesCronograma();
 
 
   public cedulaAlumno: any;
@@ -38,13 +38,18 @@ export class RegistroSeguimientoAlumnoComponent implements OnInit {
   ) { }
 
   ngOnInit(): void {
-    this.ListaActividades_Cronograma();
     this.Listatutorese();
 
   }
 
-  ListaActividades_Cronograma() {
-    this.registroSeguimientoService.getActividades_Cronograma().subscribe(registro => {
+  ListaActividades_Cronograma(cedula: any) {
+    console.log(cedula);
+
+    this.registroSeguimientoService.getActividades_Cronograma().then(registro => {
+      this.ListaActividadesCronograma = registro['data'];
+      this.ListaActividadesCronograma = this.ListaActividadesCronograma.filter(lc => lc.cronograma.tutorAcademico.alumno.persona.cedula
+        == cedula);
+      console.log(this.ListaActividadesCronograma);
       console.log(registro);
 
     });
@@ -54,25 +59,33 @@ export class RegistroSeguimientoAlumnoComponent implements OnInit {
 
 
   buscarestudiante($event: any) {
+
     this.tutore = new TutorE();
     this.tutora = new TutorA();
     this.estudiante = this.tutore.alumno.persona.primerNombre;
     this.tutoracademico = null;
     if ($event.target.value.length == 10) {
+      for (let t of this.Listatutoresem) {
+        if (t.alumno.persona.cedula == $event.target.value) {
+          this.tutore = t;
+          this.estudiante = this.tutore.alumno.persona.primerNombre + " " + this.tutore.alumno.persona.primerApellido;
+        }
+      }
 
-      this.tutore = this.Listatutoresem.find(x => { return x.alumno.persona.cedula == $event.target.value });
-      this.estudiante = this.tutore.alumno.persona.primerNombre + " " + this.tutore.alumno.persona.primerApellido;
-
-
+   
       this.tutorService.getTutoresAcademicos().then(value => {
         this.Listatutoresac = value['data'];
-        this.tutora = this.Listatutoresac.find(tu => { return tu.alumno.persona.cedula == $event.target.value })
-        console.log(this.tutora);
-        this.tutoracademico = this.tutora.docente.persona.primerNombre + " " + this.tutora.docente.persona.primerApellido;
-
+        for (let a of this.Listatutoresac) {
+          if (a.alumno.persona.cedula == $event.target.value) {
+            this.tutora = a;
+            this.tutoracademico = this.tutora.docente.persona.primerNombre + " " + this.tutora.docente.persona.primerApellido;
+            
+          }
+        }
+        this.ListaActividades_Cronograma(this.tutora.alumno.persona.cedula);
       })
 
-
+    
     }
 
   }
@@ -85,10 +98,10 @@ export class RegistroSeguimientoAlumnoComponent implements OnInit {
     )
 
   }
-CrearRegistro(){
-console.log(this.cronograma);
+  CrearRegistro() {
+    console.log(this.cronograma);
 
-}
+  }
 
 }
 
