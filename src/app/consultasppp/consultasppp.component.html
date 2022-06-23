@@ -3,14 +3,14 @@
   <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
     Practicas Pre-Profecionales | Consultas
   </mat-card-title>
-  
+
 
   <mat-card-content>
     <p-orderList [value]="convocatorias" [listStyle]="{'max-height':'30rem'}" header="Lista" filterBy="idConvocatoria" filterPlaceholder="Busqueda por el numero de convocatoria" [dragdrop]="true">
       <ng-template let-conv pTemplate="item">
           <div class="product-item">
               <div class="image-container">
-                      <img src="../assets/imagen/log.png" [alt]="conv.nombreConvocatoria" class="product-image" />
+                      <img src="assets/imagen/log.png" [alt]="conv.nombreConvocatoria" class="product-image" />
               </div>
               <div class="product-list-detail">
                   <h5 class="mb-2">{{conv.nombreConvocatoria}}</h5>
@@ -21,19 +21,19 @@
               <div class="product-list-action">
                   <h6 class="mb-2">Número de convocatoria:{{conv.idConvocatoria}}</h6>
                   <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == false">
-                    
+
                     <p-message severity="error" text="Cursando"></p-message>
 
                   </span>
                   <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == true">
-                    
+
                     <p-message severity="success" text="Aprobado"></p-message>
 
                   </span>
               </div>
           </div>
           <div class="product-item text-center">
-            
+
             <p-table [value]="alumnosolicitud" responsiveLayout="scroll">
               <ng-template pTemplate="header">
                   <tr>
