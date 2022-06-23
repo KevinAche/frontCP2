@@ -94,6 +94,7 @@ export class SolicitudEmpresaComponent implements OnInit {
       {field: 'descripcion', header: 'Descripcion '},
     ];
 
+
     this.obtenerActividadesConvenio();
     this.cargarLogeado();
     this.obtenerEmpleado();

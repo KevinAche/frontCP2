@@ -37,6 +37,10 @@ export class Solicitud_empresaService {
     ).toPromise();
   }
 
-
+  getSolicitudesResponsable():Promise<any[]>{
+    return this.http.get<[any]>(
+      environment.URL_APP+`GestionSolicitudEmpresa/ListarSolicitudesGenerarVista`
+    ).toPromise();
+  }
 
 }
