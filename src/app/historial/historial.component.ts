@@ -8,7 +8,7 @@ import { HistorialService} from '../services/historial.services';
 })
 
 export class HistorialComponent implements OnInit {
-
+   searchText: any;
   public historialC:Array<any>=[];
   constructor(private historialService:HistorialService) { }
 

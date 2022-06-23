@@ -75,6 +75,8 @@ import { ListaResponsablepppComponent } from './lista-responsableppp/lista-respo
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
 import {OrderListModule} from 'primeng/orderlist';
 
+import {SolicitudEmpresa} from "./models/SolicitudEmpresa";
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ListboxModule} from 'primeng/listbox';
@@ -171,6 +173,7 @@ SolicitudEmpresaComponent,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
