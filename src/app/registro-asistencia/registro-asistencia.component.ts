@@ -17,6 +17,7 @@ function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
 }
 
+
 @Component({
   selector: 'app-registro-asistencia',
   templateUrl: './registro-asistencia.component.html',
