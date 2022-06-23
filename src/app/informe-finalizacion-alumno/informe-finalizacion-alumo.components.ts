@@ -131,9 +131,9 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
     this.informeFinal.docInformeFinal='documento';
     this.informeFinal.fechaEmision=null;
-    
+
 alert(docubas);
-    
+
     if (docubas=="undefined") {
       swal.fire(
         'Error de entrada',
@@ -142,7 +142,7 @@ alert(docubas);
       )
       return;
     }
-    
+
     this.informeFinal.docInformeFinal=docubas;
 
     this.informeFinalAlumnoService.createInformeFinal(this.informeFinal).subscribe(
@@ -179,16 +179,16 @@ alert(docubas);
 
           Response => {
             this.informeFinalDatos = this.informeFinalDatos.filter(servi => servi !== id)
-            
+
             swal.fire(
               'Borrado!',
               'Su actividad ha sido eliminada.',
               'success'
             )
-            
+
             this.dialogoEliminar = false;
             location.reload();
-            
+
           }
         )
 
