@@ -26,9 +26,19 @@ export class AlumnosService {
   }
 
   getAlumnoCedula(cedula: string) {
-    return this.http.get<any[]>(
+    return this.http.get<any>(
       environment.URL_APP+`GestionAlumno/BuscarAlumnoCedula/${cedula}`
     ).toPromise();
+  }
+
+  getAlumnoByCedula(cedula: any) {
+    let header = new HttpHeaders()
+    .set('Type-content','aplication/json')
+
+    return this.http.get(environment.URL_APP+`GestionAlumno/BuscarAlumnoCedula/${cedula}`,{
+        headers: header
+
+    });
   }
 
   getlistaAlumnos() {
