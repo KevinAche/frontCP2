@@ -1,6 +1,10 @@
+import { PersonalEmpresa } from "./PersonalEmpresa";
+
 export class Convenio {
-    idConvenio: any;
-    documento: any;
-    duracion: any;
-    fechaEmision: any;
+    idConvenio :any;
+    fechaEmision :any;
+    duracion :any;
+    documento :any;
+    gerente: PersonalEmpresa;
+    responsablePPP: any;
 }

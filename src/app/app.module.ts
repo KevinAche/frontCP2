@@ -76,9 +76,19 @@ import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.
 
 import {OrderListModule} from 'primeng/orderlist';
 
+import {SolicitudEmpresa} from "./models/SolicitudEmpresa";
+
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
-
+import {ListboxModule} from 'primeng/listbox';
+import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
+import {OverlayPanelModule} from 'primeng/overlaypanel';
+import {SidebarModule} from 'primeng/sidebar';
+import {VirtualScrollerModule} from 'primeng/virtualscroller';
+import { GestionConvocatoriaComponent } from './responsable/gestion-convocatoria/gestion-convocatoria.component';
+import {DividerModule} from 'primeng/divider';
+import {CalendarModule} from 'primeng/calendar';
+import { Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
 @NgModule({
@@ -113,7 +123,7 @@ import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-emplea
     EvaluacionEstudianteTutorEmpresarialComponent,
     RegistroSeguimientoAlumnoComponent,
     CertificadoAlumnoComponent,
-
+    InformeAcreditacionComponent,
     //Lisseth
     EvaluacionEstudianteTutorAcademicoComponent,
     InformeFinalTutorAcademicoComponent,
@@ -141,6 +151,7 @@ RegistroSeguimientoAlumnoComponent,
 CertificadoAlumnoComponent,
 
 
+
 //Lisseth
 EvaluacionEstudianteTutorAcademicoComponent,
 InformeFinalTutorAcademicoComponent,
@@ -164,6 +175,7 @@ SolicitudEmpresaComponent,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+    Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,
     MatSidenavModule,
@@ -192,7 +204,13 @@ SolicitudEmpresaComponent,
     FileUploadModule,
     OrderListModule,
     MessagesModule,
-    MessageModule
+    MessageModule,
+   ListboxModule,
+   OverlayPanelModule,
+   SidebarModule,
+   VirtualScrollerModule,
+   DividerModule,
+   CalendarModule
 
   ],
   providers: [MessageService,ConfirmationService],

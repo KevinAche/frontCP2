@@ -6,7 +6,7 @@ import { Component, OnInit } from '@angular/core';
   styleUrls: ['./anexosde-ppp.component.css']
 })
 export class AnexosdePPPComponent implements OnInit {
-
+ searchText: any;
   constructor() { }
 
   ngOnInit(): void {

@@ -4,6 +4,10 @@ import { Observable, throwError } from 'rxjs';
 import { map, catchError } from 'rxjs';
 import swal from 'sweetalert2';
 import { environment } from "../../environments/environment";
+import { Asignatura } from '../models/Asignatura';
+import { Convenio } from '../models/Convenio';
+import Swal from 'sweetalert2';
+
 @Injectable({
   providedIn: 'root'
 })
@@ -49,5 +53,37 @@ export class ConvenioService {
     ).toPromise();
   }
 
+
+
+
+  private urlCreate: string = this._url+'/CrearConvenios';
+  private urlDelete: string = this._url+'/EliminarConvenios';
+  private urlSearch: string = this._url+'/ListarConvenios';
+
+
+  getConvenios(): Observable<Convenio[]> {
+    return this.http.get(this.urlSearch).pipe(
+      map(response => response as Convenio[])
+    );
+  }
+
+
+  createConvenios(doc: Convenio): Observable<Convenio> {
+    return this.http.post<Convenio>(`${this.urlCreate}`, doc, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al guardar', 'NO se puede guardar el convenio', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
+  deleteConvenios(empid: String): Observable<Convenio> {
+    return this.http.delete<Convenio>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al eliminar', 'No se puede eliminar', 'error')
+        return throwError(e);
+      })
+    );
+  }
 
 }

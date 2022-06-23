@@ -27,10 +27,13 @@ function loadFile(url, callback) {
 export class SolicitudEstudianteComponent implements OnInit {
   public convocatorias: Array<any> = [];
   public alumnos: Array<any> = [];
+  public alumnosDatos: Array<any> = [];
   public solicitudes: Array<any>=[];
   public numConvocatoria: any;
   solicitud: SolicitudAlumno = new SolicitudAlumno();
   public id: String;
+  public cedula:String;
+  public rol:String;
   public empresaNombre:any;
   public responsableNombre:any;
   dialogoCrearSolicitud: boolean;
@@ -56,7 +59,10 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.listarConvocatorias();
     this.listarAlumnos();
     this.listarSolicitudAlumnos();
-    this.id = this.route.snapshot.paramMap.get('id');
+    this.listarDetalladaAlumnos();
+    //this.id = this.route.snapshot.paramMap.get('id');
+    this.cedula =this.route.snapshot.paramMap.get('cedula');
+    this.rol=this.route.snapshot.paramMap.get('rol');
 
     this.formSolicitud = this.formBuilder.group({
       fechaEmision: ['', Validators.required],
@@ -81,12 +87,20 @@ export class SolicitudEstudianteComponent implements OnInit {
     })
   }
 
+  public listarDetalladaAlumnos() {
+    this.alumnoService.getDetalleAlumnos().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.alumnosDatos = resp.data
+    })
+  }
+
   crearSolicitud(valor: any,ide:any,nomEmp:any,respo:any) {
     this.dialogoCrearSolicitud = true;
     this.numConvocatoria = valor;
     this.solicitudAlumno.estado="pendiente";
     this.solicitudAlumno.convocatoria.idConvocatoria=valor;
     this.solicitudAlumno.alumno.idAlumno=ide;
+    this.id=ide;
     this.empresaNombre=nomEmp;
     this.responsableNombre=respo;
 

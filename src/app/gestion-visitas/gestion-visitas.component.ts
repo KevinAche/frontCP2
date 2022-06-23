@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { InformeVisita } from '../models/Visita';
+import { InformeVisita, Visita } from '../models/Visita';
 import { InformeService } from '../services/Informe.service';
 import swal from 'sweetalert2';
 
@@ -18,7 +18,7 @@ export class GestionVisitasComponent implements OnInit {
   dataInformes: any[];
 
   showDialog() {
-    this.informe.idinforme = null;
+    this.informe.idInformeVisita = null;
     this.informe.fecha = null;
     this.informe.horaInicio = null;
     this.informe.horaFin = null;
@@ -31,7 +31,7 @@ export class GestionVisitasComponent implements OnInit {
   showDialogEdit(informe: InformeVisita): void {
     this.dis = true;
     this.informe = {
-      idinforme: informe.idinforme,
+      idInformeVisita: informe.idInformeVisita,
       fecha: informe.fecha,
       horaInicio: informe.horaInicio,
       horaFin: informe.horaFin,
@@ -48,7 +48,6 @@ export class GestionVisitasComponent implements OnInit {
 
   ngOnInit(): void {
     this.formInforme = this.formBuilder.group({
-      idinforme: ['', Validators.required],
       fecha: ['', Validators.required],
       horainicio: ['', Validators.required],
       horafin: ['', Validators.required],
@@ -58,7 +57,6 @@ export class GestionVisitasComponent implements OnInit {
     });
 
     this.cols = [
-      { field: 'idinforme', header: 'IdInforme' },
       { field: 'fecha', header: 'Fecha' },
       { field: 'horainicio', header: 'Hora Inicio' },
       { field: 'horafin', header: 'Hora Fin' },
@@ -82,8 +80,9 @@ export class GestionVisitasComponent implements OnInit {
       this.listarInfome();
     });
     this.dis = false;
+    this.limpiar();
   }
-  eliminarInforme(inf: InformeVisita): void {
+  eliminarInforme(infvisita: InformeVisita): void {
     const swalWithBootstrapButtons = swal.mixin({
       customClass: {
         confirmButton: 'btn btn-success',
@@ -94,28 +93,30 @@ export class GestionVisitasComponent implements OnInit {
     swalWithBootstrapButtons
       .fire({
         title: 'Esta seguro que desea eliminar?',
-        text: `¡No podrás revertir esto! eliminar el ${inf.asunto}`,
+        text: `¡No podrás revertir esto! eliminar el ${infvisita.asunto}`,
         icon: 'warning',
         showCancelButton: true,
         confirmButtonText: 'Si, Eliminar! ',
         cancelButtonText: ' No, Cancelar!',
         reverseButtons: true,
       })
-      .then((result) => {
-        if (result.isConfirmed) {
+      .then((resultt) => {
+        if (resultt.isConfirmed) {
           this.informeservice
-            .deleteInforme(inf.idinforme)
+            .deleteInforme(infvisita.idInformeVisita)
             .subscribe((response) => {
-              this.informes = this.informes.filter((servi) => servi !== inf);
+              this.informes = this.informes.filter(
+                (servii) => servii !== infvisita
+              );
               swalWithBootstrapButtons.fire(
                 'Eliminado!',
-                `La empresa  fue eliminada.`,
+                `El informe fue eliminado.`,
                 'success'
               );
             });
         } else if (
           /* Read more about handling dismissals below */
-          result.dismiss === swal.DismissReason.cancel
+          resultt.dismiss === swal.DismissReason.cancel
         ) {
           swalWithBootstrapButtons.fire(
             'Cancelado',
@@ -124,5 +125,14 @@ export class GestionVisitasComponent implements OnInit {
           );
         }
       });
+  }
+
+  public limpiar(): void {
+    this.informe.fecha = null;
+    this.informe.horaInicio = null;
+    this.informe.horaFin = null;
+    this.informe.asunto = null;
+    this.informe.actividades = null;
+    this.informe.observaciones = null;
   }
 }

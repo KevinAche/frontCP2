@@ -6,7 +6,6 @@ import {environment} from "../../environments/environment";
 import {Empleado} from "../models/Empleado";
 import {catchError} from "rxjs/operators";
 import swal from "sweetalert2";
-import { Empresa } from './empresa';
 
 @Injectable({
   providedIn: 'root'
@@ -21,6 +20,12 @@ export class EmpleadoService {
 
   getEmpleados(): Observable<Empleado[]> {
     return this.httpClient.get<Empleado[]>(environment.URL_APP + 'GestionPersonalEmpresa/ListaPersonal');
+  }
+
+  getEmpleadosFiltrar(): Promise<any[]> {
+    return this.httpClient.get<any[]>(
+      environment.URL_APP + `GestionPersonalEmpresa/ListaPersonal`
+    ).toPromise();
   }
 
   getGerente(idEmpresa: string) {

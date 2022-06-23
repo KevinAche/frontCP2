@@ -20,6 +20,27 @@ export class Solicitud_empresaService {
     ).toPromise();
   }
 
+  createSolicitud(cedulaE: any, cedulaR: any, solicitud:any): Promise<any> {
+    return this.http.post(
+      environment.URL_APP + `GestionSolicitudEmpresa/CrearSolicitudEmpresa/${cedulaE}/${cedulaR}`,
+      {
+        ...solicitud
+      }, {
+        headers: this.headers
+      }
+    ).toPromise();
+  }
 
+  deleteSolicitud(id: any): Promise<any[]> {
+    return this.http.delete<any[]>(
+      environment.URL_APP + `GestionSolicitudEmpresa/EliminarSolicitud/${id}`
+    ).toPromise();
+  }
+
+  getSolicitudesResponsable():Promise<any[]>{
+    return this.http.get<[any]>(
+      environment.URL_APP+`GestionSolicitudEmpresa/ListarSolicitudesGenerarVista`
+    ).toPromise();
+  }
 
 }

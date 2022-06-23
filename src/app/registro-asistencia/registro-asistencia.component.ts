@@ -3,9 +3,19 @@ import { Router, ActivatedRoute } from '@angular/router';
 import { ActividadesDiariasService } from '../services/actividades-diarias.service';
 import { Anexo9Service } from '../services/anexo9.service';
 import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
+import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import swal from 'sweetalert2';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { ActividadesDiarias } from '../models/actividades-diarias';
+import Docxtemplater from "docxtemplater";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import { saveAs } from "file-saver";
+import { Carrera } from '../models/Carrera';
+
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
 
 
 @Component({
@@ -21,22 +31,37 @@ export class RegistroAsistenciaComponent implements OnInit {
   public listaActividades: Array<any> = [];
   public listaAnexo9Datos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
+  public listaSolicitudAlumno: Array<any> = [];
 
   actividadesDiarias: ActividadesDiarias = new ActividadesDiarias();
 
 
   public dialogoMiRegistro: boolean;
+  public dialogoGuardaryGenerar: boolean;
   public contador = 0;
   public dis: boolean;
   public cedulaAlumno: any;
   formValidacion: FormGroup;
+  formGuardar: FormGroup;
 
+  public datoEstudiante: any;
+  public datoEmpresa: any;
+  public datoTutor: any;
+  public datoCarrera: any;
 
-
-  showDialog(idRegiAsi:any) {
+  showDialog(idRegiAsi: any) {
     this.dis = true;
-    this.actividadesDiarias.registroAsistencia.idRegistroAsistencia = idRegiAsi;
-    
+    this.actividadesDiarias.registroA.idRegistroAsistencia = idRegiAsi;
+
+  }
+
+  showDialogGuardar(est: any, emp: any, tut: any, carr: any) {
+    this.dialogoGuardaryGenerar = true;
+    this.datoEstudiante = est;
+    this.datoEmpresa = emp;
+    this.datoTutor = tut;
+    this.datoCarrera = carr;
+
   }
 
 
@@ -45,6 +70,7 @@ export class RegistroAsistenciaComponent implements OnInit {
     private actividadesDiariasService: ActividadesDiariasService,
     private anexo9Service: Anexo9Service,
     private registroAsistenciaService: RegistroAsistenciaService,
+    private solicitudAlumnoService: SolicitudAlumnoService,
     private formBuilder: FormBuilder,
   ) { }
 
@@ -54,6 +80,8 @@ export class RegistroAsistenciaComponent implements OnInit {
     this.listarActividades();
     this.listarAnexo9();
     this.listarregistroAsistencia();
+    this.listarSolicitudAlumnos();
+
 
     this.formValidacion = this.formBuilder.group({
       fecha: ['', Validators.required],
@@ -89,6 +117,14 @@ export class RegistroAsistenciaComponent implements OnInit {
     })
   }
 
+  //LISTAR SOLICITUDES
+  listarSolicitudAlumnos() {
+    this.solicitudAlumnoService.getSolicitudAlumno().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaSolicitudAlumno = resp.data
+    }
+    )
+  }
 
 
   //Metodo de crear actividades
@@ -105,26 +141,130 @@ export class RegistroAsistenciaComponent implements OnInit {
     }
 
 
-
-        
-        this.actividadesDiariasService.createregistroActividades(this.actividadesDiarias).subscribe(
-          Response => {
-            swal.fire(
-              'Enviado',
-              `Actividad creada con exito!`,
-              'success'
-            )
-            //this.limpiar();
-            //this.listarSolicitudAlumnos();
-          }
+    this.actividadesDiariasService.createregistroActividades(this.actividadesDiarias).subscribe(
+      Response => {
+        swal.fire(
+          'Enviado',
+          `Actividad creada con exito!`,
+          'success'
         )
-    
-    
+        this.listarActividades();
+        this.limpiar();
 
-        
+      }
+    )
+
   }
 
 
+  limpiar() {
+    this.actividadesDiarias.fecha = null;
+    this.actividadesDiarias.numHoras = null;
+    this.actividadesDiarias.horaLlegada = null;
+    this.actividadesDiarias.horaSalida = null;
+    this.actividadesDiarias.descripcion = null;
+  }
+
+
+  //Metodo de borrar
+
+  borrarActividad(id:any) {
+
+    swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+
+        this.actividadesDiariasService.deleteActividad(id).subscribe(
+          
+          Response => {
+            this.listaActividades = this.listaActividades.filter(servi => servi !== id)
+
+            swal.fire(
+              'Borrado!',
+              'Su actividad ha sido eliminada.',
+              'success'
+            )
+            this.listarActividades();
+          }
+        )
+
+
+
+      }
+    })
+  }
+
+
+  //metodo generar documento
+
+  generate(est: any, emp: any, tut: any, car: any) {
+
+    loadFile("https://backendg1c2.herokuapp.com/files/anexo9.docx", function (
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+
+
+
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+      doc.setData({
+
+        estudiante: est,
+        empresa: emp,
+        NombreTutor: tut,
+        carrera: car,
+      });
+      try {
+        // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function (
+              error,
+              key
+            ) {
+              error[key] = value[key];
+              return error;
+            },
+              {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function (error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "anexo9.docx");
+    });
+  }
 
 
 }

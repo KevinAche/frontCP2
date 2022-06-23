@@ -1,81 +1,45 @@
-<!DOCTYPE html>
-<html lang="es">
-<head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+<section class="vh-100">
+  <div class="container-fluid" style="padding: 55px;">
 
-</head>
-<section class="vh-100" style="padding: 55px;">
-  <mat-card>
-    <mat-card-title style="background-color:#1d3557; color:white; padding: 33px; border-radius: 5px">
-      {{titulo}}
+    <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
+      HISTORIAL DE PROCESO
     </mat-card-title>
-    <body>
-
-    <div class="container mt-5">
-      <div class="col-12">
-
-        <div class="row">
-          <div class="col-12 grid-margin">
-            <div class="card">
-              <div class="card-body">
-
-                <h4 class="card-title">Buscador</h4>
-
-
-                <form id="form2" name="form2" method="POST" action="index.php">
-                  <div class="col-12 row">
-                    <div class="col-11">
-                      <!--Entrada de datos para busqueda -->
-<!--                      <label  class="form-label">Nombre a buscar</label>-->
-                      <input type="text" class="form-control" id="buscar" name="buscar" value="" >
-                    </div>
-                    <!--Boton de busqueda de datos -->
-                    <div class="col-1">
-                      <input type="submit" class="btn btn-success" value="Ver" style="margin-top: 0px;">
-                    </div>
-                  </div>
-
-
-                  <p style="font-weight: bold; color:#1d3557;"><i class="mdi mdi-file-document"></i> Resultados encontrados</p>
-                </form>
-
-
-                <div class="table-responsive">
-                  <!----Tabla------>
-                  <table class="table">
-                    <thead>
-                    <tr style="background-color: #eab207; color:#070707;">
-<!--                      <th *ngFor="let col of columnasConvocatorias"> {{col.header}}</th>-->
-                    </tr>
-                    </thead>
-                    <tbody>
-                    <tr >
-                      <td >
-                        <div >
-<!--                          <span *ngSwitchCase="'fechaMaxima'"> {{convocatoria[col.field] | date}} </span>-->
-<!--                          <span *ngSwitchDefault>{{convocatoria[col.field]}}</span>-->
-                        </div>
-                      </td>
-                    </tr>
-                    </tbody>
-                  </table>
-                  <!------------------------------------------------------------------------------->
-                </div>
-
-
-              </div>
-            </div>
-          </div>
-        </div>
-
-
+    <br>
+    <mat-card>
+      <h2 style="color: #1d3557;">Buscar Convocatorias</h2>
+      <div class="search-historial">
+        <input class="form-control" type="text" name="search" [(ngModel)]="searchText" autocomplete="on" placeholder="">
       </div>
-    </div>
 
-    </body>
-  </mat-card>
+      <br>
+      <h2 style="color: #1d3557;">Historial de procesos</h2>
+      <form>
+        <h3>
+          <table class="table table-striped">
+            <thead class="bg-warning">
+            <tr>
+              <th scope="col">Fecha Emision</th>
+              <th scope="col">Fecha Maxima</th>
+              <th scope="col">Nombre</th>
+              <th scope="col"># Alumnos</th>
+              <th scope="col">Empresa</th>
+              <th scope="col">Carrera</th>
+            </tr>
+            </thead>
 
-
+            <tbody >
+              <tr *ngFor="let historial of historialC | filter:searchText">
+                <td>{{historial.fechaEmision}}</td>
+                <td>{{historial.fechaMaxima}}</td>
+                <td>{{historial.nombreConvocatoria}}</td>
+                <td>{{historial.solicitudEmpresa.numeroAlumnos}}</td>
+                <td>{{historial.solicitudEmpresa.empleado.empresa.nombreEmpresa}}</td>
+                <td>{{historial.solicitudEmpresa.carrera.nombre}}</td>
+              </tr>
+            </tbody>
+          </table>
+        </h3>
+      </form>
+    </mat-card>
+  </div>
 </section>
-</html>

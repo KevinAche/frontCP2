@@ -1,6 +1,5 @@
-import { NgModule } from '@angular/core';
+import { Component, NgModule } from '@angular/core';
 import { RouterModule, Routes } from '@angular/router';
-import { AppComponent } from './app.component';
 import { HomeComponent } from './components/home/home.component';
 import { PagenotfoundComponent } from './components/pagenotfound/pagenotfound.component';
 import { ConsultaspppComponent } from './consultasppp/consultasppp.component';
@@ -39,11 +38,15 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
+import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 
+import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
+import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'informe-acreditacion', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
   {path: 'registro-empresa', component:RegistroEmpresasComponent },
@@ -57,6 +60,7 @@ const routes: Routes = [
   {path:'listar-carreras', component:ListarCarrerasComponent},
   {path:'consulta-convocatoria', component:ConsultaConvocatoriaComponent},
   {path:'crear-empleado', component:CrearEmpleadoComponent},
+  {path:'gestion-convocatoria', component:GestionConvocatoriaComponent},
   {path:'cons-est-asignados', component:ConsultasEstudiantesAsignadosComponent},
   {path:'gestion-empresa', component: GestionEmpresaComponent },
   {path:'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},
@@ -94,7 +98,7 @@ const routes: Routes = [
 
   {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
-  {path:'solicitud-estudiante/:id',component: SolicitudEstudianteComponent},
+  {path:'solicitud-estudiante/:rol/:cedula',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
   {path:'consultas-reportes',component:ConsultasReportesComponent},
   {
@@ -113,7 +117,7 @@ const routes: Routes = [
   { path: 'consulta-estado', component: ConsultaEstadoComponent },
   //Franklin
   { path: 'registro-convocatoria', component: RegistroConvocatoriaComponent },
-  { path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent },
+  { path: 'inf-fin-alumno/:cedula', component: InformeFinalAlumnoComponent },
   {
     path: 'eva-est-tu-empresarial',
     component: EvaluacionEstudianteTutorEmpresarialComponent,
@@ -154,6 +158,7 @@ const routes: Routes = [
   },
   { path: 'gestion-visitas', component: GestionVisitasComponent },
   { path: 'lista-responsableppp', component: ListaResponsablepppComponent },
+
   { path: '**', component: PagenotfoundComponent },
 ];
 
