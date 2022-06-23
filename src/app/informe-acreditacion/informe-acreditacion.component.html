@@ -43,21 +43,6 @@
               </tr>
             </ng-template>
             </tbody>
-
-            <tbody *ngFor="let solitud of solicitudes">
-
-            <tr *ngIf="solitud.estado==true; else login">
-            </tr>
-            <ng-template #login>
-              <tr *ngIf="verSeleccion=='Seleccione una convocatoria'">
-                <td>{{solitud.alumno.persona.primerApellido}} {{solitud.alumno.persona.segundoApellido}}</td>
-                <td>{{solitud.alumno.persona.primerNombre}} {{solitud.alumno.persona.segundoNombre}}</td>
-                <td>{{solitud.alumno.paralelo}}</td>
-                <td>{{solitud.horasPPP}}</td>
-                <td><a class="btn btn-primary btn-xs" style="color: white">Documento</a></td>
-              </tr>
-            </ng-template>
-            </tbody>
           </table>
         </h3>
       </form>
