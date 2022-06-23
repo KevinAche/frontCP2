@@ -5,6 +5,7 @@ import { InformeFinalAlumnoService } from '../services/informe-finalizacion-alum
 import { AlumnosService } from '../services/alumnos.service';
 import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import { TutorEmpresarialService } from '../services/tutor-empresarial.service';
+import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
 import { TutorAService } from '../services/tutorA.service';
 import { ActaReunionService } from '../services/acta-reunion.service';
 import { Observable } from 'rxjs';
@@ -35,6 +36,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public TutorEmpresarialDatos: Array<any> = [];
   public TutorAcademicoDatos: Array<any> = [];
   public ActaReunionDatos: Array<any> = [];
+  public listaRegistroActividades: Array<any> = [];
 
   informeFinal: InformeFinal = new InformeFinal();
 
@@ -58,7 +60,8 @@ export class InformeFinalAlumnoComponent implements OnInit {
     private solicitudAlumnoService: SolicitudAlumnoService,
     private tutorEmpresarialService: TutorEmpresarialService,
     private tutorAcademicoService: TutorAService,
-    private actaReunionService: ActaReunionService
+    private actaReunionService: ActaReunionService,
+    private registroAsistenciaService: RegistroAsistenciaService,
   ) { }
 
 
@@ -123,18 +126,41 @@ export class InformeFinalAlumnoComponent implements OnInit {
     )
   }
 
+  public listarregistroAsistencia() {
+    this.registroAsistenciaService.getRegistoAsistencialista().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaRegistroActividades = resp.data
+    })
+  }
+
   //Metodo para crear
 
   public create(): void {
 
-    var docubas=this.base64Output;
+    var docubas = this.base64Output;
 
-    this.informeFinal.docInformeFinal='documento';
-    this.informeFinal.fechaEmision=null;
+    this.informeFinal.fechaEmision = null;
+    this.informeFinal.docInformeFinal = docubas;
 
-alert(docubas);
 
-    if (docubas=="undefined") {
+    try {
+      if (docubas.length != 0) {
+        this.informeFinalAlumnoService.createInformeFinal(this.informeFinal).subscribe(
+          Response => {
+            swal.fire(
+              'Enviado',
+              `Informe creada con exito!`,
+              'success'
+            )
+            this.dialogoGuardaryGenerar = false;
+            location.reload();
+
+          }
+        )
+      }
+
+
+    } catch (error) {
       swal.fire(
         'Error de entrada',
         'Seleccione documento',
@@ -143,20 +169,6 @@ alert(docubas);
       return;
     }
 
-    this.informeFinal.docInformeFinal=docubas;
-
-    this.informeFinalAlumnoService.createInformeFinal(this.informeFinal).subscribe(
-      Response => {
-        swal.fire(
-          'Enviado',
-          `Informe creada con exito!`,
-          'success'
-        )
-       this.dialogoGuardaryGenerar=false;
-       location.reload();
-
-      }
-    )
 
   }
 
