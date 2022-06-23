@@ -6,6 +6,7 @@ import { AlumnosService } from '../services/alumnos.service';
 import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import { TutorEmpresarialService } from '../services/tutor-empresarial.service';
 import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
+import { ActividadesDiariasService } from '../services/actividades-diarias.service';
 import { TutorAService } from '../services/tutorA.service';
 import { ActaReunionService } from '../services/acta-reunion.service';
 import { Observable } from 'rxjs';
@@ -37,6 +38,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public TutorAcademicoDatos: Array<any> = [];
   public ActaReunionDatos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
+  public listaActividades: Array<any> = [];
 
   informeFinal: InformeFinal = new InformeFinal();
 
@@ -45,6 +47,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public cedula: String;
   public areaEmpresa: String;
   public vava: any;
+  public datoActividadDocumento:String="";
 
   formGuardar: FormGroup;
 
@@ -62,6 +65,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
     private tutorAcademicoService: TutorAService,
     private actaReunionService: ActaReunionService,
     private registroAsistenciaService: RegistroAsistenciaService,
+    private actividadesDiariasService: ActividadesDiariasService,
   ) { }
 
 
@@ -75,6 +79,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
     this.listarTutorEmpresarial();
     this.listarTutorAcademico();
     this.listarActaReunion();
+    this.listarActividades();
   }
 
 
@@ -132,6 +137,14 @@ export class InformeFinalAlumnoComponent implements OnInit {
       this.listaRegistroActividades = resp.data
     })
   }
+
+  public listarActividades() {
+    this.actividadesDiariasService.getInformeActividadesDiarias().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaActividades = resp.data
+    })
+  }
+
 
   //Metodo para crear
 
@@ -242,6 +255,24 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   }
 
+  //metosdo para obtener actividades
+
+  obtenerActividades(idregistro: any) {
+
+    for (var c = 0; c < this.listaActividades.length; c++) {
+
+      if(this.listaActividades[c].registroA.idRegistroAsistencia==idregistro){
+
+        this.datoActividadDocumento= this.datoActividadDocumento+"- "+this.listaActividades[c].descripcion+"\n";
+        
+        //alert(this.listaActividades[c].descripcion);
+      }
+    
+    }
+    //alert(this.datoActividadDocumento);
+
+  }
+
   //Metodo para subir documento en base 64
   onFileSelected(event) {
     this.convertFile(event.target.files[0]).subscribe(base64 => {
@@ -261,8 +292,12 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   //Metodo para generar documento
 
-  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any) {
+  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any, idregistro: any) {
+    this.datoActividadDocumento="";
+    this.obtenerActividades(idregistro);
+    var ddac=this.datoActividadDocumento;
 
+    //alert(ddac);
     var fech = this.informeFinal.fechaEmision;
     if (actPrin == 0 || prinEmp == 0 || conclu == 0) {
 
@@ -324,6 +359,8 @@ export class InformeFinalAlumnoComponent implements OnInit {
           conclusion: conclu,
           fecha: fech,
 
+          DescripcionDetallada:ddac,
+
         });
         try {
           // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
@@ -365,6 +402,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
         saveAs(out, "anexo13.docx");
       });
     }
+    
   }
 
 }
