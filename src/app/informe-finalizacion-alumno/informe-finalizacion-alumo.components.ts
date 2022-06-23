@@ -311,7 +311,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
     //fein fefi
     let arra = fein.split('T');
     fein=arra[0];
-    
+
     let array = fefi.split('T');
     fefi=array[0];
 
@@ -411,7 +411,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
           horasPPP: horpp,
           fechaInicio: fein,
           fechaFin: fefi,
-          
+
           constitucionEmpresa: consEmp,
           misionEmpresa: misEmpr,
           visionEmpresa: visEmpr,
