@@ -73,12 +73,14 @@ import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
+
 import {OrderListModule} from 'primeng/orderlist';
 
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 
 
+import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -154,6 +156,7 @@ SolicitudEmpresaComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
     CrearEmpleadoComponent,
+    ListarEmpleadoComponent,
   ],
   imports: [
     BrowserModule,

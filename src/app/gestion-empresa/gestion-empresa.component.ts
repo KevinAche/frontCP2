@@ -5,7 +5,20 @@ import { Empresa } from '../services/empresa';
 import { EmpresaService } from '../services/empresa.service';
 import swal from 'sweetalert2';
 import { MessageService } from 'primeng/api';
+import { ActividadesService } from '../services/actividades.service';
+import { EmpleadoService } from '../services/empleado.service'
+import { Actividades } from '../models/Actividades';
+import { TokenService } from '../services/token.service';
+import { ConvenioService } from '../services/convenio.service';
+import { Convenio } from '../models/Convenio';
+import Docxtemplater from "docxtemplater";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import { saveAs } from "file-saver";
 
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
 
 @Component({
   selector: 'app-gestion-empresa',
@@ -17,9 +30,23 @@ export class GestionEmpresaComponent implements OnInit {
 
   empresa: Empresa = new Empresa();
   formEmpresa: FormGroup;
+  formActividades: FormGroup;
+  formConvenio: FormGroup;
   cols: any[];
+  colsAct: any[];
+  
   dis: boolean;
+  createConvenio: boolean;
+  createActividades: boolean;
+  refresh = true;
+
   empresas : Empresa[];
+  actividad: Actividades = new Actividades();
+  actividades: Actividades[] = new Array <Actividades>();
+  gerente: any;
+  convenio: Convenio = new Convenio();
+ 
+
 
 
   showDialog() {
@@ -52,10 +79,15 @@ export class GestionEmpresaComponent implements OnInit {
     private formBuilder: FormBuilder,
     private activatedRoute: ActivatedRoute,
     private empresaservice: EmpresaService,
-    public messageService: MessageService
+    public messageService: MessageService,
+    private actividadesService: ActividadesService,
+    private empleadoService: EmpleadoService,
+    private tokenService: TokenService,
+    private convenioService: ConvenioService
   ) { }
 
   ngOnInit(): void {
+    this.createConvenio=false;
 
     this.formEmpresa = this.formBuilder.group({
       ruc: ['', Validators.required],
@@ -68,6 +100,22 @@ export class GestionEmpresaComponent implements OnInit {
 
     });
 
+    this.formConvenio = this.formBuilder.group({
+      duracion: ['', Validators.required],
+      fechaEmision: ['', Validators.required],
+    })
+
+    this.formActividades = this.formBuilder.group({
+      descripcion: ['', Validators.required]
+
+    });
+
+    this.colsAct = [
+      { field: 'idActividad', header: 'Id' },
+      { field: 'descripcion', header: 'Descripción' },
+      { field: 'accion', header: 'Acciones' },
+    ]
+
     this.cols = [
       { field: 'ruc', header: 'Ruc' },
       { field: 'nombreEmpresa', header: 'Empresa' },
@@ -78,6 +126,7 @@ export class GestionEmpresaComponent implements OnInit {
       { field: 'naturaleza', header: 'Naturaleza' },
       { field: 'size', header: 'Acciones' },
       { field: 'convenio', header: 'Convenio' },
+      { field: 'documento', header: 'Documento' },
 
     ];
     this.listarEmpresas();
@@ -144,4 +193,135 @@ export class GestionEmpresaComponent implements OnInit {
     })
   }
 
+  getGerente (idEmpresa){
+    
+    this.empleadoService.getGerente(idEmpresa).then(value => {
+      this.gerente=value['data'];
+      if(this.gerente[0]){
+      
+          console.log(this.gerente[0].persona.primerNombre);
+          
+          
+      } else {
+        console.log("NO TIENE GERENTE")
+      
+        
+      }
+    })
+    
+    
+  }
+
+
+  eliminarActividad(id){
+    this.actividadesService.deleteActividad(id).then(res=>{
+      console.log("Actividad eliminada");
+      this.getActividades()
+    })
+  }
+
+  getActividades(){
+    this.actividadesService.getActividades().subscribe(res => {
+      this.actividades = res['data']
+    })
+  }
+
+  agregarActividad(){
+    if(this.formActividades.invalid){
+      console.log("ACTIVIDAD ERROR")
+    }else {
+      this.actividad.convenio=this.convenio[0]
+      this.actividadesService.createActividades(this.actividad).then(res => {
+        console.log(this.actividad)
+        this.getActividades()
+      })
+
+      
+    }
+    
+  }
+
+  crearConvenio(id){
+    this.createConvenio = true
+    this.getGerente(id);
+  }
+
+  guardarConvenio(){
+    console.log(this.convenio.fechaEmision)
+    this.convenioService.createConvenio2
+          (this.convenio,this.gerente[0].persona.cedula,this.tokenService.getUserName()).then(res => {
+            this.convenio = res['data']    
+            console.log(this.convenio);
+                
+          });
+
+    this.createConvenio = false;
+    this.createActividades = true;
+  }
+
+
+  updateVisibility(): void {
+    this.refresh = false;
+    setTimeout(() => this.refresh = true, 0);
+  }
+
+
+  generate(empresa, gerente, actividades) {
+    loadFile("http://localhost:8082/files/convocatoria.docx", function(
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+
+
+  
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+      doc.setData({
+        nombreEmpresa: "",
+        duracion: "2501"
+      });
+      try {
+        // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
+        doc.render();
+      } catch (error) {
+        // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+              error,
+              key
+            ) {
+              error[key] = value[key];
+              return error;
+            },
+            {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, "output.docx");
+    });
+  }
+  
 }
