@@ -36,7 +36,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public TutorAcademicoDatos: Array<any> = [];
   public ActaReunionDatos: Array<any> = [];
 
-  informeFinalclase: InformeFinal = new InformeFinal();
+  informeFinal: InformeFinal = new InformeFinal();
 
 
   public base64Output: string;
@@ -123,22 +123,98 @@ export class InformeFinalAlumnoComponent implements OnInit {
     )
   }
 
+  //Metodo para crear
+
+  public create(): void {
+
+    var docubas=this.base64Output;
+
+    this.informeFinal.docInformeFinal='documento';
+    this.informeFinal.fechaEmision=null;
+
+alert(docubas);
+
+    if (docubas=="undefined") {
+      swal.fire(
+        'Error de entrada',
+        'Seleccione documento',
+        'error'
+      )
+      return;
+    }
+
+    this.informeFinal.docInformeFinal=docubas;
+
+    this.informeFinalAlumnoService.createInformeFinal(this.informeFinal).subscribe(
+      Response => {
+        swal.fire(
+          'Enviado',
+          `Informe creada con exito!`,
+          'success'
+        )
+       this.dialogoGuardaryGenerar=false;
+       location.reload();
+
+      }
+    )
+
+  }
+
+
+  //Metodo de borrar
+
+  borrarInforme(id: any) {
+
+    swal.fire({
+      title: '¿Estas seguro?',
+      text: "¡No podrás revertir esto!",
+      icon: 'warning',
+      showCancelButton: true,
+      confirmButtonColor: '#d33',
+      cancelButtonColor: '#3085d6',
+      confirmButtonText: 'Si, borrar!'
+    }).then((result) => {
+      if (result.isConfirmed) {
+        this.informeFinalAlumnoService.deleteInformeFinal(id).subscribe(
+
+          Response => {
+            this.informeFinalDatos = this.informeFinalDatos.filter(servi => servi !== id)
+
+            swal.fire(
+              'Borrado!',
+              'Su actividad ha sido eliminada.',
+              'success'
+            )
+
+            this.dialogoEliminar = false;
+            location.reload();
+
+          }
+        )
+
+
+      }
+    })
+  }
+
   //Metodo capturar fecha
 
   capturarFecha() {
     let date = new Date();
-    this.informeFinalclase.fechaEmision = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+    this.informeFinal.fechaEmision = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
   }
 
   //metodo Dialogo
 
   showDialogGuardar(idAlumno: any) {
     var con = 0;
-    this.informeFinalclase.alumno.idAlumno = idAlumno;
+    this.dialogoEliminar = null;
+    this.dialogoGuardaryGenerar = false;
+    this.informeFinal.alumno.idAlumno = idAlumno;
 
     for (var i = 0; i < this.informeFinalDatos.length; i++) {
 
-      if (this.informeFinalDatos[i].alumno.idAlumno == this.informeFinalclase.alumno.idAlumno) {
+      if (this.informeFinalDatos[i].alumno.idAlumno == this.informeFinal.alumno.idAlumno) {
         con = 1;
         //alert(this.informeFinalDatos[i].alumno.idAlumno);
       }
@@ -175,7 +251,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any) {
 
-    var fech = this.informeFinalclase.fechaEmision;
+    var fech = this.informeFinal.fechaEmision;
     if (actPrin == 0 || prinEmp == 0 || conclu == 0) {
 
       swal.fire(
