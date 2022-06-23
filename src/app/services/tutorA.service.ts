@@ -8,6 +8,7 @@ import {environment} from "../../environments/environment";
 export class TutorAService {
 
   headers = new HttpHeaders().append('Content-type', 'application/json');
+  _url ='https://backendg1c2.herokuapp.com/GestionTutorAcademico';
 
   constructor(
     private http: HttpClient
@@ -49,5 +50,16 @@ export class TutorAService {
       environment.URL_APP + `GestionTutorAcademico/EliminarTutorAcademico/${id}`
     ).toPromise();
   }
+
+
+  getTutorAcademico() {
+    let header = new HttpHeaders()
+        .set('Type-content', 'aplication/json')
+
+        return this.http.get(this._url+'/ListaTutorAcademico',{
+        headers: header
+
+    });
+}
 
 }

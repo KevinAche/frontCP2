@@ -1,11 +1,25 @@
 import { Component, OnInit } from '@angular/core';
 import { Router, ActivatedRoute } from '@angular/router';
+import { InformeFinal } from '../models/InformeFinal';
 import { InformeFinalAlumnoService } from '../services/informe-finalizacion-alumo.services';
 import { AlumnosService } from '../services/alumnos.service';
 import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import { TutorEmpresarialService } from '../services/tutor-empresarial.service';
+import { TutorAService } from '../services/tutorA.service';
+import { ActaReunionService } from '../services/acta-reunion.service';
 import { Observable } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import { FormBuilder, FormGroup, Validators } from '@angular/forms';
+import { saveAs } from "file-saver";
+import Docxtemplater from "docxtemplater";
+import swal from 'sweetalert2';
+
+
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
 
 @Component({
   selector: 'app-info-seguimiento',
@@ -15,14 +29,25 @@ import { ReplaySubject } from 'rxjs';
 })
 export class InformeFinalAlumnoComponent implements OnInit {
   //Variables
-  public informeFinal: Array<any> = [];
+  public informeFinalDatos: Array<any> = [];
   public alumnosDatos: Array<any> = [];
   public solicitudAlumnosDatos: Array<any> = [];
   public TutorEmpresarialDatos: Array<any> = [];
+  public TutorAcademicoDatos: Array<any> = [];
+  public ActaReunionDatos: Array<any> = [];
+
+  informeFinalclase: InformeFinal = new InformeFinal();
 
 
   public base64Output: string;
   public cedula: String;
+  public areaEmpresa: String;
+  public vava: any;
+
+  formGuardar: FormGroup;
+
+  public dialogoGuardaryGenerar: boolean;
+  public dialogoEliminar: boolean;
 
 
   //constructor y OnInit
@@ -31,16 +56,22 @@ export class InformeFinalAlumnoComponent implements OnInit {
     private informeFinalAlumnoService: InformeFinalAlumnoService,
     private alumnoService: AlumnosService,
     private solicitudAlumnoService: SolicitudAlumnoService,
-    private tutorEmpresarialService: TutorEmpresarialService
+    private tutorEmpresarialService: TutorEmpresarialService,
+    private tutorAcademicoService: TutorAService,
+    private actaReunionService: ActaReunionService
   ) { }
 
 
   ngOnInit(): void {
     this.cedula = this.route.snapshot.paramMap.get('cedula');
+    this.areaEmpresa = 'Desarrollo';
+    this.capturarFecha();
     this.listarInformeFinal();
     this.listarDetalladaAlumnos();
     this.listarSolicitudAlumnos();
     this.listarTutorEmpresarial();
+    this.listarTutorAcademico();
+    this.listarActaReunion();
   }
 
 
@@ -48,7 +79,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public listarInformeFinal() {
     this.informeFinalAlumnoService.getInformeFinalAlumno().subscribe((resp: any) => {
       console.log(resp.data)
-      this.informeFinal = resp.data
+      this.informeFinalDatos = resp.data
     })
   }
 
@@ -75,8 +106,55 @@ export class InformeFinalAlumnoComponent implements OnInit {
     )
   }
 
+  listarTutorAcademico() {
+    this.tutorAcademicoService.getTutorAcademico().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.TutorAcademicoDatos = resp.data
+    }
+    )
+  }
 
-  //M+etodo para subir documento en base 64
+  listarActaReunion() {
+
+    this.actaReunionService.getActaReunion().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.ActaReunionDatos = resp.data
+    }
+    )
+  }
+
+  //Metodo capturar fecha
+
+  capturarFecha() {
+    let date = new Date();
+    this.informeFinalclase.fechaEmision = String(date.getDate()).padStart(2, '0') + '/' + String(date.getMonth() + 1).padStart(2, '0') + '/' + date.getFullYear();
+  }
+
+  //metodo Dialogo
+
+  showDialogGuardar(idAlumno: any) {
+    var con = 0;
+    this.informeFinalclase.alumno.idAlumno = idAlumno;
+
+    for (var i = 0; i < this.informeFinalDatos.length; i++) {
+
+      if (this.informeFinalDatos[i].alumno.idAlumno == this.informeFinalclase.alumno.idAlumno) {
+        con = 1;
+        //alert(this.informeFinalDatos[i].alumno.idAlumno);
+      }
+
+    }
+
+    if (con == 1) {
+      this.dialogoEliminar = true;
+
+    } else {
+      this.dialogoGuardaryGenerar = true;
+    }
+
+  }
+
+  //Metodo para subir documento en base 64
   onFileSelected(event) {
     this.convertFile(event.target.files[0]).subscribe(base64 => {
       this.base64Output = base64;
@@ -90,6 +168,115 @@ export class InformeFinalAlumnoComponent implements OnInit {
     reader.onload = (event) => result.next(btoa(event.target.result.toString()));
     console.log(result)
     return result;
+  }
+
+
+  //Metodo para generar documento
+
+  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any) {
+
+    var fech = this.informeFinalclase.fechaEmision;
+    if (actPrin == 0 || prinEmp == 0 || conclu == 0) {
+
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+      return;
+
+
+    } else {
+
+
+      loadFile("https://backendg1c2.herokuapp.com/files/anexo13.docx", function (
+        error,
+        content
+      ) {
+        if (error) {
+          throw error;
+        }
+
+
+
+        const zip = new PizZip(content);
+        const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
+        doc.setData({
+
+          nombreEmpresa: nomEm.toUpperCase(),
+          ubicacionEmpresa: ubiEm.toUpperCase(),
+          areaEmpresa: areEm.toUpperCase(),
+
+          nombreTutorE: nomte.toUpperCase(),
+          cedulaTutorE: cedte.toUpperCase(),
+          cargoTutorE: carte.toUpperCase(),
+          telefonoEmpresa: telem.toUpperCase(),
+          correoTutorE: corte,
+
+          nombreEstudiante: nomEs.toUpperCase(),
+          cedulaEstudiante: cedEs,
+          ciclo: cicEs.toUpperCase(),
+          correoEstudiante: corEst,
+          telefonoEstudiante: corEs.toUpperCase(),
+
+          nombreTutorA: nomtac.toUpperCase(),
+          cedulaTutorA: cedtac.toUpperCase(),
+          correoTutorA: cortac,
+
+          horasPPP: horpp,
+          fechaInicio: fein,
+          fechaFin: fefi,
+
+          constitucionEmpresa: consEmp,
+          misionEmpresa: misEmpr,
+          visionEmpresa: visEmpr,
+
+          actividadEmpresa: actPrin,
+          principiosEmpresa: prinEmp,
+          conclusion: conclu,
+          fecha: fech,
+
+        });
+        try {
+          // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
+          doc.render();
+        } catch (error) {
+          // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
+          function replaceErrors(key, value) {
+            if (value instanceof Error) {
+              return Object.getOwnPropertyNames(value).reduce(function (
+                error,
+                key
+              ) {
+                error[key] = value[key];
+                return error;
+              },
+                {});
+            }
+            return value;
+          }
+          console.log(JSON.stringify({ error: error }, replaceErrors));
+
+          if (error.properties && error.properties.errors instanceof Array) {
+            const errorMessages = error.properties.errors
+              .map(function (error) {
+                return error.properties.explanation;
+              })
+              .join("\n");
+            console.log("errorMessages", errorMessages);
+
+          }
+          throw error;
+        }
+        const out = doc.getZip().generate({
+          type: "blob",
+          mimeType:
+            "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+        });
+        // Output the document using Data-URI
+        saveAs(out, "anexo13.docx");
+      });
+    }
   }
 
 }
