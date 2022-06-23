@@ -34,8 +34,8 @@ export class ActaReunionService {
 
 
 
-  createActa(doc: ActaReunion, ced :String, id : number): Observable<ActaReunion> {
-    return this.http.post<ActaReunion>(`${this.urlCreate}/${ced}/${id}`, doc, { headers: this.httpHeaders }).pipe(
+  createActa(doc: ActaReunion): Observable<ActaReunion> {
+    return this.http.post<ActaReunion>(`${this.urlCreate}`, doc, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al guardar', 'NO se puede guardar la acta', 'error')
         return throwError(e);

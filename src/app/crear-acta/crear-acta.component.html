@@ -16,7 +16,7 @@
                     </div>
                     <div class="form-group col-md-3">
                         <label for="fecha">Fecha</label>
-                        <input type="date" class="form-control"  id="fecha" formControlName="fecha" >
+                        <input type="date" class="form-control"  id="fecha" formControlName="fecha" [(ngModel)]="actareunion.fechaEmision"  >
     
                     </div>
                    
@@ -128,12 +128,12 @@
                 <div class="form-row">
                     <div class="form-group col-md-6">
                         <label for="finicio">Fecha de inicio:</label>
-                        <input type="date" class="form-control"  id="finicio" formControlName="finicio" >
+                        <input type="date" class="form-control"  id="finicio" formControlName="finicio" [(ngModel)]="actareunion.fechaInicioPPP">
                         
                     </div>
                     <div class="form-group col-md-6">
                         <label for="ffinal">Fecha de finalización:</label>
-                        <input type="date" class="form-control"  id="ffinal"  formControlName="ffinal">
+                        <input type="date" class="form-control"  id="ffinal"  formControlName="ffinal" [(ngModel)]="actareunion.fechaFinPPP">
                     </div>
 
                 </div>
@@ -171,7 +171,28 @@
                         <input type="text" class="form-control"  id="horas"  formControlName="horas" placeholder="Ingrese las horas de las practicas pre-profesionales">
                         
                     </div>
+                    <div class="form-group col-md-6">
 
+                        <label for="carrera">Convenio</label><br>
+    
+                        <p-dropdown 
+                            [options]="convenios" 
+                            optionLabel="documento"
+                            [showClear]="true" 
+                            (onChange)="OnChangeConv($event)"
+                            [filter]="true" 
+                            filterBy="documento"
+                            [showClear]="true"
+                            >
+                            <ng-template let-doc pTemplate="item">
+                                <div class="country-item">
+                                    
+                                    <div>{{doc.documento}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+    
+                    </div>
                 </div>
                 <div class="form-row">
                     <label for="est"> Con base en la solicitud realizada por la empresa <b>{{empleadoPPP.nombre_empresa}}</b> (el/la) estudiante
@@ -185,22 +206,22 @@
             <div class="form-row">
                 <div class="form-group col-md-2">
                     
-                    <button pButton pRipple type="button" label="Agregar" class="p-button-success"></button>
+                    <button pButton  (click)='ShowAgregarActividadReunion()' pRipple type="button" label="Agregar" class="p-button-success"></button>
                 </div>
                 <div class="form-group col-md-10">
-                    <p-table [value]="actividades" responsiveLayout="scroll">
+                    <p-table [value]="actividadesFiltradas" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
                                 <th>Area</th>
-                                <th>Actividad por realizar</th>
+                                <th>Actividades</th>
                                 <th>Asignatura Relacionada</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-product>
+                        <ng-template pTemplate="body" let-act>
                             <tr>
-                                <td>{{product.code}}</td>
-                                <td>{{product.name}}</td>
-                                <td>{{product.category}}</td>
+                                <td>{{act.area}}</td>
+                                <td>{{act.descripcion}}</td>
+                                <td>{{act.asignatura.nombreAsignatura}}</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -215,25 +236,28 @@
                 </div>
             </p-divider>
             <br><br>
+            
             <div class="form-row">
                 <div class="form-group col-md-2">
                     
-                    <button pButton pRipple type="button" label="Agregar" class="p-button-success"></button>
+                    <button pButton (click)='ShowAgregarActividadCronograma()' pRipple type="button" label="Agregar" class="p-button-success"></button>
                 </div>
                 <div class="form-group col-md-10">
-                    <p-table [value]="actividades" responsiveLayout="scroll">
+                    <p-table [value]="actividadesReunionFiltradas" responsiveLayout="scroll">
                         <ng-template pTemplate="header">
                             <tr>
-                                <th>Fecha</th>
+                                <th>Semanas</th>
+                                <th>Areas</th>
                                 <th>Actividades</th>
-                                <th>Número de horas</th>
+                                <th>Horas</th>
                             </tr>
                         </ng-template>
-                        <ng-template pTemplate="body" let-product>
+                        <ng-template pTemplate="body" let-act>
                             <tr>
-                                <td>{{product.code}}</td>
-                                <td>{{product.name}}</td>
-                                <td>{{product.category}}</td>
+                                <td>{{act.numSemanas}}</td>
+                                <td>{{act.actividades.area}}</td>
+                                <td>{{act.actividades.descripcion}}</td>
+                                <td>{{act.numHoras}}</td>
                             </tr>
                         </ng-template>
                     </p-table>
@@ -257,10 +281,131 @@
                 <div class="form-group col-md-6">
                 </div>
                 <div class="form-group col-md-6">
-                    <button pButton pRipple type="button" label="Generar Acta" class="p-button-warning"></button>
+                    <button pButton pRipple (click)="GenerarActa()" type="button" label="Generar Acta" class="p-button-warning"></button>
                 </div>
             </div>
         </div>
     </mat-card>
+    <p-dialog header="Agregar actividades practicas" [(visible)]="dis" [style]="{width: '50vw'}">
+        <div class="container-fluid" >
+            <form [formGroup]="formActividades" >
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                        <label for="area">Asignatura</label><br>
+                        
+                        <p-dropdown 
+                            [options]="asignaturas" 
+                            [(ngModel)]="asignatura" 
+                            optionLabel="nombreAsignatura"
+                            [showClear]="true" 
+                            (onChange)="OnChangeAsi($event)"
+                            formControlName="asignatura"
+                            [filter]="true" 
+                            filterBy="nombreAsignatura"
+                            [showClear]="true"
+                            >
+                            <ng-template let-doc pTemplate="item">
+                                <div class="country-item">
+                                    
+                                    <div>{{doc.nombreAsignatura}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+                    </div>
+                    
+
+                </div>
+            
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                    <label for="descripcion">Descripción:</label>
+                    <input type="text" class="form-control" [(ngModel)]="actividad.descripcion" id="descripcion"  formControlName="descripcion" placeholder="Ingrese la descripción de la actividad">
+                    </div>
+
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+                    <label for="area">Area:</label>
+                    <input type="text" class="form-control" [(ngModel)]="actividad.area" id="area"  formControlName="area" placeholder="Ingrese la area">
+                    </div>
+                </div>
+                
+
+                <br><br>
+                <div class="row text-center">
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    <button type="submit" (click)='CrearActividad()' class="btn" style="background: #1d3557; color: white;">Crear</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="dis=false" label="Cancel" styleClass="p-button-text"></p-button>
+        </ng-template>
+
+    </p-dialog>
+
+
+    <p-dialog header="Agregar actividades cronograma" [(visible)]="dis2" [style]="{width: '55vw'}">
+        <div class="container-fluid" >
+            <form [formGroup]="formActividadesReunion" >
+                <div class="form-row">
+                    <div class="form-group col-md-12">
+    
+                        <label for="carrera">Actividad</label><br>
+    
+                        <p-dropdown 
+                            [options]="actividadesFiltradas" 
+                            [(ngModel)]="actividadselec"
+                            optionLabel="descripcion"
+                            [showClear]="true" 
+                            (onChange)="OnChangeActividad($event)"
+                            formControlName="actividad"
+                            [filter]="true" 
+                            filterBy="descripcion"
+                            [showClear]="true"
+                            >
+                            <ng-template let-doc pTemplate="item">
+                                <div class="country-item">
+                                    
+                                    <div>{{doc.descripcion}}</div>
+                                </div>
+                            </ng-template>
+                        </p-dropdown>
+    
+                    </div>
+                </div>
+                <div class="form-row">
+                    <div class="form-group col-md-6">
+                    <label for="semanas">Numero de semanas:</label>
+                    <input type="number" class="form-control" [(ngModel)]="actividadReunion.numSemanas" id="semanas"  formControlName="semanas" placeholder="Ingrese el numero de semanas">
+                    </div>
+                    <div class="form-group col-md-6">
+                        <label for="horas">Numero de horas:</label>
+                        <input type="number" class="form-control" [(ngModel)]="actividadReunion.numHoras" id="horas"  formControlName="horas" placeholder="Ingrese el numero de horas">
+                    </div>
+                </div>
+            
+                <br><br>
+                <div class="row text-center">
+                    <div class="col">
+                    </div>
+                    <div class="col">
+                    <button type="submit" (click)='crearActividadCronograma()' class="btn" style="background: #1d3557; color: white;">Crear</button>
+                    </div>
+
+                </div>
+
+            </form>
+        </div>
+        <ng-template pTemplate="footer">
+            <p-button icon="pi pi-check" (click)="dis2=false" label="Cancel" styleClass="p-button-text"></p-button>
+        </ng-template>
+
+    </p-dialog>
 </div>
 

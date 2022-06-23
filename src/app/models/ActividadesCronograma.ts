@@ -13,8 +13,8 @@ export class ActividadesCronograma {
     porcentaje: any;
 
     observacion: any;
-    actividadesDiarias:ActividadesDiarias=new ActividadesDiarias();
-    cronograma:Cronograma=new Cronograma();
+    actividadesDiarias:ActividadesDiarias;
+    cronograma:Cronograma;
 
     
 }
