@@ -281,12 +281,13 @@
                                       <div class="form-group">
                                         <label>ACTIVIDAD PRINCIPAL:</label>
                                         <input type="text" class="form-control"
-                                          placeholder="Ingrese la actividad principal">
+                                          placeholder="Ingrese la actividad principal" #actprincipal>
                                       </div>
 
                                       <div class="form-group">
                                         <label>PRINCIPIOS:</label>
-                                        <input type="text" class="form-control" placeholder="ingrese los principios">
+                                        <input type="text" class="form-control" placeholder="ingrese los principios"
+                                          #prinempresa>
                                       </div>
 
                                       <div class="form-group">
@@ -398,8 +399,7 @@
                                 <div class="card2">
 
                                   <div class="card-header">
-                                    <h2 style=" text-align: center;color: #1d3557; ">CONCLUSIONES Y RECOMENDACIONESL
-                                    </h2>
+                                    <h2 style=" text-align: center;color: #1d3557; ">CONCLUSIONES Y RECOMENDACIONES</h2>
                                   </div>
 
 
@@ -408,7 +408,8 @@
                                     <div class="form-group">
 
                                       <input type="text" class="form-control"
-                                        placeholder="Indicar los resultados de aprendizaje que se han conseguido">
+                                        placeholder="Indicar los resultados de aprendizaje que se han conseguido"
+                                        #conclusion>
                                     </div>
 
 
@@ -429,11 +430,12 @@
                                     datosTutEmpresarial.personalEmpresa.persona.primerNombre+' '+datosTutEmpresarial.personalEmpresa.persona.segundoNombre+' '+datosTutEmpresarial.personalEmpresa.persona.primerApellido+ ''+datosTutEmpresarial.personalEmpresa.persona.segundoApellido,
                                     datosTutEmpresarial.personalEmpresa.persona.cedula,datosTutEmpresarial.personalEmpresa.cargo,datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.telefono,datosTutEmpresarial.personalEmpresa.persona.correo,datosAlumno.primer_nombre+' '+datosAlumno.segundo_nombre+' '+datosAlumno.primer_apellido+' '+datosAlumno.segundo_apellido,
                                     datosAlumno.cedula,datosAlumno.ciclo+' '+datosAlumno.paralelo,datosAlumno.correo,datosAlumno.telefono,datosTutAcademico.docente.persona.primerNombre+' '+datosTutAcademico.docente.persona.segundoNombre+' '+datosTutAcademico.docente.persona.primerApellido+' '+datosTutAcademico.docente.persona.segundoApellido,
-                                    datosTutAcademico.docente.persona.cedula,datosTutAcademico.docente.persona.correo,datosSolicitud.horasPPP,datosActaReunion.fechaInicioPPP,datosActaReunion.fechaFinPPP,
-                                    datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.naturaleza,datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.mision,datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.vision)"></button>
+                                    datosTutAcademico.docente.persona.cedula,datosTutAcademico.docente.persona.correo,datosSolicitud.horasPPP,datosActaReunion.fechaInicioPPP,datosActaReunion.fechaFinPPP,datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.naturaleza,datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.mision,
+                                    datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.vision,actprincipal.value, prinempresa.value,conclusion.value)"></button>
 
                                   <button class="btn btn-primary" style="background: #28528d; color: white;" pButton
-                                    icon="pi pi-check-circle" label="SUBIR DOCUMENTO"></button>
+                                    icon="pi pi-check-circle" label="SUBIR DOCUMENTO"
+                                    (click)="showDialogGuardar(datosAlumno.id_alumno)"></button>
                                 </div>
 
 
@@ -473,3 +475,96 @@
   </div>
 
 </section>
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para guardar solicitud-->
+<p-dialog [(visible)]="dialogoGuardaryGenerar" [style]="{width:'37vw'}" [draggable]="false" [baseZIndex]="10000"
+  [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <mat-card class="card" style="width: 100%;">
+
+      <form [formGroup]="formGuardar">
+
+        <div *ngFor="let informeFinal of informeFinalDatos">
+
+          <div *ngIf="informeFinal.alumno.idAlumno == informeFinalclase.alumno.idAlumno;">
+
+            <mat-card>
+              <!--LINEA 2-->
+              <div>
+                <label for="horaSalida">SELECCIONE DOCUMENTO</label>
+                <input type="file" class="form-control" id="horaSalida" formControlName="horaSalida">
+              </div>
+              <br>
+              <!--botones-->
+
+              <div class="d-grid gap-1 d-md-flex justify-content-center">
+                <button class="btn btn-primary" style="background: #28528d; color: white;" pButton icon="pi pi-save"
+                  label="GUARDAR DOCUMENTO"></button>
+              </div>
+            </mat-card>
+
+          </div>
+
+
+        </div>
+
+
+
+      </form>
+
+
+
+    </mat-card>
+
+  </ng-template>
+
+</p-dialog>
+
+
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para eliminar-->
+<p-dialog [(visible)]="dialogoEliminar" [style]="{width:'37vw'}" [draggable]="false" [baseZIndex]="10000" [modal]="true"
+  styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <mat-card class="card" style="width: 100%;">
+
+      <form [formGroup]="formGuardar">
+
+        <div *ngFor="let informeFinal of informeFinalDatos">
+
+          <div *ngIf="informeFinal.alumno.idAlumno == informeFinalclase.alumno.idAlumno;">
+
+            <mat-card>
+              <!--LINEA 2-->
+              <div>
+                <h2 style="text-align: center;">USTED YA CUENTA CON UN INFORME CARGADO</h2>
+               
+              </div>
+              <br>
+              <!--botones-->
+
+              <div class="d-grid gap-1 d-md-flex justify-content-center">
+                <button class="btn btn-primary" style="background: #28528d; color: white;" pButton icon="pi pi-trash"
+                  label="ELIMINAR DOCUMENTO"></button>
+              </div>
+            </mat-card>
+
+          </div>
+
+
+        </div>
+
+
+
+      </form>
+
+
+
+    </mat-card>
+
+  </ng-template>
+
+</p-dialog>
