@@ -51,6 +51,12 @@
                     <a class="delete" title="Delete" (click)="eliminarInforme(visita)" data-toggle="tooltip"><i
                             class="material-icons">&#xE872;</i></a>
                 </td>
+                <td>
+                    <button type="submit"
+                        (click)=' generate(visita.alumno.persona.primerNombre,visita.alumno.persona.primerNombre+" "+visita.alumno.persona.segundoNombre+" "+visita.alumno.persona.primerApellido+" "+visita.alumno.persona.segundoApellido,visita.alumno.persona.nombreEmpresa,visita.empresa.tutorempresarial.persona.primerApellido,visita.alumno.ciclo,visita.asunto,visita.observacion,visita.registroVisitaEmpresa.observaciones,visita.horainicion,visita.horaf,visita.fecha,visita.alumno.carrera.abreviatura)'
+                        class="btn" pButton icon="pi pi-download" label="DESCARGAR DOCUMENTO"
+                        style="background: #5c1818; color: white;"></button>
+                </td>
             </tr>
         </ng-template>
         <ng-template pTemplate="emptymessage">
