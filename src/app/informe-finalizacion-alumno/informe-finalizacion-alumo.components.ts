@@ -7,6 +7,7 @@ import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import { TutorEmpresarialService } from '../services/tutor-empresarial.service';
 import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
 import { ActividadesDiariasService } from '../services/actividades-diarias.service';
+import { Anexo9Service } from '../services/anexo9.service';
 import { TutorAService } from '../services/tutorA.service';
 import { ActaReunionService } from '../services/acta-reunion.service';
 import { Observable } from 'rxjs';
@@ -39,6 +40,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public ActaReunionDatos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
   public listaActividades: Array<any> = [];
+  public listaAnexo9Datos: Array<any> = [];
 
   informeFinal: InformeFinal = new InformeFinal();
 
@@ -67,6 +69,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
     private actaReunionService: ActaReunionService,
     private registroAsistenciaService: RegistroAsistenciaService,
     private actividadesDiariasService: ActividadesDiariasService,
+    private anexo9Service: Anexo9Service
   ) { }
 
 
@@ -81,6 +84,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
     this.listarTutorAcademico();
     this.listarActaReunion();
     this.listarActividades();
+    this.listarAnexo9();
   }
 
 
@@ -145,6 +149,13 @@ export class InformeFinalAlumnoComponent implements OnInit {
     this.actividadesDiariasService.getInformeActividadesDiarias().subscribe((resp: any) => {
       console.log(resp.data)
       this.listaActividades = resp.data
+    })
+  }
+
+  public listarAnexo9() {
+    this.anexo9Service.getAnexo9lista().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaAnexo9Datos = resp.data
     })
   }
 
