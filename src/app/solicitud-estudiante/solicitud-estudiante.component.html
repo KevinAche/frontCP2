@@ -25,6 +25,12 @@
             <!--Lista Solicitudes-->
 
             <div *ngFor="let convocatoria of convocatorias">
+
+              <div *ngIf="convocatoria.estado == 'ABIERTO'">
+                
+              
+
+
               <mat-card class="card" *ngIf=" convocatoria.solicitudEmpresa.carrera.nombre == datosAlumno.carrera">
                 <div>
                   <mat-card-header>
@@ -58,6 +64,7 @@
                   </mat-card-content>
                 </div>
               </mat-card>
+            </div>
             </div>
           </div>
         </section>

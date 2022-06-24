@@ -6,6 +6,8 @@ import { AlumnosService } from '../services/alumnos.service';
 import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
 import { TutorEmpresarialService } from '../services/tutor-empresarial.service';
 import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
+import { ActividadesDiariasService } from '../services/actividades-diarias.service';
+import { Anexo9Service } from '../services/anexo9.service';
 import { TutorAService } from '../services/tutorA.service';
 import { ActaReunionService } from '../services/acta-reunion.service';
 import { Observable } from 'rxjs';
@@ -37,6 +39,8 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public TutorAcademicoDatos: Array<any> = [];
   public ActaReunionDatos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
+  public listaActividades: Array<any> = [];
+  public listaAnexo9Datos: Array<any> = [];
 
   informeFinal: InformeFinal = new InformeFinal();
 
@@ -45,6 +49,8 @@ export class InformeFinalAlumnoComponent implements OnInit {
   public cedula: String;
   public areaEmpresa: String;
   public vava: any;
+  public datoActividadDocumento: String = "";
+  public valor: Array<any> = [1];
 
   formGuardar: FormGroup;
 
@@ -62,6 +68,8 @@ export class InformeFinalAlumnoComponent implements OnInit {
     private tutorAcademicoService: TutorAService,
     private actaReunionService: ActaReunionService,
     private registroAsistenciaService: RegistroAsistenciaService,
+    private actividadesDiariasService: ActividadesDiariasService,
+    private anexo9Service: Anexo9Service
   ) { }
 
 
@@ -75,7 +83,11 @@ export class InformeFinalAlumnoComponent implements OnInit {
     this.listarTutorEmpresarial();
     this.listarTutorAcademico();
     this.listarActaReunion();
+    this.listarActividades();
+    this.listarAnexo9();
   }
+
+
 
 
   //Métodos de listar
@@ -132,6 +144,21 @@ export class InformeFinalAlumnoComponent implements OnInit {
       this.listaRegistroActividades = resp.data
     })
   }
+
+  public listarActividades() {
+    this.actividadesDiariasService.getInformeActividadesDiarias().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaActividades = resp.data
+    })
+  }
+
+  public listarAnexo9() {
+    this.anexo9Service.getAnexo9lista().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaAnexo9Datos = resp.data
+    })
+  }
+
 
   //Metodo para crear
 
@@ -242,6 +269,24 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   }
 
+  //metosdo para obtener actividades
+
+  obtenerActividades(idregistro: any) {
+
+    for (var c = 0; c < this.listaActividades.length; c++) {
+
+      if (this.listaActividades[c].registroA.idRegistroAsistencia == idregistro) {
+
+        this.datoActividadDocumento = this.datoActividadDocumento + "- " + this.listaActividades[c].descripcion + "\n";
+
+        //alert(this.listaActividades[c].descripcion);
+      }
+
+    }
+    //alert(this.datoActividadDocumento);
+
+  }
+
   //Metodo para subir documento en base 64
   onFileSelected(event) {
     this.convertFile(event.target.files[0]).subscribe(base64 => {
@@ -261,9 +306,72 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
   //Metodo para generar documento
 
-  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any) {
+  generate(nomEm: any, ubiEm: any, areEm: any, nomte: any, cedte: any, carte: any, telem: any, corte: any, nomEs: any, cedEs: any, cicEs: any, corEst: any, corEs: any, nomtac: any, cedtac: any, cortac: any, horpp: any, fein: any, fefi: any, consEmp: any, misEmpr: any, visEmpr: any, actPrin: any, prinEmp: any, conclu: any, idregistro: any) {
+    this.datoActividadDocumento = "";
+    this.obtenerActividades(idregistro);
+    var ddac = this.datoActividadDocumento;
+
 
     var fech = this.informeFinal.fechaEmision;
+    let arr = fech.split('/');
+    var dia = arr[0];
+    var mes = arr[1];
+    var anio = arr[2];
+
+
+    //fein fefi
+    let arra = fein.split('T');
+    fein=arra[0];
+
+    let array = fefi.split('T');
+    fefi=array[0];
+
+    if (mes == 1) {
+      mes = "Enero";
+    } else {
+      if (mes == 2) {
+        mes = "Febrero";
+      } else {
+        if (mes == 3) {
+          mes = "Marzo";
+        } else {
+          if (mes == 4) {
+            mes = "Abril";
+          } else {
+            if (mes == 5) {
+              mes = "Mayo";
+            } else {
+              if (mes == 6) {
+                mes = "Junio";
+              } else {
+                if (mes == 7) {
+                  mes = "Julio";
+                } else {
+                  if (mes == 8) {
+                    mes = "Agoso";
+                  } else {
+                    if (mes == 9) {
+                      mes = "Septiembre";
+                    } else {
+                      if (mes == 10) {
+                        mes = "Octubre";
+                      } else {
+                        if (mes == 11) {
+                          mes = "Noviembre";
+                        } else {
+                          mes = "Diciembre";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
     if (actPrin == 0 || prinEmp == 0 || conclu == 0) {
 
       swal.fire(
@@ -322,7 +430,11 @@ export class InformeFinalAlumnoComponent implements OnInit {
           actividadEmpresa: actPrin,
           principiosEmpresa: prinEmp,
           conclusion: conclu,
-          fecha: fech,
+          dia: dia,
+          mes: mes,
+          anio: anio,
+
+          DescripcionDetallada: ddac,
 
         });
         try {
@@ -365,6 +477,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
         saveAs(out, "anexo13.docx");
       });
     }
+
   }
 
 }

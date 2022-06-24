@@ -28,27 +28,27 @@ export class SolicitudEstudianteComponent implements OnInit {
   public convocatorias: Array<any> = [];
   public alumnos: Array<any> = [];
   public alumnosDatos: Array<any> = [];
-  public solicitudes: Array<any>=[];
+  public solicitudes: Array<any> = [];
   public numConvocatoria: any;
   solicitud: SolicitudAlumno = new SolicitudAlumno();
   public id: String;
-  public cedula:String;
-  public rol:String;
-  public empresaNombre:any;
-  public responsableNombre:any;
+  public cedula: String;
+  public rol: String;
+  public empresaNombre: any;
+  public responsableNombre: any;
   dialogoCrearSolicitud: boolean;
   dialogoMisSolicitudes: boolean;
-  base64Output : string;
+  base64Output: string;
   panelOpen = false;
   empresa: Empresa = new Empresa();
-  solicitudAlumno: SolicitudAlumno=new SolicitudAlumno();
+  solicitudAlumno: SolicitudAlumno = new SolicitudAlumno();
   formSolicitud: FormGroup;
 
   constructor(private convocatoriaService: ConvocatoriaService,
     private router: Router, private route: ActivatedRoute,
     private alumnoService: AlumnosService,
     private solicitudAlumnoService: SolicitudAlumnoService,
-    private empresaService:EmpresaService,
+    private empresaService: EmpresaService,
     private formBuilder: FormBuilder,
   ) {
 
@@ -61,8 +61,8 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.listarSolicitudAlumnos();
     this.listarDetalladaAlumnos();
     //this.id = this.route.snapshot.paramMap.get('id');
-    this.cedula =this.route.snapshot.paramMap.get('cedula');
-    this.rol=this.route.snapshot.paramMap.get('rol');
+    this.cedula = this.route.snapshot.paramMap.get('cedula');
+    this.rol = this.route.snapshot.paramMap.get('rol');
 
     this.formSolicitud = this.formBuilder.group({
       fechaEmision: ['', Validators.required],
@@ -94,29 +94,68 @@ export class SolicitudEstudianteComponent implements OnInit {
     })
   }
 
-  crearSolicitud(valor: any,ide:any,nomEmp:any,respo:any) {
-    this.dialogoCrearSolicitud = true;
-    this.numConvocatoria = valor;
-    this.solicitudAlumno.estado="pendiente";
-    this.solicitudAlumno.convocatoria.idConvocatoria=valor;
-    this.solicitudAlumno.alumno.idAlumno=ide;
-    this.id=ide;
-    this.empresaNombre=nomEmp;
-    this.responsableNombre=respo;
+  crearSolicitud(valor: any, ide: any, nomEmp: any, respo: any) {
+
+
+    for (var i = 0; i < this.solicitudes.length; i++) {
+
+
+      if (this.solicitudes[i].alumno.idAlumno == ide) {
+        if (this.solicitudes[i].estado == "Aceptado") {
+
+
+          swal.fire({
+            icon: 'error',
+            title: 'Oops...',
+            text: 'Ya tienes una solicitud aceptada!',
+
+          })
+          this.dialogoCrearSolicitud = false;
+          break;
+
+        } else {
+          if (this.solicitud[i] == null) {
+            this.abrirDialogo(valor, ide, nomEmp, respo);
+
+          }
+
+        }
+      } else {
+        this.abrirDialogo(valor, ide, nomEmp, respo);
+
+      }
+
+    }
+
+
+
+
+
 
   }
 
-  misSolicitudes(va:any){
-    this.dialogoMisSolicitudes=true;
-    this.id=va;
+  abrirDialogo(valor: any, ide: any, nomEmp: any, respo: any) {
+    this.dialogoCrearSolicitud = true;
+    this.numConvocatoria = valor;
+    this.solicitudAlumno.estado = "pendiente";
+    this.solicitudAlumno.convocatoria.idConvocatoria = valor;
+    this.solicitudAlumno.alumno.idAlumno = ide;
+    this.id = ide;
+    this.empresaNombre = nomEmp;
+    this.responsableNombre = respo;
+  }
+
+  misSolicitudes(va: any) {
+    this.dialogoMisSolicitudes = true;
+    this.id = va;
   }
 
 
 
   public create(): void {
-    var docubas=this.base64Output;
+    var docubas = this.base64Output;
 
-    if (this.formSolicitud.invalid || docubas=="undefined") {
+    if (this.formSolicitud.invalid || docubas == "undefined") {
       swal.fire(
         'Error de entrada',
         'Revise que los campos no esten vacios',
@@ -126,7 +165,7 @@ export class SolicitudEstudianteComponent implements OnInit {
     }
 
 
-this.solicitudAlumno.documentoSoliEstudiante=docubas;
+    this.solicitudAlumno.documentoSoliEstudiante = docubas;
 
     this.solicitudAlumnoService.createSolicitudAlumno(this.solicitudAlumno).subscribe(
       Response => {
@@ -145,9 +184,64 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
   }
 
   //Generar documento
-  generate(nom:any,ced:any,par:any,cic:any,corr:any,cell:any,hor,fec,carr,sig,conv) {
-    var empn=this.empresaNombre;
-    var res=this.responsableNombre;
+  generate(nom: any, ced: any, par: any, cic: any, corr: any, cell: any, hor, fec, carr, sig, conv,) {
+    var empn = this.empresaNombre;
+    var res = this.responsableNombre;
+
+    let tee = res.split(' ');
+
+    let arr = fec.split('-');
+    var anio = arr[0];
+    var mes = arr[1];
+    var dia = arr[2];
+
+    if (mes == 1) {
+      mes = "Enero";
+    } else {
+      if (mes == 2) {
+        mes = "Febrero";
+      } else {
+        if (mes == 3) {
+          mes = "Marzo";
+        } else {
+          if (mes == 4) {
+            mes = "Abril";
+          } else {
+            if (mes == 5) {
+              mes = "Mayo";
+            } else {
+              if (mes == 6) {
+                mes = "Junio";
+              } else {
+                if (mes == 7) {
+                  mes = "Julio";
+                } else {
+                  if (mes == 8) {
+                    mes = "Agoso";
+                  } else {
+                    if (mes == 9) {
+                      mes = "Septiembre";
+                    } else {
+                      if (mes == 10) {
+                        mes = "Octubre";
+                      } else {
+                        if (mes == 11) {
+                          mes = "Noviembre";
+                        } else {
+                          mes = "Diciembre";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
     if (this.formSolicitud.invalid) {
       swal.fire(
         'Error de entrada',
@@ -156,7 +250,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
       )
       return;
     }
-    loadFile("https://backendg1c2.herokuapp.com/files/anexo3.docx", function(
+    loadFile("https://backendg1c2.herokuapp.com/files/anexo3.docx", function (
       error,
       content
     ) {
@@ -166,20 +260,23 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
-        nombreAlumno: nom,
-        datoCedula:ced,
-        datoParalelo:par,
-        datoCiclo:cic,
-        correoAlumno:corr,
-        celularAlumno:cell,
-        datoHoras:hor,
-        fecha:fec,
-        nombreCarrera:carr,
-        sigla:sig,
-        numeroConvocatoria:conv,
-        nombreEmpresa:empn,
-        periodoAcademico:"Mayo 2022 - Diciembre 2022",
-        nombreResponsablePracticas:res,
+        nombreAlumno: nom.toUpperCase(),
+        datoCedula: ced,
+        datoParalelo: par.toUpperCase(),
+        datoCiclo: cic.toUpperCase(),
+        correoAlumno: corr,
+        celularAlumno: cell,
+        datoHoras: hor,
+        dia: dia,
+        mes: mes,
+        anio: anio,
+        nombreCarrera: carr.toUpperCase(),
+        sigla: sig.toUpperCase(),
+        numeroConvocatoria: conv,
+        nombreEmpresa: empn.toUpperCase(),
+        periodoAcademico: "Mayo 2022 - Diciembre 2022",
+        nombreResponsablePracticas: tee[1].toUpperCase() + " " + tee[2].toUpperCase(),
+        titulo: tee[0].toUpperCase(),
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
@@ -188,14 +285,14 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
         // The error thrown here contains additional information when logged with JSON.stringify (it contains a properties object containing all suberrors).
         function replaceErrors(key, value) {
           if (value instanceof Error) {
-            return Object.getOwnPropertyNames(value).reduce(function(
+            return Object.getOwnPropertyNames(value).reduce(function (
               error,
               key
             ) {
               error[key] = value[key];
               return error;
             },
-            {});
+              {});
           }
           return value;
         }
@@ -203,7 +300,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
 
         if (error.properties && error.properties.errors instanceof Array) {
           const errorMessages = error.properties.errors
-            .map(function(error) {
+            .map(function (error) {
               return error.properties.explanation;
             })
             .join("\n");
@@ -234,7 +331,7 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
     });
   }
 
-  convertFile(file : File) : Observable<string> {
+  convertFile(file: File): Observable<string> {
     const result = new ReplaySubject<string>(1);
     const reader = new FileReader();
     reader.readAsBinaryString(file);
@@ -245,15 +342,15 @@ this.solicitudAlumno.documentoSoliEstudiante=docubas;
 
   //LimpiarCampos
 
-  limpiar(){
-    this.solicitudAlumno.fechaEmision=null;
-    this.solicitudAlumno.horasPPP=null;
-    this.solicitudAlumno.documentoSoliEstudiante="undefined";
+  limpiar() {
+    this.solicitudAlumno.fechaEmision = null;
+    this.solicitudAlumno.horasPPP = null;
+    this.solicitudAlumno.documentoSoliEstudiante = "undefined";
   }
 
   //LISTAR SOLICITUDES
-  listarSolicitudAlumnos(){
-    this.solicitudAlumnoService.getSolicitudAlumno().subscribe((resp: any)=>{
+  listarSolicitudAlumnos() {
+    this.solicitudAlumnoService.getSolicitudAlumno().subscribe((resp: any) => {
       console.log(resp.data)
       this.solicitudes = resp.data
     }
