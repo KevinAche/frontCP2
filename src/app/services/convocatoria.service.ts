@@ -1,5 +1,6 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'
@@ -7,6 +8,8 @@ import {Injectable} from '@angular/core';
 export class ConvocatoriaService {
 
   _url = 'https://backendg1c2.herokuapp.com/GestionConvocatoria'
+
+  headers= new HttpHeaders().append('Content-type','application/json');
 
   constructor(
     private http: HttpClient
@@ -29,6 +32,17 @@ export class ConvocatoriaService {
     return this.http.get(this._url + '/ObtenerNumCon', {
       headers: header
     });
+  }
+
+  createConvocatoria(idSolicitud:any, convocatoria:any): Promise<any> {
+    return this.http.post(
+      environment.URL_APP + `GestionConvocatoria/CrearConD/${idSolicitud}`,
+      {
+        ...convocatoria
+      }, {
+        headers: this.headers
+      }
+    ).toPromise();
   }
 
 }

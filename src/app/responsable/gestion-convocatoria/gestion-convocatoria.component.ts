@@ -12,6 +12,7 @@ import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 import {saveAs} from "file-saver";
+import {DatePipe} from "@angular/common";
 
 function loadFile(url: any, callback: any) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -335,17 +336,29 @@ export class GestionConvocatoriaComponent implements OnInit {
   }
 
 
-  crearAnexo2(): void{
-    if(this.base64Output!=null){
+  crearAnexo2(): void {
+    if (this.base64Output != null) {
       let fechaActual = new Date().toLocaleDateString();
       let fechacortada: any[] = fechaActual.split('/');
-      let pdfConv:any = {
+      let pipefecha =  new DatePipe('en-US');
+      let fecha = null;
+      fecha=pipefecha.transform(Date.now(),'yyyy-MM-dd');
+      let pdfConv: any = {
         docConvocatoria: this.base64Output,
-        fechaEmision: fechacortada,
+        fechaEmision: fecha,
         fechaMaxima: this.formConvocataria.value.fechaMaxima,
-        nombreConvocatoria: 'CONVOCATORIA - '+ this.ObjetoSolicitud.abreviatura
+        nombreConvocatoria: 'CONVOCATORIA - ' + this.ObjetoSolicitud.abreviatura + fechacortada[2]
       }
-    }else{
+      this._convocatoriaService.createConvocatoria(this.ObjetoSolicitud.id_solicitud_empresa, pdfConv).then(value => {
+        this.formConvocataria.reset();
+        this.dialogoDatos = false;
+        this.mostarMensajeCorrecto('Su convocatoria ha sido lanzada');
+        this.obtenerSolicitudes();
+      }).catch((err)=>{
+        this.mostrarMensajeError('No se ha guardado la convocatoria')
+      });
+
+    } else {
       this.mostrarMensajeError('No se pudo generar el documento');
     }
   }
