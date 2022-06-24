@@ -14,7 +14,6 @@ import PizZipUtils from "pizzip/utils/index.js";
 import Docxtemplater from "docxtemplater";
 import { Observable } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
-import { title } from 'process';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -188,6 +187,61 @@ export class SolicitudEstudianteComponent implements OnInit {
   generate(nom: any, ced: any, par: any, cic: any, corr: any, cell: any, hor, fec, carr, sig, conv,) {
     var empn = this.empresaNombre;
     var res = this.responsableNombre;
+
+    let tee = res.split(' ');
+
+    let arr = fec.split('-');
+    var anio = arr[0];
+    var mes = arr[1];
+    var dia = arr[2];
+
+    if (mes == 1) {
+      mes = "Enero";
+    } else {
+      if (mes == 2) {
+        mes = "Febrero";
+      } else {
+        if (mes == 3) {
+          mes = "Marzo";
+        } else {
+          if (mes == 4) {
+            mes = "Abril";
+          } else {
+            if (mes == 5) {
+              mes = "Mayo";
+            } else {
+              if (mes == 6) {
+                mes = "Junio";
+              } else {
+                if (mes == 7) {
+                  mes = "Julio";
+                } else {
+                  if (mes == 8) {
+                    mes = "Agoso";
+                  } else {
+                    if (mes == 9) {
+                      mes = "Septiembre";
+                    } else {
+                      if (mes == 10) {
+                        mes = "Octubre";
+                      } else {
+                        if (mes == 11) {
+                          mes = "Noviembre";
+                        } else {
+                          mes = "Diciembre";
+                        }
+                      }
+                    }
+                  }
+                }
+              }
+            }
+          }
+        }
+      }
+    }
+
+
     if (this.formSolicitud.invalid) {
       swal.fire(
         'Error de entrada',
@@ -206,21 +260,23 @@ export class SolicitudEstudianteComponent implements OnInit {
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData({
-        nombreAlumno: nom,
+        nombreAlumno: nom.toUpperCase(),
         datoCedula: ced,
-        datoParalelo: par,
-        datoCiclo: cic,
+        datoParalelo: par.toUpperCase(),
+        datoCiclo: cic.toUpperCase(),
         correoAlumno: corr,
         celularAlumno: cell,
         datoHoras: hor,
-        fecha: fec,
-        nombreCarrera: carr,
-        sigla: sig,
+        dia: dia,
+        mes: mes,
+        anio: anio,
+        nombreCarrera: carr.toUpperCase(),
+        sigla: sig.toUpperCase(),
         numeroConvocatoria: conv,
-        nombreEmpresa: empn,
+        nombreEmpresa: empn.toUpperCase(),
         periodoAcademico: "Mayo 2022 - Diciembre 2022",
-        nombreResponsablePracticas: res,
-        titulo:"LIC",
+        nombreResponsablePracticas: tee[1].toUpperCase() + " " + tee[2].toUpperCase(),
+        titulo: tee[0].toUpperCase(),
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
