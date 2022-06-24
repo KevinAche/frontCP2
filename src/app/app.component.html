@@ -33,14 +33,14 @@
   <mat-sidenav #sidenav="matSidenav">
 
     <div style="text-align: center;">
-      <img class="logo" src="assets/imagen/log.png">
+      <img class="logo" src="../assets/imagen/log.png">
       <br><br>
       <mat-divider></mat-divider>
       <h2 class="text-center">Caso #2 - Grupo #1</h2>
     </div>
 
     <mat-divider></mat-divider>
-    <div class="divimag" > <img *ngIf="isLogged" src="assets/imagen/programmer.png"> </div>
+<div class="divimag" > <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
 
 
     <div *ngFor="let persona of personas">
@@ -124,6 +124,15 @@
             <mat-icon>find_in_page</mat-icon>
             <span> Procesos </span>
           </button>
+        <button mat-button class="button-accordion" routerLink="/consulta-conv-publico">
+          <mat-icon>description</mat-icon>
+          <span>Ver Convocatorias Publicas</span>
+        </button>
+
+        <button mat-button class="button-accordion" routerLink="/consultasppp">
+          <mat-icon>find_in_page</mat-icon>
+          <span> Procesos </span>
+        </button>
 
           <button mat-button class="button-accordion" routerLink="/anexosde-ppp">
             <mat-icon>file_copy</mat-icon>

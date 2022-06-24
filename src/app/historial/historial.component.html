@@ -29,8 +29,8 @@
 
             <tbody >
               <tr *ngFor="let historial of historialC | filter:searchText">
-                <td>{{historial.fechaEmision}}</td>
-                <td>{{historial.fechaMaxima}}</td>
+                <td>{{historial.fechaEmision| date:'yyyy/MM/dd'}}</td>
+                <td>{{historial.fechaMaxima | date:'yyyy/MM/dd'}}</td>
                 <td>{{historial.nombreConvocatoria}}</td>
                 <td>{{historial.solicitudEmpresa.numeroAlumnos}}</td>
                 <td>{{historial.solicitudEmpresa.empleado.empresa.nombreEmpresa}}</td>

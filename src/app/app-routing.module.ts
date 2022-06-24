@@ -21,8 +21,6 @@ import { EvaluacionEstudianteTutorEmpresarialComponent } from './evaluacion-estu
 import { AnexosdePPPComponent } from './anexosde-ppp/anexosde-ppp.component';
 import { ActaReunionComponent } from './acta-reunion/acta-reunion.component';
 import { RegistroConvocatoriaComponent } from './registro-convocatoria/registro-convocatoria.component';
-
-
 import { CertificadoAlumnoComponent } from './certificado-alumno/certificado-alumno.components';
 import { RegistroSeguimientoAlumnoComponent } from './registro-seguimiento/registro-seguimiento.components';
 import { EvaluacionEstudianteTutorAcademicoComponent } from './evaluacion-estudiante-tutor-academico/evaluacion-estudiante-tutor-academico.component';
@@ -40,12 +38,13 @@ import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.c
 import {HistorialComponent} from "./historial/historial.component";
 import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
-
+import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-conv-publico.component';
 import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
 import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
+  {path: 'consulta-conv-publico',component: ConsultaConvPublicoComponent},
   {path: 'informe-acreditacion', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component:AnexosdePPPComponent},
   {path: 'registro-docente', component:RegistroDocentesComponent},
