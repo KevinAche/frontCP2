@@ -50,17 +50,16 @@
 
                 </td>
                 <td>
-                    <button (click)="crearConvenio(empresas.idEmpresa)">
-                      Crear convenio
-                    </button>
+                  <button pButton pRipple type="button" icon="pi pi-plus"
+                  class="p-button-rounded p-button-success"  (click)="hasConvenio(empresas.idEmpresa)">
+                </button>
                 </td>
                 <td>
-                  <div >
-                    <button (click)="getGerente(empresas.idEmpresa)">
-                      Asignar Gerente
+                            
+                      <button pButton pRipple type="button" icon="pi pi-bookmark"
+                      class="p-button-rounded p-button-secondary"  (click)="obtenerDocumento(empresas.idEmpresa)">
                     </button>
                     
-                  </div>
                 </td>
               </tr>
           </ng-template>
@@ -141,7 +140,7 @@
         </p-footer>
     </p-dialog>
 
-    <p-dialog header="Editar empresa" [(visible)]="createActividades" [modal]="true" [style]="{width: '50%', height: '40vw'}"
+    <p-dialog header="Registro de Actividades" [(visible)]="createActividades" [modal]="true" [style]="{width: '50%', height: '40vw'}"
         [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
         <form [formGroup]="formActividades">
             <div class="form-row">
@@ -190,9 +189,26 @@
 
           </p-table>
         </div>
+        <button type="button" pButton icon="pi pi-print"   label="Generar Documento" (click)="generarDoc()"></button>
+        <div>
+          <h3>Subir archivo de convenio firmado y en pdf</h3>
+          <p-fileUpload
+                [customUpload]="true"
+                [showCancelButton]="false"
+                [multiple]="false"
+                (uploadHandler)="onFileSelected($event)"
+                chooseLabel="Seleccionar anexo"
+                uploadLabel="Cargar anexo"
+                invalidFileTypeMessageSummary="Archivo no valido"
+                invalidFileSizeMessageDetail="Solo se acepta archivos con extensiones .doc - docx."
+              >
+              </p-fileUpload>
+        </div>
 
         <p-footer>
-            <button type="button" pButton icon="pi pi-save"   label="Crear Convenio"></button>
-            <button type="button" pButton icon="pi pi-times" (click)="dis=false" label="Cancelar" class="ui-button-secondary"></button>
+            <button type="button" pButton icon="pi pi-save"   label="Crear Convenio" (click)="updateConvenio()"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="cancelarConvenio()" label="Cancelar" class="ui-button-secondary"></button>
         </p-footer>
     </p-dialog>
+
+    

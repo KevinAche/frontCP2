@@ -59,6 +59,7 @@ export class ConvenioService {
   private urlCreate: string = this._url+'/CrearConvenios';
   private urlDelete: string = this._url+'/EliminarConvenios';
   private urlSearch: string = this._url+'/ListarConvenios';
+  private urlUpdate: string = this._url+'/EditarConvenio';
 
 
   getConvenios(): Observable<Convenio[]> {
@@ -81,6 +82,15 @@ export class ConvenioService {
     return this.http.delete<Convenio>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
         Swal.fire('Error al eliminar', 'No se puede eliminar', 'error')
+        return throwError(e);
+      })
+    );
+  }
+
+  updateConvenio(conv: Convenio, id : String): Observable<Convenio> {
+    return this.http.put<Convenio>(`${this.urlUpdate}/${id}`, conv, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al actualizar', 'NO se puede actualizar a convenio', 'error')
         return throwError(e);
       })
     );

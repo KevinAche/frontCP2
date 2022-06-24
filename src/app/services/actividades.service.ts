@@ -25,11 +25,7 @@ export class ActividadesService {
 
 
 
-  getActividades(): Observable<Actividades[]> {
-    return this.http.get(this.urlSearch).pipe(
-      map(response => response as Actividades[])
-    );
-  }
+
 
 
 
@@ -52,21 +48,7 @@ export class ActividadesService {
     );
   }
 
-
-
-
-
-
-  private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-  _url = environment.URL_APP + 'GestionActividades'
-
-  private url_mater: string = environment.URL_APP;
-
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  getActividades() {
+ getActividades() {
     let header = new HttpHeaders()
       .set('Type-content', 'aplication/json')
 
@@ -76,7 +58,27 @@ export class ActividadesService {
     });
   }
 
-  createActividades(act: any): Promise<any> {
+  getActividadesEmpresa(empid) {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + `/CargarActividadesEmpresa/${empid}`, {
+      headers: header
+
+    });
+  }
+
+  getActividadesConvenio(empid) {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + `/ListaActividadesConvenio/${empid}`, {
+      headers: header
+
+    });
+  }
+
+  createActividadesc(act: any): Promise<any> {
     return this.http.post(
         this._url + `/CrearActividades`,act, {
           headers: this.httpHeaders

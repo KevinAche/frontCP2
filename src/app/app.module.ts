@@ -88,7 +88,7 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { GestionConvocatoriaComponent } from './responsable/gestion-convocatoria/gestion-convocatoria.component';
 import {DividerModule} from 'primeng/divider';
 import {CalendarModule} from 'primeng/calendar';
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
 @NgModule({
@@ -168,6 +168,8 @@ SolicitudEmpresaComponent,
     ListaResponsablepppComponent,
     CrearEmpleadoComponent,
     ListarEmpleadoComponent,
+    GestionConvocatoriaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -175,6 +177,7 @@ SolicitudEmpresaComponent,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,
