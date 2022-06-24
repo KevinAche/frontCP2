@@ -41,6 +41,7 @@ import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.co
 import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-conv-publico.component';
 import { InformeAcreditacionComponent } from './informe-acreditacion/informe-acreditacion.component';
 import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
+import { ListaConvocatoriasComponent} from './responsable/lista-convocatorias/lista-convocatorias.component'
 
 const routes: Routes = [
   {path: '', component:HomeComponent },
@@ -150,6 +151,8 @@ const routes: Routes = [
 
   {path:'solicitud-empresa',component: SolicitudEmpresaComponent},
   {path:'historial',component: HistorialComponent},
+
+  {path: 'lista-convocatorias',component: ListaConvocatoriasComponent},
 
   {
     path: 'informe-final-tutor',

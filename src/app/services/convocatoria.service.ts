@@ -7,7 +7,7 @@ import {environment} from "../../environments/environment";
 })
 export class ConvocatoriaService {
 
-  _url = 'https://backendg1c2.herokuapp.com/GestionConvocatoria'
+  _url = environment.URL_APP+'GestionConvocatoria'
 
   headers= new HttpHeaders().append('Content-type','application/json');
 

@@ -38,5 +38,12 @@ export class SolicitudAlumnoService {
     );
   }
 
+  updateSolicitudA(soli: any, id : String): Promise<any[]> {
+    return this.http.put<any>(
+      `${environment.URL_APP+`GestionSolicitudAlumno/EditarSolicitudAlumno`}/${id}`, soli,{
+        headers: this.httpHeaders
+      }).toPromise();
+  }
+
 
 }

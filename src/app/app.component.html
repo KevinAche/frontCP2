@@ -9,9 +9,22 @@
       </mat-icon>
     </button>
   </div>
-  <a (click)="bannoti = true" style="padding: 20px;">
-    <i class="pi pi-inbox"></i>
-  </a>
+  <div *ngIf="isLogged">
+    <div *ngIf="notificaciones.length==0">
+      <a (click)="bannoti = true" style="padding: 20px;">
+        <i class="pi pi-bell" style="color: white;" ></i>
+      </a>
+    </div>
+
+    <div *ngIf="notificaciones.length>=1">
+      <a (click)="bannoti = true" style="padding: 20px;">
+        <i class="pi pi-bell" style="color: yellow;" ></i>
+      </a>
+    </div>
+    
+    
+  </div>
+  
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
   <!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
@@ -454,8 +467,9 @@
 
       <ng-template pTemplate="body" let-noti>
         <tr>
-          <td><i class="pi pi-user" style="font-size: 2rem"></i></td>
-          <td>{{noti.name}} | {{noti.descripcion}} </td>
+          <td><i class="pi pi-times" style="font-size: 1rem" type="button" (click)="deleteNotificacion(noti.idNotificacion)"></i></td>
+          <td>{{noti.fechaNotificacion | date}}</td>
+          <td>{{noti.notificacion}}</td>
 
         </tr>
 

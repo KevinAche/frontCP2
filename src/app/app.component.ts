@@ -6,6 +6,7 @@ import { CarreraService } from './services/carrera.service';
 import { TokenService } from './services/token.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { PersonaService } from './services/persona.service';
+import { NotificacionesService} from './services/notificaciones.service'
 
 @Component({
   selector: 'app-root',
@@ -33,7 +34,7 @@ export class AppComponent implements OnInit {
   realRol: String;
 
 
-  notificaciones: noti[];
+  notificaciones: any[] = new Array <any>();
   notificacion: noti;
 
   public personas: Array<any> = []
@@ -42,7 +43,8 @@ export class AppComponent implements OnInit {
     private observer: BreakpointObserver,
     private tokenService: TokenService,
     private changeDedectionRef: ChangeDetectorRef,
-    private personaService: PersonaService
+    private personaService: PersonaService,
+    private notificacionesService: NotificacionesService
     ) {
 
       console.log(this.tokenService.getUserName());
@@ -63,31 +65,10 @@ export class AppComponent implements OnInit {
 
     // Array de notifcaciones ejemplo
 
-    this.notificaciones=[
-      {name: "Primera notificacion", descripcion:"Se confirmo su participacion en la empresa TTTT"},
-      {name: "Segunda notificacion", descripcion:"Nueva solicitud enviada a la empresa TTTT"},
-      {name: "Tercera notificacion", descripcion:"Se ha sido asignado a los alumnos en la empresa TTTT"},
-      {name: "Cuarta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Quinta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Sexta notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Septima notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Octava notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Novena notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Decima notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-      ,
-      {name: "Onceava notificacion", descripcion:"Se ha sido asignado como tutor de praticas pre-profesionales"}
-
-  ];
-
     this.changeDedectionRef.detectChanges();
     if(this.tokenService.getToken()){
       this.isLogged = true;
+      this.getNotificaciones()
 
     }else {
       this.isLogged = false;
@@ -134,6 +115,25 @@ export class AppComponent implements OnInit {
         this.isEmpleado = true;
       }
     });
+  }
+
+
+  getNotificaciones(){
+    this.notificacionesService.getNotificaciones().then(res=>{
+      var notigeneral: any[]= res['data'] ;
+      notigeneral.forEach(value=>{
+        if(value.persona.cedula == this.tokenService.getUserName()){
+          this.notificaciones.push(value);
+        }
+      })
+    })
+  }
+
+  deleteNotificacion(id){
+    this.notificacionesService.deleteNotificacion(id).then(res=>{
+      console.log('Notificacion eliminada');
+      
+    })
   }
 
   onLogOut(){
