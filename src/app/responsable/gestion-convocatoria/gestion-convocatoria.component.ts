@@ -6,6 +6,25 @@ import {MessageService} from "primeng/api";
 import {FormBuilder, FormGroup, Validators} from "@angular/forms";
 import {AsignaturaService} from "../../services/asignatura.service";
 import {ActividadesConvenioService} from "../../services/actividades-convenio.service";
+import {Observable, ReplaySubject} from "rxjs";
+import {ResponsableService} from "../../services/responsable.service";
+import Docxtemplater from "docxtemplater";
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import {saveAs} from "file-saver";
+
+function loadFile(url: any, callback: any) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
+
+function getBase64(file: any) {
+  return new Promise((resolve, reject) => {
+    const reader = new FileReader();
+    reader.readAsDataURL(file);
+    reader.onload = () => resolve(reader.result);
+    reader.onerror = error => reject(error);
+  });
+}
 
 @Component({
   selector: 'app-gestion-convocatoria',
@@ -13,6 +32,9 @@ import {ActividadesConvenioService} from "../../services/actividades-convenio.se
   styleUrls: ['./gestion-convocatoria.component.css']
 })
 export class GestionConvocatoriaComponent implements OnInit {
+
+  //ARCHIVOS BASE
+  base64Output: string;
 
   //DATA PARA RECIBIR DATOS
   dataSolicitudes: any[];
@@ -23,13 +45,18 @@ export class GestionConvocatoriaComponent implements OnInit {
   ObjetoAsignatura: any;
   asiganturas: any[] = [];
   dataActividades: any[];
+  dataResponsable: any[];
+  soliEmp: any;
+  actividades: any[] = [];
+  asign: any[] = [];
+  numConv: any;
 
 
   //COLUMNAS DE TABLAS
   columnaSolicitud: any[];
   columasAsignaturas: any[];
   asignColum: any[];
-  columnasActividades:any[];
+  columnasActividades: any[];
 
 
   dialogoDatos: boolean;
@@ -42,7 +69,8 @@ export class GestionConvocatoriaComponent implements OnInit {
               private _messageService: MessageService,
               private formBuilder: FormBuilder,
               private _crudAsignaturas: AsignaturaService,
-              private _crudActividades: ActividadesConvenioService
+              private _crudActividades: ActividadesConvenioService,
+              private _crudResponsable: ResponsableService
   ) {
 
     this.columnaSolicitud = [
@@ -67,7 +95,7 @@ export class GestionConvocatoriaComponent implements OnInit {
       {field: 'descripcion', header: 'Descripcion '},
     ];
 
-    this.asignColum=[
+    this.asignColum = [
       {field: 'nombreAsignatura', header: 'Nombre Asignatura'},
     ]
 
@@ -93,7 +121,7 @@ export class GestionConvocatoriaComponent implements OnInit {
 
   quitarAsignatura() {
     if (this.ObjetoAsignatura != null) {
-      this.asiganturas.splice(this.asiganturas.indexOf(value => value.idAsignatura == this.ObjetoAsignatura.idAsignatura),1);
+      this.asiganturas.splice(this.asiganturas.indexOf(value => value.idAsignatura == this.ObjetoAsignatura.idAsignatura), 1);
       console.log(this.asiganturas);
     } else {
       this.mostrarMensajeError('NO HA SELECCIONADO LA FILA DE LA ASIGNATURA')
@@ -109,7 +137,7 @@ export class GestionConvocatoriaComponent implements OnInit {
     }
   }
 
-  obtenerActivadades(){
+  obtenerActivadades() {
     this._crudActividades.getActividadesEmpresaConvenio(this.ObjetoSolicitud.id_empresa).then(value1 => {
       this.dataActividades = value1['data'];
       console.log(this.dataActividades)
@@ -130,6 +158,7 @@ export class GestionConvocatoriaComponent implements OnInit {
     if (this.ObjetoSolicitud != null) {
       this.obtenerAsignaturas();
       this.obtenerActivadades();
+      this.obtenerResponsable();
       this.dialogoDatos = true;
     } else {
       this.mostrarMensajeError('NO HA SELECCIONADO FILA,PARA PODER CARGAR LOS DATOS PREVIOS');
@@ -141,6 +170,7 @@ export class GestionConvocatoriaComponent implements OnInit {
     if (event.data) {
       this.dataRowSolicitud = event.data;
       this.ObjetoSolicitud = {...this.dataRowSolicitud};
+      console.log(this.ObjetoSolicitud)
     }
   }
 
@@ -227,6 +257,235 @@ export class GestionConvocatoriaComponent implements OnInit {
       this.mostrarMensajeError('NO HA DADO CLICK SOBRE LA FILA DE LA CUAL QUIERE VER EL DOCUMENTO')
     }
 
+  }
+
+  obtenerResponsable(): void {
+    this._crudResponsable.getResponsableUnico(this._tokenService.getUserName()).then(value => {
+      this.dataResponsable = value['data'];
+    }).catch((err) => {
+      this.mostrarMensajeError('No se obtuvo el responsable');
+    })
+  }
+
+  getDescAct() {
+    this._crudActividades.getActividadesEmpresaConvenio(this.ObjetoSolicitud.id_empresa).then(value => {
+      this.dataActividades = value['data'];
+      this.dataActividades.forEach(value1 => {
+        let desc: any = {
+          descripcion: value1.descripcion
+        }
+        console.log(desc)
+        this.actividades.push(desc);
+      })
+    });
+  }
+
+  getNomAsig() {
+    this.asiganturas.forEach(valueAsig => {
+      let asig: any = {
+        nombre: valueAsig.nombreAsignatura
+      }
+      console.log(asig)
+      this.asign.push(asig)
+    })
+  }
+
+  lanzarConvocatoria(): void {
+
+    if (this.ObjetoSolicitud != null) {
+      this.getDescAct();
+      this.getNomAsig();
+      this.obtenerResponsable();
+      let numC;
+      this._convocatoriaService.getNumConv().subscribe((resp: any) => {
+        this.numConv = resp['data'];
+        numC = this.numConv.find(x => {
+          return x;
+        })
+        console.log(this.numConv)
+        console.log(numC)
+
+
+        console.log(numC + 'VER SI ENTRA')
+
+        let fechaActual = new Date().toLocaleDateString();
+        let fechacortada: any[] = fechaActual.split('/');
+        //DATA DOCUMENTO
+        let dataGeneral: any = {
+          abrevCarrera: this.ObjetoSolicitud.abreviatura,
+          anio: fechacortada[2],
+          num_conv: numC,
+          dia: fechacortada[0],
+          mes: this.devolvermes(fechacortada[1]),
+          ciclo: this.formConvocataria.value.ciclos,
+          actividades: this.actividades,
+          asignaturas: this.asign,
+          fechaMaxima: this.formConvocataria.value.fechaMaxima,
+          nombresrp: this.dataResponsable[0].nombres_r,
+          apellidosrp: this.dataResponsable[0].apellidos_r,
+          carrera: this.ObjetoSolicitud.carrera,
+          empresa: this.ObjetoSolicitud.nombre_empresa
+        };
+        let nombreDocumento: string = 'anexo2.' + this.dataResponsable[0].nombres_r + this.dataResponsable[0].apellidos_r + '.docx';
+        this.generate(dataGeneral, 'https://backendg1c2.herokuapp.com/files/anexo2.docx', nombreDocumento);
+      });
+    } else {
+      this.mostrarMensajeError('No se pudo lanzar la convocatoria')
+    }
+  }
+
+
+  crearAnexo2(): void{
+    if(this.base64Output!=null){
+      let fechaActual = new Date().toLocaleDateString();
+      let fechacortada: any[] = fechaActual.split('/');
+      let pdfConv:any = {
+        docConvocatoria: this.base64Output,
+        fechaEmision: fechacortada,
+        fechaMaxima: this.formConvocataria.value.fechaMaxima,
+        nombreConvocatoria: 'CONVOCATORIA - '+ this.ObjetoSolicitud.abreviatura
+      }
+    }else{
+      this.mostrarMensajeError('No se pudo generar el documento');
+    }
+  }
+
+  //-> PARA CARGA DE ARCHIVOS
+  generate(nom: any, anexoRequerido: string, nombreDoc: string): void {
+    loadFile(anexoRequerido, function (
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, {paragraphLoop: true, linebreaks: true});
+      doc.setData({
+        ...nom
+      });
+      try {
+        doc.render();
+      } catch (error) {
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function (
+                error,
+                key
+              ) {
+                error[key] = value[key];
+                return error;
+              },
+              {});
+          }
+          return value;
+        }
+
+        //console.log(JSON.stringify({error: error}, replaceErrors));
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function (error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          //console.log("errorMessages", errorMessages);
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      // Output the document using Data-URI
+      saveAs(out, nombreDoc);
+    });
+  }
+
+
+  dataURLtoFile(dataurl: any, filename: any) {
+    let arr = dataurl.split(','),
+      mime = arr[0].match(/:(.*?);/)[1],
+      bstr = atob(arr[1]),
+      n = bstr.length,
+      u8arr = new Uint8Array(n);
+    while (n--) {
+      u8arr[n] = bstr.charCodeAt(n);
+    }
+    return new File([u8arr], filename, {type: mime});
+  }
+
+
+  onFileSelected(event) {
+    this.convertFile(event.files['0']).subscribe(base64 => {
+      this.base64Output = base64;
+      this.soliEmp = {
+        docSoliEmp: this.base64Output
+      };
+      this.mostarMensajeCorrecto('El archivo fue cargado con exito')
+    });
+  }
+
+  convertFile(file: File): Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    console.log(result)
+    return result;
+  }
+
+
+  devolvermes(mes: any): any {
+    switch (mes) {
+      case '1':
+        return 'enero'
+        break;
+
+      case '2':
+        return 'febrero'
+        break;
+
+      case '3':
+        return 'marzo'
+        break;
+
+      case '4':
+        return 'abril'
+        break;
+
+      case '5':
+        return 'mayo'
+        break;
+
+      case '6':
+        return 'junio'
+        break;
+
+      case '7':
+        return 'julio'
+        break;
+
+      case '8':
+        return 'agosto'
+        break;
+
+      case '9':
+        return 'septiembre'
+        break;
+
+      case '10':
+        return 'octubre'
+        break;
+
+      case '11':
+        return 'noviembre'
+        break;
+
+      case '12':
+        return 'diciembre'
+        break;
+    }
   }
 
 }

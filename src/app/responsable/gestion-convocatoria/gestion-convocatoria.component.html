@@ -132,7 +132,7 @@
             </p-table>
           </form>
           <br>
-          <button pButton pRipple type="button" label="Generar Documento "></button>
+          <button pButton pRipple type="button" label="Generar Documento" (click)="lanzarConvocatoria()"></button>
         </p-panel>
       </p-accordionTab>
       <p-accordionTab header="Actividades propuestas">
@@ -160,6 +160,28 @@
           </p-table>
         </p-panel>
       </p-accordionTab>
+      <p-accordionTab header="Documentos">
+        <p-panel header="Envio de documento">
+          <ng-template pTemplate="content">
+            <div mat-row="">
+              <h3>Ingrese el documento firmado que se genero: </h3>
+              <p-fileUpload
+                [customUpload]="true"
+                [showCancelButton]="false"
+                [multiple]="false"
+                (uploadHandler)="onFileSelected($event)"
+                chooseLabel="Seleccionar anexo"
+                uploadLabel="Cargar anexo"
+                invalidFileTypeMessageSummary="Archivo no valido"
+                invalidFileSizeMessageDetail="Solo se acepta archivos con extensiones .doc - docx."
+              >
+              </p-fileUpload>
+            </div>
+          </ng-template>
+        </p-panel>
+      </p-accordionTab>
     </p-accordion>
+    <button pButton pRipple type="button" label="Lanzar Convocatoria" ></button>
   </ng-template>
+
 </p-dialog>

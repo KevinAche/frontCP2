@@ -16,4 +16,10 @@ export class ResponsableService {
       environment.URL_APP + `GestionResponsablePPP/ListarResponsablesVista`
     ).toPromise();
   }
+
+  getResponsableUnico(cedula: any): Promise<any[]>{
+    return this.http.get<any[]>(
+      environment.URL_APP + `GestionResponsablePPP/ObtenerResponsable/${cedula}`
+    ).toPromise();
+  }
 }

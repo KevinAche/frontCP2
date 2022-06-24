@@ -73,9 +73,7 @@ import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
-
 import {OrderListModule} from 'primeng/orderlist';
-
 import {SolicitudEmpresa} from "./models/SolicitudEmpresa";
 
 import {MessagesModule} from 'primeng/messages';
@@ -169,7 +167,7 @@ SolicitudEmpresaComponent,
     CrearEmpleadoComponent,
     ListarEmpleadoComponent,
     GestionConvocatoriaComponent
-    
+
   ],
   imports: [
     BrowserModule,
@@ -177,7 +175,6 @@ SolicitudEmpresaComponent,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
-
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,
