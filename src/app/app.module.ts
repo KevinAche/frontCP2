@@ -73,10 +73,11 @@ import {AccordionModule} from "primeng/accordion";
 import {FileUploadModule} from "primeng/fileupload";
 import { ListaResponsablepppComponent } from './lista-responsableppp/lista-responsableppp.component';
 import { CrearEmpleadoComponent } from './empresa/crear-empleado/crear-empleado.component';
+
 import {OrderListModule} from 'primeng/orderlist';
 
 import {SolicitudEmpresa} from "./models/SolicitudEmpresa";
-import { Ng2SearchPipeModule } from 'ng2-search-filter';
+
 import {MessagesModule} from 'primeng/messages';
 import {MessageModule} from 'primeng/message';
 import {ListboxModule} from 'primeng/listbox';
@@ -87,8 +88,9 @@ import {VirtualScrollerModule} from 'primeng/virtualscroller';
 import { GestionConvocatoriaComponent } from './responsable/gestion-convocatoria/gestion-convocatoria.component';
 import {DividerModule} from 'primeng/divider';
 import {CalendarModule} from 'primeng/calendar';
+import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
-
+import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
 @NgModule({
   declarations: [
     AppComponent,
@@ -165,7 +167,9 @@ SolicitudEmpresaComponent,
     GestionVisitasComponent,
     ListaResponsablepppComponent,
     CrearEmpleadoComponent,
-    GestionConvocatoriaComponent,
+    ListarEmpleadoComponent,
+    GestionConvocatoriaComponent
+    
   ],
   imports: [
     BrowserModule,
@@ -173,6 +177,7 @@ SolicitudEmpresaComponent,
     NgbModule,
     ReactiveFormsModule,
     FormsModule,
+
     Ng2SearchPipeModule,
     BrowserAnimationsModule,
     MatToolbarModule,

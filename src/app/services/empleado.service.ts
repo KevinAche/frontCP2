@@ -28,6 +28,12 @@ export class EmpleadoService {
     ).toPromise();
   }
 
+  getGerente(idEmpresa: string) {
+    return this.httpClient.get<any[]>(
+      environment.URL_APP+`GestionPersonalEmpresa/ListaGerente/${idEmpresa}`
+    ).toPromise();
+  }
+
   createEmpleado(empleado: Empleado, cedula: String, idEmp: number): Observable<Empleado> {
     return this.httpClient
       .post<Empleado>(environment.URL_APP + `GestionPersonalEmpresa/CrearPersonal/${cedula}/${idEmp}` ,empleado)

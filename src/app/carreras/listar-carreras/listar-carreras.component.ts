@@ -102,7 +102,7 @@ export class ListarCarrerasComponent implements OnInit {
 
     
     this.coordinador=false;
-    window.location.reload();
+    //window.location.reload();
 
     //this.docenteService.updateDocente(docente,docente.persona.cedula)
     

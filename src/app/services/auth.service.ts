@@ -4,13 +4,14 @@ import {NuevoUsuario} from "../models/nuevo-usuario";
 import {Observable} from "rxjs";
 import {LoginUsuario} from "../models/LoginUsuario";
 import {JwtDto} from "../models/Jwt-Dto";
+import { environment } from 'src/environments/environment';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthService {
 
-  authURL = 'https://backendg1c2.herokuapp.com/auth/';
+  authURL = environment.URL_APP+"auth/";
 
 
   constructor(private httpClient: HttpClient) { }

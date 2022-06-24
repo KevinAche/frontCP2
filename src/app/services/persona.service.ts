@@ -3,7 +3,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Persona } from '../models/Persona';
 import { catchError, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
-import { environment } from 'src/environments/environment';
+import {environment} from "../../environments/environment";
 
 @Injectable({
   providedIn: 'root'

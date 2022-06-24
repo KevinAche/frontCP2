@@ -25,11 +25,7 @@ export class ActividadesService {
 
 
 
-  getActividades(): Observable<Actividades[]> {
-    return this.http.get(this.urlSearch).pipe(
-      map(response => response as Actividades[])
-    );
-  }
+
 
 
 
@@ -51,5 +47,50 @@ export class ActividadesService {
       })
     );
   }
+
+ getActividades() {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + '/ListaActividades', {
+      headers: header
+
+    });
+  }
+
+  getActividadesEmpresa(empid) {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + `/CargarActividadesEmpresa/${empid}`, {
+      headers: header
+
+    });
+  }
+
+  getActividadesConvenio(empid) {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + `/ListaActividadesConvenio/${empid}`, {
+      headers: header
+
+    });
+  }
+
+  createActividadesc(act: any): Promise<any> {
+    return this.http.post(
+        this._url + `/CrearActividades`,act, {
+          headers: this.httpHeaders
+        }
+      ).toPromise();
+  }
+
+  deleteActividad(id: any): Promise<any[]> {
+    return this.http.delete<any[]>(
+      this._url + `/EliminarActividades/${id}`
+    ).toPromise();
+  }
+
 
 }

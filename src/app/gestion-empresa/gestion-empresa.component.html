@@ -49,6 +49,18 @@
                     <a class="delete" title="Delete" (click)="eliminarEmpresa(empresas)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
 
                 </td>
+                <td>
+                  <button pButton pRipple type="button" icon="pi pi-plus"
+                  class="p-button-rounded p-button-success"  (click)="hasConvenio(empresas.idEmpresa)">
+                </button>
+                </td>
+                <td>
+                            
+                      <button pButton pRipple type="button" icon="pi pi-bookmark"
+                      class="p-button-rounded p-button-secondary"  (click)="obtenerDocumento(empresas.idEmpresa)">
+                    </button>
+                    
+                </td>
               </tr>
           </ng-template>
           <ng-template pTemplate="emptymessage">
@@ -104,3 +116,99 @@
             <button type="button" pButton icon="pi pi-times" (click)="dis=false" label="Cancelar" class="ui-button-secondary"></button>
         </p-footer>
     </p-dialog>
+
+    <p-dialog header="Generar Convenio" [(visible)]="createConvenio" [modal]="true" [style]="{width: '40%', height: '50%'}"
+        [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <form [formGroup]="formConvenio">
+            <div class="form-row">
+              <div class="form-group col-md-6">
+                <label for="duracion">Duración:</label>
+                <input type="text" class="form-control" [(ngModel)]="convenio.duracion" id="duracion"  formControlName="duracion" placeholder="Ingrese la duración">
+              </div>
+              <div class="col-md-6" >
+                <label for="fechaEmision">Fecha de Emisión</label>
+                <input type="date" class="form-control" id="fechaEmision" formControlName="fechaEmision" [(ngModel)]="convenio.fechaEmision"
+                 placeholder="Ingrese la fecha de emisión">          
+              </div>
+            </div>
+            
+        </form>
+
+        <p-footer>
+            <button type="button" pButton icon="pi pi-save" (click)="guardarConvenio()" label="Crear Convenio"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="createConvenio=false" label="Cancelar" class="ui-button-secondary"></button>
+        </p-footer>
+    </p-dialog>
+
+    <p-dialog header="Registro de Actividades" [(visible)]="createActividades" [modal]="true" [style]="{width: '50%', height: '40vw'}"
+        [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+        <form [formGroup]="formActividades">
+            <div class="form-row">
+              <div class="form-group col-md-8">
+                <label for="descripcion">Descripción:</label>
+                <input type="text" class="form-control" [(ngModel)]="actividad.descripcion" id="descripcion"  formControlName="descripcion" placeholder="Ingrese la descripción">
+              </div>
+              <div class="col-md-4" >
+                <button type="button" pButton icon="pi pi-save"  (click)="agregarActividad()" label="agregar"></button>
+              </div>
+            </div>
+            
+        </form>
+        <div>
+          <p-table [value]="actividades"
+          [paginator]="true"
+          [columns]="cols"
+          [rows]="10"
+          [showCurrentPageReport]="true"
+          [rowsPerPageOptions]="[10,25,50]"
+          [paginator]="true" *ngIf="refresh">
+
+          <ng-template pTemplate="header" let-columns>
+            <tr>
+                <th *ngFor="let col of colsAct">
+                    {{col.header}}
+                </th>
+            </tr>
+        </ng-template>
+
+        <ng-template pTemplate="body" let-actividades>
+            <tr>
+              <td>{{actividades.idActividad}}</td>
+              <td>{{actividades.descripcion}}</td>
+              <td>
+                  <a class="delete" title="Delete" (click)="eliminarActividad(actividades.idActividad)" data-toggle="tooltip"><i class="material-icons">&#xE872;</i></a>
+
+              </td>
+            </tr>
+        </ng-template>
+        <ng-template pTemplate="emptymessage">
+            <tr>
+                <td [attr.colspan]="cols.length">No hay datos.</td>
+            </tr>
+        </ng-template>
+
+          </p-table>
+        </div>
+        <button type="button" pButton icon="pi pi-print"   label="Generar Documento" (click)="generarDoc()"></button>
+        <div>
+          <h3>Subir archivo de convenio firmado y en pdf</h3>
+          <p-fileUpload
+                [customUpload]="true"
+                [showCancelButton]="false"
+                [multiple]="false"
+                (uploadHandler)="onFileSelected($event)"
+                chooseLabel="Seleccionar anexo"
+                uploadLabel="Cargar anexo"
+                invalidFileTypeMessageSummary="Archivo no valido"
+                invalidFileSizeMessageDetail="Solo se acepta archivos con extensiones .doc - docx."
+              >
+              </p-fileUpload>
+        </div>
+
+        <p-footer>
+            <button type="button" pButton icon="pi pi-save"   label="Crear Convenio" (click)="updateConvenio()"></button>
+            <button type="button" pButton icon="pi pi-times" (click)="cancelarConvenio()" label="Cancelar" class="ui-button-secondary"></button>
+        </p-footer>
+    </p-dialog>
+
+    

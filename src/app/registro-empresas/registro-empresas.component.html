@@ -52,6 +52,76 @@
 
     </div>
     </mat-card>
+
+    <p-dialog header="Registrar Gerente" [(visible)]="rempleado" [modal]="true" [style]="{width: '80%', height: '40vw'}"
+        [maximizable]="false" [baseZIndex]="10000" [draggable]="false" [resizable]="false">
+
+        <form [formGroup]="formEmpleado" >
+          <div class="form-row">
+            <div class="form-group col-md-3">
+              <label for="cedula">Cédula:</label>
+              <input  type="text" class="form-control" id="cedula"
+                      formControlName="cedula" placeholder="Cédula" [(ngModel)]="persona.cedula">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="primernombre">Primer Nombre:</label>
+              <input  type="text" class="form-control" id="primerNombre"
+                      formControlName="primerNombre" placeholder="Primer Nombre" [(ngModel)]="persona.primerNombre">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="segundoNombre">Segundo Nombre:</label>
+              <input  type="text" class="form-control" id="segundoNombre"
+                      formControlName="segundoNombre" placeholder="Segundo Nombre" [(ngModel)]="persona.segundoNombre">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="primerApellido">Primer Apellido:</label>
+              <input type="text" class="form-control" id="primerApellido"
+                     formControlName="primerApellido" placeholder="Primer Apellido" [(ngModel)]="persona.primerApellido">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="segundoApellido">Segundo Apellido:</label>
+              <input  type="text" class="form-control" id="segundoApellido"
+                      formControlName="segundoApellido" placeholder="Segundo Apellido" [(ngModel)]="persona.segundoApellido">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="fechaNac">Fecha de Nacimiento</label>
+              <input type="date" class="form-control" id="fechaNac" formControlName="fechaNac"
+                     placeholder="Ingrese la fecha de nacimiento" [(ngModel)]="persona.fechaNac">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="direccion">Dirección:</label>
+              <input type="text" class="form-control" id="direccion" formControlName="direccion"
+                     placeholder="Ingrese la dirección" [(ngModel)]="persona.direccion">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="telefono">Telefono:</label>
+              <input type="text" class="form-control" id="telefono" formControlName="telefono"
+                     placeholder="123456789" [(ngModel)]="persona.telefono">
+            </div>
+            <div class="form-group col-md-3">
+              <label for="correo">Correo:</label>
+              <input type="text" class="form-control" id="correo" formControlName="correo"
+                     placeholder="Ingrese el correo eléctronico" [(ngModel)]="persona.correo">
+            </div>
+            
+            <div class="form-group col-md-3">
+              <label for="abrev_titulo">Título:</label>
+              <input  type="text" class="form-control" id="abrev_titulo"
+                      formControlName="abrev_titulo" placeholder="Abreviatura Titulo" [(ngModel)]="empleado.abrev_titulo">
+            </div>
+          </div>
+          <br>
+          <mat-card-actions>
+            
+    
+          </mat-card-actions>
+        </form>
+       
+        <p-footer>
+          <button mat-raised-button color="primary" (click)="verficardATOS()" >Crear Empleado</button>
+            <button type="button" pButton icon="pi pi-times" (click)="rempleado=false" label="Cancelar" class="ui-button-secondary"></button>
+        </p-footer>
+    </p-dialog>
 </section>
 
 
