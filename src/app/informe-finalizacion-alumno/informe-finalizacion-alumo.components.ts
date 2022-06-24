@@ -255,7 +255,7 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
       if (this.informeFinalDatos[i].alumno.idAlumno == this.informeFinal.alumno.idAlumno) {
         con = 1;
-        //alert(this.informeFinalDatos[i].alumno.idAlumno);
+        break;
       }
 
     }
@@ -321,10 +321,10 @@ export class InformeFinalAlumnoComponent implements OnInit {
 
     //fein fefi
     let arra = fein.split('T');
-    fein=arra[0];
+    fein = arra[0];
 
     let array = fefi.split('T');
-    fefi=array[0];
+    fefi = array[0];
 
     if (mes == 1) {
       mes = "Enero";

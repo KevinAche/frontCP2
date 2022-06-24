@@ -11,7 +11,9 @@ import Docxtemplater from "docxtemplater";
 import PizZip from "pizzip";
 import PizZipUtils from "pizzip/utils/index.js";
 import { saveAs } from "file-saver";
-import { Carrera } from '../models/Carrera';
+import { registroA } from '../models/RegistroAsistencia';
+import { Observable } from 'rxjs';
+import { ReplaySubject } from 'rxjs';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -34,6 +36,8 @@ export class RegistroAsistenciaComponent implements OnInit {
   public listaSolicitudAlumno: Array<any> = [];
 
   actividadesDiarias: ActividadesDiarias = new ActividadesDiarias();
+  registroA: registroA = new registroA();
+
 
 
   public dialogoMiRegistro: boolean;
@@ -48,6 +52,8 @@ export class RegistroAsistenciaComponent implements OnInit {
   public datoEmpresa: any;
   public datoTutor: any;
   public datoCarrera: any;
+  public datoIdAlumno: any;
+  public base64Output: string;
 
   showDialog(idRegiAsi: any) {
     this.dis = true;
@@ -55,7 +61,10 @@ export class RegistroAsistenciaComponent implements OnInit {
 
   }
 
-  showDialogGuardar(est: any, emp: any, tut: any, carr: any) {
+  showDialogGuardar(est: any, emp: any, tut: any, carr: any, idAlumno: any,regiId:any) {
+    this.datoIdAlumno = idAlumno;
+    this.registroA.alumno.idAlumno=idAlumno;
+    this.registroA.idRegistroAsistencia=regiId;
     this.dialogoGuardaryGenerar = true;
     this.datoEstudiante = est;
     this.datoEmpresa = emp;
@@ -74,6 +83,21 @@ export class RegistroAsistenciaComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
+
+  capturarActividades(idAlumno: any) {
+    this.datoIdAlumno = idAlumno;
+
+    for (var i = 0; i < this.listaActividades.length; i++) {
+
+      if (this.listaActividades[i].registroA.alumno.idAlumno == this.datoIdAlumno) {
+
+        alert(this.listaActividades[i].descripcion);
+
+      }
+    }
+
+
+  }
 
   ngOnInit(): void {
     this.cedulaAlumno = this.route.snapshot.paramMap.get('cedula');
@@ -166,9 +190,11 @@ export class RegistroAsistenciaComponent implements OnInit {
   }
 
 
+
+
   //Metodo de borrar
 
-  borrarActividad(id:any) {
+  borrarActividad(id: any) {
 
     swal.fire({
       title: '¿Estas seguro?',
@@ -182,7 +208,7 @@ export class RegistroAsistenciaComponent implements OnInit {
       if (result.isConfirmed) {
 
         this.actividadesDiariasService.deleteActividad(id).subscribe(
-          
+
           Response => {
             this.listaActividades = this.listaActividades.filter(servi => servi !== id)
 
@@ -201,12 +227,59 @@ export class RegistroAsistenciaComponent implements OnInit {
     })
   }
 
+  //metodo editar
+
+  editarRegistro() {
+    
+    try {
+      if(this.registroA.docRegistroA.length != 0){
+        this.registroAsistenciaService.updateReAsistencia(this.registroA).subscribe(registroA => {
+          swal.fire('Registro documento', 'El documento se ha subido con exito.', 'success')
+          location.reload();
+        })
+      }
+      
+    } catch (error) {
+      swal.fire(
+        'Error de entrada',
+        'Revise que los campos no esten vacios',
+        'error'
+      )
+    }
+    
+
+
+   
+  }
+  
+ 
+
+  //Metodo para subir documento en base 64
+  onFileSelected(event) {
+    this.convertFile(event.target.files[0]).subscribe(base64 => {
+      this.base64Output = base64;
+      this.registroA.docRegistroA=base64;
+      
+    });
+  }
+
+  convertFile(file: File): Observable<string> {
+    const result = new ReplaySubject<string>(1);
+    const reader = new FileReader();
+    reader.readAsBinaryString(file);
+    reader.onload = (event) => result.next(btoa(event.target.result.toString()));
+    console.log(result)
+    return result;
+  }
+
+
+
 
   //metodo generar documento
 
   generate(est: any, emp: any, tut: any, car: any) {
 
-    loadFile("https://backendg1c2.herokuapp.com/files/anexo9.docx", function (
+    loadFile("https://backendg1c2.herokuapp.com/files/anexo9v.docx", function (
       error,
       content
     ) {
@@ -214,17 +287,22 @@ export class RegistroAsistenciaComponent implements OnInit {
         throw error;
       }
 
-
+      var arr = ['Franklin'];
 
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
-      doc.setData({
+      doc.setData(
+        {
 
-        estudiante: est,
-        empresa: emp,
-        NombreTutor: tut,
-        carrera: car,
-      });
+          nombreas: arr,
+          estudiante: est.toUpperCase(),
+          empresa: emp.toUpperCase(),
+          NombreTutor: tut.toUpperCase(),
+          carrera: car.toUpperCase(),
+
+
+
+        });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
         doc.render();
@@ -265,6 +343,8 @@ export class RegistroAsistenciaComponent implements OnInit {
       saveAs(out, "anexo9.docx");
     });
   }
+
+  
 
 
 }
