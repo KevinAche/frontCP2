@@ -14,6 +14,7 @@ import PizZipUtils from "pizzip/utils/index.js";
 import Docxtemplater from "docxtemplater";
 import { Observable } from 'rxjs';
 import { ReplaySubject } from 'rxjs';
+import { title } from 'process';
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -95,7 +96,7 @@ export class SolicitudEstudianteComponent implements OnInit {
   }
 
   crearSolicitud(valor: any, ide: any, nomEmp: any, respo: any) {
-   
+
 
     for (var i = 0; i < this.solicitudes.length; i++) {
 
@@ -108,7 +109,7 @@ export class SolicitudEstudianteComponent implements OnInit {
             icon: 'error',
             title: 'Oops...',
             text: 'Ya tienes una solicitud aceptada!',
-            
+
           })
           this.dialogoCrearSolicitud = false;
           break;
@@ -116,13 +117,13 @@ export class SolicitudEstudianteComponent implements OnInit {
         } else {
           if (this.solicitud[i] == null) {
             this.abrirDialogo(valor, ide, nomEmp, respo);
-            
+
           }
 
         }
       } else {
         this.abrirDialogo(valor, ide, nomEmp, respo);
-        
+
       }
 
     }
@@ -184,7 +185,7 @@ export class SolicitudEstudianteComponent implements OnInit {
   }
 
   //Generar documento
-  generate(nom: any, ced: any, par: any, cic: any, corr: any, cell: any, hor, fec, carr, sig, conv) {
+  generate(nom: any, ced: any, par: any, cic: any, corr: any, cell: any, hor, fec, carr, sig, conv,) {
     var empn = this.empresaNombre;
     var res = this.responsableNombre;
     if (this.formSolicitud.invalid) {
@@ -219,6 +220,7 @@ export class SolicitudEstudianteComponent implements OnInit {
         nombreEmpresa: empn,
         periodoAcademico: "Mayo 2022 - Diciembre 2022",
         nombreResponsablePracticas: res,
+        titulo:"LIC",
       });
       try {
         // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
