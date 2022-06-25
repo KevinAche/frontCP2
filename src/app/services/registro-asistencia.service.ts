@@ -2,6 +2,7 @@ import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
 import { registroA } from '../models/RegistroAsistencia';
 import { catchError, map, Observable, throwError } from 'rxjs';
+import { environment } from "../../environments/environment";
 import { Router } from '@angular/router';
 import Swal from 'sweetalert2';
 
@@ -34,6 +35,15 @@ export class RegistroAsistenciaService {
         return this.http.put<registroA>(`${this.urlUpdate}/${reg.idRegistroAsistencia}`, reg, { headers: this.httpHeaders }).pipe(
             catchError(e => {
                 Swal.fire('Error', 'NO se puede subir el documento', 'error')
+                return throwError(e);
+            })
+        );
+    }
+
+    createReAsistencia(act: registroA): Observable<registroA> {
+        return this.http.post<registroA>(environment.URL_APP + 'RegistroAsistencia/CrearRegistroAsistencia/'+act.alumno.persona.cedula, act, { headers: this.httpHeaders }).pipe(
+            catchError(e => {
+                Swal.fire('Error al guardar', 'NO se puede guardar registro de asistencia', 'error')
                 return throwError(e);
             })
         );

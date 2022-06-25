@@ -87,6 +87,25 @@ export class RegistroAsistenciaComponent implements OnInit {
     private formBuilder: FormBuilder,
   ) { }
 
+  
+  ngOnInit(): void {
+    this.cedulaAlumno = this.route.snapshot.paramMap.get('cedula');
+    this.listarActividades();
+    this.listarAnexo9();
+    this.listarregistroAsistencia();
+    this.listarSolicitudAlumnos();
+    
+
+    this.formValidacion = this.formBuilder.group({
+      fecha: ['', Validators.required],
+      numHoras: ['', Validators.required],
+      horaLlegada: ['', Validators.required],
+      horaSalida: ['', Validators.required],
+      descripcion: ['', Validators.required],
+    });
+  }
+
+  
 
   capturarActividades(idAlumno: any) {
 
@@ -99,16 +118,16 @@ export class RegistroAsistenciaComponent implements OnInit {
     }
 
 
-    
+
 
     for (var i = 0; i < this.listaActividades.length; i++) {
       if (this.listaActividades[i].registroA.alumno.idAlumno == this.datoIdAlumno) {
-        if (this.c1==this.c) {
+        if (this.c1 == this.c) {
           let arr = this.listaActividades[i].fecha.split('T');
           this.datoCapturaActividades = this.datoCapturaActividades + "FECHA: " + arr[0] + "     ENTRADA: " + this.listaActividades[i].horaLlegada +
             "     SALIDA: " + this.listaActividades[i].horaSalida + "     HORAS: " + this.listaActividades[i].numHoras + "     FIRMA:  ______________" + "\n" +
-            "ACTIVIDAD: " + this.listaActividades[i].descripcion+ "\n";
-          
+            "ACTIVIDAD: " + this.listaActividades[i].descripcion + "\n";
+
         } else {
           let arr = this.listaActividades[i].fecha.split('T');
           this.datoCapturaActividades = this.datoCapturaActividades + "FECHA: " + arr[0] + "     ENTRADA: " + this.listaActividades[i].horaLlegada +
@@ -119,28 +138,12 @@ export class RegistroAsistenciaComponent implements OnInit {
 
       }
     }
-    this.c1=1;
-    this.c=0;
+    this.c1 = 1;
+    this.c = 0;
 
 
   }
 
-  ngOnInit(): void {
-    this.cedulaAlumno = this.route.snapshot.paramMap.get('cedula');
-    this.listarActividades();
-    this.listarAnexo9();
-    this.listarregistroAsistencia();
-    this.listarSolicitudAlumnos();
-
-
-    this.formValidacion = this.formBuilder.group({
-      fecha: ['', Validators.required],
-      numHoras: ['', Validators.required],
-      horaLlegada: ['', Validators.required],
-      horaSalida: ['', Validators.required],
-      descripcion: ['', Validators.required],
-    });
-  }
 
 
 
