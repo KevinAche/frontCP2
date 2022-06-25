@@ -103,6 +103,16 @@
       </table>
 
     </mat-card>
+    <div class="container text-center">
+    <br><br>
+    <button (click)="CrearRegistro()" style="background: #1d3557; color: white;">Generate document</button>
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf"/>
+<br>
+<br>
+    base64 Output :
+    {{base64Output}}
+</div>
   </div>
-
 </section>
+ 
+
