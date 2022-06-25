@@ -12,6 +12,10 @@ import { AlumnosService } from './services/alumnos.service';
 import { SolicitudAlumnoService } from './services/solicitud-alumno.service';
 import { RegistroAsistenciaService } from './services/registro-asistencia.service';
 import { registroA } from './models/RegistroAsistencia';
+import { Anexo9Service } from './services/anexo9.service';
+import { TutorAService } from './services/tutorA.service';
+import { TutorEmpresarialService } from './services/tutor-empresarial.service';
+import { ActaReunionService } from './services/acta-reunion.service';
 
 @Component({
   selector: 'app-root',
@@ -24,11 +28,17 @@ export class AppComponent implements OnInit {
   public listaSolicitudAlumno: Array<any> = [];
   public alumnosDatos: Array<any> = [];
   public listaRegistroActividades: Array<any> = [];
+  public listaAnexo9Datos: Array<any> = [];
+  public TutorEmpresarialDatos: Array<any> = [];
+  public TutorAcademicoDatos: Array<any> = [];
+  public ActaReunionDatos: Array<any> = [];
 
   registroA: registroA = new registroA();
 
   public contro: boolean = false;
+  public controVerificador: boolean = false;
   public idAlumnoo: any = 0;
+  public cedula: any;
 
   @ViewChild(MatSidenav)
   sidenav: MatSidenav;
@@ -61,6 +71,10 @@ export class AppComponent implements OnInit {
     private alumnoService: AlumnosService,
     private solicitudAlumnoService: SolicitudAlumnoService,
     private registroAsistenciaService: RegistroAsistenciaService,
+    private anexo9Service: Anexo9Service,
+    private tutorEmpresarialService: TutorEmpresarialService,
+    private tutorAcademicoService: TutorAService,
+    private actaReunionService: ActaReunionService,
   ) {
 
     console.log(this.tokenService.getUserName());
@@ -81,7 +95,10 @@ export class AppComponent implements OnInit {
     this.listarDetalladaAlumnos();
     this.listarSolicitudAlumnos();
     this.listarregistroAsistencia();
-
+    this.listarAnexo9();
+    this.listarTutorEmpresarial();
+    this.listarTutorAcademico();
+    this.listarActaReunion();
 
     // Array de notifcaciones ejemplo
 
@@ -206,17 +223,47 @@ export class AppComponent implements OnInit {
     })
   }
 
+  public listarAnexo9() {
+    this.anexo9Service.getAnexo9lista().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.listaAnexo9Datos = resp.data
+    })
+  }
 
+  listarTutorEmpresarial() {
+    this.tutorEmpresarialService.getTutorEmpresarial().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.TutorEmpresarialDatos = resp.data
+    }
+    )
+  }
+
+  listarTutorAcademico() {
+    this.tutorAcademicoService.getTutorAcademico().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.TutorAcademicoDatos = resp.data
+    }
+    )
+  }
+
+  listarActaReunion() {
+
+    this.actaReunionService.getActaReunion().subscribe((resp: any) => {
+      console.log(resp.data)
+      this.ActaReunionDatos = resp.data
+    }
+    )
+  }
 
   verificarSolicitud(cedula: any) {
-
     
+    this.cedula = cedula;
 
     for (var b = 0; b < this.alumnosDatos.length; b++) {
       if (cedula == this.alumnosDatos[b].cedula) {
 
         for (var a = 0; a < this.listaRegistroActividades.length; a++) {
-          //this.registroA.alumno.idAlumno=this.alumnosDatos[b].id_alumno;
+
           if (this.listaRegistroActividades[a].alumno.idAlumno == this.alumnosDatos[b].id_alumno) {
             this.contro = true;
           }
@@ -225,9 +272,9 @@ export class AppComponent implements OnInit {
       }
     }
 
-    this.registroA.alumno.persona.cedula=cedula;
-    this.registroA.docRegistroA="Sin Documento";
-    
+    this.registroA.alumno.persona.cedula = cedula;
+    this.registroA.docRegistroA = "Sin Documento";
+
     if (this.contro == false) {
       Swal.fire({
         title: '¿Desea crear una plantilla de registro de actividades?',
@@ -245,6 +292,7 @@ export class AppComponent implements OnInit {
                 `Plantilla creado con exito!`,
                 'success'
               )
+              //this.verificarRequisitosRegistroAsistencia();
               location.reload();
             }
           )
@@ -255,12 +303,127 @@ export class AppComponent implements OnInit {
         }
       })
 
+    } else {
+      this.verificarRequisitosRegistroAsistencia();
     }
+
+    //this.verificarRequisitosRegistroAsistencia();
 
   }
 
 
 
+  verificarRequisitosRegistroAsistencia() {
+    console.log("cedula: " + this.cedula);
+    this.controVerificador = false;
+    for (var a = 0; a < this.listaAnexo9Datos.length; a++) {
+      if (this.listaAnexo9Datos[a].cedula_a == this.cedula) {
+
+        for (var b = 0; b < this.listaSolicitudAlumno.length; b++) {
+
+          if (this.listaSolicitudAlumno[b].alumno.idAlumno == this.listaAnexo9Datos[a].id_alumno) {
+            this.controVerificador = true;
+          } else {
+            console.log("No cumple requisito solicitud alumno");
+          }
+
+        }
+
+      } else {
+        console.log("No esta en lista vista anexo 9");
+      }
+    }
+
+
+    if (this.controVerificador == true) {
+      console.log("Inicio registro actividades Anexo 9 exitoso");
+    } else {
+      this.mensajeError();
+    }
+
+
+  }
+
+  verificarRequisitosInformeFinalA13(cedula: any) {
+    
+    this.cedula = cedula;
+    this.controVerificador = false;
+    console.log("cedula: " + this.cedula);
+
+    for (var a = 0; a < this.alumnosDatos.length; a++) {
+     
+      if (this.alumnosDatos[a].cedula == cedula) {
+        console.log("Alumno Datos Existoso");
+        
+        for (var b = 0; b < this.listaSolicitudAlumno.length; b++) {
+          if (this.listaSolicitudAlumno[b].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
+            console.log("Solicitud Alumno Exitoso");
+
+            for (var c = 0; c < this.TutorEmpresarialDatos.length; c++) {
+              if (this.TutorEmpresarialDatos[c].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
+                console.log("Tutor empresarial exitoso");
+                
+                for (var d = 0; d < this.TutorAcademicoDatos.length; d++) {
+                  if (this.TutorAcademicoDatos[d].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
+                    
+                    for (var e = 0; e < this.ActaReunionDatos.length; e++) {
+                      if (this.ActaReunionDatos[e].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
+                        console.log("Acta reunion exitoso");
+
+                        for (var f = 0; f < this.listaAnexo9Datos.length; f++) {
+                         
+                         
+                          try {
+                            if (this.listaAnexo9Datos[f].id_alumno == this.alumnosDatos[a].id_alumno) {
+                              console.log("Anexo 9 datos");
+                              this.controVerificador = true;
+                            }
+                          } catch (error) {
+                            console.log("error");
+                          }
+                         
+                          
+                        }
+
+                      }
+
+
+                    }
+
+                  }
+
+                }
+
+              }
+
+            }
+
+
+          }
+
+        }
+
+      }
+
+    }
+
+    if (this.controVerificador == true) {
+      console.log("Inicio registro actividades Anexo 9 exitoso");
+    } else {
+      this.mensajeError();
+    }
+
+
+  }
+
+
+  mensajeError() {
+    Swal.fire({
+      icon: 'error',
+      title: 'Oops...',
+      text: 'Al parecer no cumples con los requisitos necesarios para esta seccion!',
+    })
+  }
 
 }
 

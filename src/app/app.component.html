@@ -275,7 +275,8 @@
               <span>Registro Asistencia </span>
             </button>
 
-            <button mat-button class="button-accordion" routerLink="/inf-fin-alumno/{{persona.cedula}}">
+            <button mat-button class="button-accordion" routerLink="/inf-fin-alumno/{{persona.cedula}}"
+            (click)="verificarRequisitosInformeFinalA13(persona.cedula)">
               <mat-icon>file_open</mat-icon>
               <span> Informe Final </span>
             </button>
