@@ -40,7 +40,7 @@
     </div>
 
     <mat-divider></mat-divider>
-<div class="divimag" > <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
+    <div class="divimag"> <img *ngIf="isLogged" src="/assets/imagen/programmer.png"> </div>
 
 
     <div *ngFor="let persona of personas">
@@ -62,27 +62,27 @@
 
       <mat-divider></mat-divider>
 
-    <!--Coordinador de vinculación-->
-    <mat-accordion multi>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon>school</mat-icon>
-            <span>Carreras</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <!--Coordinador de vinculación-->
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>school</mat-icon>
+              <span>Carreras</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-        <button mat-button class="button-accordion" routerLink="/crear-carrera">
-          <mat-icon>add</mat-icon>
-          <span> Nueva </span>
-        </button>
-        <button mat-button class="button-accordion" routerLink="/listar-carreras">
-          <mat-icon>list</mat-icon>
-          <span>Listar </span>
-        </button>
+          <button mat-button class="button-accordion" routerLink="/crear-carrera">
+            <mat-icon>add</mat-icon>
+            <span> Nueva </span>
+          </button>
+          <button mat-button class="button-accordion" routerLink="/listar-carreras">
+            <mat-icon>list</mat-icon>
+            <span>Listar </span>
+          </button>
 
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
 
       <mat-accordion multi>
         <mat-expansion-panel>
@@ -93,36 +93,36 @@
             </mat-panel-title>
           </mat-expansion-panel-header>
 
-        <button mat-button class="button-accordion" routerLink="/registro-docente">
-          <mat-icon>add</mat-icon>
-          <span>Nuevo</span>
-        </button>
-        <button mat-button class="button-accordion" routerLink="/gestion-docentes">
-          <mat-icon>list</mat-icon>
-          <span>Listar</span>
-        </button>
+          <button mat-button class="button-accordion" routerLink="/registro-docente">
+            <mat-icon>add</mat-icon>
+            <span>Nuevo</span>
+          </button>
+          <button mat-button class="button-accordion" routerLink="/gestion-docentes">
+            <mat-icon>list</mat-icon>
+            <span>Listar</span>
+          </button>
 
-      </mat-expansion-panel>
-    </mat-accordion>
+        </mat-expansion-panel>
+      </mat-accordion>
 
 
-    <mat-accordion multi>
-      <mat-expansion-panel>
-        <mat-expansion-panel-header>
-          <mat-panel-title>
-            <mat-icon>business</mat-icon>
-            <span>Empresa</span>
-          </mat-panel-title>
-        </mat-expansion-panel-header>
+      <mat-accordion multi>
+        <mat-expansion-panel>
+          <mat-expansion-panel-header>
+            <mat-panel-title>
+              <mat-icon>business</mat-icon>
+              <span>Empresa</span>
+            </mat-panel-title>
+          </mat-expansion-panel-header>
 
-        <button mat-button class="button-accordion" routerLink="/registro-empresa">
-          <mat-icon>add</mat-icon>
-          <span>Nuevo</span>
-        </button>
-        <button mat-button class="button-accordion" routerLink="/gestion-empresa">
-          <mat-icon>list</mat-icon>
-          <span>Listar</span>
-        </button>
+          <button mat-button class="button-accordion" routerLink="/registro-empresa">
+            <mat-icon>add</mat-icon>
+            <span>Nuevo</span>
+          </button>
+          <button mat-button class="button-accordion" routerLink="/gestion-empresa">
+            <mat-icon>list</mat-icon>
+            <span>Listar</span>
+          </button>
 
 
         </mat-expansion-panel>
@@ -150,15 +150,15 @@
             <mat-icon>find_in_page</mat-icon>
             <span> Procesos </span>
           </button>
-        <button mat-button class="button-accordion" routerLink="/consulta-conv-publico">
-          <mat-icon>description</mat-icon>
-          <span>Ver Convocatorias Publicas</span>
-        </button>
+          <button mat-button class="button-accordion" routerLink="/consulta-conv-publico">
+            <mat-icon>description</mat-icon>
+            <span>Ver Convocatorias Publicas</span>
+          </button>
 
-        <button mat-button class="button-accordion" routerLink="/consultasppp">
-          <mat-icon>find_in_page</mat-icon>
-          <span> Procesos </span>
-        </button>
+          <button mat-button class="button-accordion" routerLink="/consultasppp">
+            <mat-icon>find_in_page</mat-icon>
+            <span> Procesos </span>
+          </button>
 
           <button mat-button class="button-accordion" routerLink="/anexosde-ppp">
             <mat-icon>file_copy</mat-icon>
@@ -263,12 +263,14 @@
               <span>Ver Convocatorias</span>
             </button>
 
-            <button mat-button class="button-accordion" routerLink="/solicitud-estudiante/{{realRol}}/{{persona.cedula}}">
+            <button mat-button class="button-accordion"
+              routerLink="/solicitud-estudiante/{{realRol}}/{{persona.cedula}}">
               <mat-icon>picture_as_pdf</mat-icon>
               <span>Generar Anexo3</span>
             </button>
 
-            <button mat-button class="button-accordion" routerLink="/registro-asistencia/{{persona.cedula}}">
+            <button mat-button class="button-accordion" routerLink="/registro-asistencia/{{persona.cedula}}"
+              (click)="verificarSolicitud(persona.cedula)">
               <mat-icon>how_to_reg</mat-icon>
               <span>Registro Asistencia </span>
             </button>
@@ -308,10 +310,10 @@
               <span>Notificación Actividades A8.1</span>
             </button>
 
-          <button mat-button class="button-accordion" routerLink="/registro-asistencia">
-            <mat-icon>assignment_turned_in</mat-icon>
-            <span>Asistencias Alumno</span>
-          </button>
+            <button mat-button class="button-accordion" routerLink="/registro-asistencia">
+              <mat-icon>assignment_turned_in</mat-icon>
+              <span>Asistencias Alumno</span>
+            </button>
 
             <button mat-button class="button-accordion">
               <mat-icon>grading</mat-icon>
@@ -349,7 +351,7 @@
         <span>Gestión Convocatoria</span>
       </a>
 
-      <a  class="nav-link" routerLink="/consultas-reportes" style="color: white;">
+      <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
         <mat-icon>auto_stories</mat-icon>
         <span>Consultas y Reportes </span>
       </a>
@@ -369,7 +371,7 @@
         <span>Designar Tutor Empresarial </span>
       </a>
 
-      <a  class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
+      <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
         <mat-icon>receipt</mat-icon>
         <span>Anexos PPP </span>
       </a>
@@ -404,7 +406,7 @@
         <span>Estado de Solicitudes</span>
       </a>
 
-      <a  class="nav-link" routerLink="/historial" style="color: white;">
+      <a class="nav-link" routerLink="/historial" style="color: white;">
         <mat-icon>assignment</mat-icon>
         <span>Historial</span>
       </a>
@@ -431,7 +433,7 @@
 
 
       <a *ngIf="isTutorAcademico" class="nav-link" routerLink="/evaluacion-estudiante-tutor-academico"
-         style="color: white;">
+        style="color: white;">
         <mat-icon>assignment</mat-icon>
         <span>Evaluacion Estudiante Tutor Academico </span>
       </a>

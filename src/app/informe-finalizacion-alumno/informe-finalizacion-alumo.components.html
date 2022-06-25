@@ -67,7 +67,7 @@
                                             <div class="form-group col-md-6">
                                               <label>NOMBRE:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa}}"
+                                                placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa |uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -81,7 +81,7 @@
                                             <div class="form-group col-md-6">
                                               <label>UBICACION:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.direccion}}"
+                                                placeholder="{{datosSolicitud.convocatoria.solicitudEmpresa.empleado.empresa.direccion |uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -103,7 +103,7 @@
                                             <div class="form-group col-md-6">
                                               <label>NOMBRE:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosTutEmpresarial.personalEmpresa.persona.primerNombre}} {{datosTutEmpresarial.personalEmpresa.persona.segundoNombre}} {{datosTutEmpresarial.personalEmpresa.persona.primerApellido}} {{datosTutEmpresarial.personalEmpresa.persona.segundoApellido}}"
+                                                placeholder="{{datosTutEmpresarial.personalEmpresa.persona.primerNombre|uppercase}} {{datosTutEmpresarial.personalEmpresa.persona.segundoNombre|uppercase}} {{datosTutEmpresarial.personalEmpresa.persona.primerApellido|uppercase}} {{datosTutEmpresarial.personalEmpresa.persona.segundoApellido|uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -118,7 +118,7 @@
                                             <div class="form-group col-md-6">
                                               <label>CARGO:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosTutEmpresarial.personalEmpresa.cargo}}"
+                                                placeholder="{{datosTutEmpresarial.personalEmpresa.cargo|uppercase}}"
                                                 [disabled]="true">
                                             </div>
 
@@ -151,7 +151,7 @@
                                             <div class="form-group col-md-6">
                                               <label>NOMBRE:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosAlumno.primer_nombre}} {{datosAlumno.segundo_nombre}} {{datosAlumno.primer_apellido}} {{datosAlumno.segundo_apellido}}"
+                                                placeholder="{{datosAlumno.primer_nombre|uppercase}} {{datosAlumno.segundo_nombre|uppercase}} {{datosAlumno.primer_apellido|uppercase}} {{datosAlumno.segundo_apellido|uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -165,7 +165,7 @@
                                             <div class="form-group col-md-6">
                                               <label>CICLO:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosAlumno.ciclo}} {{datosAlumno.paralelo}}"
+                                                placeholder="{{datosAlumno.ciclo|uppercase}} {{datosAlumno.paralelo|uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -198,7 +198,7 @@
                                             <div class="form-group col-md-6">
                                               <label>NOMBRE:</label>
                                               <input type="text" class="form-control"
-                                                placeholder="{{datosTutAcademico.docente.persona.primerNombre}} {{datosTutAcademico.docente.persona.segundoNombre}} {{datosTutAcademico.docente.persona.primerApellido}} {{datosTutAcademico.docente.persona.segundoApellido}}"
+                                                placeholder="{{datosTutAcademico.docente.persona.primerNombre|uppercase}} {{datosTutAcademico.docente.persona.segundoNombre|uppercase}} {{datosTutAcademico.docente.persona.primerApellido|uppercase}} {{datosTutAcademico.docente.persona.segundoApellido|uppercase}}"
                                                 [disabled]="true">
                                             </div>
                                             <div class="form-group col-md-6">
@@ -530,7 +530,7 @@
 
         <div *ngFor="let informeFinal of informeFinalDatos">
 
-          <div *ngIf="informeFinal.alumno.idAlumno == informeFinal.alumno.idAlumno;">
+          <div *ngIf="informeFinal.alumno.idAlumno == identificador;">
 
             <mat-card>
               <!--LINEA 2-->
