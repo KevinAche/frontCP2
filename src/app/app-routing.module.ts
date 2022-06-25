@@ -71,7 +71,6 @@ const routes: Routes = [
   },
   { path: 'gestion-empresa', component: GestionEmpresaComponent },
   { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
-  { path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent },
   {
     path: 'desig-tutor-empresarial',
     component: DesigTutorEmpresarialComponent,
@@ -94,8 +93,6 @@ const routes: Routes = [
   },
   { path: 'gestion-empresa', component: GestionEmpresaComponent },
   { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
-
-  {path:'desig-tutor-academico', component: DesigTutorAcademicoComponent},
   {path:'desig-tutor-empresarial', component: DesigTutorEmpresarialComponent},
   {path:'solicitud-estudiante/:rol/:cedula',component: SolicitudEstudianteComponent},
   {path:'registro-visita',component:RegistroVisitaComponent},
@@ -104,7 +101,7 @@ const routes: Routes = [
     path: 'desig-tutor-academico',
     component: DesigTutorAcademicoComponent,
     canActivate: [guard],
-    data: { expectedRol: ['administrador'] },
+    data: { expectedRol: ['admin'] },
   },
   {
     path: 'desig-tutor-empresarial',
