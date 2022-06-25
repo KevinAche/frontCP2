@@ -39,11 +39,14 @@ export class GestionConvocatoriaComponent implements OnInit {
 
   //DATA PARA RECIBIR DATOS
   dataSolicitudes: any[];
+  dataConvocatorias: any[];
   dataAsignaturas: any[];
   dataRowSolicitud: any;
   dataRowAsignatura: any;
+  dataRonwConvocatoria: any;
   ObjetoSolicitud: any;
   ObjetoAsignatura: any;
+  ObjetoConvocatoria: any;
   asiganturas: any[] = [];
   dataActividades: any[];
   dataResponsable: any[];
@@ -56,11 +59,13 @@ export class GestionConvocatoriaComponent implements OnInit {
   //COLUMNAS DE TABLAS
   columnaSolicitud: any[];
   columasAsignaturas: any[];
+  columnasConvocatorias: any[];
   asignColum: any[];
   columnasActividades: any[];
 
 
   dialogoDatos: boolean;
+  dialogoConvocatorias: boolean;
 
   formConvocataria: FormGroup;
 
@@ -100,6 +105,18 @@ export class GestionConvocatoriaComponent implements OnInit {
       {field: 'nombreAsignatura', header: 'Nombre Asignatura'},
     ]
 
+    this.columnasConvocatorias=[
+      {field: 'doc_convocatoria', header: 'Documento'},
+      {field: 'id_convocatoria', header: 'ID'},
+      {field: 'estado', header: 'Estado convocatoria'},
+      {field: 'fecha_emision', header: 'F.Emisión'},
+      {field: 'fecha_maxima', header: 'F.Maxima'},
+      {field: 'nombre_convocatoria', header: 'Nombre Convocatoria'},
+      {field: 'nombre_empresa', header: 'Empresa'},
+      {field: 'eliminarC', header: 'Eliminar convocatoria'}
+    ]
+
+
   }
 
   ngOnInit(): void {
@@ -110,6 +127,7 @@ export class GestionConvocatoriaComponent implements OnInit {
     });
 
     this.obtenerSolicitudes();
+
   }
 
   obtenerAsignaturas(): void {
@@ -142,6 +160,16 @@ export class GestionConvocatoriaComponent implements OnInit {
     this._crudActividades.getActividadesEmpresaConvenio(this.ObjetoSolicitud.id_empresa).then(value1 => {
       this.dataActividades = value1['data'];
       console.log(this.dataActividades)
+    })
+  }
+
+  obtenerCovocatorias():void {
+    this.dialogoConvocatorias=true;
+    this._convocatoriaService.getConvocatoriasVista().then(value => {
+      this.dataConvocatorias=value['data'];
+      console.log(this.dataConvocatorias)
+    }).catch((err)=>{
+      this.mostrarMensajeError('NO GE LOGRO GENERAL EL LISTADO DE CONVOCATORIAS')
     })
   }
 
@@ -181,6 +209,22 @@ export class GestionConvocatoriaComponent implements OnInit {
     }
   }
 
+  onRowSelectConvocatoria(event): void {
+    this.ObjetoConvocatoria = null;
+    if (event.data) {
+      this.dataRonwConvocatoria = event.data;
+      this.ObjetoConvocatoria = {...this.dataRonwConvocatoria};
+      console.log(this.ObjetoConvocatoria)
+    }
+  }
+
+  onRowUnSelectConvocatoria(event): void {
+    if (event.data) {
+      this.dataRonwConvocatoria = null;
+      this.ObjetoConvocatoria=null;
+    }
+  }
+
   onRowSelectAsignatura(event): void {
     this.ObjetoAsignatura = null;
     if (event.data) {
@@ -188,6 +232,7 @@ export class GestionConvocatoriaComponent implements OnInit {
       this.ObjetoAsignatura = {...this.dataRowAsignatura};
     }
   }
+
 
   onRowUnSelectAsignatura(event): void {
     if (event.data) {
@@ -260,12 +305,51 @@ export class GestionConvocatoriaComponent implements OnInit {
 
   }
 
+
+  checkForMIMEType2() {
+    if (this.ObjetoConvocatoria != null) {
+      var response = this.ObjetoConvocatoria['doc_convocatoria'];
+      //console.log(response)
+      var blob;
+      if (response.mimetype == 'pdf') {
+
+        blob = this.converBase64toBlob(response.content, 'application/pdf');
+      } else if (response.mimetype == 'doc') {
+        blob = this.converBase64toBlob(response.content, 'application/msword');
+      }
+
+      /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */
+
+      blob = this.converBase64toBlob(response, 'application/pdf');
+      var blobURL = URL.createObjectURL(blob);
+      window.open(blobURL);
+    } else {
+      this.mostrarMensajeError('NO HA DADO CLICK SOBRE LA FILA DE LA CUAL QUIERE VER EL DOCUMENTO')
+    }
+
+  }
+
   obtenerResponsable(): void {
     this._crudResponsable.getResponsableUnico(this._tokenService.getUserName()).then(value => {
       this.dataResponsable = value['data'];
     }).catch((err) => {
       this.mostrarMensajeError('No se obtuvo el responsable');
     })
+  }
+
+
+  borrarConvocatoria():void {
+    if(this.ObjetoConvocatoria !=null){
+      this._convocatoriaService.deleteConvocatoria(this.ObjetoConvocatoria.id_convocatoria).then(value => {
+        this.dialogoConvocatorias=false;
+        this.obtenerCovocatorias();
+        this.mostarMensajeCorrecto('La convocatoria fue emitida correctamente')
+      }).catch((err)=>{
+        this.mostrarMensajeError('No se puede borrar esta convocatoria, por que se encuentra en otros procesos')
+      })
+    }else{
+      this.mostrarMensajeError('No puede eliminar convocatoria por que no ha dado clic sobre la fila')
+    }
   }
 
   getDescAct() {

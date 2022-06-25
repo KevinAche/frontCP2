@@ -26,6 +26,12 @@ export class ConvocatoriaService {
     });
   }
 
+  getConvocatoriasVista(): Promise<any[]> {
+    return this.http.get<any[]>(
+      environment.URL_APP + `GestionConvocatoria/ListaConvocatoriaVista`
+    ).toPromise();
+  }
+
   getNumConv() {
     let header = new HttpHeaders()
       .set('Type-content', 'aplication/json')
@@ -44,5 +50,12 @@ export class ConvocatoriaService {
       }
     ).toPromise();
   }
+
+  deleteConvocatoria(id: any): Promise<any[]> {
+    return this.http.delete<any[]>(
+      environment.URL_APP + `GestionConvocatoria/EliminarConvocatoria/${id}`
+    ).toPromise();
+  }
+
 
 }

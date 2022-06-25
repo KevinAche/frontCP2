@@ -39,4 +39,11 @@ export class SolicitudAlumnoService {
   }
 
 
+  listaSolicitudesAlumnosAprobados(id_empresa:any): Promise<any[]>{
+    return this.http.get<any[]>(
+      environment.URL_APP+`GestionSolicitudAlumno/ListaSolAlumnosAprobados/${id_empresa}`
+    ).toPromise();
+  }
+
+
 }

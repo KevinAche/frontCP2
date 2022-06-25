@@ -1,7 +1,14 @@
 <p-toast></p-toast>
 <mat-card>
   <mat-card-title>
-    LISTA SOLICITUDES EMPRESA
+    <div class="form-row">
+      <div class="form-group col-md-9">
+        <h1>Generar nuevas convocatorias</h1>
+      </div>
+      <div class="form-group col-md-3">
+        <button type="submit" class="btn" (click)="obtenerCovocatorias()" style="background: green; color: white;">Ver convocatarias</button>
+      </div>
+    </div>
   </mat-card-title>
   <div class="container-fluid">
     <form>
@@ -65,9 +72,9 @@
           <form [formGroup]="formConvocataria">
             <h3>Ingrese fecha maxima a presentar solicitudes: </h3>
             <input type="date" id="fechaMaxima" formControlName="fechaMaxima">
-            <h3>Ingrese ciclos que se deben estar cursando o haber pasado:  </h3>
+            <h3>Ingrese ciclos que se deben estar cursando o haber pasado: </h3>
             <input type="text" id="ciclos" formControlName="ciclos">
-            <h3>Seleccione asignaturas que debe haber cumplido:  </h3>
+            <h3>Seleccione asignaturas que debe haber cumplido: </h3>
             <p-table [value]="dataAsignaturas"
                      [columns]="columasAsignaturas"
                      [paginator]="true"
@@ -89,11 +96,11 @@
                 <tr [pSelectableRow]="dataAsignatura">
                   <td *ngFor="let col  of columasAsignaturas">
                     <div [ngSwitch]="col.field">
-                  <span *ngSwitchCase="'anadirA'" >
-                    <button type="button" (click)="anadirAsignatura()" ><mat-icon>add</mat-icon></button>
+                  <span *ngSwitchCase="'anadirA'">
+                    <button type="button" (click)="anadirAsignatura()"><mat-icon>add</mat-icon></button>
                   </span>
-                      <span *ngSwitchCase="'quitarA'" >
-                    <button type="button" (click)="quitarAsignatura()" ><mat-icon>remove</mat-icon></button>
+                      <span *ngSwitchCase="'quitarA'">
+                    <button type="button" (click)="quitarAsignatura()"><mat-icon>remove</mat-icon></button>
                   </span>
                       <span *ngSwitchDefault>
                    {{dataAsignatura[col.field]}}
@@ -119,7 +126,7 @@
                 </tr>
               </ng-template>
               <ng-template pTemplate="body" let-dataAsignatura>
-                <tr >
+                <tr>
                   <td *ngFor="let col  of asignColum">
                     <div [ngSwitch]="col.field">
                   <span *ngSwitchDefault>
@@ -183,5 +190,54 @@
     </p-accordion>
     <button pButton pRipple type="button" label="Lanzar Convocatoria" (click)="crearAnexo2()"></button>
   </ng-template>
-
+</p-dialog>
+<p-dialog [(visible)]="dialogoConvocatorias"
+          [style]="{width:'50vw'}"
+          [draggable]="false"
+          [baseZIndex]="10000"
+          [modal]="true"
+          styleClass="p-fluid"
+          header="Datos para generar convocatoria">
+  <div class="form-row">
+    <div class="form-group col-md-9">
+      <h1>Lista de convocatorias generadas: </h1>
+    </div>
+  </div>
+  <p-table [value]="dataConvocatorias"
+           [columns]="columnasConvocatorias"
+           [paginator]="true"
+           [rows]="5"
+           [autoLayout]="true"
+           [(selection)]="dataRonwConvocatoria"
+           (onRowSelect)="onRowSelectConvocatoria($event)"
+           (onRowUnselect)="onRowUnSelectConvocatoria($event)"
+           [scrollable]="true"
+           selectionMode="single">
+    <ng-template pTemplate="header">
+      <tr>
+        <th *ngFor="let columna of columnasConvocatorias">
+          {{columna.header}}
+        </th>
+      </tr>
+    </ng-template>
+    <ng-template pTemplate="body" let-dataConvocatorias>
+      <tr [pSelectableRow]="dataConvocatorias">
+        <td *ngFor="let col of columnasConvocatorias">
+          <div [ngSwitch]="col.field">
+            <span *ngSwitchCase="'fecha_emision'"> {{dataConvocatorias[col.field] | date: 'yyyy-M-dd'}} </span>
+            <span *ngSwitchCase="'fecha_maxima'"> {{dataConvocatorias[col.field] | date: 'yyyy-M-dd'}} </span>
+            <span *ngSwitchCase="'doc_convocatoria'">
+                  <button pButton pRipple type="button" icon="pi pi-bookmark"
+                          class="p-button-rounded p-button-secondary" (click)="checkForMIMEType2()">
+                      </button>
+                </span>
+            <span *ngSwitchCase="'eliminarC'">
+                  <button button pButton pRipple type="button" icon="pi pi-times"  (click)="borrarConvocatoria()" class="p-button-rounded p-button-danger"></button>
+                </span>
+            <span *ngSwitchDefault>{{dataConvocatorias[col.field]}}</span>
+          </div>
+        </td>
+      </tr>
+    </ng-template>
+  </p-table>
 </p-dialog>

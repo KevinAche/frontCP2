@@ -66,5 +66,25 @@ export class EmpleadoService {
     ).toPromise();
   }
 
+  getEmpleadosEmpresa(empresa: number): Promise<any[]>{
+    return this.httpClient.get<any[]>(
+      environment.URL_APP+`GestionPersonalEmpresa/ListaPersonalEmpresa/${empresa}`
+    ).toPromise();
+  }
+
+  listarTutoresMios(empresa: number): Promise<any[]>{
+    return this.httpClient.get<any[]>(
+      environment.URL_APP+`GestionPersonalEmpresa/ListaTutoresEmpresa/${empresa}`
+    ).toPromise();
+  }
+
+  obtenerEmpleado(cedula: any): Promise<any[]>{
+    return this.httpClient.get<any[]>(
+      environment.URL_APP+`GestionPersonalEmpresa/ListaPersonalEmp/${cedula}`
+    ).toPromise();
+  }
+
+
+
 
 }
