@@ -7,72 +7,66 @@
     <!--BLOQUE 1-->
     <mat-card>
       <h1 style=" text-align: center;color: #0a172a; "><u>DATOS ESTUDIANTE</u></h1>
-      <h2 style="color: #1d3557;">INGRESE CÉDULA</h2>
-      <input class="form-control mr-sm-2" type="search" placeholder="Buscar alumno" aria-label="Search"
-        (keyup)="buscarestudiante($event)">
+      
+      <p-table>
+        <p-table #dt id="talumnos"
+                dataKey="idSolicitud"
+                [value]="solicitudes"
+                [paginator]="true"
+                [rows]="10"
+                [showCurrentPageReport]="true"
+                [rowsPerPageOptions]="[10,25,50]"
+                [paginator]="true"
+                styleClass="p-datatable-customers p-datatable-gridlines"
+                [globalFilterFields]="['alumno.persona.primerNombre','alumno.persona.primerApellido','fechaEmision']"
+                >
+    
+                <ng-template pTemplate="caption">
+                    <div class="p-grid">
+                        <div class="p-col" style="text-align: right">
+                            <i class="pi pi-search" style="margin:4px 4px 0 0"></i>
+                            <input type="text" pInputText size="50" placeholder="Busqueda: "
+                                (input)="dt.filterGlobal($any($event.target).value, 'contains')" style="width:auto">
+                        </div>
+                    </div>
+                </ng-template>
+                <ng-template pTemplate="header">
+    
+                    <tr>
+                        <th>Cedula</th>
+                        <th>Nombre Estudiante</th>                      
+                        <th style="width: 100px;">Seleccionar</th>
+                    </tr>
+                </ng-template>
+    
+                <ng-template pTemplate="body" let-soli>
+                    <tr>
+                      
+                      <td>{{soli.alumno.persona.primerNombre + ' ' + soli.alumno.persona.primerApellido}}</td>
+                      <td>{{soli.horasPPP}}</td>
+                        <td style="align-items: center; text-align: center;">
+                            <button pButton pRipple type="button" icon="pi pi-angle-right"
+                          class="p-button-rounded p-button-success" (click)="getRegistroAsistencia(soli.alumno)">
+                        </button>
+                        </td>
+                    </tr>
+                </ng-template>
+                <ng-template pTemplate="emptymessage">
+                    <tr>
+                        <td >No hay datos.</td>
+                    </tr>
+                </ng-template>
+    
+                </p-table>
+      </p-table>
+
       <br>
-      <h2 style="color: #1d3557;">DATOS DE ESTUDIANTE SELECCIONADO</h2>
-
-      <div class="container-fluid">
-        <div class="form-row">
-
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Estudiante:</label>
-            <input type="text" class="form-control" id="inputEmail4" placeholder="Dato" [disabled]="true"
-              [(ngModel)]="estudiante">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Empresa:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true"
-              [(ngModel)]="tutore.personalEmpresa.empresa.nombreEmpresa">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">TUTOR ACADEMICO:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato" [disabled]="true"
-              [(ngModel)]="tutoracademico">
-          </div>
-        </div>
-      </div>
+     
     </mat-card>
     <br> <br>
     <!--BLOQUE 2-->
-    <mat-card>
-      <h1 style=" text-align: center;color: #0a172a; "><u>REGISTRO ACTIVIDADES</u></h1>
-
-      <div class="container-fluid">
-        <div class="form-row">
-
-          <div class="form-group col-md-6">
-            <label for="inputEmail4">Fecha de Seguimiento:</label>
-            <input type="date" class="form-control" id="inputEmail4" placeholder="Dato"
-              [(ngModel)]="cronograma.fechaSeguimiento">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Actividades según cronograma:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato"
-              [(ngModel)]="cronograma.numActividad">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Fecha Finalización Prevista:</label>
-            <input type="date" class="form-control" id="inputPassword4" placeholder="Dato"
-              [(ngModel)]="cronograma.fechaFinalizacion">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Porcentaje de Avance:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato"
-              [(ngModel)]="cronograma.porcentaje">
-          </div>
-          <div class="form-group col-md-6">
-            <label for="inputPassword4">Observaciones:</label>
-            <input type="text" class="form-control" id="inputPassword4" placeholder="Dato"
-              [(ngModel)]="cronograma.observacion">
-          </div>
-        </div>
-      </div>
-
-      <div class="d-grid gap-2 col-6 mx-auto">
-        <button class="btn btn-primary" type="button" (click)="CrearRegistro()">Agregar Registro</button>
-      </div>
+    <mat-card *ngIf="estudiante!=null">
+      <h3>ESTUDIANTE SELECCIONADO</h3>
     </mat-card>
     <br><br>
     <!--BLOQUE 3-->
@@ -84,6 +78,7 @@
         <thead>
           <tr class="text-center">
             <th>#</th>
+            <th>Descripcion</th>
             <th>F. Seguimiento</th>
             <th>F. Finalizacion</th>
             <th>Porcentaje</th>
@@ -93,6 +88,7 @@
         <tbody>
           <tr *ngFor="let cronograma of ListaActividadesCronograma">
             <td>{{cronograma.numActividad}}</td>
+            <td>{{cronograma.actividadesDiarias.descripcion}}</td>
             <td>{{cronograma.fechaSeguimiento |  date:'dd/MM/yyyy'}} </td>
             <td>{{cronograma.fechaFinalizacion |  date:'dd/MM/yyyy'}}</td>
             <td>{{cronograma.porcentaje}}</td>
@@ -103,6 +99,16 @@
       </table>
 
     </mat-card>
+    <div class="container text-center">
+    <br><br>
+    <button  style="background: #1d3557; color: white;">Generate document</button>
+    <input type="file" (change)="onFileSelected($event)" accept=".pdf"/>
+<br>
+<br>
+    base64 Output :
+    {{base64Output}}
+</div>
   </div>
-
 </section>
+ 
+
