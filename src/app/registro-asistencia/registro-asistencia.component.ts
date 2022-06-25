@@ -54,6 +54,9 @@ export class RegistroAsistenciaComponent implements OnInit {
   public datoCarrera: any;
   public datoIdAlumno: any;
   public base64Output: string;
+  public datoCapturaActividades: string = "";
+  public c: number = 0;
+  public c1: number = 1;
 
   showDialog(idRegiAsi: any) {
     this.dis = true;
@@ -61,10 +64,11 @@ export class RegistroAsistenciaComponent implements OnInit {
 
   }
 
-  showDialogGuardar(est: any, emp: any, tut: any, carr: any, idAlumno: any,regiId:any) {
+  showDialogGuardar(est: any, emp: any, tut: any, carr: any, idAlumno: any, regiId: any) {
+    this.capturarActividades(idAlumno);
     this.datoIdAlumno = idAlumno;
-    this.registroA.alumno.idAlumno=idAlumno;
-    this.registroA.idRegistroAsistencia=regiId;
+    this.registroA.alumno.idAlumno = idAlumno;
+    this.registroA.idRegistroAsistencia = regiId;
     this.dialogoGuardaryGenerar = true;
     this.datoEstudiante = est;
     this.datoEmpresa = emp;
@@ -85,16 +89,38 @@ export class RegistroAsistenciaComponent implements OnInit {
 
 
   capturarActividades(idAlumno: any) {
+
     this.datoIdAlumno = idAlumno;
 
     for (var i = 0; i < this.listaActividades.length; i++) {
-
       if (this.listaActividades[i].registroA.alumno.idAlumno == this.datoIdAlumno) {
+        this.c = this.c + 1;
+      }
+    }
 
-        alert(this.listaActividades[i].descripcion);
+
+    
+
+    for (var i = 0; i < this.listaActividades.length; i++) {
+      if (this.listaActividades[i].registroA.alumno.idAlumno == this.datoIdAlumno) {
+        if (this.c1==this.c) {
+          let arr = this.listaActividades[i].fecha.split('T');
+          this.datoCapturaActividades = this.datoCapturaActividades + "FECHA: " + arr[0] + "     ENTRADA: " + this.listaActividades[i].horaLlegada +
+            "     SALIDA: " + this.listaActividades[i].horaSalida + "     HORAS: " + this.listaActividades[i].numHoras + "     FIRMA:  ______________" + "\n" +
+            "ACTIVIDAD: " + this.listaActividades[i].descripcion+ "\n";
+          
+        } else {
+          let arr = this.listaActividades[i].fecha.split('T');
+          this.datoCapturaActividades = this.datoCapturaActividades + "FECHA: " + arr[0] + "     ENTRADA: " + this.listaActividades[i].horaLlegada +
+            "     SALIDA: " + this.listaActividades[i].horaSalida + "     HORAS: " + this.listaActividades[i].numHoras + "     FIRMA:  ______________" + "\n" +
+            "ACTIVIDAD: " + this.listaActividades[i].descripcion + "\n" + "___________________________________________________________________________________" + "\n";
+          this.c1++;
+        }
 
       }
     }
+    this.c1=1;
+    this.c=0;
 
 
   }
@@ -230,15 +256,15 @@ export class RegistroAsistenciaComponent implements OnInit {
   //metodo editar
 
   editarRegistro() {
-    
+
     try {
-      if(this.registroA.docRegistroA.length != 0){
+      if (this.registroA.docRegistroA.length != 0) {
         this.registroAsistenciaService.updateReAsistencia(this.registroA).subscribe(registroA => {
           swal.fire('Registro documento', 'El documento se ha subido con exito.', 'success')
           location.reload();
         })
       }
-      
+
     } catch (error) {
       swal.fire(
         'Error de entrada',
@@ -246,20 +272,20 @@ export class RegistroAsistenciaComponent implements OnInit {
         'error'
       )
     }
-    
 
 
-   
+
+
   }
-  
- 
+
+
 
   //Metodo para subir documento en base 64
   onFileSelected(event) {
     this.convertFile(event.target.files[0]).subscribe(base64 => {
       this.base64Output = base64;
-      this.registroA.docRegistroA=base64;
-      
+      this.registroA.docRegistroA = base64;
+
     });
   }
 
@@ -275,9 +301,11 @@ export class RegistroAsistenciaComponent implements OnInit {
 
 
 
+  //////////////////////////////////////////////////////////////////////////////////////////////////////////////////////
   //metodo generar documento
 
   generate(est: any, emp: any, tut: any, car: any) {
+    var actido = this.datoCapturaActividades;
 
     loadFile("https://backendg1c2.herokuapp.com/files/anexo9v.docx", function (
       error,
@@ -287,19 +315,18 @@ export class RegistroAsistenciaComponent implements OnInit {
         throw error;
       }
 
-      var arr = ['Franklin'];
 
       const zip = new PizZip(content);
       const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true });
       doc.setData(
         {
 
-          nombreas: arr,
+
           estudiante: est.toUpperCase(),
           empresa: emp.toUpperCase(),
           NombreTutor: tut.toUpperCase(),
           carrera: car.toUpperCase(),
-
+          actividades: actido,
 
 
         });
@@ -340,11 +367,13 @@ export class RegistroAsistenciaComponent implements OnInit {
           "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
       });
       // Output the document using Data-URI
+      location.reload();
       saveAs(out, "anexo9.docx");
     });
+    //location.reload();
   }
 
-  
+
 
 
 }
