@@ -14,6 +14,13 @@ import PizZipUtils from "pizzip/utils/index.js";
 import { saveAs } from "file-saver";
 import { empty, Observable, ReplaySubject } from 'rxjs';
 import { Empresa } from '../services/empresa';
+import { TokenService } from '../services/token.service';
+import { SolicitudAlumnoService } from '../services/solicitud-alumno.service';
+import { RegistroAsistenciaService } from '../services/registro-asistencia.service';
+import Swal from 'sweetalert2';
+import { ActividadesDiariasService } from '../services/actividades-diarias.service';
+import { CronogramaService } from '../services/cronograma.service';
+import { ActividadesCronogramaService } from '../services/actividades-cronograma.service';
 
 
 function loadFile(url, callback) {
@@ -26,17 +33,20 @@ function loadFile(url, callback) {
 
 })
 export class RegistroSeguimientoAlumnoComponent implements OnInit {
-  public ListaActividadesCronograma: Array<any> = [];
-  public ListaAlumnos: Array<any> = [];
-  public Listatutoresem: Array<any> = [];
+  public ListaActividadesCronograma: any[] = new Array<any>();
   public Listatutoresac: Array<any> = [];
-  tutore: TutorE = new TutorE();
+
   estudiante: any;
   tutoracademico: any;
   tutora: TutorA = new TutorA();
-  cronograma: ActividadesCronograma = new ActividadesCronograma();
+  cronograma: any;
   base64Output : string;
   formCronograma: FormGroup;
+
+  solicitudes: any[] = new Array<any>();
+  registroAsistencia: any;
+  actividadesDiarias: any[] = new Array<any>();
+  actividadesCronograma: any[] = new Array<any>();
 
 
   public cedulaAlumno: any;
@@ -47,73 +57,109 @@ export class RegistroSeguimientoAlumnoComponent implements OnInit {
     private alumnosService: AlumnosService,
     private formBuilder: FormBuilder,
     private tutorService: TutorAService,
+    private tokenService: TokenService,
+    private soliAlumnoService: SolicitudAlumnoService,
+    private registroAsistenciaService: RegistroAsistenciaService,
+    private cronogramaService: CronogramaService,
+    private actCronoService: ActividadesCronogramaService
   ) { }
 
   ngOnInit(): void {
-    this.Listatutorese();
+    this.getTutorAcademico();
 
   }
 
-  ListaActividades_Cronograma(cedula: any) {
-    console.log(cedula);
-
-    this.registroSeguimientoService.getActividades_Cronograma().then(registro => {
-      this.ListaActividadesCronograma = registro['data'];
-      this.ListaActividadesCronograma = this.ListaActividadesCronograma.filter(lc => lc.cronograma.tutorAcademico.alumno.persona.cedula
-        == cedula);
-      console.log(this.ListaActividadesCronograma);
-      console.log(registro);
-
-    });
-
-
-  }
-
-
-  buscarestudiante($event: any) {
-
-    this.tutore = new TutorE();
-    this.tutora = new TutorA();
-    this.estudiante = this.tutore.alumno.persona.primerNombre;
-    this.tutoracademico = null;
-    if ($event.target.value.length == 10) {
-      for (let t of this.Listatutoresem) {
-        if (t.alumno.persona.cedula == $event.target.value) {
-          this.tutore = t;
-          this.estudiante = this.tutore.alumno.persona.primerNombre + " " + this.tutore.alumno.persona.primerApellido;
+  buscarAlumno(alumno){
+    this.soliAlumnoService.getSolicitudAlumno().subscribe(res=>{
+       var listaSolicitudes:any[]=res['data'];
+       listaSolicitudes.forEach(value=>{
+        if(value.alumno.idAlumno == alumno.idAlumno){
+          console.log(value.alumno)
+          this.solicitudes.push(value)
         }
-      }
+       })
+    })
+  }
 
-   
-      this.tutorService.getTutoresAcademicos().then(value => {
-        this.Listatutoresac = value['data'];
-        for (let a of this.Listatutoresac) {
-          if (a.alumno.persona.cedula == $event.target.value) {
-            this.tutora = a;
-            this.tutoracademico = this.tutora.docente.persona.primerNombre + " " + this.tutora.docente.persona.primerApellido;
-            
+  getTutorAcademico(){
+    console.log("BUSCANDO TUTOR")
+    
+    this.tutorService.getTutoresAcademicos().then(res=>{
+       this.Listatutoresac=res['data'];
+       console.log(this.Listatutoresac)
+       this.Listatutoresac.forEach(value=>{
+          if(value.docente.persona.cedula == this.tokenService.getUserName()){
+            this.tutoracademico=value;
+            console.log(this.tutoracademico)
+            this.buscarAlumno(value.alumno);
           }
-        }
-        this.ListaActividades_Cronograma(this.tutora.alumno.persona.cedula);
+       })
+       console.log(this.solicitudes)
+    })
+  }
+
+  getRegistroAsistencia(alumno){
+    this.estudiante = alumno;
+    this.ListaActividadesCronograma = new Array<any>();
+    this.registroAsistenciaService.getRegistoAsistencialista().subscribe(res=>{
+      var registroAsistenciaList: any[] = res['data'];
+      registroAsistenciaList.forEach(value=>{
+        if(value.alumno.idAlumno == alumno.idAlumno){
+          var temporal = value;
+          this.registroAsistencia = value;
+          this.generarCronograma(alumno);
+          if(temporal ==null){
+            Swal.fire({
+              icon: 'info',
+              title: 'Este estudiante no tiene un registro de Asistencia'
+            })
+            this.registroAsistencia = null;
+          }
+        } 
+      })
+    })
+  }
+
+  generarCronograma(estudiante){
+    var temporalCronograma: any;
+    this.cronogramaService.getCronogramas().then(res=>{
+      var cronogramasList: any [] = res['data'];
+      cronogramasList.forEach(value=>{
+        if(value.tutorAcademico.docente.idDocente == this.tutoracademico.docente.idDocente 
+          && value.tutorAcademico.alumno.idAlumno == estudiante.idAlumno){
+            temporalCronograma = value;
+            this.cronograma = value;
+            this.getActividadesCronograma(this.cronograma.idCronograma)
+          }
       })
 
-    
-    }
+      if(temporalCronograma == null){
+        this.cronograma = null;
+        this.cronograma.tutorAcademico= this.tutoracademico;
+        this.cronogramaService.createCronograma(this.cronograma).then(res=>{
+          this.cronograma = res['data']
+          console.log("SE GENERO UN CRONOGRAMA CON ID")
+          console.log(this.cronograma.idCronograma)
+          this.getActividadesCronograma(this.cronograma.idCronograma)
+        })
+      }
 
+      
+
+    })
   }
 
-  Listatutorese() {
-    this.registroSeguimientoService.getTutoresE().subscribe(value => {
-      this.Listatutoresem = value['data'];
-      console.log(this.Listatutoresem);
-    }
-    )
-
+  getActividadesCronograma(idcronograma){
+    this.actCronoService.getActividadesByCronograma(idcronograma).then(res=>{
+      this.ListaActividadesCronograma = res['data']
+    })
   }
-  CrearRegistro() {
-    console.log(this.cronograma);
 
-  }
+
+
+
+
+
  /* generate(nom:any,em:any,nt:any) {
     var est=this.estudiante;
     var tut=this.tutora;
