@@ -17,7 +17,7 @@ export class ActaReunionService {
   private urlCreate: string = this._url+'/CrearActaDeReunion';
   private urlDelete: string = this._url+'/EliminarActaDeReunion';
   private urlSearch: string = this._url+'/ListaActaDeReunion';
-
+  private urlUpdate: string = this._url+'/EditarActaDeReunion';
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
 
@@ -52,4 +52,12 @@ export class ActaReunionService {
     );
   }
 
+  updateActa(emp: ActaReunion, id:number): Observable<ActaReunion> {
+    return this.http.put<ActaReunion>(`${this.urlUpdate}/${id}`, emp, { headers: this.httpHeaders }).pipe(
+      catchError(e => {
+        Swal.fire('Error al actualizar', 'No existe una acta de reunion generada por el estudiante', 'error')
+        return throwError(e);
+      })
+    );
+  }
 }
