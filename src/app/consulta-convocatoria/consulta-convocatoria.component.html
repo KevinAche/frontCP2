@@ -1,22 +1,81 @@
 <section>
     <mat-card>
         <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
-            CONVOCATORIAS ABIERTAS
+            CONVOCATORIAS
         </mat-card-title>
         <br>
-        <select class="form-control" [(ngModel)]="opcionSeleccionado" (change)="capturarCarrera()">
-            <option>FILTRAR POR CARRERA</option>
+        <h3 style="color: #1d3557;">SELECCIONE UNA OPCIÓN</h3>
+        <select class="form-control" [(ngModel)]="opcionSeleccionado" (change)="capturarCarrera('hidden')">
+
             <option>TODAS LAS CARRERAS</option>
             <option *ngFor=" let carrera of carreraDatos">{{carrera.nombre|uppercase}}</option>
         </select>
         <br>
-        <h2 style="color: #1d3557;">CONVOCATORIAS</h2>
+        
     </mat-card>
+
 
     <br>
     <mat-card-content>
         <div>
             <div>
+
+                <div *ngFor="let convocatoria of convocatorias">
+
+                    <mat-card class="card" *ngIf="filtro==verSeleccion">
+
+                        <div>
+                            <mat-card-header>
+                                <mat-card-title>
+                                    <h2 style=" text-align: center">{{convocatoria.nombreConvocatoria
+                                        |uppercase}}
+                                    </h2>
+                                </mat-card-title>
+                                <mat-card-subtitle><strong>RESPONSABLE:
+                                        {{convocatoria.solicitudEmpresa.responsablePPP.docente.abrevTitulo|uppercase}}
+                                        {{convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerNombre|uppercase}}
+                                        {{convocatoria.solicitudEmpresa.responsablePPP.docente.persona.primerApellido|uppercase}}
+                                    </strong>
+                                </mat-card-subtitle>
+                                <span class="example-spacer"></span>
+
+                            </mat-card-header>
+                            <mat-card-content>
+                                <p><strong>NUMERO DE CONVOCATORIA: </strong> {{convocatoria.idConvocatoria}}
+                                </p>
+                                <p><strong>CARRERA: </strong>
+                                    {{convocatoria.solicitudEmpresa.carrera.nombre|uppercase}}</p>
+                                <p><strong>FECHA EMISIÓN CONVOCATORIA: </strong>{{convocatoria.fechaEmision |
+                                    date:'yyyy/MM/dd'}}</p>
+                                <p><strong>FECHA MÁXIMA DE RECEPCIÓN: </strong>{{convocatoria.fechaMaxima |
+                                    date:'yyyy/MM/dd'}}</p>
+                                <p><strong>NÚMERO ESTUDIANTES: </strong>
+                                    {{convocatoria.solicitudEmpresa.numeroAlumnos}}
+                                </p>
+                                <p><strong>ENTIDAD: </strong>
+                                    {{convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa|uppercase}}
+                                </p>
+
+
+
+
+                            </mat-card-content>
+
+
+
+                        </div>
+
+
+
+                    </mat-card>
+
+
+
+
+
+                </div>
+
+
                 <div *ngFor="let convocatoria of convocatorias">
 
                     <mat-card class="card" *ngIf="convocatoria.solicitudEmpresa.carrera.nombre==verSeleccion">
@@ -38,15 +97,22 @@
 
                             </mat-card-header>
                             <mat-card-content>
+                                <p><strong>NUMERO DE CONVOCATORIA: </strong> {{convocatoria.idConvocatoria}}
+                                </p>
                                 <p><strong>CARRERA: </strong>
                                     {{convocatoria.solicitudEmpresa.carrera.nombre|uppercase}}</p>
+                                <p><strong>FECHA EMISIÓN CONVOCATORIA: </strong>{{convocatoria.fechaEmision |
+                                    date:'yyyy/MM/dd'}}</p>
                                 <p><strong>FECHA MÁXIMA DE RECEPCIÓN: </strong>{{convocatoria.fechaMaxima |
                                     date:'yyyy/MM/dd'}}</p>
-                                <p><strong>NUMERO DE CONVOCATORIA: </strong> {{convocatoria.idConvocatoria}}
+                                <p><strong>NÚMERO ESTUDIANTES: </strong>
+                                    {{convocatoria.solicitudEmpresa.numeroAlumnos}}
                                 </p>
                                 <p><strong>ENTIDAD: </strong>
                                     {{convocatoria.solicitudEmpresa.empleado.empresa.nombreEmpresa|uppercase}}
                                 </p>
+
+
 
 
                             </mat-card-content>
@@ -61,7 +127,11 @@
 
 
 
+
+
                 </div>
+
+                
 
 
             </div>
@@ -80,11 +150,3 @@
 
 
 </section>
-
-
-<!--
-<tr *ngIf="lala=='ja'; else listado">entra</tr>
-<ng-template #listado>
-    else
-</ng-template>
--->

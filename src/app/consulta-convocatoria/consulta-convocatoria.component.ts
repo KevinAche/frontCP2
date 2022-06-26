@@ -14,8 +14,9 @@ export class ConsultaConvocatoriaComponent implements OnInit, DoCheck, OnDestroy
 
 
   opcionSeleccionado: string = '0';
-  verSeleccion: string = '';
+  verSeleccion: string = 'TODAS LAS CARRERAS';
   filtro:string="TODAS LAS CARRERAS";
+  public dialogoTa: string="visible";
 
   constructor(private carreraService: CarreraService,
     private convocatoriaService: ConvocatoriaService,) { }
@@ -26,8 +27,10 @@ export class ConsultaConvocatoriaComponent implements OnInit, DoCheck, OnDestroy
     console.log("Componente iniciado");
   }
 
-  capturarCarrera() {
+  capturarCarrera(visi:any) {
     this.verSeleccion = this.opcionSeleccionado;
+    this.dialogoTa=visi;
+    
   }
 
   ngDoCheck(): void {
