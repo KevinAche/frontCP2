@@ -18,7 +18,7 @@ export class ConsultaRegistroAsistenciaComponent implements OnInit {
   actividadesDiarias: ActividadesDiarias = new ActividadesDiarias();
   public contador = 0;
   public cedulaAlumno: any;
-  idalumnob= '0182638136';
+  idalumnob:any;
   formValidacion: FormGroup;
   
   constructor(
