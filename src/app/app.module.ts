@@ -89,6 +89,7 @@ import {CalendarModule} from 'primeng/calendar';
 import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 
 import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
+import { GenerarCertificadoEmpresaComponent } from './tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component';
 import { NotificacionCronogramaComponent } from './notificacion-cronograma/notificacion-cronograma.component';
 @NgModule({
   declarations: [
@@ -168,6 +169,7 @@ SolicitudEmpresaComponent,
     CrearEmpleadoComponent,
     ListarEmpleadoComponent,
     GestionConvocatoriaComponent,
+    GenerarCertificadoEmpresaComponent,
     NotificacionCronogramaComponent
 
   ],
