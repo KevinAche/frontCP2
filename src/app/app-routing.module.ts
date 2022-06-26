@@ -40,6 +40,7 @@ import { GestionDocentesComponent } from './gestion-docentes/gestion-docentes.co
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
 import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
+import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asistencia/consulta-registro-asistencia.component';
 
 
 const routes: Routes = [
@@ -72,6 +73,8 @@ const routes: Routes = [
     path: 'desig-tutor-empresarial',
     component: DesigTutorEmpresarialComponent,
   },
+  //vero
+  {path: 'consulta-registro-asisitencia',component: ConsultaRegistroAsistenciaComponent},
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
