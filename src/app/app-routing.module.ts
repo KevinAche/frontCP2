@@ -74,7 +74,7 @@ const routes: Routes = [
     component: DesigTutorEmpresarialComponent,
   },
   //vero
-  {path: 'consulta-registro-asisitencia',component: ConsultaRegistroAsistenciaComponent},
+  {path: 'consulta-registro-asistencia',component: ConsultaRegistroAsistenciaComponent},
   { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
   { path: 'registro-visita', component: RegistroVisitaComponent },
   { path: 'consultas-reportes', component: ConsultasReportesComponent },
