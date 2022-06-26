@@ -1,6 +1,9 @@
 import {HttpClient, HttpHeaders} from '@angular/common/http';
 import {Injectable} from '@angular/core';
+import { catchError, Observable, throwError } from 'rxjs';
+import Swal from 'sweetalert2';
 import {environment} from "../../environments/environment";
+import { TutorA } from '../models/TutorA';
 
 @Injectable({
   providedIn: 'root'
@@ -43,6 +46,14 @@ export class TutorAService {
         headers: this.headers
       }
     ).toPromise();
+  }
+  createTutor(cedulaD: string, cedulaA: string,doc: TutorA): Observable<TutorA> {
+    return this.http.post<TutorA>( environment.URL_APP + `GestionTutorAcademico/CrearTutorAcademico/${cedulaD}/${cedulaA}`, doc, { headers: this.headers }).pipe(
+      catchError(e => {
+        Swal.fire('Error al guardar', 'NO se puede guardar al tutor academico', 'error')
+        return throwError(e);
+      })
+    );
   }
 
   deleteTutorAcademico(id: any): Promise<any[]> {

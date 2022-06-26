@@ -23,12 +23,23 @@ import { ConvenioService } from '../services/convenio.service';
 import { DocenteService } from '../services/docente.service';
 import { EmpleadoService } from '../services/empleado.service';
 import { Empresa } from '../services/empresa';
+import PizZip from "pizzip";
+import PizZipUtils from "pizzip/utils/index.js";
+import {saveAs} from "file-saver";
+import Docxtemplater from "docxtemplater";
+import { TableModule } from 'primeng/table';
+import { Carrera } from '../models/Carrera';
+
+function loadFile(url, callback) {
+  PizZipUtils.getBinaryContent(url, callback);
+}
 
 @Component({
   selector: 'app-crear-acta',
   templateUrl: './crear-acta.component.html',
   styleUrls: ['./crear-acta.component.css']
 })
+
 export class CrearActaComponent implements OnInit {
 
   docentes : Docente[];
@@ -333,7 +344,25 @@ export class CrearActaComponent implements OnInit {
       )
       return;
     }
-    window.location.reload();
+    var fecha=this.formActa.get('fecha').value+"";
+    var abrevR= this.docentePPP.abrev_titulo;
+    var responsableppp= this.docentePPP.primer_nombre+" "+this.docentePPP.segundo_nombre+" "+this.docentePPP.primer_apellido+" "+this.docentePPP.segundo_apellido;
+    var abrevE= this.empleadoPPP.abrev_titulo+"";
+    var empleado= this.empleadoPPP.primer_nombre+" "+this.empleadoPPP.segundo_nombre+" "+this.empleadoPPP.primer_apellido+" "+this.empleadoPPP.segundo_apellido;
+    var empresa=this.empleadoPPP.nombre_empresa+"";
+    var estudiante=this.alumnoPPP.primer_nombre+" "+this.alumnoPPP.segundo_nombre+" "+this.alumnoPPP.primer_apellido+" "+this.alumnoPPP.segundo_apellido;
+    var lugar=this.formActa.get('lugar').value;
+    var ciclo=this.alumnoPPP.ciclo;
+    var carrera = this.docentePPP.carrera;
+    var horas=this.formActa.get('horas').value;
+    var finicio=this.formActa.get('finicio').value;
+    var ffinal=this.formActa.get('ffinal').value;
+    var hinicio=this.formActa.get('hinicio').value;
+    var hfinal=this.formActa.get('hfinal').value;
+    var acuerdos= "Acuerdos extras";
+    this.generardocumento(carrera,fecha,abrevR,responsableppp,abrevE,empleado,empresa,estudiante,lugar,ciclo,
+      horas,finicio,ffinal,hinicio,hfinal,acuerdos,this.actividadesFiltradas,this.actividadesReunionFiltradas);
+    
   }
 
   public CrearActividad(): void {
@@ -396,6 +425,81 @@ export class CrearActaComponent implements OnInit {
         this.dis=true;
       }
     }
+  }
+
+  
+
+  generardocumento(
+    carrera:String,fecha: String, abrevR:String, responsableppp:String, abrevE:String, empleado:String,empresa:String
+    ,estudiante:String,lugar:String, ciclo:String, horas:String, finicio:String,ffinal:String, hinicio:String
+    ,hfinal:String,acuerdos:String, actividades: Actividades[], actividadescronograma: ActividadesAReunion[]) {
+    loadFile("https://backendg1c2.herokuapp.com/files/anexo7-1.docx", function(
+      error,
+      content
+    ) {
+      if (error) {
+        throw error;
+      }
+      const zip = new PizZip(content);
+      const doc = new Docxtemplater(zip, { paragraphLoop: true, linebreaks: true});
+      doc.setData({
+        carrera: carrera,
+        fecha: fecha,
+        abrevR: abrevR,
+        responsableppp: responsableppp,
+        abrevE: abrevE,
+        empleado: empleado,
+        empresa:empresa,
+        estudiante:estudiante,
+        lugar:lugar,
+        ciclo:ciclo,
+        horas:horas,
+        finicio:finicio,
+        final:ffinal,
+        hinicio:hinicio,
+        hfinal:hfinal,
+        acuerdos:acuerdos,
+        actividades : actividades,
+        actividadescronograma: actividadescronograma
+      });
+      try {
+        doc.render();
+      } catch (error) {
+        function replaceErrors(key, value) {
+          if (value instanceof Error) {
+            return Object.getOwnPropertyNames(value).reduce(function(
+              error,
+              key
+            ) {
+              error[key] = value[key];
+              return error;
+            },
+            {});
+          }
+          return value;
+        }
+        console.log(JSON.stringify({ error: error }, replaceErrors));
+
+        if (error.properties && error.properties.errors instanceof Array) {
+          const errorMessages = error.properties.errors
+            .map(function(error) {
+              return error.properties.explanation;
+            })
+            .join("\n");
+          console.log("errorMessages", errorMessages);
+
+        }
+        throw error;
+      }
+      const out = doc.getZip().generate({
+        type: "blob",
+        mimeType:
+          "application/vnd.openxmlformats-officedocument.wordprocessingml.document"
+      });
+      saveAs(out, "anexo7"+fecha+estudiante+".docx");
+      window.location.reload();
+      Swal.fire('Acta de reunión','Acta de reunión generada con  exito','success')
+    });
   }
 
 }
