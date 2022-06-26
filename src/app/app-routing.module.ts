@@ -49,6 +49,7 @@ import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.co
 import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-conv-publico.component';
 import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
 import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
+import { NotificacionCronogramaComponent } from './notificacion-cronograma/notificacion-cronograma.component';
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -61,6 +62,7 @@ const routes: Routes = [
   {path: 'consultasppp', component: ConsultaspppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
+  {path: 'notificacion-tutor-academico', component: NotificacionCronogramaComponent },
   //KevinAche
   {path: 'dashboard', component: DashboardComponent},
   {path: 'crear-carrera', component: CrearCarreraComponent},

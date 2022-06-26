@@ -32,6 +32,13 @@ export class EmpresaService {
     ).toPromise();
   }
 
+  getEmpresasNotificacion(): Observable<Empresa[]> {
+    return this.http.get(this.urlSearch).pipe(
+      map(response => response as Empresa[])
+    );
+  }
+
+
   createEmpresa(emp: Empresa): Observable<Empresa> {
     return this.http.post<Empresa>(this.urlCreate, emp, { headers: this.httpHeaders }).pipe(
       catchError(e => {
