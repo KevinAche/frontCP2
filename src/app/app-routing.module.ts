@@ -50,7 +50,7 @@ import {
 } from "./tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component";
 import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
 import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asistencia/consulta-registro-asistencia.component';
-
+import { ListaConvocatoriasComponent} from './responsable/lista-convocatorias/lista-convocatorias.component';
 
 const routes: Routes = [
   {path: '', component:DashboardComponent},
@@ -114,6 +114,7 @@ const routes: Routes = [
   { path: 'consultasppp', component: ConsultaspppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
   { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',
@@ -166,6 +167,8 @@ const routes: Routes = [
   {path: 'solicitud-empresa', component: SolicitudEmpresaComponent},
   {path: 'historial', component: HistorialComponent},
 
+  {path: 'lista-convocatorias',component: ListaConvocatoriasComponent},
+
   {
     path: 'informe-final-tutor',
     component: InformeFinalTutorAcademicoComponent,
@@ -176,10 +179,8 @@ const routes: Routes = [
   {path: '**', component: PagenotfoundComponent},
 ];
 
-
 @NgModule({
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }
