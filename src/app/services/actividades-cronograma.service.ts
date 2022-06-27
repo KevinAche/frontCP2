@@ -1,6 +1,6 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-<<<<<<< HEAD
+
 import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -8,9 +8,7 @@ import {environment} from "../../environments/environment";
 import { ActaReunion } from '../models/ActaReunion';
 import { Actividades } from '../models/actividades';
 import { ActividadesCronograma } from '../models/ActividadesCronograma';
-=======
-import {environment} from "../../environments/environment";
->>>>>>> main-Vero
+
 
 @Injectable({
   providedIn: 'root'
@@ -25,6 +23,7 @@ export class ActividadesCronogramaService {
 
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
+  headers= new HttpHeaders().append('Content-type','application/json');
 
   constructor(private http: HttpClient, private router: Router) { }
 
@@ -51,41 +50,38 @@ export class ActividadesCronogramaService {
         return throwError(e);
       })
     );
-  headers= new HttpHeaders().append('Content-type','application/json');
-
-  url = environment.URL_APP + 'GestionActividades_Cronograma/'
-
-  constructor(
-    private http: HttpClient
-  ) { }
-
-  createActividadCronograma(cronograma): Promise<any> {
-    return this.http.post(
-      this.url + `CrearActividades_Cronograma`,
-      {
-        ...cronograma
-      }, {
-        headers: this.headers
-      }
-    ).toPromise();
   }
+  
+    url = environment.URL_APP + 'GestionActividades_Cronograma/'
 
-  getActividadesByCronograma(idcronograma) {
-    return this.http.get<any[]>(
-      this.url+`ListaActividadesPorCronograma/${idcronograma}`
-    ).toPromise();
-  }
-
-  updateActividadesCronograma(id , actividad){
-    return this.http.put<any[]>(
-        this.url+`EditarActividades_Cronograma/${id}`,actividad, { headers: this.headers }
+    createActividadCronograma(cronograma): Promise<any> {
+      return this.http.post(
+        this.url + `CrearActividades_Cronograma`,
+        {
+          ...cronograma
+        }, {
+          headers: this.headers
+        }
       ).toPromise();
-  }
+    }
+  
+    getActividadesByCronograma(idcronograma) {
+      return this.http.get<any[]>(
+        this.url+`ListaActividadesPorCronograma/${idcronograma}`
+      ).toPromise();
+    }
+  
+    updateActividadesCronograma(id , actividad){
+      return this.http.put<any[]>(
+          this.url+`EditarActividades_Cronograma/${id}`,actividad, { headers: this.headers }
+        ).toPromise();
+    }
+  
+    deleteCronogramas(id: any): Promise<any[]> {
+      return this.http.delete<any[]>(
+        this.url + `EliminarActividades_Cronograma/${id}`
+      ).toPromise();
+    }
 
-  deleteCronogramas(id: any): Promise<any[]> {
-    return this.http.delete<any[]>(
-      this.url + `EliminarActividades_Cronograma/${id}`
-    ).toPromise();
-  }
 
 }
