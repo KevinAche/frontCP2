@@ -1,7 +1,7 @@
 # Grupo 1 Caso Práctico 2
 
 
-Caso Práctico 2 consiste en una web que tiene el objetivo de autimatizar la gestión de las Prácticas Pre Profesionales en el Instituto Superior Tecnológico del Azuay,
+Caso Práctico 2 consiste en una web que tiene el objetivo de automatizar la gestión de las Prácticas Pre Profesionales en el Instituto Superior Tecnológico del Azuay,
 cuenta con distinción de roles para que cada usuario pueda acceder solo a sus actividades respectivas, en esta web se gestiona los diferentes pasos que se deben dar
 al momento de participar en las PPP por lo que se permite la búsqueda, registro y eliminación de diferentes actividades, además de la generación y registro de documentos.
  
