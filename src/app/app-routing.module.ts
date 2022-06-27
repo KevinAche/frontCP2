@@ -40,7 +40,6 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import {GestionDocentesComponent} from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
-import {RegistroSeguimientoService} from './services/registro-seguimiento.service';
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-conv-publico.component';
 import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
@@ -49,9 +48,12 @@ import { NotificacionCronogramaComponent } from './notificacion-cronograma/notif
 import {
   GenerarCertificadoEmpresaComponent
 } from "./tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component";
+import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
+import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asistencia/consulta-registro-asistencia.component';
+import { ListaConvocatoriasComponent} from './responsable/lista-convocatorias/lista-convocatorias.component';
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component:DashboardComponent},
   {path: 'consulta-conv-publico', component: ConsultaConvPublicoComponent},
    {path: 'informe-acreditacion/:cedula', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component: AnexosdePPPComponent},
@@ -92,8 +94,28 @@ const routes: Routes = [
   {path: 'consultasppp', component: ConsultaspppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'dashboard', component: DashboardComponent},
   {path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent},
+  { path: 'gestion-empresa', component: GestionEmpresaComponent },
+  { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
+  { path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent },
+  {
+    path: 'desig-tutor-empresarial',
+    component: DesigTutorEmpresarialComponent,
+  },
+  //vero
+  {path: 'consulta-registro-asistencia',component: ConsultaRegistroAsistenciaComponent},
+  { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
+  { path: 'registro-visita', component: RegistroVisitaComponent },
+  { path: 'consultas-reportes', component: ConsultasReportesComponent },
+  { path: '', component: HomeComponent },
+  { path: 'registro-docente', component: RegistroDocentesComponent },
+  { path: 'registro-empresa', component: RegistroEmpresasComponent },
+  { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
+  { path: 'consultasppp', component: ConsultaspppComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',
     component: ConsultasEstudiantesAsignadosComponent,
@@ -145,6 +167,8 @@ const routes: Routes = [
   {path: 'solicitud-empresa', component: SolicitudEmpresaComponent},
   {path: 'historial', component: HistorialComponent},
 
+  {path: 'lista-convocatorias',component: ListaConvocatoriasComponent},
+
   {
     path: 'informe-final-tutor',
     component: InformeFinalTutorAcademicoComponent,
@@ -159,5 +183,4 @@ const routes: Routes = [
   imports: [RouterModule.forRoot(routes)],
   exports: [RouterModule]
 })
-export class AppRoutingModule {
-}
+export class AppRoutingModule { }

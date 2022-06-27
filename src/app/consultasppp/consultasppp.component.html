@@ -20,14 +20,14 @@
               </div>
               <div class="product-list-action">
                   <h6 class="mb-2">Número de convocatoria:{{conv.idConvocatoria}}</h6>
-                  <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == false">
+                  <span class="product-category" style="width: 100px;" *ngIf="conv.estado == 'CERRADA'">
 
                     <p-message severity="error" text="Cursando"></p-message>
 
                   </span>
-                  <span class="product-category" style="width: 100px;" *ngIf="conv.solicitudEmpresa.estado == true">
+                  <span class="product-category" style="width: 100px;" *ngIf="conv.estado == 'ABIERTO'">
 
-                    <p-message severity="success" text="Aprobado"></p-message>
+                    <p-message severity="success" text="Abierta"></p-message>
 
                   </span>
               </div>

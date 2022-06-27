@@ -1,11 +1,12 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { FormControl, FormGroup, FormsModule, ReactiveFormsModule, Validators } from '@angular/forms';
+import { FormControl, FormGroup, FormsModule,ReactiveFormsModule, Validators } from '@angular/forms';
 import { MatSidenav } from '@angular/material/sidenav';
-import { LayoutModule, BreakpointObserver } from '@angular/cdk/layout';
+import {LayoutModule, BreakpointObserver} from '@angular/cdk/layout';
 import { CarreraService } from './services/carrera.service';
 import { TokenService } from './services/token.service';
 import { ChangeDetectorRef } from '@angular/core';
 import { PersonaService } from './services/persona.service';
+import { NotificacionesService} from './services/notificaciones.service'
 
 import Swal from 'sweetalert2';
 import { AlumnosService } from './services/alumnos.service';
@@ -41,11 +42,11 @@ export class AppComponent implements OnInit {
   public cedula: any;
 
   @ViewChild(MatSidenav)
-  sidenav: MatSidenav;
+ sidenav: MatSidenav;
   title = 'casopractico-dos';
   loginForm!: FormGroup;
   roles: string[];
-  bannoti: boolean;
+  bannoti:boolean;
   isUser = false;
   isAdmin = false;
   isDocente = false;
@@ -58,7 +59,7 @@ export class AppComponent implements OnInit {
   realRol: String;
 
 
-  notificaciones: noti[];
+  notificaciones: any[] = new Array <any>();
   notificacion: noti;
 
   public personas: Array<any> = []
@@ -75,21 +76,24 @@ export class AppComponent implements OnInit {
     private tutorEmpresarialService: TutorEmpresarialService,
     private tutorAcademicoService: TutorAService,
     private actaReunionService: ActaReunionService,
+    private notificacionesService: NotificacionesService
   ) {
 
-    console.log(this.tokenService.getUserName());
 
 
-    this.personaService.getPersonasByCedula(
-      this.tokenService.getUserName()
-    ).subscribe((resp: any) => {
-      console.log(resp.data)
-      this.personas = resp.data
-    })
+      console.log(this.tokenService.getUserName());
 
-    console.log("PERSONA GENERADA")
 
-  }
+      this.personaService.getPersonasByCedula(
+        this.tokenService.getUserName()
+      ).subscribe((resp: any)=>{
+        console.log(resp.data)
+        this.personas = resp.data
+      })
+
+      console.log("PERSONA GENERADA")
+
+    }
 
   ngOnInit(): void {
     this.listarDetalladaAlumnos();
@@ -102,33 +106,12 @@ export class AppComponent implements OnInit {
 
     // Array de notifcaciones ejemplo
 
-    this.notificaciones = [
-      { name: "Primera notificacion", descripcion: "Se confirmo su participacion en la empresa TTTT" },
-      { name: "Segunda notificacion", descripcion: "Nueva solicitud enviada a la empresa TTTT" },
-      { name: "Tercera notificacion", descripcion: "Se ha sido asignado a los alumnos en la empresa TTTT" },
-      { name: "Cuarta notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Quinta notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Sexta notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Septima notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Octava notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Novena notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Decima notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-      ,
-      { name: "Onceava notificacion", descripcion: "Se ha sido asignado como tutor de praticas pre-profesionales" }
-
-    ];
-
     this.changeDedectionRef.detectChanges();
-    if (this.tokenService.getToken()) {
+    if(this.tokenService.getToken()){
       this.isLogged = true;
+      this.getNotificaciones()
 
-    } else {
+    }else {
       this.isLogged = false;
     }
 
@@ -179,11 +162,30 @@ export class AppComponent implements OnInit {
 
   onLogOut() {
     this.tokenService.logOut();
-    window.location.reload();
+    window.location.replace('/');
   }
 
+  getNotificaciones(){
+    this.notificacionesService.getNotificaciones().then(res=>{
+      var notigeneral: any[]= res['data'] ;
+      notigeneral.forEach(value=>{
+        if(value.persona.cedula == this.tokenService.getUserName()){
+          this.notificaciones.push(value);
+        }
+      })
+    })
+  }
+
+  deleteNotificacion(id){
+    this.notificacionesService.deleteNotificacion(id).then(res=>{
+      console.log('Notificacion eliminada');
+
+    })
+  }
+
+
   onLogIn() {
-    window.location.reload();
+    window.location.replace('/')
   }
 
   ngAfterContentInit() {
@@ -256,14 +258,14 @@ export class AppComponent implements OnInit {
   }
 
   verificarSolicitud(cedula: any) {
-    
+
     this.cedula = cedula;
 
     for (var b = 0; b < this.alumnosDatos.length; b++) {
       if (cedula == this.alumnosDatos[b].cedula) {
 
         for (var a = 0; a < this.listaRegistroActividades.length; a++) {
-
+          //this.registroA.alumno.idAlumno=this.alumnosDatos[b].id_alumno;
           if (this.listaRegistroActividades[a].alumno.idAlumno == this.alumnosDatos[b].id_alumno) {
             this.contro = true;
           }
@@ -272,8 +274,8 @@ export class AppComponent implements OnInit {
       }
     }
 
-    this.registroA.alumno.persona.cedula = cedula;
-    this.registroA.docRegistroA = "Sin Documento";
+    this.registroA.alumno.persona.cedula=cedula;
+    this.registroA.docRegistroA="Sin Documento";
 
     if (this.contro == false) {
       Swal.fire({
@@ -345,16 +347,16 @@ export class AppComponent implements OnInit {
   }
 
   verificarRequisitosInformeFinalA13(cedula: any) {
-    
+
     this.cedula = cedula;
     this.controVerificador = false;
     console.log("cedula: " + this.cedula);
 
     for (var a = 0; a < this.alumnosDatos.length; a++) {
-     
+
       if (this.alumnosDatos[a].cedula == cedula) {
         console.log("Alumno Datos Existoso");
-        
+
         for (var b = 0; b < this.listaSolicitudAlumno.length; b++) {
           if (this.listaSolicitudAlumno[b].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
             console.log("Solicitud Alumno Exitoso");
@@ -362,17 +364,17 @@ export class AppComponent implements OnInit {
             for (var c = 0; c < this.TutorEmpresarialDatos.length; c++) {
               if (this.TutorEmpresarialDatos[c].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
                 console.log("Tutor empresarial exitoso");
-                
+
                 for (var d = 0; d < this.TutorAcademicoDatos.length; d++) {
                   if (this.TutorAcademicoDatos[d].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
-                    
+
                     for (var e = 0; e < this.ActaReunionDatos.length; e++) {
                       if (this.ActaReunionDatos[e].alumno.idAlumno == this.alumnosDatos[a].id_alumno) {
                         console.log("Acta reunion exitoso");
 
                         for (var f = 0; f < this.listaAnexo9Datos.length; f++) {
-                         
-                         
+
+
                           try {
                             if (this.listaAnexo9Datos[f].id_alumno == this.alumnosDatos[a].id_alumno) {
                               console.log("Anexo 9 datos");
@@ -381,8 +383,8 @@ export class AppComponent implements OnInit {
                           } catch (error) {
                             console.log("error");
                           }
-                         
-                          
+
+
                         }
 
                       }

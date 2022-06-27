@@ -13,6 +13,11 @@ export class Solicitud_empresaService {
     private http: HttpClient
   ) { }
 
+  getSolicitudesEmpresaGeneral() {
+    return this.http.get<any[]>(
+      environment.URL_APP+`GestionSolicitudEmpresa/ListaSolicitudEmpresa`
+    ).toPromise();
+  }
 
   getSolicitudesEmpresa(cedula: string) {
     return this.http.get<any[]>(
@@ -41,6 +46,13 @@ export class Solicitud_empresaService {
     return this.http.get<[any]>(
       environment.URL_APP+`GestionSolicitudEmpresa/ListarSolicitudesGenerarVista`
     ).toPromise();
+  }
+
+  updateSolicitud(soli: any, id : String): Promise<any[]> {
+    return this.http.put<any>(
+      `${environment.URL_APP+`GestionSolicitudEmpresa/EditarSolicitudEmpresa`}/${id}`, soli,{
+        headers: this.headers
+      }).toPromise();
   }
 
 }

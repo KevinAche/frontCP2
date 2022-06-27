@@ -1,6 +1,5 @@
 import { HttpClient, HttpHeaders } from '@angular/common/http';
 import { Injectable } from '@angular/core';
-
 import { Router } from '@angular/router';
 import { catchError, map, Observable, throwError } from 'rxjs';
 import Swal from 'sweetalert2';
@@ -11,10 +10,12 @@ import { ActividadesCronograma } from '../models/ActividadesCronograma';
 
 
 
+
 @Injectable({
   providedIn: 'root'
 })
 export class ActividadesCronogramaService {
+
 
   _url =  environment.URL_APP+'GestionActividades_Cronograma'
 
@@ -27,7 +28,6 @@ export class ActividadesCronogramaService {
   url = environment.URL_APP + 'GestionActividades_Cronograma/'
 
   private httpHeaders = new HttpHeaders({ 'Content-Type': 'application/json' })
-
   constructor(private http: HttpClient, private router: Router) { }
 
   getActividades(): Observable<ActividadesCronograma[]> {

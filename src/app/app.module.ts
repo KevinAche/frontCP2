@@ -91,6 +91,8 @@ import { Ng2SearchPipe, Ng2SearchPipeModule } from 'ng2-search-filter';
 import { ListarEmpleadoComponent } from './empresa/listar-empleado/listar-empleado.component';
 import { GenerarCertificadoEmpresaComponent } from './tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component';
 import { NotificacionCronogramaComponent } from './notificacion-cronograma/notificacion-cronograma.component';
+import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asistencia/consulta-registro-asistencia.component';
+import {ListaConvocatoriasComponent} from "./responsable/lista-convocatorias/lista-convocatorias.component";
 @NgModule({
   declarations: [
     AppComponent,
@@ -170,8 +172,10 @@ SolicitudEmpresaComponent,
     ListarEmpleadoComponent,
     GestionConvocatoriaComponent,
     GenerarCertificadoEmpresaComponent,
-    NotificacionCronogramaComponent
-
+    NotificacionCronogramaComponent,
+    GestionConvocatoriaComponent,
+    ListaConvocatoriasComponent,
+    ConsultaRegistroAsistenciaComponent
   ],
   imports: [
     BrowserModule,

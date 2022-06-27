@@ -9,9 +9,22 @@
       </mat-icon>
     </button>
   </div>
-  <a (click)="bannoti = true" style="padding: 20px;">
-    <i class="pi pi-inbox"></i>
-  </a>
+  <div *ngIf="isLogged">
+    <div *ngIf="notificaciones.length==0">
+      <a (click)="bannoti = true" style="padding: 20px;">
+        <i class="pi pi-bell" style="color: white;" ></i>
+      </a>
+    </div>
+
+    <div *ngIf="notificaciones.length>=1">
+      <a (click)="bannoti = true" style="padding: 20px;">
+        <i class="pi pi-bell" style="color: yellow;" ></i>
+      </a>
+    </div>
+    
+    
+  </div>
+  
   INSTITUTO TEGNOLOGICO SUPERIOR DEL AZUAY
 
   <!--  <button *ngIf="isLogged" (click)="onLogOut()">-->
@@ -62,7 +75,7 @@
 
       <mat-divider></mat-divider>
 
-      <!--Coordinador de vinculación-->
+      <!--Coordinador de vinculación
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -82,8 +95,9 @@
           </button>
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion>-->
 
+      <!--
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -103,9 +117,10 @@
           </button>
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion>-->
 
 
+<!--
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -126,7 +141,7 @@
 
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion> -->
 
 
 
@@ -306,7 +321,7 @@
               <span>Notificación Designación A6</span>
             </button>
 
-            <button mat-button class="button-accordion">
+            <button mat-button class="button-accordion" routerLink="/notificacion-tutor-academico">
               <mat-icon>event_note</mat-icon>
               <span>Notificación Actividades A8.1</span>
             </button>
@@ -438,6 +453,11 @@
         <mat-icon>assignment</mat-icon>
         <span>Evaluacion Estudiante Tutor Academico </span>
       </a>
+      <a *ngIf="isAdmin" class="nav-link" routerLink="/informe-acreditacion/{{persona.cedula}}"
+         style="color: white;">
+        <mat-icon>assignment</mat-icon>
+        <span>Acreditación</span>
+      </a>
 
     </div>
   </mat-sidenav>
@@ -457,15 +477,17 @@
 
       <ng-template pTemplate="body" let-noti>
         <tr>
-          <td><i class="pi pi-user" style="font-size: 2rem"></i></td>
-          <td>{{noti.name}} | {{noti.descripcion}} </td>
+          <td><i class="pi pi-times" style="font-size: 1rem" type="button" (click)="deleteNotificacion(noti.idNotificacion)"></i></td>
+          <td>{{noti.fechaNotificacion | date}}</td>
+          <td>{{noti.notificacion}}</td>
 
         </tr>
+        <!--
         <a *ngIf="isAdmin" class="nav-link" routerLink="/informe-acreditacion/{{persona.cedula}}"
            style="color: white;">
           <mat-icon>assignment</mat-icon>
           <span>Acreditación</span>
-        </a>
+        </a>-->
       </ng-template>
     </p-table>
   </div>
