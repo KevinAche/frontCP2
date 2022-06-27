@@ -10,18 +10,14 @@ import {SeleccionEstudiantesComponent} from './seleccion-estudiantes/seleccion-e
 import {ConsultaConvocatoriaComponent} from './consulta-convocatoria/consulta-convocatoria.component';
 import {DesigTutorAcademicoComponent} from './desig-tutor-academico/desig-tutor-academico.component';
 import {DesigTutorEmpresarialComponent} from './desig-tutor-empresarial/desig-tutor-empresarial.component';
-import {
-  ConsultasEstudiantesAsignadosComponent
-} from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
+import {ConsultasEstudiantesAsignadosComponent} from './consulta-estudiantes-asignados/consulta-estudiantes-asignados.components';
 import {GestionEmpresaComponent} from './gestion-empresa/gestion-empresa.component';
 import {RegistroAsistenciaComponent} from './registro-asistencia/registro-asistencia.component';
 import {SolicitudEstudianteComponent} from './solicitud-estudiante/solicitud-estudiante.component';
 import {RegistroVisitaComponent} from './registro-visita/registro-visita.component';
 import {ConsultasReportesComponent} from './consultas-reportes/consultas-reportes.component';
 import {InformeFinalAlumnoComponent} from './informe-finalizacion-alumno/informe-finalizacion-alumo.components';
-import {
-  EvaluacionEstudianteTutorEmpresarialComponent
-} from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
+import { EvaluacionEstudianteTutorEmpresarialComponent} from './evaluacion-estudiante-tutor-empresarial/evaluacion-estudiante-tutor-empresarial.components';
 import {AnexosdePPPComponent} from './anexosde-ppp/anexosde-ppp.component';
 import {ActaReunionComponent} from './acta-reunion/acta-reunion.component';
 import {RegistroConvocatoriaComponent} from './registro-convocatoria/registro-convocatoria.component';
@@ -53,7 +49,7 @@ import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/g
 const routes: Routes = [
   {path: '', component: HomeComponent},
   {path: 'consulta-conv-publico', component: ConsultaConvPublicoComponent},
-  {path: 'informe-acreditacion', component: InformeAcreditacionComponent},
+   {path: 'informe-acreditacion/:cedula', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component: AnexosdePPPComponent},
   {path: 'registro-docente', component: RegistroDocentesComponent},
   {path: 'registro-empresa', component: RegistroEmpresasComponent},
@@ -117,16 +113,8 @@ const routes: Routes = [
   //Franklin
   {path: 'registro-convocatoria', component: RegistroConvocatoriaComponent},
   {path: 'inf-fin-alumno/:cedula', component: InformeFinalAlumnoComponent},
-  {
-    path: 'eva-est-tu-empresarial',
-    component: EvaluacionEstudianteTutorEmpresarialComponent,
-  },
   {path: 'acta-reunion', component: ActaReunionComponent},
   {path: 'crear-acta', component: CrearActaComponent},
-  {
-    path: 'eva-est-tu-empresarial',
-    component: EvaluacionEstudianteTutorEmpresarialComponent,
-  },
   {path: 'acta-reunion', component: ActaReunionComponent},
   {path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent},
   {path: 'cert-alumno', component: CertificadoAlumnoComponent},
@@ -139,7 +127,7 @@ const routes: Routes = [
   //Franklin
   {path: 'registro-convocatoria', component: RegistroConvocatoriaComponent},
   {path: 'inf-fin-alumno', component: InformeFinalAlumnoComponent},
-  {path: 'eva-est-tu-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent},
+  {path: 'evaluacion-estudiante-tutor-empresarial', component: EvaluacionEstudianteTutorEmpresarialComponent},
   {path: 'acta-reunion', component: ActaReunionComponent},
   {path: 'reg-seg-alumno', component: RegistroSeguimientoAlumnoComponent},
   {path: 'cert-alumno', component: CertificadoAlumnoComponent},

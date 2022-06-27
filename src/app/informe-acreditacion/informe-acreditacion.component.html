@@ -1,51 +1,121 @@
-<section class="vh-100">
-  <div class="container-fluid" style="padding: 55px;">
-
+<section>
+  <mat-card>
     <mat-card-title style="background-color:#1d3557; color:white; padding: 20px; border-radius: 5px">
-      {{titulo}}
+      ACREDITACIÓN DE ESTUDIANTES
     </mat-card-title>
-    <br>
-    <mat-card>
-      <h2 style="color: #1d3557;">{{convocatoriaTitulo}}</h2>
+  </mat-card>
+
+
+  <br>
+  <mat-card-content>
+    <div>
       <div>
-        <select class="form-control" [(ngModel)]="opcionSeleccionado" (change)="capturarConvocatoria()">
-          <option>Seleccione una convocatoria </option>
-          <option *ngFor="let convocatoria of convocatorias">{{convocatoria.nombreConvocatoria}}</option>
-        </select>
+
+
+        <div *ngFor="let datoEstudinte of informeFinalDatos">
+
+          <div *ngIf="datoEstudinte.estado=='APROBADO'">
+
+
+            <div *ngFor="let solicitud of solicitudes">
+
+              <div *ngIf="solicitud.alumno.idAlumno==datoEstudinte.id_alumno">
+
+                <mat-card class="card" *ngIf="solicitud.alumno.idAlumno==datoEstudinte.id_alumno">
+
+                  <div>
+                    <mat-card-header>
+                      <mat-card-title style=" text-align: center">
+                        <h2 style=" text-align: center">{{datoEstudinte.estado}}
+                        </h2>
+                      </mat-card-title>
+
+                      <span class="example-spacer"></span>
+
+                    </mat-card-header>
+                    <mat-card-content>
+                      <p><strong>CÉDULA: </strong> {{datoEstudinte.cedula}}
+                      <p><strong>NOMBRE: </strong> {{datoEstudinte.a_apellidos}} {{datoEstudinte.a_nombres}}
+                      <p><strong>FECHA EMISIÓN: </strong>{{datoEstudinte.fecha_emision|date:'yyyy/MM/dd' }}</p>
+                      <p><strong>HORAS: </strong> {{solicitud.horasPPP}}
+                      <div class="col-sm-5 offset-sm-9 col-md-8 offset-md-3">
+                        <br>
+                        <button class="mat-flat-button" style="background: #38821d; color: rgb(230, 225, 225);" pButton
+                                icon="pi pi-arrow-circle-right" label="ACREDITAR"
+                                (click)="showDialogGuardar(datoEstudinte.cedula,solicitud.horasPPP,datoEstudinte.a_nombres+' '+datoEstudinte.a_apellidos)"></button>
+                      </div>
+                    </mat-card-content>
+
+
+
+                  </div>
+
+
+
+                </mat-card>
+
+
+              </div>
+
+
+
+
+
+
+
+
+            </div>
+
+          </div>
+        </div>
+
       </div>
-      <br>
-      <h2 style="color: #1d3557;">{{listaTitulo}}</h2>
-      <form>
-        <h3>
-          <table class="table table-striped">
-            <thead class="bg-warning">
-            <tr>
-              <th scope="col">Cedula</th>
-              <th scope="col">Apellidos</th>
-              <th scope="col">Nombres</th>
-              <th scope="col">Paralelo</th>
-              <th scope="col">H. Practicas</th>
-              <th scope="col">Estado</th>
-              <th scope="col">Documento</th>
-            </tr>
-            </thead>
-            <tbody *ngFor="let solicitud of solicitudes">
-            <tr *ngIf="solicitud.estado==true; else listado"></tr>
-            <ng-template #listado>
-              <tr *ngIf="solicitud.convocatoria.nombreConvocatoria==verSeleccion">
-                <td>{{solicitud.alumno.persona.cedula}}</td>
-                <td>{{solicitud.alumno.persona.primerApellido}} {{solicitud.alumno.persona.segundoApellido}}</td>
-                <td>{{solicitud.alumno.persona.primerNombre}} {{solicitud.alumno.persona.segundoNombre}}</td>
-                <td>{{solicitud.alumno.paralelo}}</td>
-                <td>{{solicitud.horasPPP}}</td>
-                <td>{{solicitud.estado}}</td>
-                <td><a class="btn btn-primary btn-xs" style="color: white">Documento</a></td>
-              </tr>
-            </ng-template>
-            </tbody>
-          </table>
-        </h3>
-      </form>
-    </mat-card>
-  </div>
+    </div>
+
+  </mat-card-content>
+
+
 </section>
+
+<!--------------------------------------------------->
+<!------------------------------------------------------------------------------------------------------------------------------------------>
+<!--Dialogo para mandar solicitud-->
+<p-dialog [(visible)]="dialogoGuardaryGenerar" [style]="{width:'37vw'}" [draggable]="false" [baseZIndex]="10000"
+          [modal]="true" styleClass="p-fluid">
+  <ng-template pTemplate="content">
+
+    <mat-card class="card" style="width: 100%;">
+
+      <form [formGroup]="formGuardar">
+
+        <mat-card>
+
+          <!--LINEA 2-->
+
+
+          <div>
+            <label for="horaSalida">SELECCIONE DOCUMENTO</label>
+            <input class="form-control" type="file" (change)="onFileSelected($event)" accept=".pdf" />
+          </div>
+
+          <br>
+
+          <!--botones-->
+
+          <div class="d-grid gap-2 d-md-flex justify-content-md-end">
+            <button class="btn btn-primary me-md-2" type="button" style="background: #9f2a2a; color: white;
+              " (click)="generate('Franklin')">DESCARGAR
+              DOCUMENTO</button>
+            <button class="btn btn-primary" type="button" style="background: #28528d; color: white;"
+                    (click)="create()">SUBIR
+              DOCUMENTO</button>
+          </div>
+        </mat-card>
+
+      </form>
+
+    </mat-card>
+
+  </ng-template>
+
+</p-dialog>

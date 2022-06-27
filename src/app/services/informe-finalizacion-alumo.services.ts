@@ -32,6 +32,18 @@ export class InformeFinalAlumnoService {
     });
   }
 
+  getInformeFinalparaAcreditacion() {
+    let header = new HttpHeaders()
+      .set('Type-content', 'aplication/json')
+
+    return this.http.get(this._url + '/ListaInformesEstudiantes', {
+      headers: header
+
+    });
+  }
+
+
+
   deleteInformeFinal(empid: number): Observable<InformeFinal> {
     return this.http.delete<InformeFinal>(`${this.urlDelete}/${empid}`, { headers: this.httpHeaders }).pipe(
       catchError(e => {
