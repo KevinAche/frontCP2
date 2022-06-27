@@ -77,6 +77,7 @@ export class SolicitudEstudianteComponent implements OnInit {
     this.convocatoriaService.getConvocatoria().subscribe((resp: any) => {
       console.log(resp.data)
       this.convocatorias = resp.data
+      console.log('DATA->'+resp['data']);
     })
   }
 

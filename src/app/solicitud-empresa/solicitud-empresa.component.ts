@@ -176,7 +176,7 @@ export class SolicitudEmpresaComponent implements OnInit {
         fechaInicio: this.formSolicitud.value.fechaTentativa,
         numeroAlumnos: this.formSolicitud.value.numeroEstudiantes,
         pdfSolicitud: this.base64Output,
-        respuesta: "respuesta en espera"
+        respuesta: null,
       }
 
       console.log('CEDULA DE EMPLEADO LOGEADO: ' + this._tokenCrud.getUserName());
@@ -217,6 +217,24 @@ export class SolicitudEmpresaComponent implements OnInit {
         console.log(this.dataActividadesConvenio)
       })
     })
+  }
+
+  checkForMIMEType2() {
+    var response = this.ObjetoResponsable['respuesta'];
+    //console.log(response)
+    var blob;
+    if (response.mimetype == 'pdf') {
+
+      blob = this.converBase64toBlob(response.content, 'application/pdf');
+    } else if (response.mimetype == 'doc') {
+      blob = this.converBase64toBlob(response.content, 'application/msword');
+    }
+
+    /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */
+
+    blob = this.converBase64toBlob(response, 'application/pdf');
+    var blobURL = URL.createObjectURL(blob);
+    window.open(blobURL);
   }
 
 
