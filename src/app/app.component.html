@@ -460,7 +460,11 @@
           <td>{{noti.name}} | {{noti.descripcion}} </td>
 
         </tr>
-
+        <a *ngIf="isAdmin" class="nav-link" routerLink="/informe-acreditacion/{{persona.cedula}}"
+           style="color: white;">
+          <mat-icon>assignment</mat-icon>
+          <span>Acreditación</span>
+        </a>
       </ng-template>
     </p-table>
   </div>

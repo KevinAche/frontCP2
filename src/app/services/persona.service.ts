@@ -10,6 +10,7 @@ import {environment} from "../../environments/environment";
 })
 export class PersonaService {
 
+  _url1 = 'https://backendg1c2.herokuapp.com/GestionPersona'
   _url = environment.URL_APP+'GestionPersona'
   private urlCreate: string = this._url+'/CrearPersona';
   private urlUpdate: string = this._url+'/EditarPersona';
@@ -73,4 +74,13 @@ export class PersonaService {
       environment.URL_APP + `GestionPersona/PersonaByCedula/${cedula}`
     ).toPromise();
   }
+
+  getPersonaTodo() {
+    let header = new HttpHeaders()
+        .set('Type-content', 'aplication/json')
+    return this.http.get(this._url1 + '/ListaPersonas', {
+        headers: header
+    });
+}
+
 }
