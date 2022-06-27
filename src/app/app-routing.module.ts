@@ -49,6 +49,9 @@ import { NotificacionCronogramaComponent } from './notificacion-cronograma/notif
 import {
   GenerarCertificadoEmpresaComponent
 } from "./tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component";
+import { RegistroSeguimientoService } from './services/registro-seguimiento.service';
+import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asistencia/consulta-registro-asistencia.component';
+
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -94,6 +97,27 @@ const routes: Routes = [
   {path: 'home', component: HomeComponent},
   {path: 'dashboard', component: DashboardComponent},
   {path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent},
+  { path: 'gestion-empresa', component: GestionEmpresaComponent },
+  { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
+  { path: 'desig-tutor-academico', component: DesigTutorAcademicoComponent },
+  {
+    path: 'desig-tutor-empresarial',
+    component: DesigTutorEmpresarialComponent,
+  },
+  //vero
+  {path: 'consulta-registro-asistencia',component: ConsultaRegistroAsistenciaComponent},
+  { path: 'solicitud-estudiante', component: SolicitudEstudianteComponent },
+  { path: 'registro-visita', component: RegistroVisitaComponent },
+  { path: 'consultas-reportes', component: ConsultasReportesComponent },
+  { path: '', component: HomeComponent },
+  { path: 'registro-docente', component: RegistroDocentesComponent },
+  { path: 'registro-empresa', component: RegistroEmpresasComponent },
+  { path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent },
+  { path: 'consultasppp', component: ConsultaspppComponent },
+  { path: 'login', component: LoginComponent },
+  { path: 'home', component: HomeComponent },
+  { path: 'dashboard', component: DashboardComponent },
+  { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',
     component: ConsultasEstudiantesAsignadosComponent,
@@ -154,6 +178,7 @@ const routes: Routes = [
 
   {path: '**', component: PagenotfoundComponent},
 ];
+
 
 @NgModule({
   imports: [RouterModule.forRoot(routes)],

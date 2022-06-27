@@ -16,7 +16,7 @@ import { ActividadesCronograma } from '../models/ActividadesCronograma';
 })
 export class ActividadesCronogramaService {
 
-  _url =  environment.URL_APP+'GestionActividades_Cronograma'
+  //_url =  environment.URL_APP+'GestionActividades_Cronograma'
 
   private urlCreate: string = this._url+'/CrearActividades_Cronograma';
   private urlDelete: string = this._url+'/EliminarActividades_Cronograma';
