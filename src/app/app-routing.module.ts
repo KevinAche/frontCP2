@@ -50,6 +50,9 @@ import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-con
 import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
 import {GestionConvocatoriaComponent} from "./responsable/gestion-convocatoria/gestion-convocatoria.component";
 import { NotificacionCronogramaComponent } from './notificacion-cronograma/notificacion-cronograma.component';
+import {
+  GenerarCertificadoEmpresaComponent
+} from "./tutor-empresarial/generar-certificado-empresa/generar-certificado-empresa.component";
 
 const routes: Routes = [
   {path: '', component: HomeComponent},
@@ -75,6 +78,7 @@ const routes: Routes = [
   {path: 'registro-asistencia/:cedula', component: RegistroAsistenciaComponent},
   {path: 'seleccion-estudiantes', component: SeleccionEstudiantesComponent},
   {path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent},
+  {path: 'generar-certificado-empresa', component: GenerarCertificadoEmpresaComponent},
   {
     path: 'cons-est-asignados',
     component: ConsultasEstudiantesAsignadosComponent,
