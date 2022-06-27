@@ -1,6 +1,5 @@
-# Título del Proyecto
+# Grupo 1 Caso Práctico 2
 
-Grupo 1 Caso Práctico 2
 
 Caso Práctico 2 consiste en una web que tiene el objetivo de autimatizar la gestión de las Prácticas Pre Profesionales en el Instituto Superior Tecnológico del Azuay,
 cuenta con distinción de roles para que cada usuario pueda acceder solo a sus actividades respectivas, en esta web se gestiona los diferentes pasos que se deben dar
@@ -79,7 +78,7 @@ _Herramientas Utilizadas_
 •	Bootstrap
 •	PrimeNG
 •	Heroku
-• DocxTemplater
+•	DocxTemplater
 ```
 
 ## Autores ✒️
@@ -88,8 +87,16 @@ _Integrantes_
 
 
 ```
-•	Darwin Israel Gonzalez Idrovo
-•	Kevin Alexander Hernández Vásquez
-•	Angel Efraín Villa Arpi
+•	CHRISTIAN PATRICIO SALINAS VILLA
+•	PATRICIO ROLANDO CUEVA GONZAGA 
+•	FRANKLIN SANTIAGO DOMINGUEZ YANQUE
+•	GISELLE XIMENA ORTIZ VILLALTA
+•	KEVIN ALEXANDER HERNANDEZ VASQUEZ
+•	KEVIN VINICIO AGUILAR LITUMA
+•	LISSETH THALIA SIZALIMA GUAYLLASACA
+•	MARIELA LISSETH NIEVES LUPERCIO
+•	ROLANDO PATRICIO REMACHE ORTIZ
+•	VERONICA LORENA SARI MOLINA
+
 ```
 
