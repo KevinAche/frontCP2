@@ -28,6 +28,7 @@ export class EvaluacionEstudianteTutorAcademicoComponent implements OnInit {
   formEvaluacion: FormGroup;
   public alumnos: Array<any> = [];
   public id: String;
+  //el de abajo es el tutor
   public idd: String;
   evaluacionTa: evaluacionTA = new evaluacionTA();
   opcionA;
@@ -40,6 +41,7 @@ export class EvaluacionEstudianteTutorAcademicoComponent implements OnInit {
   registros: any;
   public cedula: String;
   public rol: String;
+  public nombreTutor:String;
 
   constructor(
     private evaluacionService: EvaluacionTAService,
@@ -70,10 +72,12 @@ export class EvaluacionEstudianteTutorAcademicoComponent implements OnInit {
     });
   }
 
-  miEvaluacion(va: any, vat: any) {
+  miEvaluacion(va: any, vat: any,tu:any) {
     this.dialogoCrearEvaluacion = true;
     this.id = va;
     this.idd = vat;
+    this.evaluacionTa.tutorAcademico.idTutorAcademico=vat;
+    this.nombreTutor=tu;
   }
 
   public listarTutorA() {
@@ -137,6 +141,7 @@ export class EvaluacionEstudianteTutorAcademicoComponent implements OnInit {
     hor,
     tutorE
   ) {
+  var lala=this.nombreTutor;
     if (this.formEvaluacion.invalid) {
       console.log(this.formEvaluacion);
       swal.fire(
@@ -171,7 +176,7 @@ export class EvaluacionEstudianteTutorAcademicoComponent implements OnInit {
           opc5: opc5E,
           puntajet: puntajeto,
           hor: hor,
-          tutor: tutorE,
+          tutor: lala,
         });
         try {
           // Se reemplaza en el documento: {rpp} -> John, {numestudiantes} -> Doe ....
