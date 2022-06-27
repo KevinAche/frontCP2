@@ -18,6 +18,7 @@ import { saveAs } from "file-saver";
 import { DatePipe } from '@angular/common';
 import { Observable, ReplaySubject } from 'rxjs';
 import { environment } from 'src/environments/environment';
+import {PersonaService} from "../services/persona.service";
 
 function loadFile(url, callback) {
   PizZipUtils.getBinaryContent(url, callback);
@@ -31,13 +32,21 @@ function loadFile(url, callback) {
 })
 export class GestionEmpresaComponent implements OnInit {
 
+  //ACCESO
+  roles: string[];
+  isResponsable = false;
+  isLogged = false;
+  realRol: String;
+  public personas: Array<any> = [];
+
   empresa: Empresa = new Empresa();
   formEmpresa: FormGroup;
   formActividades: FormGroup;
   formConvenio: FormGroup;
   cols: any[];
   colsAct: any[];
-  
+
+
   dis: boolean;
   createConvenio: boolean;
   createActividades: boolean;
@@ -88,10 +97,20 @@ export class GestionEmpresaComponent implements OnInit {
     private empleadoService: EmpleadoService,
     private tokenService: TokenService,
     private convenioService: ConvenioService,
-    private _messageService: MessageService
+    private _messageService: MessageService,
+    private personaService: PersonaService
   ) { }
 
   ngOnInit(): void {
+
+    this.roles = this.tokenService.getAuthorities();
+    this.roles.forEach(rol => {
+      if (rol === 'ROLE_RESPONSABLEPPP') {
+        this.realRol = 'responsableppp';
+        this.isResponsable = true;
+      }
+    })
+
     this.createConvenio=false;
 
     this.formEmpresa = this.formBuilder.group({
@@ -101,7 +120,7 @@ export class GestionEmpresaComponent implements OnInit {
       vision: ['', Validators.required],
       telefono: ['', Validators.required],
       direccion: ['', Validators.required],
-      
+
 
     });
 
@@ -137,6 +156,9 @@ export class GestionEmpresaComponent implements OnInit {
     this.listarEmpresas();
     this.listarConvenios();
   }
+
+
+
 
   editarEmpresa():void {
     if (this.formEmpresa.invalid) {
@@ -175,7 +197,7 @@ export class GestionEmpresaComponent implements OnInit {
 
     if(present){
       console.log("TIENE CONVENIO");
-      
+
     }
     if(!present){
       console.log("NO TIENE CONVENIO");
@@ -225,22 +247,22 @@ export class GestionEmpresaComponent implements OnInit {
   }
 
   getGerente (idEmpresa){
-    
+
     this.empleadoService.getGerente(idEmpresa).then(value => {
       this.gerente=value['data'];
       if(this.gerente[0]){
         this.createConvenio = true
           console.log(this.gerente[0].persona.primerNombre);
-          
-          
+
+
       } else {
         console.log("NO TIENE GERENTE")
-        
-        
+
+
       }
     })
-    
-    
+
+
   }
 
 
@@ -268,13 +290,13 @@ export class GestionEmpresaComponent implements OnInit {
         this.getActividades()
       })
 
-      
+
     }
-    
+
   }
 
   crearConvenio(id){
-    
+
     this.getGerente(id);
   }
 
@@ -282,9 +304,9 @@ export class GestionEmpresaComponent implements OnInit {
     console.log(this.convenio.fechaEmision)
     this.convenioService.createConvenio2
           (this.convenio,this.gerente[0].persona.cedula,this.tokenService.getUserName()).then(res => {
-            this.convenio = res['data']    
+            this.convenio = res['data']
             console.log(this.convenio);
-                
+
           });
 
     this.createConvenio = false;
@@ -301,11 +323,11 @@ export class GestionEmpresaComponent implements OnInit {
     this.actividades.forEach(value =>{
       this.actividadesService.deleteActividad(value.idActividad).then(res=>{
         console.log("ACTIVIDAD ELIMINADA");
-        
+
       })
     })
     this.convenioService.deleteConvenios(this.convenio[0].idConvenio).subscribe(res => {
-      console.log("CONVENIO ELIMINADO");  
+      console.log("CONVENIO ELIMINADO");
     })
   }
 
@@ -316,12 +338,12 @@ export class GestionEmpresaComponent implements OnInit {
     let actividadesDoc: any[] = [];
     this.actividades.forEach(value => {
       console.log(value.descripcion);
-      let des: any = {      
+      let des: any = {
         descripcion: value.descripcion
       }
       actividadesDoc.push(des);
     });
-    
+
     console.log(actividadesDoc)
 
     let dataGeneral: any =  {
@@ -339,8 +361,8 @@ export class GestionEmpresaComponent implements OnInit {
 
     this.generate(dataGeneral, environment.URL_APP+'files/convenio.docx', nombreDocumento);
 
-    
-    
+
+
 
   }
 
@@ -454,7 +476,7 @@ export class GestionEmpresaComponent implements OnInit {
       this.base64Output = base64;
       this.convenio[0].documento = this.base64Output;
       console.log(this.convenio[0]);
-      
+
       this.mostarMensajeCorrecto('El archivo fue cargado con exito')
     });
   }
@@ -493,7 +515,7 @@ export class GestionEmpresaComponent implements OnInit {
         present = true;
         this.convenio = value;
         console.log(this.convenio);
-        
+
       }
     })
 
@@ -543,5 +565,5 @@ export class GestionEmpresaComponent implements OnInit {
     }); //statement which creates the blob
     return blob;
   }
-  
+
 }
