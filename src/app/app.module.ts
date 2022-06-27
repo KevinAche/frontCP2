@@ -170,9 +170,9 @@ SolicitudEmpresaComponent,
     ListarEmpleadoComponent,
     GestionConvocatoriaComponent,
     GenerarCertificadoEmpresaComponent,
-    NotificacionCronogramaComponent
+    NotificacionCronogramaComponent,
 
-    ConsultaRegistroAsistenciaComponent,
+    ConsultaRegistroAsistenciaComponent
   ],
   imports: [
     BrowserModule,

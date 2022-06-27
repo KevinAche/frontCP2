@@ -40,7 +40,6 @@ import {ListarCarrerasComponent} from "./carreras/listar-carreras/listar-carrera
 import {GestionDocentesComponent} from './gestion-docentes/gestion-docentes.component';
 import {SolicitudEmpresaComponent} from "./solicitud-empresa/solicitud-empresa.component";
 import {HistorialComponent} from "./historial/historial.component";
-import {RegistroSeguimientoService} from './services/registro-seguimiento.service';
 import {CrearEmpleadoComponent} from "./empresa/crear-empleado/crear-empleado.component";
 import {ConsultaConvPublicoComponent} from './consulta-conv-publico/consulta-conv-publico.component';
 import {InformeAcreditacionComponent} from './informe-acreditacion/informe-acreditacion.component';
