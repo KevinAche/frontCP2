@@ -5,7 +5,4 @@ export class InformeFinal{
     docInformeFinal:any;
     alumno:Alumno;
 
-    constructor(){
-        this.alumno = new Alumno();
-    }
 }

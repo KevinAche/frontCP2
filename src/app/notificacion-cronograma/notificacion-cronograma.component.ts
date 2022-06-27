@@ -37,6 +37,9 @@ function loadFile(url, callback) {
 })
 export class NotificacionCronogramaComponent implements OnInit {
 
+  actareunion: ActaReunion;
+  actasreunion: ActaReunion [] = new Array();
+
   docentes : Docente[];
   docentePPP: any;
 
@@ -84,6 +87,7 @@ export class NotificacionCronogramaComponent implements OnInit {
     this.tutor = new TutorA();
     this.tutord = new Docente();
     this.empresaPPP = new Empresa();
+    this.actareunion = new ActaReunion();
     this.formActa = this.formBuilder.group({
       fecha: ['', Validators.required],
       docente: ['', Validators.required],
@@ -92,11 +96,19 @@ export class NotificacionCronogramaComponent implements OnInit {
       empresa: ['', Validators.required]
     });
 
-    
     this.listaDocentes();
     this.listaEmpresas();
     this.listaTutoresAcademicos();
     this.listaAlumnos();
+    this.listaActaReunion();
+  }
+
+  listaActaReunion(){
+    this.actareunionservice.getActas().subscribe((resp: any)=>{
+      console.log(resp.data)
+      this.actasreunion = resp.data;
+    }
+    )
   }
 
   OnChangeReponsable(ev) {
@@ -129,6 +141,7 @@ export class NotificacionCronogramaComponent implements OnInit {
     this.alumnoservice.getAlumnoByCedula(this.alumnoPPP.cedula).subscribe((resp: any)=>{
       console.log(resp.data[0])
       this.tutor.alumno = resp.data[0];
+      
     });
   }
 
@@ -177,11 +190,6 @@ export class NotificacionCronogramaComponent implements OnInit {
       )
       return;
     }
-    this.tutorAservicie.createTutor(this.docentePPP.cedula, this.alumnoPPP.cedula, this.tutor).subscribe(
-      Response => {
-        
-      }
-    )
     var fecha=""+ this.formActa.get('fecha').value;
     var abrevR= this.tutord.abrev_titulo;
     var responsable= this.docentePPP.primer_nombre+" "+this.docentePPP.segundo_nombre+" "+this.docentePPP.primer_apellido+" "+this.docentePPP.segundo_apellido;
@@ -253,58 +261,26 @@ export class NotificacionCronogramaComponent implements OnInit {
     });
   }
 
-  // Subir archivos a la base de datos
+  crearNotificacionTutor(){
 
-  checkForMIMEType() {
-    var response = this.ObjetoResponsable['pdf_solicitud'];
-    //console.log(response)
-    var blob;
-    if (response.mimetype == 'pdf') {
-
-      blob = this.converBase64toBlob(response.content, 'application/pdf');
-    } else if (response.mimetype == 'doc') {
-      blob = this.converBase64toBlob(response.content, 'application/msword');
+    for (let index = 0; index <this.actasreunion.length; index++) {
+      if (this.actasreunion[index].alumno.idAlumno == this.tutor.alumno.idAlumno) {
+        this.actareunion=this.actasreunion[index];
+      } 
     }
-
-    /* application/vnd.openxmlformats-officedocument.wordprocessingml.document */
-
-    blob = this.converBase64toBlob(response, 'application/pdf');
-    var blobURL = URL.createObjectURL(blob);
-    window.open(blobURL);
-  }
-
-  converBase64toBlob(content, contentType) {
-    contentType = contentType || '';
-    var sliceSize = 512;
-    var byteCharacters = window.atob(content); //method which converts base64 to binary
-    var byteArrays = [];
-    for (var offset = 0; offset < byteCharacters.length; offset += sliceSize) {
-      var slice = byteCharacters.slice(offset, offset + sliceSize);
-      var byteNumbers = new Array(slice.length);
-      for (var i = 0; i < slice.length; i++) {
-        byteNumbers[i] = slice.charCodeAt(i);
+    this.actareunion.notificacionTA=this.solicitud.pdfSolicitud;
+    console.log(this.actareunion);
+    this.actareunionservice.updateActa(this.actareunion, this.actareunion.idActaReunion).subscribe(
+      Response => {
+        Swal.fire('Tutor asignado','Documento guardado con exito','success');
+        window.location.reload();
+        console.log(Response);
       }
-      var byteArray = new Uint8Array(byteNumbers);
-      byteArrays.push(byteArray);
-    }
-    var blob = new Blob(byteArrays, {
-      type: contentType
-    }); //statement which creates the blob
-    return blob;
+    )
   }
+  
 
-
-  dataURLtoFile(dataurl: any, filename: any) {
-    let arr = dataurl.split(','),
-      mime = arr[0].match(/:(.*?);/)[1],
-      bstr = atob(arr[1]),
-      n = bstr.length,
-      u8arr = new Uint8Array(n);
-    while (n--) {
-      u8arr[n] = bstr.charCodeAt(n);
-    }
-    return new File([u8arr], filename, {type: mime});
-  }
+  // Subir archivos a la base de datos
 
   onFileSelected(event) {
     this.convertFile(event.files['0']).subscribe(base64 => {
@@ -312,9 +288,8 @@ export class NotificacionCronogramaComponent implements OnInit {
       this.solicitud = {
         pdfSolicitud: this.base64Output
       };
-      Swal.fire(
-        "Archivo cargado","Archivo cargado con exito","success"
-      )
+     
+      this.crearNotificacionTutor();
     });
   }
 
@@ -326,7 +301,5 @@ export class NotificacionCronogramaComponent implements OnInit {
     console.log(result)
     return result;
   }
-
-  
 
 }
