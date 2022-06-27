@@ -20,7 +20,7 @@ export class ConvocatoriaService {
     let header = new HttpHeaders()
       .set('Type-content', 'aplication/json')
 
-    return this.http.get(this._url + '/ListaConvocatoria', {
+    return this.http.get(environment.URL_APP + 'GestionConvocatoria/ListaConvocatoria', {
       headers: header
 
     });
@@ -35,7 +35,7 @@ export class ConvocatoriaService {
   getNumConv() {
     let header = new HttpHeaders()
       .set('Type-content', 'aplication/json')
-    return this.http.get(this._url + '/ObtenerNumCon', {
+    return this.http.get(environment.URL_APP + 'GestionConvocatoria/ObtenerNumCon', {
       headers: header
     });
   }
@@ -50,6 +50,7 @@ export class ConvocatoriaService {
       }
     ).toPromise();
   }
+
 
   deleteConvocatoria(id: any): Promise<any[]> {
     return this.http.delete<any[]>(

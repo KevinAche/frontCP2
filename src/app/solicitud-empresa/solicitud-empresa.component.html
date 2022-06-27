@@ -39,6 +39,11 @@
                         class="p-button-rounded p-button-secondary" (click)="checkForMIMEType()">
                       </button>
               </span>
+              <span *ngSwitchCase="'respuesta'">
+                <button pButton pRipple type="button" icon="pi pi-bookmark"
+                        class="p-button-rounded p-button-secondary" (click)="checkForMIMEType2()">
+                      </button>
+              </span>
               <span *ngSwitchCase="'eliminartS'">
                       <button pButton pRipple type="button" icon="pi pi-times" class="p-button-rounded p-button-danger"
                               (click)="eliminarSolicitud()"    ></button>
