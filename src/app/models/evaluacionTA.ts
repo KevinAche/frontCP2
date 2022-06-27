@@ -5,9 +5,7 @@ import { TutorA } from './TutorA';
 export class evaluacionTA {
   idEvaluacionTA: number;
   puntajeTotal: number;
-  //tutorAcademico: TutorA;
   docEvaluacionTA: any;
-  //nombreEmpresa: Empresa;
   opcionA: any;
   opcionB: any;
   opcionC: any;
@@ -17,8 +15,11 @@ export class evaluacionTA {
   desde: any;
   hasta: any;
   alumno: Alumno;
+  tutorAcademico:TutorA;
+
   constructor() {
     this.alumno = new Alumno();
+    this.tutorAcademico=new TutorA();
     //this.tutorAcademico = new TutorA();
   }
 }
