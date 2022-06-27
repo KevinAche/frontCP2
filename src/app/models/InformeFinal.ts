@@ -4,5 +4,6 @@ export class InformeFinal{
     fechaEmision:any;
     docInformeFinal:any;
     alumno:Alumno;
+    estado:String;
 
 }
