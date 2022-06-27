@@ -183,10 +183,6 @@ export class AppComponent implements OnInit {
     })
   }
 
-  onLogOut(){
-    this.tokenService.logOut();
-    window.location.replace('/');
-  }
 
   onLogIn() {
     window.location.replace('/')
