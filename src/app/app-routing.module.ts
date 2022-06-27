@@ -53,7 +53,7 @@ import { ConsultaRegistroAsistenciaComponent } from './consulta-registro-asisten
 
 
 const routes: Routes = [
-  {path: '', component: HomeComponent},
+  {path: '', component:DashboardComponent},
   {path: 'consulta-conv-publico', component: ConsultaConvPublicoComponent},
    {path: 'informe-acreditacion/:cedula', component:InformeAcreditacionComponent},
   {path: 'anexosde-ppp', component: AnexosdePPPComponent},
@@ -94,7 +94,6 @@ const routes: Routes = [
   {path: 'consultasppp', component: ConsultaspppComponent},
   {path: 'login', component: LoginComponent},
   {path: 'home', component: HomeComponent},
-  {path: 'dashboard', component: DashboardComponent},
   {path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent},
   { path: 'gestion-empresa', component: GestionEmpresaComponent },
   { path: 'registro-asistencia', component: RegistroAsistenciaComponent },
@@ -115,7 +114,6 @@ const routes: Routes = [
   { path: 'consultasppp', component: ConsultaspppComponent },
   { path: 'login', component: LoginComponent },
   { path: 'home', component: HomeComponent },
-  { path: 'dashboard', component: DashboardComponent },
   { path: 'consulta-convocatoria', component: ConsultaConvocatoriaComponent },
   {
     path: 'cons-est-asignados',

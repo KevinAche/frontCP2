@@ -62,7 +62,7 @@
 
       <mat-divider></mat-divider>
 
-      <!--Coordinador de vinculación-->
+      <!--Coordinador de vinculación
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -82,8 +82,9 @@
           </button>
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion>-->
 
+      <!--
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -103,9 +104,10 @@
           </button>
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion>-->
 
 
+<!--
       <mat-accordion multi>
         <mat-expansion-panel>
           <mat-expansion-panel-header>
@@ -126,7 +128,7 @@
 
 
         </mat-expansion-panel>
-      </mat-accordion>
+      </mat-accordion> -->
 
 
 
@@ -351,10 +353,6 @@
         <span>Gestión Convocatoria</span>
       </a>
 
-      <a class="nav-link" routerLink="/consultas-reportes" style="color: white;">
-        <mat-icon>auto_stories</mat-icon>
-        <span>Consultas y Reportes </span>
-      </a>
 
       <a *ngIf="isResponsable" class="nav-link" routerLink="/consultasppp" style="color: white;">
         <mat-icon>supervisor_account</mat-icon>
@@ -371,10 +369,6 @@
         <span>Designar Tutor Empresarial </span>
       </a>
 
-      <a class="nav-link" routerLink="/anexosde-ppp" style="color: white;">
-        <mat-icon>receipt</mat-icon>
-        <span>Anexos PPP </span>
-      </a>
 
       <a *ngIf="isEmpleado" class="nav-link" routerLink="/cons-est-asignados" style="color: white;">
         <mat-icon>person_pin</mat-icon>
@@ -406,10 +400,6 @@
         <span>Estado de Solicitudes</span>
       </a>
 
-      <a class="nav-link" routerLink="/historial" style="color: white;">
-        <mat-icon>assignment</mat-icon>
-        <span>Historial</span>
-      </a>
 
       <a *ngIf="isTutorEmpresarial" class="nav-link" routerLink="/eva-est-tu-empresarial" style="color: white;">
         <mat-icon>perm_identity</mat-icon>

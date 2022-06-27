@@ -162,11 +162,11 @@ export class AppComponent implements OnInit {
 
   onLogOut() {
     this.tokenService.logOut();
-    window.location.reload();
+    window.location.replace('/');
   }
 
   onLogIn() {
-    window.location.reload();
+    window.location.replace('/')
   }
 
   ngAfterContentInit() {
@@ -210,7 +210,7 @@ export class AppComponent implements OnInit {
 
   verificarSolicitud(cedula: any) {
 
-    
+
 
     for (var b = 0; b < this.alumnosDatos.length; b++) {
       if (cedula == this.alumnosDatos[b].cedula) {
@@ -227,7 +227,7 @@ export class AppComponent implements OnInit {
 
     this.registroA.alumno.persona.cedula=cedula;
     this.registroA.docRegistroA="Sin Documento";
-    
+
     if (this.contro == false) {
       Swal.fire({
         title: '¿Desea crear una plantilla de registro de actividades?',
