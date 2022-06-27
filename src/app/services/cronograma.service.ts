@@ -17,13 +17,17 @@ export class CronogramaService {
 
   createCronograma(cronograma): Promise<any> {
     return this.http.post(
-      this.url + `CrearTutorAcademico`,
-      {
-        ...cronograma
-      }, {
+      this.url + `CrearCronograma`,
+      cronograma, {
         headers: this.headers
       }
     ).toPromise();
+  }
+
+  updateActividadesCronograma(id , cronograma){
+    return this.http.put<any[]>(
+        this.url+`EditarCronograma/${id}`,cronograma, { headers: this.headers }
+      ).toPromise();
   }
 
   getCronogramas() {
