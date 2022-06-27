@@ -191,12 +191,18 @@ export class InformeFinalTutorAcademicoComponent implements OnInit {
     var periodo = this.formActa.get('periodo').value;
     var notaA = this.formActa.get('notaA').value;
     var notaE = (this.formActa.get('notaE').value);
-    var naF =((this.formActa.get('notaA').value)*0.40)+"/100";
-    var neF = ((this.formActa.get('notaE').value)*0.60)+"/100";
+    var naF =((this.formActa.get('notaA').value)*0.40).toString();
+    var neF = ((this.formActa.get('notaE').value)*0.60).toString();
     var notaF = (((this.formActa.get('notaA').value)*0.40)+((this.formActa.get('notaE').value)*0.60));
+    var estado;
+    if ((((this.formActa.get('notaA').value)*0.40)+((this.formActa.get('notaE').value)*0.60))>70) {
+      estado="APROBADA";
+    }else{
+      estado="NO APROBADAs";
+    }
     
 
-    this.generardocumento(fecha,abrevR,responsable,tutor,empresa,alumno,carrera,horas,periodo,notaA,notaE,naF,neF,notaF,ciclo);
+    this.generardocumento(fecha,abrevR,responsable,tutor,empresa,alumno,carrera,horas,periodo,notaA,notaE,naF,neF,notaF,ciclo,estado);
    
   }
   
@@ -204,6 +210,12 @@ export class InformeFinalTutorAcademicoComponent implements OnInit {
   crearInformefinal(){
     
     this.informeFinal.docInformeFinal=this.formActa.get('fecha').value;
+    if ((((this.formActa.get('notaA').value)*0.40)+((this.formActa.get('notaE').value)*0.60))>70) {
+      this.informeFinal.estado="APROBADA";
+    }else{
+      this.informeFinal.estado="NO APROBADA";
+    }
+    
     console.log(this.informeFinal);
     this.informefinalservice.createInformeFinal(this.informeFinal).subscribe(
       Response => {
@@ -230,7 +242,8 @@ export class InformeFinalTutorAcademicoComponent implements OnInit {
     naF:String, 
     neF:String, 
     notaF:number, 
-    ciclo:String ) {
+    ciclo:String,
+    estado:String, ) {
     loadFile("https://backendg1c2.herokuapp.com/files/anexo15.docx", function(
       error,
       content
@@ -256,7 +269,7 @@ export class InformeFinalTutorAcademicoComponent implements OnInit {
         neF:neF,
         notaF:notaF,
         ciclo: ciclo,
-        
+        estado:estado,
       });
       try {
         doc.render();
