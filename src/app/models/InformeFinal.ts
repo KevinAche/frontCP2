@@ -6,4 +6,8 @@ export class InformeFinal{
     alumno:Alumno;
     estado:String;
 
+    constructor(){
+        this.alumno = new Alumno();
+    }
+
 }

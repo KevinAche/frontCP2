@@ -247,10 +247,12 @@ export class InformeFinalAlumnoComponent implements OnInit {
   //metodo Dialogo
 
   showDialogGuardar(idAlumno: any) {
+    this.informeFinal.alumno.idAlumno = idAlumno;
     var con = 0;
     this.dialogoEliminar = null;
     this.dialogoGuardaryGenerar = false;
-    this.informeFinal.alumno.idAlumno = idAlumno;
+    
+    
 
     for (var i = 0; i < this.informeFinalDatos.length; i++) {
 
