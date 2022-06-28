@@ -109,6 +109,7 @@ export class GestionEmpresaComponent implements OnInit {
         this.realRol = 'responsableppp';
         this.isResponsable = true;
       }
+
     })
 
     this.createConvenio=false;
