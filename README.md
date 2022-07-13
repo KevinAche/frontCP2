@@ -11,6 +11,13 @@ _Estas instrucciones te permitirán obtener una copia del proyecto en funcionami
 
 _Accediendo al repositorio, podrás descargar el archivo .zip con el código implementado._
 
+### Ruta de proyecto desplegado
+
+_Por medio de la herramiebta de github pages, se deplego el proyecto con la siguiente ruta._
+
+```
+•	https://xanderez17.github.io/casoPractico2/
+```
 
 ### Pre-requisitos 📋
 
