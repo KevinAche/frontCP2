@@ -13,7 +13,7 @@ _Accediendo al repositorio, podrás descargar el archivo .zip con el código imp
 
 ### Ruta de proyecto desplegado
 
-_Por medio de la herramiebta de github pages, se deplego el proyecto con la siguiente ruta._
+_Por medio de la herramienta de github pages, se desplego el proyecto con la siguiente ruta._
 
 ```
 •	https://xanderez17.github.io/casoPractico2/
